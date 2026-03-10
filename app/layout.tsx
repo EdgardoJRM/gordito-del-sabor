@@ -1,22 +1,44 @@
 import type { Metadata } from 'next';
-import { Inter, DM_Sans } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/components/AuthProvider';
 import NavbarWrapper from '@/components/NavbarWrapper';
 
-// Clash Display alternative - Inter Bold para headings
-const clashDisplay = Inter({ 
-  subsets: ['latin'], 
-  weight: ['700'],
-  variable: '--font-clash' 
+// Clash Display - Para headings
+const clashDisplay = localFont({
+  src: [
+    {
+      path: '../public/images/fonts/ClashDisplay-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-clash',
+  display: 'swap',
 });
 
-// General Sans alternative - DM Sans para texto/UI
-const generalSans = DM_Sans({ 
-  subsets: ['latin'], 
-  weight: ['400', '500', '700'],
-  variable: '--font-general' 
+// General Sans - Para texto/UI
+const generalSans = localFont({
+  src: [
+    {
+      path: '../public/images/fonts/GeneralSans-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/images/fonts/GeneralSans-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/images/fonts/GeneralSans-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-general',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
