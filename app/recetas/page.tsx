@@ -15,13 +15,13 @@ export default async function RecipesPage() {
 
   if (!session) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="heading-1 text-amber-900 mb-4">Acceso Requerido</h1>
-          <p className="text-gray-600 mb-6">Debes iniciar sesión para ver las recetas</p>
+      <main className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center space-y-8">
+          <h1 className="heading-section text-white">Acceso Requerido</h1>
+          <p className="body-text text-xl">Debes iniciar sesión para ver las recetas</p>
           <Link
             href="/auth/login"
-            className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
+            className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
           >
             Iniciar Sesión
           </Link>
@@ -31,55 +31,55 @@ export default async function RecipesPage() {
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-black">
       {/* Header */}
-      <section className="bg-gradient-to-r from-amber-50 to-orange-50 py-12">
+      <section className="section-spacing bg-black border-b border-gray-900">
         <div className="container-custom">
-          <Link href="/" className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 mb-6">
+          <Link href="/" className="inline-flex items-center gap-2 text-[#A1A1A6] hover:text-white mb-8 transition-colors">
             <ArrowLeft size={20} />
-            Volver al inicio
+            <span className="nav-text">Volver al inicio</span>
           </Link>
-          <h1 className="heading-1 text-amber-900 mb-4">Todas las Recetas</h1>
-          <p className="subheading text-gray-600">
+          <h1 className="heading-section text-white mb-6">Todas las Recetas</h1>
+          <p className="body-text text-xl max-w-3xl">
             Explora nuestra colección completa de recetas auténticas puertorriqueñas
           </p>
         </div>
       </section>
 
       {/* Recipes Grid */}
-      <section className="py-16">
+      <section className="section-spacing">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {recipes.map((recipe) => (
               <Link
                 key={recipe.id}
                 href={`/recetas/${recipe.id}`}
                 className="group"
               >
-                <div className="card-hover bg-white border border-gray-200 rounded-2xl overflow-hidden h-full flex flex-col">
+                <div className="bg-[#1C1C1E] rounded-3xl overflow-hidden h-full flex flex-col transition-all duration-300 hover:scale-105 border border-gray-900 hover:border-gray-800">
                   {/* Image placeholder */}
-                  <div className="h-48 bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center group-hover:from-amber-200 group-hover:to-orange-200 transition-colors">
-                    <span className="text-6xl">🍳</span>
+                  <div className="h-56 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:to-gray-900 transition-colors">
+                    <span className="text-7xl">🍳</span>
                   </div>
 
                   {/* Content */}
                   <div className="p-6 flex flex-col flex-grow">
-                    <div className="mb-3">
-                      <span className="inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">
+                    <div className="mb-4">
+                      <span className="inline-block px-3 py-1 bg-gray-900 text-[#A1A1A6] text-xs font-bold rounded-full uppercase tracking-wide">
                         {recipe.category}
                       </span>
                     </div>
 
-                    <h3 className="font-playfair text-xl font-bold text-amber-900 mb-2 group-hover:text-amber-700 transition">
+                    <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#FF3B30] transition">
                       {recipe.title}
                     </h3>
 
-                    <p className="text-gray-600 text-sm mb-4 flex-grow">
+                    <p className="body-text text-sm mb-6 flex-grow">
                       {recipe.description}
                     </p>
 
                     {/* Meta info */}
-                    <div className="flex gap-4 text-sm text-gray-500 border-t border-gray-200 pt-4">
+                    <div className="flex gap-4 text-sm text-[#6E6E73] border-t border-gray-900 pt-4">
                       <div className="flex items-center gap-1">
                         <Clock size={16} />
                         <span>{recipe.time}</span>
