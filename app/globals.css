@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-primary: #d4a574;
+  --color-primary-dark: #b8860b;
+  --color-secondary: #2c1810;
+  --color-accent: #e8d4c4;
+  --color-light: #f5f1ed;
+}
+
+* {
+  @apply scroll-smooth;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+
+.font-playfair {
+  font-family: var(--font-playfair);
+}
+
+/* Gradient backgrounds */
+.gradient-primary {
+  @apply bg-gradient-to-r from-amber-600 to-amber-500;
+}
+
+.gradient-dark {
+  @apply bg-gradient-to-br from-amber-900 to-amber-800;
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-slide-in-left {
+  animation: slideInLeft 0.6s ease-out;
+}
+
+/* Utility classes */
+.container-custom {
+  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+.btn-primary {
+  @apply px-6 py-3 bg-amber-600 text-white rounded-lg font-semibold hover:bg-amber-700 transition-colors duration-300;
+}
+
+.btn-secondary {
+  @apply px-6 py-3 bg-white text-amber-600 border-2 border-amber-600 rounded-lg font-semibold hover:bg-amber-50 transition-colors duration-300;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-xl hover:scale-105;
+}
+
+.text-gradient {
+  @apply bg-gradient-to-r from-amber-600 to-amber-500 bg-clip-text text-transparent;
+}
+
+/* Responsive typography */
+.heading-1 {
+  @apply text-4xl md:text-5xl lg:text-6xl font-playfair font-bold;
+}
+
+.heading-2 {
+  @apply text-3xl md:text-4xl font-playfair font-bold;
+}
+
+.heading-3 {
+  @apply text-2xl md:text-3xl font-playfair font-semibold;
+}
+
+.subheading {
+  @apply text-lg md:text-xl text-gray-600;
+}
