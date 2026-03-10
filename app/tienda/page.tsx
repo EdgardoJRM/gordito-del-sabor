@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { apronProducts } from '@/lib/products';
 import { useCartStore } from '@/lib/cart-store';
 import { X, Check } from 'lucide-react';
+import AuthGate from '@/components/AuthGate';
 
 export default function StorePage() {
   const { data: session, status } = useSession();
@@ -20,30 +21,17 @@ export default function StorePage() {
 
   if (status === 'loading') {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF3B30] mx-auto mb-4"></div>
+          <p className="body-text">Cargando...</p>
         </div>
       </main>
     );
   }
 
   if (status === 'unauthenticated') {
-    return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Requerido</h1>
-          <p className="text-gray-600 mb-6">Debes iniciar sesión para acceder a la tienda</p>
-          <Link
-            href="/auth/login"
-            className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
-          >
-            Iniciar Sesión
-          </Link>
-        </div>
-      </main>
-    );
+    return <AuthGate />;
   }
 
   const handleAddToCart = (productId: string) => {

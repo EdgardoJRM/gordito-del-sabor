@@ -5,6 +5,7 @@ import { authOptions } from '@/lib/auth';
 import Link from 'next/link';
 import { ArrowLeft, Clock, Users, ChefHat } from 'lucide-react';
 import FavoriteButton from '@/components/FavoriteButton';
+import AuthGate from '@/components/AuthGate';
 
 export const metadata: Metadata = {
   title: 'Receta | El Gordito del Sabor',
@@ -22,20 +23,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
   const { id } = await params;
 
   if (!session) {
-    return (
-      <main className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center space-y-8">
-          <h1 className="heading-section text-white">Acceso Requerido</h1>
-          <p className="body-text text-xl">Debes iniciar sesión para ver las recetas</p>
-          <Link
-            href="/auth/login"
-            className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
-          >
-            Iniciar Sesión
-          </Link>
-        </div>
-      </main>
-    );
+    return <AuthGate />;
   }
 
   const recipe = recipes.find(r => r.id === id);

@@ -4,6 +4,7 @@ import { Clock, Users, ChefHat, ArrowLeft } from 'lucide-react';
 import { recipes } from '@/lib/recipes-data';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
+import AuthGate from '@/components/AuthGate';
 
 export const metadata: Metadata = {
   title: 'Todas las Recetas | El Gordito del Sabor',
@@ -14,20 +15,7 @@ export default async function RecipesPage() {
   const session = await getServerSession(authOptions);
 
   if (!session) {
-    return (
-      <main className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center space-y-8">
-          <h1 className="heading-section text-white">Acceso Requerido</h1>
-          <p className="body-text text-xl">Debes iniciar sesión para ver las recetas</p>
-          <Link
-            href="/auth/login"
-            className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
-          >
-            Iniciar Sesión
-          </Link>
-        </div>
-      </main>
-    );
+    return <AuthGate />;
   }
 
   return (
