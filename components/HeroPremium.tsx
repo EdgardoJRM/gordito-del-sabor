@@ -144,7 +144,7 @@ export default function HeroPremium() {
 
   // Handle window resize
   useEffect(() => {
-    if (isMobile || !imagesLoaded) return;
+    if (!imagesLoaded) return;
 
     const handleResize = () => {
       if (canvasRef.current) {
@@ -156,11 +156,11 @@ export default function HeroPremium() {
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isMobile, imagesLoaded, currentFrame]);
+  }, [imagesLoaded, currentFrame]);
 
   // Update frame when currentFrame changes
   useEffect(() => {
-    if (!imagesLoaded || isMobile) return;
+    if (!imagesLoaded) return;
     
     animationFrameRef.current = requestAnimationFrame(() => {
       drawFrame(currentFrame);
@@ -171,13 +171,12 @@ export default function HeroPremium() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [currentFrame, imagesLoaded, isMobile]);
+  }, [currentFrame, imagesLoaded]);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isMobile) return;
-      
-      const heroHeight = window.innerHeight * 8;
+      // Calcular el progreso basado en el scroll dentro del hero
+      const heroHeight = window.innerHeight * (isMobile ? 4 : 8); // 400vh mobile, 800vh desktop
       const scrolled = window.scrollY;
       
       if (scrolled < heroHeight) {
@@ -323,185 +322,127 @@ export default function HeroPremium() {
         )}
       </nav>
 
-      {/* Hero Animation Section - SOLO DESKTOP */}
-      {!isMobile && (
-        <section ref={containerRef} className="relative w-full min-h-[800vh] bg-black">
-          {/* Fixed Background Animation Container */}
-          <div 
-            className="fixed top-0 left-0 h-screen w-full z-0 transition-opacity duration-500"
-            style={{
-              opacity: scrollProgress < 90 ? 1 : 0,
-              pointerEvents: scrollProgress < 90 ? 'auto' : 'none',
-            }}
-          >
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-amber-950/10 opacity-40" />
+      {/* Hero Animation Section - Desktop & Mobile */}
+      <section ref={containerRef} className={`relative w-full ${isMobile ? 'min-h-[400vh]' : 'min-h-[800vh]'} bg-black`}>
+        {/* Fixed Background Animation Container */}
+        <div 
+          className="fixed top-0 left-0 h-screen w-full z-0 transition-opacity duration-500"
+          style={{
+            opacity: scrollProgress < 90 ? 1 : 0,
+            pointerEvents: scrollProgress < 90 ? 'auto' : 'none',
+          }}
+        >
+          {/* Background Gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-amber-950/10 opacity-40" />
 
-            {/* Animated Background Elements */}
+          {/* Animated Background Elements - Solo Desktop */}
+          {!isMobile && (
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute top-20 right-20 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl animate-pulse" />
               <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl animate-pulse" />
             </div>
+          )}
 
-            {/* Background Animation - Fondo Pantalla Completa */}
-            <div className="absolute inset-0 z-0 flex items-center justify-center">
-              {/* Lighting Effects */}
+          {/* Background Animation - Fondo Pantalla Completa */}
+          <div className="absolute inset-0 z-0 flex items-center justify-center">
+            {/* Lighting Effects - Solo Desktop */}
+            {!isMobile && (
               <div className="absolute inset-0 flex items-center justify-center">
                 {/* Rim Light */}
                 <div className="absolute w-full h-full bg-gradient-to-r from-amber-500/20 to-transparent rounded-full blur-3xl" />
               </div>
+            )}
 
-              {/* Animated Product Image - Canvas Rendering */}
-              <div className="relative w-full h-full flex items-center justify-center">
-                {!imagesLoaded && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-white text-xl">Cargando animación...</div>
-                  </div>
-                )}
-                <canvas
-                  ref={canvasRef}
-                  className="w-full h-full object-cover opacity-50"
-                  style={{ 
-                    display: 'block',
-                  }}
-                />
-              </div>
+            {/* Animated Product Image - Canvas Rendering */}
+            <div className="relative w-full h-full flex items-center justify-center">
+              {!imagesLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="text-white text-xl">Cargando animación...</div>
+                </div>
+              )}
+              <canvas
+                ref={canvasRef}
+                className="w-full h-full object-cover opacity-50"
+                style={{ 
+                  display: 'block',
+                }}
+              />
             </div>
+          </div>
 
-            {/* Bottom Gradient Fade */}
-            <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+          {/* Bottom Gradient Fade */}
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
 
-            {/* Hero Content - Centered Text */}
-            <div 
-              className="absolute inset-0 flex items-center justify-center z-20"
-              style={{
-                opacity: Math.max(0, 1 - scrollProgress / 30),
-                pointerEvents: scrollProgress > 30 ? 'none' : 'auto',
-              }}
-            >
-              <div className="container-custom w-full px-4">
-                {/* Centered Text Content */}
-                <div className="text-white space-y-8 max-w-3xl mx-auto text-center">
-                  {/* Headline */}
+          {/* Hero Content - Centered Text */}
+          <div 
+            className="absolute inset-0 flex items-center justify-center z-20"
+            style={{
+              opacity: Math.max(0, 1 - scrollProgress / 30),
+              pointerEvents: scrollProgress > 30 ? 'none' : 'auto',
+            }}
+          >
+            <div className="container-custom w-full px-4">
+              {/* Centered Text Content */}
+              <div className="text-white space-y-6 md:space-y-8 max-w-3xl mx-auto text-center">
+                {/* Headline */}
+                <div>
+                  <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold leading-tight mb-4 md:mb-6">
+                    El Gordito
+                    <br />
+                    <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+                      del Sabor
+                    </span>
+                  </h1>
+                </div>
+
+                {/* Description */}
+                <p className="text-base md:text-xl lg:text-2xl text-gray-300 leading-relaxed px-2 md:px-0">
+                  Delantales diseñados para los que cocinan con respeto. Personaliza el tuyo y cocina con estilo.
+                </p>
+
+                {/* CTA Button */}
+                <button
+                  onClick={() => router.push('/tienda')}
+                  className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 md:py-5 md:px-12 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-lg"
+                >
+                  Diseñar mi delantal
+                </button>
+
+                {/* Features */}
+                <div className="flex flex-col md:flex-row gap-6 md:gap-12 pt-8 md:pt-12 border-t border-gray-800 justify-center">
                   <div>
-                    <h1 className="text-7xl lg:text-8xl font-bold leading-tight mb-6">
-                      El Gordito
-                      <br />
-                      <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                        del Sabor
-                      </span>
-                    </h1>
+                    <p className="text-amber-400 font-bold text-xl md:text-2xl">100%</p>
+                    <p className="text-gray-400 text-sm md:text-lg">Personalizable</p>
                   </div>
-
-                  {/* Description */}
-                  <p className="text-xl lg:text-2xl text-gray-300 leading-relaxed">
-                    Delantales diseñados para los que cocinan con respeto. Personaliza el tuyo y cocina con estilo.
-                  </p>
-
-                  {/* CTA Button */}
-                  <button
-                    onClick={() => router.push('/tienda')}
-                    className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-5 px-12 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl text-lg"
-                  >
-                    Diseñar mi delantal
-                  </button>
-
-                  {/* Features */}
-                  <div className="flex gap-12 pt-12 border-t border-gray-800 justify-center">
-                    <div>
-                      <p className="text-amber-400 font-bold text-2xl">100%</p>
-                      <p className="text-gray-400 text-lg">Personalizable</p>
-                    </div>
-                    <div>
-                      <p className="text-amber-400 font-bold text-2xl">Premium</p>
-                      <p className="text-gray-400 text-lg">Calidad</p>
-                    </div>
-                    <div>
-                      <p className="text-amber-400 font-bold text-2xl">Rápido</p>
-                      <p className="text-gray-400 text-lg">Envío</p>
-                    </div>
+                  <div>
+                    <p className="text-amber-400 font-bold text-xl md:text-2xl">Premium</p>
+                    <p className="text-gray-400 text-sm md:text-lg">Calidad</p>
+                  </div>
+                  <div>
+                    <p className="text-amber-400 font-bold text-xl md:text-2xl">Rápido</p>
+                    <p className="text-gray-400 text-sm md:text-lg">Envío</p>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Scroll Indicator */}
-            <div className="absolute bottom-8 right-8 flex flex-col items-center gap-4 z-30">
-              <div className="flex flex-col gap-2">
-                {[0, 1, 2].map((i) => (
-                  <div
-                    key={i}
-                    className={`w-1 h-1 rounded-full transition-all ${
-                      scrollProgress > i * 33 ? 'bg-amber-500 h-2' : 'bg-gray-600'
-                    }`}
-                  />
-                ))}
-              </div>
-              <ChevronDown className="text-gray-600 animate-bounce" size={20} />
+          {/* Scroll Indicator */}
+          <div className="absolute bottom-8 right-8 flex flex-col items-center gap-4 z-30">
+            <div className="flex flex-col gap-2">
+              {[0, 1, 2].map((i) => (
+                <div
+                  key={i}
+                  className={`w-1 h-1 rounded-full transition-all ${
+                    scrollProgress > i * 33 ? 'bg-amber-500 h-2' : 'bg-gray-600'
+                  }`}
+                />
+              ))}
             </div>
+            <ChevronDown className="text-gray-600 animate-bounce" size={20} />
           </div>
-        </section>
-      )}
-
-      {/* Hero Section Simplificado para Mobile */}
-      {isMobile && (
-        <section className="relative w-full min-h-screen bg-black pt-32 pb-20 z-10">
-          {/* Background Image for Mobile */}
-          <div className="absolute inset-0 z-0">
-            <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-amber-950/10 opacity-40" />
-            <img 
-              src="/images/hero/webp/ezgif-frame-001.webp"
-              alt="Delantal"
-              className="w-full h-full object-cover opacity-30"
-            />
-          </div>
-
-          <div className="container-custom w-full h-full flex items-center justify-center relative z-10">
-            {/* Centered Text Content */}
-            <div className="text-white space-y-6 max-w-3xl mx-auto text-center">
-              {/* Headline */}
-              <div>
-                <h1 className="text-4xl font-bold leading-tight mb-4">
-                  El Gordito
-                  <br />
-                  <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                    del Sabor
-                  </span>
-                </h1>
-              </div>
-
-              {/* Description */}
-              <p className="text-base text-gray-300 leading-relaxed px-2">
-                Delantales diseñados para los que cocinan con respeto. Personaliza el tuyo y cocina con estilo.
-              </p>
-
-              {/* CTA Button */}
-              <button
-                onClick={() => router.push('/tienda')}
-                className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl text-sm"
-              >
-                Diseñar mi delantal
-              </button>
-
-              {/* Features */}
-              <div className="flex flex-col gap-6 pt-8 border-t border-gray-800 justify-center">
-                <div>
-                  <p className="text-amber-400 font-bold text-xl">100%</p>
-                  <p className="text-gray-400 text-sm">Personalizable</p>
-                </div>
-                <div>
-                  <p className="text-amber-400 font-bold text-xl">Premium</p>
-                  <p className="text-gray-400 text-sm">Calidad</p>
-                </div>
-                <div>
-                  <p className="text-amber-400 font-bold text-xl">Rápido</p>
-                  <p className="text-gray-400 text-sm">Envío</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
     </>
   );
 }
