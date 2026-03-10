@@ -1,0 +1,12 @@
+Vercel CLI 41.4.1
+Retrieving project…
+Deploying edgardo-hernandezs-projects/gordito-del-sabor
+Uploading [--------------------] (0.0B/477B)
+Uploading [===============-----] (381.0B/477B)
+Uploading [====================] (477.0B/477B)
+Inspect: https://vercel.com/edgardo-hernandezs-projects/gordito-del-sabor/GjYuQxNDGskZGMXe9mGTksXtf9aB [2s]
+Production: https://gordito-del-sabor-85fu5lc4l-edgardo-hernandezs-projects.vercel.app [2s]
+https://gordito-del-sabor-85fu5lc4l-edgardo-hernandezs-projects.vercel.appBuilding
+Building
+Error: Command "npm run build" exited with 1
+Error: Check your logs at https://gordito-del-sabor-85fu5lc4l-edgardo-hernandezs-projects.vercel.app/_logs or run `vercel logs gordito-del-sabor-85fu5lc4l-edgardo-hernandezs-projects.vercel.app`

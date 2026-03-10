@@ -21,7 +21,7 @@ async function dbConnect() {
     const opts = {
       bufferCommands: false,
       retryWrites: true,
-      w: 'majority',
+      w: 'majority' as any,
       ssl: true,
       tls: true,
       tlsAllowInvalidCertificates: false,

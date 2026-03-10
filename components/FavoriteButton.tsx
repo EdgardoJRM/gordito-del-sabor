@@ -41,6 +41,7 @@ export default function FavoriteButton({
         title: recipeTitle,
         category: recipeCategory,
         description: recipeDescription,
+        savedAt: new Date().toISOString(),
       });
       setIsLiked(true);
     }
