@@ -3,38 +3,26 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
 import { apronProducts } from '@/lib/products';
 import { useCartStore } from '@/lib/cart-store';
 import { X, Check } from 'lucide-react';
-import AuthGate from '@/components/AuthGate';
 
 export default function StorePage() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const router = useRouter();
   const [selectedProduct, setSelectedProduct] = useState<string | null>(null);
   const [customText, setCustomText] = useState('');
   const [showPopup, setShowPopup] = useState(false);
   const [popupProduct, setPopupProduct] = useState<any>(null);
   const addItem = useCartStore((state) => state.addItem);
-  const cartItems = useCartStore((state) => state.items);
-
-  if (status === 'loading') {
-    return (
-      <main className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF3B30] mx-auto mb-4"></div>
-          <p className="body-text">Cargando...</p>
-        </div>
-      </main>
-    );
-  }
-
-  if (status === 'unauthenticated') {
-    return <AuthGate />;
-  }
 
   const handleAddToCart = (productId: string) => {
+    // Verificar login solo al intentar agregar al carrito
+    if (!session) {
+      router.push('/auth/login');
+      return;
+    }
+
     if (!customText.trim()) {
       alert('Por favor ingresa el texto personalizado');
       return;
@@ -70,52 +58,52 @@ export default function StorePage() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-black">
       {/* Hero */}
-      <section className="bg-gradient-to-r from-amber-600 to-orange-600 text-white py-16">
+      <section className="section-spacing bg-black border-b border-gray-900">
         <div className="container-custom text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Delantales Personalizados
+          <h1 className="heading-section text-white mb-6">
+            El delantal del sabor
           </h1>
-          <p className="text-xl opacity-90">
-            Crea tu delantal único con tu nombre personalizado
+          <p className="body-text text-xl max-w-2xl mx-auto">
+            Diseñado para los que cocinan con respeto. Personaliza tu delantal con tu nombre.
           </p>
         </div>
       </section>
 
       {/* Products */}
-      <section className="py-20">
+      <section className="section-spacing">
         <div className="container-custom">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {apronProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-xl transition-shadow"
+                className="bg-[#1C1C1E] border border-gray-900 rounded-3xl overflow-hidden hover:border-gray-800 transition-all hover:scale-105"
               >
                 {/* Product Image */}
-                <div className="h-48 bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center text-8xl">
+                <div className="h-56 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-8xl">
                   {product.image}
                 </div>
 
                 {/* Product Info */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-amber-900 mb-2">
+                <div className="p-8">
+                  <h3 className="text-3xl font-bold text-white mb-3">
                     {product.name}
                   </h3>
-                  <p className="text-gray-600 mb-4">{product.description}</p>
+                  <p className="body-text mb-6">{product.description}</p>
 
                   {/* Features */}
-                  <ul className="space-y-2 mb-6">
+                  <ul className="space-y-3 mb-8">
                     {product.features.map((feature, idx) => (
-                      <li key={idx} className="text-sm text-gray-700 flex items-center gap-2">
-                        <span className="text-amber-600">✓</span>
+                      <li key={idx} className="text-sm text-[#A1A1A6] flex items-center gap-2">
+                        <span className="text-[#FF3B30]">✓</span>
                         {feature}
                       </li>
                     ))}
                   </ul>
 
                   {/* Price */}
-                  <div className="text-3xl font-bold text-amber-900 mb-6">
+                  <div className="text-4xl font-bold text-white mb-8">
                     ${product.price.toFixed(2)}
                   </div>
 
@@ -123,7 +111,7 @@ export default function StorePage() {
                   {selectedProduct === product.id ? (
                     <div className="space-y-4">
                       <div>
-                        <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        <label className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
                           Tu nombre (máx 20 caracteres)
                         </label>
                         <input
@@ -133,23 +121,23 @@ export default function StorePage() {
                             setCustomText(e.target.value.slice(0, 20))
                           }
                           placeholder="Ej: El Flaco"
-                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                          className="w-full px-6 py-4 bg-black border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                         />
-                        <p className="text-xs text-gray-500 mt-1">
-                          Se mostrará como: "{customText} del Sabor"
+                        <p className="text-xs text-[#6E6E73] mt-2">
+                          Se mostrará como: "<span className="text-white">{customText || 'Tu nombre'} del Sabor</span>"
                         </p>
                       </div>
 
-                      <div className="flex gap-2">
+                      <div className="flex gap-3">
                         <button
                           onClick={() => handleAddToCart(product.id)}
-                          className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-2 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
+                          className="btn-text flex-1 bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 rounded-full transition-all transform hover:scale-105"
                         >
                           Agregar al Carrito
                         </button>
                         <button
                           onClick={() => setSelectedProduct(null)}
-                          className="flex-1 bg-gray-200 text-gray-700 font-bold py-2 rounded-lg hover:bg-gray-300 transition-all"
+                          className="btn-text flex-1 bg-gray-900 text-white py-4 rounded-full hover:bg-gray-800 transition-all"
                         >
                           Cancelar
                         </button>
@@ -158,7 +146,7 @@ export default function StorePage() {
                   ) : (
                     <button
                       onClick={() => setSelectedProduct(product.id)}
-                      className="w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
+                      className="btn-text w-full bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 rounded-full transition-all transform hover:scale-105"
                     >
                       Personalizar
                     </button>
@@ -172,40 +160,40 @@ export default function StorePage() {
 
       {/* Popup */}
       {showPopup && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 animate-in">
+        <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
+          <div className="bg-[#1C1C1E] border border-gray-900 rounded-3xl shadow-2xl max-w-md w-full p-8 relative">
             {/* Close Button */}
             <button
               onClick={() => setShowPopup(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
+              className="absolute top-6 right-6 text-[#6E6E73] hover:text-white transition-colors"
             >
               <X size={24} />
             </button>
 
             {/* Success Icon */}
-            <div className="flex justify-center mb-6">
-              <div className="bg-green-100 rounded-full p-4">
-                <Check size={32} className="text-green-600" />
+            <div className="flex justify-center mb-8">
+              <div className="bg-[#FF3B30]/20 rounded-full p-6">
+                <Check size={40} className="text-[#FF3B30]" />
               </div>
             </div>
 
             {/* Content */}
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-amber-900 mb-2">
+              <h2 className="text-3xl font-bold text-white mb-4">
                 ¡Agregado al Carrito!
               </h2>
-              <p className="text-gray-600 mb-4">
+              <p className="body-text text-lg mb-6">
                 {popupProduct?.name}
               </p>
-              <div className="bg-amber-50 rounded-lg p-4 mb-4">
-                <p className="text-lg font-semibold text-amber-900">
+              <div className="bg-black border border-gray-900 rounded-2xl p-6 mb-6">
+                <p className="text-xl font-bold text-white mb-2">
                   "{popupProduct?.customText}"
                 </p>
-                <p className="text-2xl font-bold text-amber-600 mt-2">
+                <p className="text-3xl font-bold text-[#FF3B30] mt-4">
                   ${popupProduct?.price.toFixed(2)}
                 </p>
               </div>
-              <p className="text-sm text-gray-500 italic mb-6">
+              <p className="text-sm text-[#6E6E73] italic">
                 Este es el Regalo Perfecto
               </p>
             </div>
@@ -214,7 +202,7 @@ export default function StorePage() {
             <div className="flex gap-3">
               <button
                 onClick={() => setShowPopup(false)}
-                className="flex-1 bg-gray-200 text-gray-700 font-bold py-3 rounded-lg hover:bg-gray-300 transition-all"
+                className="btn-text flex-1 bg-gray-900 text-white py-4 rounded-full hover:bg-gray-800 transition-all"
               >
                 Seguir Explorando
               </button>
@@ -223,9 +211,9 @@ export default function StorePage() {
                   setShowPopup(false);
                   router.push('/carrito');
                 }}
-                className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
+                className="btn-text flex-1 bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 rounded-full transition-all transform hover:scale-105"
               >
-                Asegurar Delantal
+                Ir al Carrito
               </button>
             </div>
           </div>
