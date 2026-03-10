@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ChevronDown, Menu, X } from 'lucide-react';
@@ -11,39 +11,134 @@ export default function HeroPremium() {
   const [currentFrame, setCurrentFrame] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const [preloadedFrames, setPreloadedFrames] = useState<Set<number>>(new Set());
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const containerRef = useRef(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imagesRef = useRef<HTMLImageElement[]>([]);
+  const animationFrameRef = useRef<number>();
 
   // Total frames available
   const TOTAL_FRAMES = 240;
 
-  // Precargar imágenes cercanas al frame actual
+  // Preload all images on mount
   useEffect(() => {
-    const framesToPreload = new Set<number>();
+    if (isMobile) return;
+
+    const loadImages = async () => {
+      const imagePromises: Promise<HTMLImageElement>[] = [];
+      
+      for (let i = 0; i < TOTAL_FRAMES; i++) {
+        const frameNumber = String(i + 1).padStart(3, '0');
+        const promise = new Promise<HTMLImageElement>((resolve, reject) => {
+          const img = new Image();
+          img.onload = () => resolve(img);
+          img.onerror = () => {
+            // Fallback to PNG if WebP fails
+            const fallbackImg = new Image();
+            fallbackImg.onload = () => resolve(fallbackImg);
+            fallbackImg.onerror = reject;
+            fallbackImg.src = `/images/hero/ezgif-frame-${frameNumber}.png`;
+          };
+          img.src = `/images/hero/webp/ezgif-frame-${frameNumber}.webp`;
+        });
+        imagePromises.push(promise);
+      }
+
+      try {
+        const loadedImages = await Promise.all(imagePromises);
+        imagesRef.current = loadedImages;
+        setImagesLoaded(true);
+        
+        // Draw first frame
+        if (canvasRef.current && loadedImages[0]) {
+          const canvas = canvasRef.current;
+          const ctx = canvas.getContext('2d', { alpha: false });
+          if (ctx) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw image centered and scaled
+            const scale = Math.max(canvas.width / loadedImages[0].width, canvas.height / loadedImages[0].height);
+            const x = (canvas.width / 2) - (loadedImages[0].width / 2) * scale;
+            const y = (canvas.height / 2) - (loadedImages[0].height / 2) * scale;
+            
+            ctx.drawImage(loadedImages[0], x, y, loadedImages[0].width * scale, loadedImages[0].height * scale);
+          }
+        }
+      } catch (error) {
+        console.error('Error loading images:', error);
+      }
+    };
+
+    loadImages();
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [isMobile]);
+
+  // Draw frame on canvas
+  const drawFrame = (frameIndex: number) => {
+    if (!canvasRef.current || !imagesRef.current[frameIndex]) return;
     
-    // Precargar frame actual y los 5 siguientes
-    for (let i = 0; i <= 5; i++) {
-      const frameNum = Math.min(currentFrame + i, TOTAL_FRAMES - 1);
-      framesToPreload.add(frameNum);
-    }
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d', { alpha: false });
+    if (!ctx) return;
+
+    const img = imagesRef.current[frameIndex];
     
-    // Precargar frame anterior
-    if (currentFrame > 0) {
-      framesToPreload.add(currentFrame - 1);
-    }
+    // Clear and draw
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     
-    setPreloadedFrames(framesToPreload);
-  }, [currentFrame]);
+    // Draw image centered and scaled to cover
+    const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
+    const x = (canvas.width / 2) - (img.width / 2) * scale;
+    const y = (canvas.height / 2) - (img.height / 2) * scale;
+    
+    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
+  };
+
+  // Handle window resize
+  useEffect(() => {
+    if (isMobile || !imagesLoaded) return;
+
+    const handleResize = () => {
+      if (canvasRef.current) {
+        canvasRef.current.width = window.innerWidth;
+        canvasRef.current.height = window.innerHeight;
+        drawFrame(currentFrame);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isMobile, imagesLoaded, currentFrame]);
+
+  // Update frame when currentFrame changes
+  useEffect(() => {
+    if (!imagesLoaded || isMobile) return;
+    
+    animationFrameRef.current = requestAnimationFrame(() => {
+      drawFrame(currentFrame);
+    });
+
+    return () => {
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [currentFrame, imagesLoaded, isMobile]);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (isMobile) return; // No animar en mobile
+      if (isMobile) return;
       
-      // Calcular el progreso basado en el scroll dentro del hero (primeros 800vh)
-      const heroHeight = window.innerHeight * 8; // 800vh
+      const heroHeight = window.innerHeight * 8;
       const scrolled = window.scrollY;
       
-      // Solo calcular progreso mientras estamos en el hero
       if (scrolled < heroHeight) {
         const progress = Math.min((scrolled / heroHeight) * 100, 100);
         setScrollProgress(progress);
@@ -52,7 +147,6 @@ export default function HeroPremium() {
       }
     };
 
-    // Detectar si es mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -67,37 +161,8 @@ export default function HeroPremium() {
     };
   }, [isMobile]);
 
-  // Get frame number with leading zeros
-  const getFrameNumber = (index: number) => {
-    return String(index + 1).padStart(3, '0');
-  };
-
-  // Get image source (WebP for better performance, fallback to PNG)
-  const getImageSource = (frameNumber: string) => {
-    return `/images/hero/webp/ezgif-frame-${frameNumber}.webp`;
-  };
-
-  // Preload link tags para las imágenes
-  const preloadLinks = useMemo(() => {
-    return Array.from(preloadedFrames).map((frameNum) => {
-      const frameNumber = getFrameNumber(frameNum);
-      return (
-        <link
-          key={frameNum}
-          rel="preload"
-          as="image"
-          href={getImageSource(frameNumber)}
-          type="image/webp"
-        />
-      );
-    });
-  }, [preloadedFrames]);
-
   return (
     <>
-      {/* Preload links para imágenes */}
-      {preloadLinks}
-
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30">
         <div className="container-custom py-4 md:py-6 flex items-center justify-between">
@@ -187,7 +252,7 @@ export default function HeroPremium() {
             }}
           >
             {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-amber-950/20 opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-amber-950/10 opacity-40" />
 
             {/* Animated Background Elements */}
             <div className="absolute inset-0 overflow-hidden">
@@ -203,22 +268,21 @@ export default function HeroPremium() {
                 <div className="absolute w-full h-full bg-gradient-to-r from-amber-500/20 to-transparent rounded-full blur-3xl" />
               </div>
 
-              {/* Animated Product Image - Background - Pantalla Completa */}
+              {/* Animated Product Image - Canvas Rendering */}
               <div className="relative w-full h-full flex items-center justify-center">
-                <picture>
-                  <source 
-                    srcSet={getImageSource(getFrameNumber(currentFrame))} 
-                    type="image/webp" 
-                  />
-                  <img
-                    src={`/images/hero/ezgif-frame-${getFrameNumber(currentFrame)}.png`}
-                    alt="Delantal animado"
-                    className="w-full h-full object-cover opacity-50"
-                    loading="eager"
-                    decoding="async"
-                    style={{ willChange: 'contents' }}
-                  />
-                </picture>
+                {!imagesLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="text-white text-xl">Cargando animación...</div>
+                  </div>
+                )}
+                <canvas
+                  ref={canvasRef}
+                  className="w-full h-full object-cover opacity-50"
+                  style={{ 
+                    display: 'block',
+                    imageRendering: 'high-quality',
+                  }}
+                />
               </div>
             </div>
 
