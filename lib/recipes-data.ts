@@ -10,6 +10,7 @@ export interface Recipe {
   instructions: string[];
   notes?: string;
   image?: string;
+  isPremium?: boolean; // Recetas exclusivas que requieren login
 }
 
 export const recipes: Recipe[] = [
@@ -85,6 +86,7 @@ export const recipes: Recipe[] = [
     time: '90 min',
     servings: '8',
     description: 'Plato tradicional puertorriqueño con arroz, gandules y costillas tiernas.',
+    isPremium: true,
     ingredients: [
       '3 tazas de arroz grano largo parboiled',
       '2 latas de gandules sin el agua',
@@ -123,6 +125,7 @@ export const recipes: Recipe[] = [
     time: '90 min',
     servings: '6',
     description: 'Pechuga de pavo rellena de prosciutto, pimientos y queso manchego. Una alternativa saludable y elegante.',
+    isPremium: true,
     ingredients: [
       '2 pechugas de pavo de aproximadamente 1.5 lbs cada una',
       'Prosciutto en lascas',
@@ -155,6 +158,7 @@ export const recipes: Recipe[] = [
     time: '180 min',
     servings: '12',
     description: 'Este pavo queda bello. Sirva con arroz con gandules, morcilla, pasteles con lo que quieras. Y si te sobra, al otro día te preparas un sándwich de pavo. ¡Esto es Bello!',
+    isPremium: true,
     ingredients: [
       '1 pavo entero',
       'Sal y pimienta',
@@ -176,6 +180,7 @@ export const recipes: Recipe[] = [
     title: 'Lomo de Cerdo Relleno de Arroz Mamposteao',
     category: 'Comida Criolla',
     difficulty: 'Medio',
+    isPremium: true,
     time: '90 min',
     servings: '8',
     description: 'Lomo de cerdo relleno de arroz mamposteao, plátanos y recao. Un plato elegante y delicioso.',
@@ -207,6 +212,7 @@ export const recipes: Recipe[] = [
     id: 'pollo-guisado',
     title: 'Pollo Guisado',
     category: 'Comida Criolla',
+    isPremium: true,
     difficulty: 'Medio',
     time: '60 min',
     servings: '6',
@@ -246,6 +252,7 @@ export const recipes: Recipe[] = [
   {
     id: 'hamburger-air-fryer',
     title: 'Hamburger en Air Fryer',
+    isPremium: true,
     category: 'Air Fryer',
     difficulty: 'Fácil',
     time: '20 min',
@@ -276,6 +283,7 @@ export const recipes: Recipe[] = [
   {
     id: 'pollo-entero-air-fryer',
     title: 'Pollo Entero en Air Fryer',
+    isPremium: true,
     category: 'Air Fryer',
     difficulty: 'Medio',
     time: '90 min',
@@ -309,6 +317,7 @@ export const recipes: Recipe[] = [
     time: '20 min',
     servings: '2',
     description: 'Steak jugoso y delicioso preparado en air fryer en solo 15 minutos de cocción.',
+    isPremium: true,
     ingredients: [
       '2 steak (NY steak, ribeye o el que prefieras)',
       '4 dientes de ajo',
@@ -329,6 +338,7 @@ export const recipes: Recipe[] = [
   {
     id: 'pork-belly-air-fryer',
     title: 'Pork Belly en Air Fryer',
+    isPremium: true,
     category: 'Air Fryer',
     difficulty: 'Medio',
     time: '75 min',

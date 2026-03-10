@@ -22,10 +22,6 @@ export default async function RecipeDetailPage({ params }: PageProps) {
   const session = await getServerSession(authOptions);
   const { id } = await params;
 
-  if (!session) {
-    return <AuthGate />;
-  }
-
   const recipe = recipes.find(r => r.id === id);
 
   if (!recipe) {
@@ -40,6 +36,11 @@ export default async function RecipeDetailPage({ params }: PageProps) {
         </div>
       </main>
     );
+  }
+
+  // Si la receta es premium y no hay sesión, mostrar AuthGate
+  if (recipe.isPremium && !session) {
+    return <AuthGate />;
   }
 
   return (
@@ -66,12 +67,19 @@ export default async function RecipeDetailPage({ params }: PageProps) {
                   <div className="inline-block px-4 py-2 bg-gray-900 rounded-full">
                     <span className="text-[#A1A1A6] font-bold text-sm uppercase tracking-wide">{recipe.category}</span>
                   </div>
-                  <FavoriteButton
-                    recipeId={recipe.id}
-                    recipeTitle={recipe.title}
-                    recipeCategory={recipe.category}
-                    recipeDescription={recipe.description}
-                  />
+                  <div className="flex items-center gap-3">
+                    {recipe.isPremium && (
+                      <span className="bg-[#FF3B30] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide flex items-center gap-1">
+                        <span>🔒</span> Exclusiva
+                      </span>
+                    )}
+                    <FavoriteButton
+                      recipeId={recipe.id}
+                      recipeTitle={recipe.title}
+                      recipeCategory={recipe.category}
+                      recipeDescription={recipe.description}
+                    />
+                  </div>
                 </div>
                 <h1 className="heading-section text-white mb-6">
                   {recipe.title}

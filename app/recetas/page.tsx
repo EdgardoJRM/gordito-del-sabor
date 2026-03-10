@@ -14,10 +14,7 @@ export const metadata: Metadata = {
 export default async function RecipesPage() {
   const session = await getServerSession(authOptions);
 
-  if (!session) {
-    return <AuthGate />;
-  }
-
+  // Ya no bloqueamos el acceso a la página, solo mostramos qué recetas requieren login
   return (
     <main className="min-h-screen bg-black">
       {/* Header */}
@@ -44,7 +41,14 @@ export default async function RecipesPage() {
                 href={`/recetas/${recipe.id}`}
                 className="group"
               >
-                <div className="bg-[#1C1C1E] rounded-3xl overflow-hidden h-full flex flex-col transition-all duration-300 hover:scale-105 border border-gray-900 hover:border-gray-800">
+                <div className="bg-[#1C1C1E] rounded-3xl overflow-hidden h-full flex flex-col transition-all duration-300 hover:scale-105 border border-gray-900 hover:border-gray-800 relative">
+                  {/* Premium Badge */}
+                  {recipe.isPremium && (
+                    <div className="absolute top-4 right-4 z-10 bg-[#FF3B30] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide flex items-center gap-1">
+                      <span>🔒</span> Exclusiva
+                    </div>
+                  )}
+
                   {/* Image placeholder */}
                   <div className="h-56 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center group-hover:from-gray-800 group-hover:to-gray-900 transition-colors">
                     <span className="text-7xl">🍳</span>
@@ -52,7 +56,7 @@ export default async function RecipesPage() {
 
                   {/* Content */}
                   <div className="p-6 flex flex-col flex-grow">
-                    <div className="mb-4">
+                    <div className="mb-4 flex items-center justify-between gap-2">
                       <span className="inline-block px-3 py-1 bg-gray-900 text-[#A1A1A6] text-xs font-bold rounded-full uppercase tracking-wide">
                         {recipe.category}
                       </span>
