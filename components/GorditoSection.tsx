@@ -6,22 +6,22 @@ export default function GorditoSection() {
   const router = useRouter();
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-black py-20">
+    <section className="section-spacing flex items-center justify-center bg-black">
       <div className="container-custom">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Texto primero en mobile, imagen en desktop */}
           <div className="space-y-8 order-2 lg:order-1">
-            <h2 className="text-5xl md:text-7xl font-semibold leading-tight text-white">
+            <h2 className="heading-section text-white">
               El Gordito
               <br />
               del Sabor
             </h2>
-            <p className="text-xl md:text-2xl text-[#A1A1A6] leading-relaxed">
+            <p className="body-text text-xl md:text-2xl">
               Más de 160,000 personas siguen sus recetas para aprender a cocinar con verdadero sazón boricua.
             </p>
             <button
               onClick={() => router.push('/recetas')}
-              className="inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white font-semibold py-4 px-10 rounded-full transition-all transform hover:scale-105 text-lg"
+              className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
             >
               Ver recetas
             </button>

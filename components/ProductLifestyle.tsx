@@ -12,16 +12,16 @@ export default function ProductLifestyle() {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-black">
-      <div className="container-custom px-4">
+    <section className="section-spacing bg-black">
+      <div className="container-custom">
         {/* Texto */}
-        <div className="text-center mb-16 space-y-8">
-          <h2 className="text-5xl md:text-7xl font-semibold text-white">
+        <div className="text-center mb-20 space-y-8">
+          <h2 className="heading-section text-white">
             El delantal
             <br />
             del sabor.
           </h2>
-          <p className="text-xl md:text-2xl text-[#A1A1A6] max-w-3xl mx-auto">
+          <p className="body-text text-xl md:text-2xl max-w-3xl mx-auto">
             Diseñado para los que cocinan con respeto.
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function ProductLifestyle() {
         <div className="text-center">
           <button
             onClick={() => router.push('/tienda')}
-            className="inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white font-semibold py-5 px-12 rounded-full transition-all transform hover:scale-105 text-lg"
+            className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
           >
             Diseñar mi delantal
           </button>

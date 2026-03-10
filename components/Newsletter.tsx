@@ -14,18 +14,18 @@ export default function Newsletter() {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-black py-20 border-t border-gray-900">
+    <section className="section-spacing flex items-center justify-center bg-black border-t border-gray-900">
       <div className="container-custom">
-        <div className="max-w-4xl mx-auto text-center space-y-12 px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-12">
           {/* Headline */}
-          <h2 className="text-5xl md:text-7xl lg:text-[80px] font-semibold leading-tight text-white">
+          <h2 className="heading-section text-white">
             No te pierdas la
             <br />
             próxima receta.
           </h2>
 
           {/* Copy */}
-          <p className="text-xl md:text-2xl text-[#A1A1A6] leading-relaxed max-w-3xl mx-auto">
+          <p className="body-text text-xl md:text-2xl leading-relaxed max-w-3xl mx-auto">
             Recibe recetas, tips y novedades del Gordito del Sabor directo a tu correo.
           </p>
 
@@ -38,23 +38,23 @@ export default function Newsletter() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="flex-1 px-6 py-4 rounded-full bg-gray-900 text-white placeholder-gray-500 border border-gray-800 focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent transition-all text-lg"
+                className="nav-text flex-1 px-6 py-4 rounded-full bg-gray-900 text-white placeholder-gray-500 border border-gray-800 focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent transition-all"
               />
               <button
                 type="submit"
-                className="px-10 py-4 bg-[#FF3B30] hover:bg-[#FF453A] text-white font-semibold rounded-full transition-all transform hover:scale-105 whitespace-nowrap text-lg"
+                className="btn-text px-10 py-4 bg-[#FF3B30] hover:bg-[#FF453A] text-white rounded-full transition-all transform hover:scale-105 whitespace-nowrap"
               >
                 Suscribirme
               </button>
             </div>
 
             {submitted && (
-              <p className="mt-6 text-[#FF3B30] font-semibold text-lg">
+              <p className="mt-6 text-[#FF3B30] font-bold">
                 ¡Gracias por suscribirte!
               </p>
             )}
 
-            <p className="text-[#A1A1A6] text-sm mt-6">
+            <p className="text-[#6E6E73] text-sm mt-6">
               No compartimos tu correo. Cancela cuando quieras.
             </p>
           </form>

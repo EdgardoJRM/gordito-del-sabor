@@ -6,7 +6,7 @@ export default function FinalCTA() {
   const router = useRouter();
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-black">
+    <section className="relative section-spacing flex items-center justify-center bg-black">
       {/* Imagen de fondo */}
       <div className="absolute inset-0 z-0">
         <img
@@ -22,9 +22,9 @@ export default function FinalCTA() {
 
       {/* Contenido */}
       <div className="container-custom relative z-10">
-        <div className="max-w-5xl mx-auto text-center space-y-12 px-4">
+        <div className="max-w-5xl mx-auto text-center space-y-12">
           {/* Headline */}
-          <h2 className="text-5xl md:text-7xl lg:text-[80px] font-semibold leading-tight text-white">
+          <h2 className="heading-section text-white">
             Listo para cocinar?
           </h2>
 
@@ -32,7 +32,7 @@ export default function FinalCTA() {
           <div className="pt-8">
             <button
               onClick={() => router.push('/recetas')}
-              className="inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white font-semibold py-5 px-12 rounded-full transition-all transform hover:scale-105 text-lg"
+              className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
             >
               Explorar recetas
             </button>

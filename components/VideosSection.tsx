@@ -12,10 +12,10 @@ export default function VideosSection() {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-black">
-      <div className="container-custom px-4">
+    <section className="section-spacing bg-black">
+      <div className="container-custom">
         {/* Título */}
-        <h2 className="text-5xl md:text-7xl font-semibold text-center text-white mb-16">
+        <h2 className="heading-section text-center text-white mb-20">
           Aprende a cocinar
           <br />
           con sabor.
@@ -45,7 +45,7 @@ export default function VideosSection() {
               </div>
               {/* Título */}
               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/90 to-transparent">
-                <h3 className="text-xl font-semibold text-white">{video.title}</h3>
+                <h3 className="text-xl font-bold text-white">{video.title}</h3>
               </div>
             </div>
           ))}

@@ -15,10 +15,10 @@ export default function RecipesGrid() {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-black">
-      <div className="container-custom px-4">
+    <section className="section-spacing bg-black">
+      <div className="container-custom">
         {/* Título */}
-        <h2 className="text-5xl md:text-7xl font-semibold text-center text-white mb-16">
+        <h2 className="heading-section text-center text-white mb-20">
           Recetas que saben
           <br />
           a casa.
@@ -42,7 +42,7 @@ export default function RecipesGrid() {
               />
               {/* Overlay con nombre */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex items-end p-6">
-                <h3 className="text-2xl font-semibold text-white">{recipe.name}</h3>
+                <h3 className="text-2xl font-bold text-white">{recipe.name}</h3>
               </div>
             </div>
           ))}

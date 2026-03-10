@@ -11,10 +11,10 @@ export default function CommunityGrid() {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-black">
-      <div className="container-custom px-4">
+    <section className="section-spacing bg-black">
+      <div className="container-custom">
         {/* Título */}
-        <h2 className="text-5xl md:text-7xl font-semibold text-center text-white mb-16">
+        <h2 className="heading-section text-center text-white mb-20">
           La comunidad
           <br />
           del sabor.
