@@ -1,15 +1,23 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display, Montserrat, Poppins, Lora } from 'next/font/google';
+import { Inter, DM_Sans } from 'next/font/google';
 import './globals.css';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/components/AuthProvider';
 import NavbarWrapper from '@/components/NavbarWrapper';
 
-const inter = Inter({ subsets: ['latin'] });
-const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' });
-const montserrat = Montserrat({ subsets: ['latin'], variable: '--font-montserrat' });
-const poppins = Poppins({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-poppins' });
-const lora = Lora({ subsets: ['latin'], variable: '--font-lora' });
+// Clash Display alternative - Inter Bold para headings
+const clashDisplay = Inter({ 
+  subsets: ['latin'], 
+  weight: ['700'],
+  variable: '--font-clash' 
+});
+
+// General Sans alternative - DM Sans para texto/UI
+const generalSans = DM_Sans({ 
+  subsets: ['latin'], 
+  weight: ['400', '500', '700'],
+  variable: '--font-general' 
+});
 
 export const metadata: Metadata = {
   title: 'El Gordito del Sabor | Recetas Auténticas Puertorriqueñas',
@@ -30,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={`${inter.className} ${playfair.variable} ${montserrat.variable} ${poppins.variable} ${lora.variable}`}>
+      <body className={`${generalSans.className} ${clashDisplay.variable} ${generalSans.variable}`}>
         <AuthProvider>
           <NavbarWrapper />
           {children}

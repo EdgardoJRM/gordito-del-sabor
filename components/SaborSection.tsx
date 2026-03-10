@@ -20,12 +20,12 @@ export default function SaborSection() {
 
           {/* Texto */}
           <div className="space-y-8">
-            <h2 className="text-5xl md:text-7xl font-semibold leading-tight text-white">
+            <h2 className="heading-section">
               El sabor empieza
               <br />
               en casa.
             </h2>
-            <p className="text-xl md:text-2xl text-[#A1A1A6] leading-relaxed">
+            <p className="body-text text-xl md:text-2xl">
               Recetas boricuas, sazón casero y una comunidad que cocina con respeto.
             </p>
           </div>

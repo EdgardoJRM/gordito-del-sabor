@@ -383,32 +383,32 @@ export default function HeroPremium() {
           >
             <div className="container-custom w-full px-4">
               {/* Centered Text Content */}
-              <div className="text-white space-y-6 md:space-y-8 max-w-3xl mx-auto text-center">
+              <div className="text-white space-y-8 max-w-3xl mx-auto text-center">
                 {/* Headline */}
-                <div>
-                  <h1 className="text-5xl md:text-7xl lg:text-[96px] font-bold leading-tight mb-6 md:mb-8">
-                    El Gordito del Sabor
-                  </h1>
-                </div>
+                <h1 className="heading-hero">
+                  EL GORDITO
+                  <br />
+                  DEL SABOR
+                </h1>
 
                 {/* Subheadline */}
-                <p className="text-xl md:text-3xl lg:text-4xl text-gray-400 leading-relaxed mb-8 md:mb-12">
+                <p className="subheadline">
                   Recetas boricuas.
                   <br />
                   Sazón de verdad.
                 </p>
 
                 {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                   <button
                     onClick={() => router.push('/recetas')}
-                    className="inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white font-semibold py-4 px-10 rounded-full transition-all transform hover:scale-105 text-base md:text-lg"
+                    className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
                   >
                     Explorar recetas
                   </button>
                   <button
                     onClick={() => router.push('/tienda')}
-                    className="inline-block border-2 border-white text-white font-semibold py-4 px-10 rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105 text-base md:text-lg"
+                    className="btn-text inline-block border-2 border-white text-white py-4 px-10 rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105"
                   >
                     Diseñar delantal
                   </button>
