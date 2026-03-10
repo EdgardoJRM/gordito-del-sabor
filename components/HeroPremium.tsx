@@ -446,7 +446,17 @@ export default function HeroPremium() {
       {/* Hero Section Simplificado para Mobile */}
       {isMobile && (
         <section className="relative w-full min-h-screen bg-black pt-32 pb-20 z-10">
-          <div className="container-custom w-full h-full flex items-center justify-center">
+          {/* Background Image for Mobile */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-amber-950/10 opacity-40" />
+            <img 
+              src="/images/hero/webp/ezgif-frame-001.webp"
+              alt="Delantal"
+              className="w-full h-full object-cover opacity-30"
+            />
+          </div>
+
+          <div className="container-custom w-full h-full flex items-center justify-center relative z-10">
             {/* Centered Text Content */}
             <div className="text-white space-y-6 max-w-3xl mx-auto text-center">
               {/* Headline */}
