@@ -386,42 +386,32 @@ export default function HeroPremium() {
               <div className="text-white space-y-6 md:space-y-8 max-w-3xl mx-auto text-center">
                 {/* Headline */}
                 <div>
-                  <h1 className="text-4xl md:text-7xl lg:text-8xl font-bold leading-tight mb-4 md:mb-6">
-                    El Gordito
-                    <br />
-                    <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
-                      del Sabor
-                    </span>
+                  <h1 className="text-5xl md:text-7xl lg:text-[96px] font-bold leading-tight mb-6 md:mb-8">
+                    El Gordito del Sabor
                   </h1>
                 </div>
 
-                {/* Description */}
-                <p className="text-base md:text-xl lg:text-2xl text-gray-300 leading-relaxed px-2 md:px-0">
-                  Delantales diseñados para los que cocinan con respeto. Personaliza el tuyo y cocina con estilo.
+                {/* Subheadline */}
+                <p className="text-xl md:text-3xl lg:text-4xl text-gray-400 leading-relaxed mb-8 md:mb-12">
+                  Recetas boricuas.
+                  <br />
+                  Sazón de verdad.
                 </p>
 
-                {/* CTA Button */}
-                <button
-                  onClick={() => router.push('/tienda')}
-                  className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 md:py-5 md:px-12 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-lg"
-                >
-                  Diseñar mi delantal
-                </button>
-
-                {/* Features */}
-                <div className="flex flex-col md:flex-row gap-6 md:gap-12 pt-8 md:pt-12 border-t border-gray-800 justify-center">
-                  <div>
-                    <p className="text-amber-400 font-bold text-xl md:text-2xl">100%</p>
-                    <p className="text-gray-400 text-sm md:text-lg">Personalizable</p>
-                  </div>
-                  <div>
-                    <p className="text-amber-400 font-bold text-xl md:text-2xl">Premium</p>
-                    <p className="text-gray-400 text-sm md:text-lg">Calidad</p>
-                  </div>
-                  <div>
-                    <p className="text-amber-400 font-bold text-xl md:text-2xl">Rápido</p>
-                    <p className="text-gray-400 text-sm md:text-lg">Envío</p>
-                  </div>
+                {/* CTAs */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <button
+                    onClick={() => router.push('/recetas')}
+                    className="inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white font-semibold py-4 px-10 rounded-full transition-all transform hover:scale-105 text-base md:text-lg"
+                  >
+                    Explorar recetas
+                  </button>
+                  <button
+                    onClick={() => router.push('/tienda')}
+                    className="inline-block border-2 border-white text-white font-semibold py-4 px-10 rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105 text-base md:text-lg"
+                  >
+                    Diseñar delantal
+                  </button>
                 </div>
               </div>
             </div>

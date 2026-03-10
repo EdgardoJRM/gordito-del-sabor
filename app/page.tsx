@@ -1,20 +1,38 @@
 import HeroPremium from '@/components/HeroPremium';
-import FeaturedRecipes from '@/components/FeaturedRecipes';
-import Categories from '@/components/Categories';
+import BrandSection from '@/components/BrandSection';
+import ContentSection from '@/components/ContentSection';
+import CommunitySection from '@/components/CommunitySection';
+import ProductSection from '@/components/ProductSection';
+import FeaturesSection from '@/components/FeaturesSection';
+import FinalCTA from '@/components/FinalCTA';
 import Newsletter from '@/components/Newsletter';
-import About from '@/components/About';
 
 export default function Home() {
   return (
     <>
-      {/* Hero con animación - 800vh de altura */}
+      {/* Hero con animación del delantal */}
       <HeroPremium />
       
-      {/* Resto de secciones - comienzan después del hero */}
-      <FeaturedRecipes />
-      <Categories />
-      <About />
+      {/* Brand storytelling */}
+      <BrandSection />
+      
+      {/* Contenido / recetas */}
+      <ContentSection />
+      
+      {/* Comunidad */}
+      <CommunitySection />
+      
+      {/* Producto (delantal) */}
+      <ProductSection />
+      
+      {/* Features */}
+      <FeaturesSection />
+      
+      {/* Newsletter */}
       <Newsletter />
+      
+      {/* CTA final */}
+      <FinalCTA />
     </>
   );
 }
