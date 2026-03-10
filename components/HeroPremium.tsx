@@ -280,7 +280,6 @@ export default function HeroPremium() {
                   className="w-full h-full object-cover opacity-50"
                   style={{ 
                     display: 'block',
-                    imageRendering: 'high-quality',
                   }}
                 />
               </div>
