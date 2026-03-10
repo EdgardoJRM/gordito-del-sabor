@@ -25,62 +25,77 @@ export default function HeroPremium() {
   // Preload all images on mount with progress tracking
   useEffect(() => {
     const loadImages = async () => {
-      const loadedImagesArray: HTMLImageElement[] = [];
-      let loadedCount = 0;
+      const imagePromises: Promise<HTMLImageElement>[] = [];
       
       for (let i = 0; i < TOTAL_FRAMES; i++) {
         const frameNumber = String(i + 1).padStart(3, '0');
         
-        try {
-          const img = await new Promise<HTMLImageElement>((resolve, reject) => {
-            const image = new Image();
-            image.onload = () => resolve(image);
-            image.onerror = () => {
-              // Fallback to PNG if WebP fails
-              const fallbackImg = new Image();
-              fallbackImg.onload = () => resolve(fallbackImg);
-              fallbackImg.onerror = reject;
-              fallbackImg.src = `/images/hero/ezgif-frame-${frameNumber}.png`;
+        const promise = new Promise<HTMLImageElement>((resolve, reject) => {
+          const image = new Image();
+          image.onload = () => {
+            // Update progress when each image loads
+            setLoadingProgress((prev) => {
+              const newProgress = Math.round(((prev / 100) * TOTAL_FRAMES + 1) / TOTAL_FRAMES * 100);
+              return Math.min(newProgress, 99); // Cap at 99% until all done
+            });
+            resolve(image);
+          };
+          image.onerror = () => {
+            // Fallback to PNG if WebP fails
+            const fallbackImg = new Image();
+            fallbackImg.onload = () => {
+              setLoadingProgress((prev) => {
+                const newProgress = Math.round(((prev / 100) * TOTAL_FRAMES + 1) / TOTAL_FRAMES * 100);
+                return Math.min(newProgress, 99);
+              });
+              resolve(fallbackImg);
             };
-            image.src = `/images/hero/webp/ezgif-frame-${frameNumber}.webp`;
-          });
-          
-          loadedImagesArray.push(img);
-          loadedCount++;
-          
-          // Update progress
-          const progress = Math.round((loadedCount / TOTAL_FRAMES) * 100);
-          setLoadingProgress(progress);
-          
-        } catch (error) {
-          console.error(`Error loading frame ${frameNumber}:`, error);
-        }
+            fallbackImg.onerror = () => {
+              setLoadingProgress((prev) => {
+                const newProgress = Math.round(((prev / 100) * TOTAL_FRAMES + 1) / TOTAL_FRAMES * 100);
+                return Math.min(newProgress, 99);
+              });
+              reject(new Error(`Failed to load frame ${frameNumber}`));
+            };
+            fallbackImg.src = `/images/hero/ezgif-frame-${frameNumber}.png`;
+          };
+          image.src = `/images/hero/webp/ezgif-frame-${frameNumber}.webp`;
+        });
+        
+        imagePromises.push(promise);
       }
 
-      imagesRef.current = loadedImagesArray;
-      setImagesLoaded(true);
-      
-      // Small delay for smooth transition
-      setTimeout(() => {
-        setIsLoading(false);
-      }, 500);
-      
-      // Draw first frame
-      if (canvasRef.current && loadedImagesArray[0]) {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d', { alpha: false });
-        if (ctx) {
-          canvas.width = window.innerWidth;
-          canvas.height = window.innerHeight;
-          ctx.clearRect(0, 0, canvas.width, canvas.height);
-          
-          // Draw image centered and scaled
-          const scale = Math.max(canvas.width / loadedImagesArray[0].width, canvas.height / loadedImagesArray[0].height);
-          const x = (canvas.width / 2) - (loadedImagesArray[0].width / 2) * scale;
-          const y = (canvas.height / 2) - (loadedImagesArray[0].height / 2) * scale;
-          
-          ctx.drawImage(loadedImagesArray[0], x, y, loadedImagesArray[0].width * scale, loadedImagesArray[0].height * scale);
+      try {
+        const loadedImages = await Promise.all(imagePromises);
+        imagesRef.current = loadedImages;
+        setImagesLoaded(true);
+        setLoadingProgress(100);
+        
+        // Small delay for smooth transition
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 500);
+        
+        // Draw first frame
+        if (canvasRef.current && loadedImages[0]) {
+          const canvas = canvasRef.current;
+          const ctx = canvas.getContext('2d', { alpha: false });
+          if (ctx) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw image centered and scaled
+            const scale = Math.max(canvas.width / loadedImages[0].width, canvas.height / loadedImages[0].height);
+            const x = (canvas.width / 2) - (loadedImages[0].width / 2) * scale;
+            const y = (canvas.height / 2) - (loadedImages[0].height / 2) * scale;
+            
+            ctx.drawImage(loadedImages[0], x, y, loadedImages[0].width * scale, loadedImages[0].height * scale);
+          }
         }
+      } catch (error) {
+        console.error('Error loading images:', error);
+        setIsLoading(false);
       }
     };
 
