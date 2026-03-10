@@ -12,6 +12,8 @@ export default function HeroPremium() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [loadingProgress, setLoadingProgress] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -20,54 +22,65 @@ export default function HeroPremium() {
   // Total frames available
   const TOTAL_FRAMES = 240;
 
-  // Preload all images on mount
+  // Preload all images on mount with progress tracking
   useEffect(() => {
-    if (isMobile) return;
-
     const loadImages = async () => {
-      const imagePromises: Promise<HTMLImageElement>[] = [];
+      const loadedImagesArray: HTMLImageElement[] = [];
+      let loadedCount = 0;
       
       for (let i = 0; i < TOTAL_FRAMES; i++) {
         const frameNumber = String(i + 1).padStart(3, '0');
-        const promise = new Promise<HTMLImageElement>((resolve, reject) => {
-          const img = new Image();
-          img.onload = () => resolve(img);
-          img.onerror = () => {
-            // Fallback to PNG if WebP fails
-            const fallbackImg = new Image();
-            fallbackImg.onload = () => resolve(fallbackImg);
-            fallbackImg.onerror = reject;
-            fallbackImg.src = `/images/hero/ezgif-frame-${frameNumber}.png`;
-          };
-          img.src = `/images/hero/webp/ezgif-frame-${frameNumber}.webp`;
-        });
-        imagePromises.push(promise);
+        
+        try {
+          const img = await new Promise<HTMLImageElement>((resolve, reject) => {
+            const image = new Image();
+            image.onload = () => resolve(image);
+            image.onerror = () => {
+              // Fallback to PNG if WebP fails
+              const fallbackImg = new Image();
+              fallbackImg.onload = () => resolve(fallbackImg);
+              fallbackImg.onerror = reject;
+              fallbackImg.src = `/images/hero/ezgif-frame-${frameNumber}.png`;
+            };
+            image.src = `/images/hero/webp/ezgif-frame-${frameNumber}.webp`;
+          });
+          
+          loadedImagesArray.push(img);
+          loadedCount++;
+          
+          // Update progress
+          const progress = Math.round((loadedCount / TOTAL_FRAMES) * 100);
+          setLoadingProgress(progress);
+          
+        } catch (error) {
+          console.error(`Error loading frame ${frameNumber}:`, error);
+        }
       }
 
-      try {
-        const loadedImages = await Promise.all(imagePromises);
-        imagesRef.current = loadedImages;
-        setImagesLoaded(true);
-        
-        // Draw first frame
-        if (canvasRef.current && loadedImages[0]) {
-          const canvas = canvasRef.current;
-          const ctx = canvas.getContext('2d', { alpha: false });
-          if (ctx) {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw image centered and scaled
-            const scale = Math.max(canvas.width / loadedImages[0].width, canvas.height / loadedImages[0].height);
-            const x = (canvas.width / 2) - (loadedImages[0].width / 2) * scale;
-            const y = (canvas.height / 2) - (loadedImages[0].height / 2) * scale;
-            
-            ctx.drawImage(loadedImages[0], x, y, loadedImages[0].width * scale, loadedImages[0].height * scale);
-          }
+      imagesRef.current = loadedImagesArray;
+      setImagesLoaded(true);
+      
+      // Small delay for smooth transition
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
+      
+      // Draw first frame
+      if (canvasRef.current && loadedImagesArray[0]) {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d', { alpha: false });
+        if (ctx) {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          
+          // Draw image centered and scaled
+          const scale = Math.max(canvas.width / loadedImagesArray[0].width, canvas.height / loadedImagesArray[0].height);
+          const x = (canvas.width / 2) - (loadedImagesArray[0].width / 2) * scale;
+          const y = (canvas.height / 2) - (loadedImagesArray[0].height / 2) * scale;
+          
+          ctx.drawImage(loadedImagesArray[0], x, y, loadedImagesArray[0].width * scale, loadedImagesArray[0].height * scale);
         }
-      } catch (error) {
-        console.error('Error loading images:', error);
       }
     };
 
@@ -78,7 +91,20 @@ export default function HeroPremium() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, [isMobile]);
+  }, []);
+
+  // Block scroll while loading
+  useEffect(() => {
+    if (isLoading) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isLoading]);
 
   // Draw frame on canvas
   const drawFrame = (frameIndex: number) => {
@@ -163,6 +189,48 @@ export default function HeroPremium() {
 
   return (
     <>
+      {/* Fullscreen Loader */}
+      {isLoading && (
+        <div className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center">
+          <div className="text-center space-y-8 px-4">
+            {/* Logo with pulse animation */}
+            <div className="animate-pulse">
+              <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">
+                El Gordito
+              </h1>
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+                del Sabor
+              </h2>
+            </div>
+
+            {/* Progress Bar Container */}
+            <div className="w-64 md:w-96 mx-auto">
+              {/* Progress Bar Background */}
+              <div className="relative h-2 bg-gray-800 rounded-full overflow-hidden">
+                {/* Progress Bar Fill */}
+                <div 
+                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full transition-all duration-300 ease-out"
+                  style={{ width: `${loadingProgress}%` }}
+                >
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+                </div>
+              </div>
+
+              {/* Progress Percentage */}
+              <div className="mt-4 text-amber-400 font-bold text-xl md:text-2xl">
+                {loadingProgress}%
+              </div>
+
+              {/* Loading Text */}
+              <div className="mt-2 text-gray-400 text-sm md:text-base">
+                Cargando experiencia...
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30">
         <div className="container-custom py-4 md:py-6 flex items-center justify-between">
