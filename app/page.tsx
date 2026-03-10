@@ -1,11 +1,12 @@
 import HeroPremium from '@/components/HeroPremium';
-import BrandSection from '@/components/BrandSection';
-import ContentSection from '@/components/ContentSection';
-import CommunitySection from '@/components/CommunitySection';
-import ProductSection from '@/components/ProductSection';
-import FeaturesSection from '@/components/FeaturesSection';
-import FinalCTA from '@/components/FinalCTA';
+import SaborSection from '@/components/SaborSection';
+import RecipesGrid from '@/components/RecipesGrid';
+import GorditoSection from '@/components/GorditoSection';
+import CommunityGrid from '@/components/CommunityGrid';
+import ProductLifestyle from '@/components/ProductLifestyle';
+import VideosSection from '@/components/VideosSection';
 import Newsletter from '@/components/Newsletter';
+import FinalCTA from '@/components/FinalCTA';
 
 export default function Home() {
   return (
@@ -13,25 +14,28 @@ export default function Home() {
       {/* Hero con animación del delantal */}
       <HeroPremium />
       
-      {/* Brand storytelling */}
-      <BrandSection />
+      {/* El sabor empieza aquí - Imagen grande + texto */}
+      <SaborSection />
       
-      {/* Contenido / recetas */}
-      <ContentSection />
+      {/* Grid de recetas 3x2 */}
+      <RecipesGrid />
       
-      {/* Comunidad */}
-      <CommunitySection />
+      {/* Sección del Gordito */}
+      <GorditoSection />
       
-      {/* Producto (delantal) */}
-      <ProductSection />
+      {/* Grid de comunidad tipo Instagram */}
+      <CommunityGrid />
       
-      {/* Features */}
-      <FeaturesSection />
+      {/* Productos lifestyle */}
+      <ProductLifestyle />
+      
+      {/* Videos */}
+      <VideosSection />
       
       {/* Newsletter */}
       <Newsletter />
       
-      {/* CTA final */}
+      {/* CTA final con imagen de fondo */}
       <FinalCTA />
     </>
   );

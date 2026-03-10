@@ -6,29 +6,35 @@ export default function FinalCTA() {
   const router = useRouter();
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-black py-20">
-      <div className="container-custom">
+    <section className="relative min-h-screen flex items-center justify-center bg-black">
+      {/* Imagen de fondo */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src="/images/final-cta.jpg"
+          alt="Comida en mesa"
+          className="w-full h-full object-cover opacity-40"
+          onError={(e) => {
+            e.currentTarget.src = 'https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1600&q=80';
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
+      </div>
+
+      {/* Contenido */}
+      <div className="container-custom relative z-10">
         <div className="max-w-5xl mx-auto text-center space-y-12 px-4">
           {/* Headline */}
           <h2 className="text-5xl md:text-7xl lg:text-[80px] font-semibold leading-tight text-white">
-            Listo para cocinar
-            <br />
-            con sabor.
+            Listo para cocinar?
           </h2>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-8">
+          {/* CTA */}
+          <div className="pt-8">
             <button
               onClick={() => router.push('/recetas')}
               className="inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white font-semibold py-5 px-12 rounded-full transition-all transform hover:scale-105 text-lg"
             >
               Explorar recetas
-            </button>
-            <button
-              onClick={() => router.push('/tienda')}
-              className="inline-block border-2 border-white text-white font-semibold py-5 px-12 rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105 text-lg"
-            >
-              Diseñar delantal
             </button>
           </div>
         </div>
