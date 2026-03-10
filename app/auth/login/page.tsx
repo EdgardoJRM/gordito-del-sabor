@@ -52,15 +52,15 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 flex items-center justify-center py-12 px-4">
+    <main className="min-h-screen bg-black flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-2xl shadow-xl p-8">
+        <div className="bg-[#1C1C1E] rounded-3xl border border-gray-900 p-8 md:p-10">
           {/* Header */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-amber-900 mb-2">
+          <div className="text-center mb-10">
+            <h1 className="text-4xl font-bold text-white mb-3">
               {isSignUp ? 'Crear Cuenta' : 'Iniciar Sesión'}
             </h1>
-            <p className="text-gray-600">
+            <p className="body-text">
               {isSignUp
                 ? 'Únete a El Gordito del Sabor'
                 : 'Bienvenido de vuelta'}
@@ -69,28 +69,28 @@ export default function LoginPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="text-red-600 flex-shrink-0 mt-0.5" size={20} />
-              <p className="text-red-700 text-sm">{error}</p>
+            <div className="mb-6 p-4 bg-red-950/50 border border-red-900 rounded-2xl flex items-start gap-3">
+              <AlertCircle className="text-[#FF3B30] flex-shrink-0 mt-0.5" size={20} />
+              <p className="text-red-400 text-sm">{error}</p>
             </div>
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             {isSignUp && (
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
                   Nombre Completo
                 </label>
                 <div className="relative">
-                  <User className="absolute left-3 top-3 text-amber-600" size={20} />
+                  <User className="absolute left-4 top-4 text-[#6E6E73]" size={20} />
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Tu nombre"
-                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                    className="w-full pl-12 pr-4 py-4 bg-black border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                     required={isSignUp}
                   />
                 </div>
@@ -98,36 +98,36 @@ export default function LoginPage() {
             )}
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-3 top-3 text-amber-600" size={20} />
+                <Mail className="absolute left-4 top-4 text-[#6E6E73]" size={20} />
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="tu@email.com"
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full pl-12 pr-4 py-4 bg-black border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">
+              <label className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
                 Contraseña
               </label>
               <div className="relative">
-                <Lock className="absolute left-3 top-3 text-amber-600" size={20} />
+                <Lock className="absolute left-4 top-4 text-[#6E6E73]" size={20} />
                 <input
                   type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+                  className="w-full pl-12 pr-4 py-4 bg-black border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                   required
                 />
               </div>
@@ -136,7 +136,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-text w-full bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 rounded-full transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {loading
                 ? 'Procesando...'
@@ -147,8 +147,8 @@ export default function LoginPage() {
           </form>
 
           {/* Toggle */}
-          <div className="mt-6 text-center">
-            <p className="text-gray-600 text-sm">
+          <div className="mt-8 text-center">
+            <p className="body-text text-sm">
               {isSignUp ? '¿Ya tienes cuenta?' : '¿No tienes cuenta?'}{' '}
               <button
                 onClick={() => {
@@ -156,7 +156,7 @@ export default function LoginPage() {
                   setError('');
                   setFormData({ email: '', password: '', name: '' });
                 }}
-                className="text-amber-600 font-semibold hover:text-amber-700"
+                className="text-[#FF3B30] font-bold hover:text-[#FF453A]"
               >
                 {isSignUp ? 'Inicia sesión' : 'Regístrate'}
               </button>
@@ -165,7 +165,7 @@ export default function LoginPage() {
 
           {/* Back Link */}
           <div className="mt-6 text-center">
-            <Link href="/" className="text-amber-600 hover:text-amber-700 text-sm font-semibold">
+            <Link href="/" className="text-[#A1A1A6] hover:text-white text-sm font-bold transition-colors">
               ← Volver al inicio
             </Link>
           </div>
