@@ -20,10 +20,10 @@ export default function ProfilePage() {
 
   if (status === 'loading' || !isMounted) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF3B30] mx-auto mb-4"></div>
+          <p className="body-text">Cargando...</p>
         </div>
       </main>
     );
@@ -31,13 +31,13 @@ export default function ProfilePage() {
 
   if (status === 'unauthenticated') {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Requerido</h1>
-          <p className="text-gray-600 mb-6">Debes iniciar sesión para ver tu perfil</p>
+      <main className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center space-y-8">
+          <h1 className="heading-section text-white">Acceso Requerido</h1>
+          <p className="body-text text-xl">Debes iniciar sesión para ver tu perfil</p>
           <Link
             href="/auth/login"
-            className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
+            className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
           >
             Iniciar Sesión
           </Link>
@@ -47,22 +47,22 @@ export default function ProfilePage() {
   }
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200">
-        <div className="container-custom py-6">
-          <Link href="/" className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 mb-6">
+      <header className="bg-black border-b border-gray-900">
+        <div className="container-custom py-8">
+          <Link href="/" className="inline-flex items-center gap-2 text-[#A1A1A6] hover:text-white mb-8 transition-colors">
             <ArrowLeft size={20} />
-            Volver al inicio
+            <span className="nav-text">Volver al inicio</span>
           </Link>
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="heading-1 text-amber-900 mb-2">Mi Perfil</h1>
-              <p className="text-gray-600">Bienvenido, {session?.user?.name}</p>
+              <h1 className="heading-section text-white mb-2">Mi Perfil</h1>
+              <p className="body-text text-xl">Bienvenido, {session?.user?.name}</p>
             </div>
             <button
               onClick={() => signOut({ redirect: true, callbackUrl: '/' })}
-              className="flex items-center gap-2 text-red-600 hover:text-red-700 font-semibold"
+              className="btn-text flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white px-8 py-4 rounded-full transition-all transform hover:scale-105 w-fit"
             >
               <LogOut size={20} />
               Cerrar Sesión
@@ -72,32 +72,32 @@ export default function ProfilePage() {
       </header>
 
       {/* Profile Content */}
-      <section className="py-12">
+      <section className="section-spacing">
         <div className="container-custom">
           {/* User Info */}
-          <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-2xl p-8 mb-12">
-            <h2 className="font-montserrat text-2xl font-bold text-amber-900 mb-4">Información de Cuenta</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-[#1C1C1E] border border-gray-900 rounded-3xl p-8 md:p-12 mb-16">
+            <h2 className="text-3xl font-bold text-white mb-8">Información de Cuenta</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <p className="font-poppins text-sm text-gray-600 font-medium">Nombre</p>
-                <p className="font-lora text-lg text-gray-900">{session?.user?.name}</p>
+                <p className="text-sm text-[#6E6E73] font-bold mb-2 uppercase tracking-wide">Nombre</p>
+                <p className="text-xl text-white">{session?.user?.name}</p>
               </div>
               <div>
-                <p className="font-poppins text-sm text-gray-600 font-medium">Email</p>
-                <p className="font-lora text-lg text-gray-900">{session?.user?.email}</p>
+                <p className="text-sm text-[#6E6E73] font-bold mb-2 uppercase tracking-wide">Email</p>
+                <p className="text-xl text-white">{session?.user?.email}</p>
               </div>
             </div>
           </div>
 
           {/* Favorites Section */}
           <div>
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
               <div>
-                <h2 className="font-montserrat text-2xl font-bold text-amber-900 mb-2">
-                  <Heart className="inline-block mr-2 text-red-500" size={28} />
+                <h2 className="text-4xl font-bold text-white mb-3 flex items-center gap-3">
+                  <Heart className="text-[#FF3B30]" size={40} fill="#FF3B30" />
                   Mis Recetas Favoritas
                 </h2>
-                <p className="font-lora text-gray-600">
+                <p className="body-text text-lg">
                   {favorites.length} receta{favorites.length !== 1 ? 's' : ''} guardada{favorites.length !== 1 ? 's' : ''}
                 </p>
               </div>
@@ -108,7 +108,7 @@ export default function ProfilePage() {
                       clearFavorites();
                     }
                   }}
-                  className="text-red-600 hover:text-red-700 font-semibold text-sm"
+                  className="btn-text text-[#FF3B30] hover:text-[#FF453A] font-bold transition-colors"
                 >
                   Limpiar todo
                 </button>
@@ -116,63 +116,63 @@ export default function ProfilePage() {
             </div>
 
             {favorites.length === 0 ? (
-              <div className="bg-white border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center">
-                <Heart size={64} className="mx-auto text-gray-300 mb-4" />
-                <h3 className="font-montserrat text-2xl font-bold text-gray-700 mb-2">
+              <div className="bg-[#1C1C1E] border-2 border-dashed border-gray-900 rounded-3xl p-16 text-center">
+                <Heart size={80} className="mx-auto text-[#6E6E73] mb-6" />
+                <h3 className="text-3xl font-bold text-white mb-4">
                   No tienes recetas favoritas
                 </h3>
-                <p className="font-lora text-gray-600 mb-6">
+                <p className="body-text text-lg mb-10 max-w-2xl mx-auto">
                   Explora nuestras recetas y guarda tus favoritas para acceder a ellas fácilmente
                 </p>
                 <Link
                   href="/recetas"
-                  className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
+                  className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-12 rounded-full transition-all transform hover:scale-105"
                 >
                   Explorar Recetas
                 </Link>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {favorites.map((recipe) => (
                   <div
                     key={recipe.id}
-                    className="bg-white border border-gray-200 rounded-2xl overflow-hidden hover:shadow-lg transition-shadow"
+                    className="bg-[#1C1C1E] border border-gray-900 rounded-3xl overflow-hidden hover:border-gray-800 transition-all hover:scale-105"
                   >
                     {/* Image placeholder */}
-                    <div className="h-48 bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
-                      <span className="text-6xl">🍳</span>
+                    <div className="h-56 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+                      <span className="text-7xl">🍳</span>
                     </div>
 
                     {/* Content */}
                     <div className="p-6">
-                      <div className="mb-3">
-                        <span className="font-poppins inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">
+                      <div className="mb-4">
+                        <span className="inline-block px-3 py-1 bg-gray-900 text-[#A1A1A6] text-xs font-bold rounded-full uppercase tracking-wide">
                           {recipe.category}
                         </span>
                       </div>
 
-                      <h3 className="font-montserrat text-xl font-bold text-amber-900 mb-2">
+                      <h3 className="text-2xl font-bold text-white mb-3">
                         {recipe.title}
                       </h3>
 
-                      <p className="font-lora text-gray-600 text-sm mb-4">
+                      <p className="body-text text-sm mb-4 line-clamp-2">
                         {recipe.description}
                       </p>
 
-                      <p className="font-poppins text-xs text-gray-500 mb-4">
+                      <p className="text-xs text-[#6E6E73] mb-6">
                         Guardado: {new Date(recipe.savedAt).toLocaleDateString('es-ES')}
                       </p>
 
-                      <div className="flex gap-2">
+                      <div className="flex gap-3">
                         <Link
                           href={`/recetas/${recipe.id}`}
-                          className="flex-1 bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-2 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all text-center"
+                          className="btn-text flex-1 bg-[#FF3B30] hover:bg-[#FF453A] text-white py-3 rounded-full transition-all text-center transform hover:scale-105"
                         >
                           Ver Receta
                         </Link>
                         <button
                           onClick={() => removeFavorite(recipe.id)}
-                          className="px-4 py-2 bg-red-50 text-red-600 hover:bg-red-100 rounded-lg transition-colors"
+                          className="px-4 py-3 bg-gray-900 text-[#FF3B30] hover:bg-gray-800 rounded-full transition-colors"
                           title="Eliminar de favoritos"
                         >
                           <Trash2 size={20} />
