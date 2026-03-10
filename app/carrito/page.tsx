@@ -18,10 +18,10 @@ export default function CartPage() {
 
   if (status === 'loading') {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF3B30] mx-auto mb-4"></div>
+          <p className="body-text">Cargando...</p>
         </div>
       </main>
     );
@@ -29,12 +29,13 @@ export default function CartPage() {
 
   if (status === 'unauthenticated') {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Requerido</h1>
+      <main className="min-h-screen bg-black flex items-center justify-center">
+        <div className="text-center space-y-8">
+          <h1 className="heading-section text-white">Acceso Requerido</h1>
+          <p className="body-text text-xl">Inicia sesión para ver tu carrito</p>
           <Link
             href="/auth/login"
-            className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
+            className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
           >
             Iniciar Sesión
           </Link>
@@ -68,33 +69,34 @@ export default function CartPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-gradient-to-r from-amber-50 to-orange-50 border-b border-amber-200">
+      <header className="bg-black border-b border-gray-900">
         <div className="container-custom py-6 flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold text-amber-900">
+          <Link href="/" className="text-2xl font-bold text-white">
             El Gordito del Sabor
           </Link>
-          <Link href="/tienda" className="text-amber-600 hover:text-amber-700 font-semibold">
-            ← Volver a la tienda
+          <Link href="/tienda" className="text-[#A1A1A6] hover:text-white font-bold transition-colors flex items-center gap-2">
+            <ArrowLeft size={20} />
+            Volver a la tienda
           </Link>
         </div>
       </header>
 
       {/* Cart Content */}
-      <section className="py-12">
-        <div className="container-custom max-w-4xl">
-          <h1 className="text-4xl font-bold text-amber-900 mb-8">Tu Carrito</h1>
+      <section className="section-spacing">
+        <div className="container-custom max-w-6xl">
+          <h1 className="heading-section text-white mb-12">Tu Carrito</h1>
 
           {items.length === 0 ? (
-            <div className="text-center py-12">
-              <ShoppingCart size={64} className="mx-auto text-gray-300 mb-4" />
-              <h2 className="text-2xl font-bold text-gray-700 mb-4">
+            <div className="text-center py-20">
+              <ShoppingCart size={80} className="mx-auto text-[#6E6E73] mb-6" />
+              <h2 className="text-3xl font-bold text-white mb-6">
                 Tu carrito está vacío
               </h2>
               <Link
                 href="/tienda"
-                className="inline-block bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 px-8 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all"
+                className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
               >
                 Continuar Comprando
               </Link>
@@ -102,42 +104,42 @@ export default function CartPage() {
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* Items */}
-              <div className="lg:col-span-2 space-y-4">
+              <div className="lg:col-span-2 space-y-6">
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-white border border-gray-200 rounded-lg p-6 flex items-center justify-between"
+                    className="bg-[#1C1C1E] border border-gray-900 rounded-3xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
                   >
                     <div className="flex-1">
-                      <h3 className="text-lg font-bold text-amber-900">
+                      <h3 className="text-2xl font-bold text-white mb-2">
                         {item.productName}
                       </h3>
-                      <p className="text-gray-600 text-sm mt-1">
-                        Personalización: <span className="font-semibold">{item.customText}</span>
+                      <p className="body-text text-sm mb-3">
+                        Personalización: <span className="font-bold text-white">{item.customText}</span>
                       </p>
-                      <p className="text-amber-600 font-bold mt-2">
+                      <p className="text-[#FF3B30] font-bold text-xl">
                         ${item.price.toFixed(2)}
                       </p>
                     </div>
 
                     <div className="flex items-center gap-4">
-                      <div className="flex items-center border border-gray-300 rounded-lg">
+                      <div className="flex items-center bg-black border border-gray-900 rounded-full overflow-hidden">
                         <button
                           onClick={() =>
                             updateQuantity(item.id, Math.max(1, item.quantity - 1))
                           }
-                          className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+                          className="px-4 py-2 text-white hover:bg-gray-900 transition-colors"
                         >
                           −
                         </button>
-                        <span className="px-4 py-1 font-semibold">
+                        <span className="px-6 py-2 font-bold text-white">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() =>
                             updateQuantity(item.id, item.quantity + 1)
                           }
-                          className="px-3 py-1 text-gray-600 hover:bg-gray-100"
+                          className="px-4 py-2 text-white hover:bg-gray-900 transition-colors"
                         >
                           +
                         </button>
@@ -145,9 +147,9 @@ export default function CartPage() {
 
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="text-red-600 hover:text-red-700 p-2"
+                        className="text-[#FF3B30] hover:text-[#FF453A] p-3 transition-colors"
                       >
-                        <Trash2 size={20} />
+                        <Trash2 size={24} />
                       </button>
                     </div>
                   </div>
@@ -155,40 +157,39 @@ export default function CartPage() {
               </div>
 
               {/* Summary */}
-              <div className="bg-gradient-to-br from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-6 h-fit">
-                <h2 className="text-2xl font-bold text-amber-900 mb-6">
+              <div className="bg-[#1C1C1E] border border-gray-900 rounded-3xl p-8 h-fit sticky top-24">
+                <h2 className="text-3xl font-bold text-white mb-8">
                   Resumen
                 </h2>
 
-                <div className="space-y-4 mb-6">
-                  <div className="flex justify-between text-gray-700">
+                <div className="space-y-6 mb-8">
+                  <div className="flex justify-between text-[#A1A1A6] text-lg">
                     <span>Subtotal:</span>
-                    <span>${getTotalPrice().toFixed(2)}</span>
+                    <span className="font-bold">${getTotalPrice().toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between text-gray-700">
+                  <div className="flex justify-between text-[#A1A1A6] text-lg">
                     <span>Envío:</span>
-                    <span>Gratis</span>
+                    <span className="font-bold">Gratis</span>
                   </div>
-                  <div className="border-t border-amber-200 pt-4 flex justify-between text-xl font-bold text-amber-900">
-                    <span>Total:</span>
-                    <span>${getTotalPrice().toFixed(2)}</span>
+                  <div className="border-t border-gray-900 pt-6">
+                    <div className="flex justify-between text-white text-2xl font-bold">
+                      <span>Total:</span>
+                      <span className="text-[#FF3B30]">${getTotalPrice().toFixed(2)}</span>
+                    </div>
                   </div>
                 </div>
 
                 <button
                   onClick={handleCheckout}
                   disabled={loading}
-                  className="w-full bg-gradient-to-r from-amber-600 to-orange-600 text-white font-bold py-3 rounded-lg hover:from-amber-700 hover:to-orange-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-text w-full bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 rounded-full transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                 >
                   {loading ? 'Procesando...' : 'Proceder al Pago'}
                 </button>
 
-                <Link
-                  href="/tienda"
-                  className="block text-center mt-4 text-amber-600 hover:text-amber-700 font-semibold"
-                >
-                  Continuar Comprando
-                </Link>
+                <p className="text-[#6E6E73] text-xs text-center mt-6">
+                  Pago seguro con Stripe
+                </p>
               </div>
             </div>
           )}
