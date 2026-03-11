@@ -14,6 +14,7 @@ export default function Navbar() {
   const navItems = [
     { label: 'Inicio', href: '/' },
     { label: 'Recetas', href: '/recetas' },
+    { label: 'Recetario', href: '/recetario' },
     { label: 'Categorías', href: '/categorias' },
     { label: 'Tienda', href: '/tienda' },
     { label: 'Sobre Nosotros', href: '/sobre-nosotros' },

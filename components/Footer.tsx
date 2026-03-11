@@ -20,6 +20,7 @@ export default function Footer() {
             <h4 className="font-poppins font-semibold mb-4 text-white">Enlaces Rápidos</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li><Link href="/recetas" className="hover:text-amber-400 transition">Recetas</Link></li>
+              <li><Link href="/recetario" className="hover:text-amber-400 transition">Recetario</Link></li>
               <li><Link href="/categorias" className="hover:text-amber-400 transition">Categorías</Link></li>
               <li><Link href="/tienda" className="hover:text-amber-400 transition">Tienda</Link></li>
               <li><Link href="/sobre-nosotros" className="hover:text-amber-400 transition">Sobre Nosotros</Link></li>
