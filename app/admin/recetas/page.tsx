@@ -5,23 +5,31 @@ import Link from 'next/link';
 import { ArrowLeft, Plus, Edit2, Trash2, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-interface UserData {
+interface RecipeData {
   _id: string;
-  name: string;
-  email: string;
-  role: string;
+  title: string;
+  category: string;
+  description?: string;
+  image?: string;
+  isPremium?: boolean;
   createdAt: string;
 }
 
-export default function AdminUsuarios() {
+export default function AdminRecetas() {
   const { data: session, status } = useSession();
   const [isAdmin, setIsAdmin] = useState(false);
   const [checking, setChecking] = useState(true);
-  const [users, setUsers] = useState<UserData[]>([]);
+  const [recipes, setRecipes] = useState<RecipeData[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [editingUser, setEditingUser] = useState<UserData | null>(null);
-  const [formData, setFormData] = useState({ name: '', email: '', password: '', role: 'user' });
+  const [editingRecipe, setEditingRecipe] = useState<RecipeData | null>(null);
+  const [formData, setFormData] = useState({
+    title: '',
+    category: '',
+    description: '',
+    image: '',
+    isPremium: false,
+  });
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
@@ -51,38 +59,56 @@ export default function AdminUsuarios() {
   useEffect(() => {
     if (!isAdmin) return;
 
-    const fetchUsers = async () => {
+    const fetchRecipes = async () => {
       try {
         setLoading(true);
-        const res = await fetch('/api/admin/users');
-        if (!res.ok) throw new Error('Failed to fetch users');
+        const res = await fetch('/api/admin/recipes-favorites');
+        if (!res.ok) throw new Error('Failed to fetch recipes');
         const data = await res.json();
-        setUsers(data.users || []);
+        setRecipes(data.recipes || []);
       } catch (error) {
-        console.error('Error fetching users:', error);
+        console.error('Error fetching recipes:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchUsers();
+    fetchRecipes();
   }, [isAdmin]);
 
-  const handleOpenModal = (user?: UserData) => {
-    if (user) {
-      setEditingUser(user);
-      setFormData({ name: user.name, email: user.email, password: '', role: user.role });
+  const handleOpenModal = (recipe?: RecipeData) => {
+    if (recipe) {
+      setEditingRecipe(recipe);
+      setFormData({
+        title: recipe.title,
+        category: recipe.category,
+        description: recipe.description || '',
+        image: recipe.image || '',
+        isPremium: recipe.isPremium || false,
+      });
     } else {
-      setEditingUser(null);
-      setFormData({ name: '', email: '', password: '', role: 'user' });
+      setEditingRecipe(null);
+      setFormData({
+        title: '',
+        category: '',
+        description: '',
+        image: '',
+        isPremium: false,
+      });
     }
     setShowModal(true);
   };
 
   const handleCloseModal = () => {
     setShowModal(false);
-    setEditingUser(null);
-    setFormData({ name: '', email: '', password: '', role: 'user' });
+    setEditingRecipe(null);
+    setFormData({
+      title: '',
+      category: '',
+      description: '',
+      image: '',
+      isPremium: false,
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -90,12 +116,12 @@ export default function AdminUsuarios() {
     setSubmitting(true);
 
     try {
-      const method = editingUser ? 'PUT' : 'POST';
-      const body = editingUser
-        ? { id: editingUser._id, name: formData.name, email: formData.email, role: formData.role }
+      const method = editingRecipe ? 'PUT' : 'POST';
+      const body = editingRecipe
+        ? { id: editingRecipe._id, ...formData }
         : formData;
 
-      const res = await fetch('/api/admin/user-crud', {
+      const res = await fetch('/api/admin/recipe-crud', {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
@@ -103,44 +129,44 @@ export default function AdminUsuarios() {
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || 'Error al guardar usuario');
+        alert(error.error || 'Error al guardar receta');
         return;
       }
 
-      // Recargar usuarios
-      const usersRes = await fetch('/api/admin/users');
-      const usersData = await usersRes.json();
-      setUsers(usersData.users || []);
+      // Recargar recetas
+      const recipesRes = await fetch('/api/admin/recipes-favorites');
+      const recipesData = await recipesRes.json();
+      setRecipes(recipesData.recipes || []);
 
       handleCloseModal();
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al guardar usuario');
+      alert('Error al guardar receta');
     } finally {
       setSubmitting(false);
     }
   };
 
-  const handleDelete = async (userId: string) => {
-    if (!confirm('¿Estás seguro de que deseas eliminar este usuario?')) return;
+  const handleDelete = async (recipeId: string) => {
+    if (!confirm('¿Estás seguro de que deseas eliminar esta receta?')) return;
 
     try {
-      const res = await fetch('/api/admin/user-crud', {
+      const res = await fetch('/api/admin/recipe-crud', {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: userId }),
+        body: JSON.stringify({ id: recipeId }),
       });
 
       if (!res.ok) {
         const error = await res.json();
-        alert(error.error || 'Error al eliminar usuario');
+        alert(error.error || 'Error al eliminar receta');
         return;
       }
 
-      setUsers(users.filter((u) => u._id !== userId));
+      setRecipes(recipes.filter((r) => r._id !== recipeId));
     } catch (error) {
       console.error('Error:', error);
-      alert('Error al eliminar usuario');
+      alert('Error al eliminar receta');
     }
   };
 
@@ -178,13 +204,13 @@ export default function AdminUsuarios() {
             Volver al Dashboard
           </Link>
           <div className="flex items-center justify-between">
-            <h1 className="heading-section text-white">Gestión de Usuarios</h1>
+            <h1 className="heading-section text-white">Gestión de Recetas</h1>
             <button
               onClick={() => handleOpenModal()}
               className="flex items-center gap-2 bg-[#FF3B30] hover:bg-[#FF453A] text-white font-bold py-3 px-6 rounded-full transition-all"
             >
               <Plus size={20} />
-              Nuevo Usuario
+              Nueva Receta
             </button>
           </div>
         </div>
@@ -195,68 +221,62 @@ export default function AdminUsuarios() {
         <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
           <div className="p-8">
             <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl font-bold text-white">Usuarios Registrados</h2>
-              <span className="text-[#A1A1A6] text-sm">Total: {users.length}</span>
+              <h2 className="text-2xl font-bold text-white">Recetas</h2>
+              <span className="text-[#A1A1A6] text-sm">Total: {recipes.length}</span>
             </div>
 
             {loading ? (
               <div className="text-center py-12">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF3B30] mx-auto mb-4"></div>
-                <p className="text-[#A1A1A6]">Cargando usuarios...</p>
+                <p className="text-[#A1A1A6]">Cargando recetas...</p>
               </div>
-            ) : users.length === 0 ? (
+            ) : recipes.length === 0 ? (
               <div className="text-center py-12">
-                <p className="text-[#A1A1A6] text-lg">No hay usuarios registrados aún</p>
+                <p className="text-[#A1A1A6] text-lg">No hay recetas registradas aún</p>
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="bg-white/5 border-b border-white/10">
-                      <th className="px-6 py-4 text-left font-bold text-white">Nombre</th>
-                      <th className="px-6 py-4 text-left font-bold text-white">Email</th>
-                      <th className="px-6 py-4 text-left font-bold text-white">Rol</th>
-                      <th className="px-6 py-4 text-left font-bold text-white">Fecha de Registro</th>
+                      <th className="px-6 py-4 text-left font-bold text-white">Título</th>
+                      <th className="px-6 py-4 text-left font-bold text-white">Categoría</th>
+                      <th className="px-6 py-4 text-left font-bold text-white">Premium</th>
                       <th className="px-6 py-4 text-left font-bold text-white">Acciones</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {users.map((user) => (
-                      <tr key={user._id} className="border-b border-white/10 hover:bg-white/5 transition-colors">
-                        <td className="px-6 py-4 text-white font-semibold">{user.name}</td>
-                        <td className="px-6 py-4 text-[#A1A1A6]">{user.email}</td>
+                    {recipes.map((recipe) => (
+                      <tr key={recipe._id} className="border-b border-white/10 hover:bg-white/5 transition-colors">
+                        <td className="px-6 py-4 text-white font-semibold">{recipe.title}</td>
+                        <td className="px-6 py-4 text-[#A1A1A6]">{recipe.category}</td>
                         <td className="px-6 py-4">
                           <span
                             className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                              user.role === 'admin'
+                              recipe.isPremium
                                 ? 'bg-[#FF3B30]/20 text-[#FF3B30]'
-                                : 'bg-blue-500/20 text-blue-400'
+                                : 'bg-green-500/20 text-green-400'
                             }`}
                           >
-                            {user.role === 'admin' ? '👑 Admin' : 'Usuario'}
+                            {recipe.isPremium ? '🔒 Premium' : 'Pública'}
                           </span>
-                        </td>
-                        <td className="px-6 py-4 text-[#A1A1A6] text-sm">
-                          {new Date(user.createdAt).toLocaleDateString('es-ES')}
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-3">
                             <button
-                              onClick={() => handleOpenModal(user)}
+                              onClick={() => handleOpenModal(recipe)}
                               className="text-blue-400 hover:text-blue-300 transition-colors"
                               title="Editar"
                             >
                               <Edit2 size={18} />
                             </button>
-                            {user.email !== 'admin@gordito.com' && (
-                              <button
-                                onClick={() => handleDelete(user._id)}
-                                className="text-red-400 hover:text-red-300 transition-colors"
-                                title="Eliminar"
-                              >
-                                <Trash2 size={18} />
-                              </button>
-                            )}
+                            <button
+                              onClick={() => handleDelete(recipe._id)}
+                              className="text-red-400 hover:text-red-300 transition-colors"
+                              title="Eliminar"
+                            >
+                              <Trash2 size={18} />
+                            </button>
                           </div>
                         </td>
                       </tr>
@@ -271,11 +291,11 @@ export default function AdminUsuarios() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#1C1C1E] border border-white/10 rounded-2xl max-w-md w-full p-8">
+        <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4 overflow-y-auto">
+          <div className="bg-[#1C1C1E] border border-white/10 rounded-2xl max-w-md w-full p-8 my-8">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-2xl font-bold text-white">
-                {editingUser ? 'Editar Usuario' : 'Nuevo Usuario'}
+                {editingRecipe ? 'Editar Receta' : 'Nueva Receta'}
               </h2>
               <button onClick={handleCloseModal} className="text-[#A1A1A6] hover:text-white">
                 <X size={24} />
@@ -284,50 +304,58 @@ export default function AdminUsuarios() {
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-bold text-white mb-2">Nombre</label>
+                <label className="block text-sm font-bold text-white mb-2">Título</label>
                 <input
                   type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  value={formData.title}
+                  onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-[#6E6E73] focus:outline-none focus:ring-2 focus:ring-[#FF3B30]"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-bold text-white mb-2">Email</label>
+                <label className="block text-sm font-bold text-white mb-2">Categoría</label>
                 <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  type="text"
+                  value={formData.category}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                   className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-[#6E6E73] focus:outline-none focus:ring-2 focus:ring-[#FF3B30]"
                   required
                 />
               </div>
 
-              {!editingUser && (
-                <div>
-                  <label className="block text-sm font-bold text-white mb-2">Contraseña</label>
-                  <input
-                    type="password"
-                    value={formData.password}
-                    onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                    className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-[#6E6E73] focus:outline-none focus:ring-2 focus:ring-[#FF3B30]"
-                    required
-                  />
-                </div>
-              )}
+              <div>
+                <label className="block text-sm font-bold text-white mb-2">Descripción</label>
+                <textarea
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-[#6E6E73] focus:outline-none focus:ring-2 focus:ring-[#FF3B30]"
+                  rows={3}
+                />
+              </div>
 
               <div>
-                <label className="block text-sm font-bold text-white mb-2">Rol</label>
-                <select
-                  value={formData.role}
-                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-[#FF3B30]"
-                >
-                  <option value="user">Usuario</option>
-                  <option value="admin">Admin</option>
-                </select>
+                <label className="block text-sm font-bold text-white mb-2">URL de Imagen</label>
+                <input
+                  type="text"
+                  value={formData.image}
+                  onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                  className="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-[#6E6E73] focus:outline-none focus:ring-2 focus:ring-[#FF3B30]"
+                />
+              </div>
+
+              <div className="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  id="isPremium"
+                  checked={formData.isPremium}
+                  onChange={(e) => setFormData({ ...formData, isPremium: e.target.checked })}
+                  className="w-4 h-4 rounded"
+                />
+                <label htmlFor="isPremium" className="text-sm font-bold text-white">
+                  Receta Premium (requiere login)
+                </label>
               </div>
 
               <div className="flex gap-3 pt-4">

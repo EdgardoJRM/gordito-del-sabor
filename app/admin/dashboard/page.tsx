@@ -226,12 +226,12 @@ export default function AdminDashboard() {
             </Link>
 
             <Link
-              href="/admin/recetas-vistas"
+              href="/admin/recetas"
               className="p-6 bg-white/5 border border-white/10 rounded-xl hover:bg-white/10 transition-all"
             >
               <Eye className="text-green-400 mb-3" size={32} />
               <h3 className="text-white font-bold mb-2">Recetas</h3>
-              <p className="body-text text-[#A1A1A6] text-sm">Analizar recetas populares</p>
+              <p className="body-text text-[#A1A1A6] text-sm">Gestionar recetas (CRUD)</p>
             </Link>
 
             <Link
