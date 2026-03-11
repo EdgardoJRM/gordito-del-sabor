@@ -393,9 +393,7 @@ export default function HeroPremium() {
 
                 {/* Subheadline */}
                 <p className="subheadline">
-                  Recetas boricuas.
-                  <br />
-                  Sazón de verdad.
+                  Recetas boricuas con sazón de verdad.
                 </p>
 
                 {/* CTAs */}
@@ -404,7 +402,7 @@ export default function HeroPremium() {
                     onClick={() => router.push('/recetas')}
                     className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
                   >
-                    Explorar recetas
+                    Ver recetas
                   </button>
                   <button
                     onClick={() => router.push('/tienda')}

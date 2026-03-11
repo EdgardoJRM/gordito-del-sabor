@@ -25,16 +25,22 @@ export default function FinalCTA() {
         <div className="max-w-5xl mx-auto text-center space-y-12">
           {/* Headline */}
           <h2 className="heading-section text-white">
-            Listo para cocinar?
+            ¿Listo para cocinar?
           </h2>
 
           {/* CTA */}
-          <div className="pt-8">
+          <div className="pt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
             <button
               onClick={() => router.push('/recetas')}
               className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
             >
-              Explorar recetas
+              Ver recetas
+            </button>
+            <button
+              onClick={() => router.push('/tienda')}
+              className="btn-text inline-block border-2 border-white text-white py-5 px-12 rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105"
+            >
+              Diseñar delantal
             </button>
           </div>
         </div>

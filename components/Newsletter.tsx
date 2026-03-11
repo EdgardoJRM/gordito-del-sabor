@@ -5,12 +5,38 @@ import { useState } from 'react';
 export default function Newsletter() {
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setEmail('');
-    setTimeout(() => setSubmitted(false), 3000);
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email,
+          source: 'newsletter',
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error('Error al suscribirte');
+      }
+
+      setSubmitted(true);
+      setEmail('');
+      setTimeout(() => setSubmitted(false), 3000);
+    } catch (err) {
+      setError('Ocurrió un error al suscribirte. Intenta nuevamente.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -42,15 +68,21 @@ export default function Newsletter() {
               />
               <button
                 type="submit"
-                className="btn-text px-10 py-4 bg-[#FF3B30] hover:bg-[#FF453A] text-white rounded-full transition-all transform hover:scale-105 whitespace-nowrap"
+                disabled={loading}
+                className="btn-text px-10 py-4 bg-[#FF3B30] hover:bg-[#FF453A] text-white rounded-full transition-all transform hover:scale-105 whitespace-nowrap disabled:opacity-50 disabled:hover:scale-100"
               >
-                Suscribirme
+                {loading ? 'Enviando...' : 'Suscribirme'}
               </button>
             </div>
 
-            {submitted && (
+            {submitted && !error && (
               <p className="mt-6 text-[#FF3B30] font-bold">
                 ¡Gracias por suscribirte!
+              </p>
+            )}
+            {error && (
+              <p className="mt-4 text-[#FF3B30] body-text text-sm">
+                {error}
               </p>
             )}
 

@@ -3,7 +3,7 @@
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { BarChart3, Users, ShoppingCart, Eye, LogOut } from 'lucide-react';
+import { BarChart3, Users, ShoppingCart, Eye, LogOut, Mail } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 
 export default function AdminDashboard() {
@@ -97,15 +97,17 @@ export default function AdminDashboard() {
             </div>
           </Link>
 
-          {/* Ingresos */}
-          <div className="bg-white rounded-2xl p-8 border border-gray-200">
-            <div className="flex items-center justify-between mb-4">
-              <h3 className="font-poppins text-lg font-semibold text-gray-700">Ingresos</h3>
-              <BarChart3 className="text-orange-600" size={32} />
+          {/* Leads (placeholder stats) */}
+          <Link href="/admin/leads" className="group">
+            <div className="bg-white rounded-2xl p-8 border border-gray-200 hover:shadow-lg transition-shadow cursor-pointer">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-poppins text-lg font-semibold text-gray-700">Leads</h3>
+                <Mail className="text-orange-600" size={32} />
+              </div>
+              <p className="font-montserrat text-4xl font-bold text-gray-900 mb-2">--</p>
+              <p className="text-sm text-gray-600">Leads capturados (ebook, contacto, newsletter)</p>
             </div>
-            <p className="font-montserrat text-4xl font-bold text-gray-900 mb-2">$0.00</p>
-            <p className="text-sm text-gray-600">Ingresos totales</p>
-          </div>
+          </Link>
         </div>
 
         {/* Quick Actions */}
@@ -137,6 +139,15 @@ export default function AdminDashboard() {
               <ShoppingCart className="text-purple-600 mb-3" size={32} />
               <h3 className="font-poppins font-semibold text-gray-900 mb-2">Órdenes</h3>
               <p className="text-sm text-gray-600">Ver todas las órdenes de compra</p>
+            </Link>
+
+            <Link
+              href="/admin/leads"
+              className="p-6 bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl hover:shadow-lg transition-shadow"
+            >
+              <Mail className="text-orange-600 mb-3" size={32} />
+              <h3 className="font-poppins font-semibold text-gray-900 mb-2">Leads</h3>
+              <p className="text-sm text-gray-600">Ver leads de ebook, contacto y newsletter</p>
             </Link>
 
             <Link

@@ -14,11 +14,16 @@ export default function CommunityGrid() {
     <section className="section-spacing bg-black">
       <div className="container-custom">
         {/* Título */}
-        <h2 className="heading-section text-center text-white mb-20">
-          La comunidad
-          <br />
-          del sabor.
-        </h2>
+        <div className="text-center space-y-6 mb-20">
+          <h2 className="heading-section text-white">
+            La comunidad
+            <br />
+            del sabor.
+          </h2>
+          <p className="body-text text-xl md:text-2xl text-[#A1A1A6]">
+            Más de 160,000 personas cocinan con nosotros.
+          </p>
+        </div>
 
         {/* Grid estilo Instagram */}
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">

@@ -1,6 +1,7 @@
 import HeroPremium from '@/components/HeroPremium';
 import SaborSection from '@/components/SaborSection';
 import RecipesGrid from '@/components/RecipesGrid';
+import EbookSection from '@/components/EbookSection';
 import GorditoSection from '@/components/GorditoSection';
 import CommunityGrid from '@/components/CommunityGrid';
 import ProductLifestyle from '@/components/ProductLifestyle';
@@ -19,6 +20,9 @@ export default function Home() {
       
       {/* Grid de recetas 3x2 */}
       <RecipesGrid />
+
+      {/* Ebook / Lead magnet */}
+      <EbookSection />
       
       {/* Sección del Gordito */}
       <GorditoSection />
