@@ -12,9 +12,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'Invalid JSON body' }, { status: 400 });
     }
 
-    const { name, email, source, message } = body as {
+    const { name, email, phone, source, message } = body as {
       name?: string;
       email: string;
+      phone?: string;
       source: 'ebook' | 'contact' | 'newsletter';
       message?: string;
     };
@@ -26,6 +27,7 @@ export async function POST(req: Request) {
     await Lead.create({
       name,
       email,
+      phone,
       source,
       message,
     });

@@ -3,6 +3,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface ILead extends Document {
   name?: string;
   email: string;
+  phone?: string;
   source: 'ebook' | 'contact' | 'newsletter';
   message?: string;
   createdAt: Date;
@@ -19,6 +20,9 @@ const LeadSchema = new Schema<ILead>(
       required: true,
       lowercase: true,
       trim: true,
+    },
+    phone: {
+      type: String,
     },
     source: {
       type: String,

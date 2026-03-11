@@ -9,6 +9,7 @@ type Lead = {
   _id: string;
   name?: string;
   email: string;
+  phone?: string;
   source: 'ebook' | 'contact' | 'newsletter';
   message?: string;
   createdAt?: string;
@@ -159,6 +160,7 @@ export default function AdminLeadsPage() {
                   <tr className="bg-gray-100 border-b-2 border-gray-300">
                     <th className="px-6 py-4 text-left font-bold text-gray-700">Email</th>
                     <th className="px-6 py-4 text-left font-bold text-gray-700">Nombre</th>
+                    <th className="px-6 py-4 text-left font-bold text-gray-700">Teléfono</th>
                     <th className="px-6 py-4 text-left font-bold text-gray-700">Origen</th>
                     <th className="px-6 py-4 text-left font-bold text-gray-700">Fecha</th>
                     <th className="px-6 py-4 text-left font-bold text-gray-700">Mensaje (resumen)</th>
@@ -180,6 +182,18 @@ export default function AdminLeadsPage() {
                       </td>
                       <td className="px-6 py-4 text-gray-900">
                         {lead.name || '—'}
+                      </td>
+                      <td className="px-6 py-4 text-gray-900">
+                        {lead.phone ? (
+                          <a
+                            href={`tel:${lead.phone}`}
+                            className="text-amber-700 hover:text-amber-900 underline-offset-2 hover:underline"
+                          >
+                            {lead.phone}
+                          </a>
+                        ) : (
+                          '—'
+                        )}
                       </td>
                       <td className="px-6 py-4">
                         <span
