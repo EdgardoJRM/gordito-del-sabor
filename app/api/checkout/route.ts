@@ -6,7 +6,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
 });
 
 // Simulamos una base de datos de órdenes en memoria
-export const orders: Record<string, any> = {};
+const orders: Record<string, any> = {};
 
 export async function POST(request: NextRequest) {
   try {

@@ -3,7 +3,6 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import dbConnect from '@/lib/mongodb';
 import User from '@/lib/models/User';
-import Order from '@/lib/models/Order';
 
 export async function GET() {
   try {
@@ -21,12 +20,12 @@ export async function GET() {
       return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
     }
 
-    // Obtener todas las órdenes
-    const orders = await Order.find({}).sort({ createdAt: -1 }).lean();
+    // Obtener todos los usuarios
+    const users = await User.find({}).sort({ createdAt: -1 }).lean();
 
-    return NextResponse.json({ orders });
+    return NextResponse.json({ users });
   } catch (error) {
-    console.error('Error fetching orders:', error);
+    console.error('Error fetching users:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
