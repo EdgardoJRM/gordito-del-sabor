@@ -36,10 +36,10 @@ export default function AdminOrdenes() {
 
   if (status === 'loading' || checking) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF3B30] mx-auto mb-4"></div>
+          <p className="text-[#A1A1A6]">Cargando...</p>
         </div>
       </main>
     );
@@ -47,10 +47,10 @@ export default function AdminOrdenes() {
 
   if (status === 'unauthenticated' || !isAdmin) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Denegado</h1>
-          <Link href="/" className="text-amber-600 hover:text-amber-700">
+          <h1 className="heading-section text-white mb-4">Acceso Denegado</h1>
+          <Link href="/" className="text-[#FF3B30] hover:text-[#FF453A]">
             Volver al inicio
           </Link>
         </div>
@@ -59,34 +59,33 @@ export default function AdminOrdenes() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-black border-b border-gray-900">
         <div className="container-custom py-6">
-          <Link href="/admin/dashboard" className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 mb-6">
+          <Link href="/admin/dashboard" className="inline-flex items-center gap-2 text-[#FF3B30] hover:text-[#FF453A] mb-6 transition-colors">
             <ArrowLeft size={20} />
             Volver al Dashboard
           </Link>
-          <h1 className="font-montserrat text-3xl font-bold text-amber-900">Gestión de Órdenes</h1>
+          <h1 className="heading-section text-white">Gestión de Órdenes</h1>
         </div>
       </header>
 
       {/* Content */}
       <div className="container-custom py-12">
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
           <div className="p-8">
-            <h2 className="font-montserrat text-2xl font-bold text-amber-900 mb-6">Órdenes de Compra</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">Órdenes de Compra</h2>
             
             <div className="text-center py-12">
-              <ShoppingCart size={64} className="mx-auto text-gray-300 mb-4" />
-              <p className="font-lora text-gray-600 text-lg">No hay órdenes aún</p>
-              <p className="text-sm text-gray-500 mt-2">Las órdenes aparecerán aquí cuando los clientes realicen compras</p>
+              <ShoppingCart size={64} className="mx-auto text-[#6E6E73] mb-4" />
+              <p className="body-text text-[#A1A1A6] text-lg">No hay órdenes aún</p>
+              <p className="text-sm text-[#6E6E73] mt-2">Las órdenes aparecerán aquí cuando los clientes realicen compras</p>
             </div>
 
-            <div className="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="font-lora text-blue-800">
-                💡 <span className="font-semibold">Nota:</span> Las órdenes se guardarán cuando se conecte a una base de datos. 
-                Actualmente, se pueden ver en el panel de admin de órdenes.
+            <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-lg">
+              <p className="body-text text-[#A1A1A6]">
+                💡 <span className="font-semibold text-white">Nota:</span> Las órdenes se guardarán cuando se conecte a una base de datos.
               </p>
             </div>
           </div>

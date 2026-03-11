@@ -37,10 +37,10 @@ export default function AdminRecetasVistas() {
 
   if (status === 'loading' || checking) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF3B30] mx-auto mb-4"></div>
+          <p className="text-[#A1A1A6]">Cargando...</p>
         </div>
       </main>
     );
@@ -48,10 +48,10 @@ export default function AdminRecetasVistas() {
 
   if (status === 'unauthenticated' || !isAdmin) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Denegado</h1>
-          <Link href="/" className="text-amber-600 hover:text-amber-700">
+          <h1 className="heading-section text-white mb-4">Acceso Denegado</h1>
+          <Link href="/" className="text-[#FF3B30] hover:text-[#FF453A]">
             Volver al inicio
           </Link>
         </div>
@@ -60,25 +60,25 @@ export default function AdminRecetasVistas() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-black border-b border-gray-900">
         <div className="container-custom py-6">
-          <Link href="/admin/dashboard" className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 mb-6">
+          <Link href="/admin/dashboard" className="inline-flex items-center gap-2 text-[#FF3B30] hover:text-[#FF453A] mb-6 transition-colors">
             <ArrowLeft size={20} />
             Volver al Dashboard
           </Link>
-          <h1 className="font-montserrat text-3xl font-bold text-amber-900">Recetas Más Vistas</h1>
+          <h1 className="heading-section text-white">Recetas Más Vistas</h1>
         </div>
       </header>
 
       {/* Content */}
       <div className="container-custom py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {recipes.map((recipe, index) => (
-            <div key={recipe.id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow">
+          {recipes.slice(0, 6).map((recipe, index) => (
+            <div key={recipe.id} className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden hover:bg-white/10 transition-all">
               {/* Image */}
-              <div className="h-48 bg-gradient-to-br from-amber-100 to-orange-100 flex items-center justify-center">
+              <div className="h-48 bg-gradient-to-br from-[#FF3B30]/20 to-orange-600/20 flex items-center justify-center">
                 {recipe.image ? (
                   <img src={recipe.image} alt={recipe.title} className="w-full h-full object-cover" />
                 ) : (
@@ -89,34 +89,27 @@ export default function AdminRecetasVistas() {
               {/* Content */}
               <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <span className="font-poppins inline-block px-3 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">
+                  <span className="inline-block px-3 py-1 bg-[#FF3B30]/20 text-[#FF3B30] text-xs font-semibold rounded-full">
                     {recipe.category}
                   </span>
-                  <span className="font-montserrat text-2xl font-bold text-green-600">#{index + 1}</span>
+                  <span className="text-2xl font-bold text-[#FF3B30]">#{index + 1}</span>
                 </div>
 
-                <h3 className="font-montserrat text-xl font-bold text-amber-900 mb-2">
+                <h3 className="text-xl font-bold text-white mb-2">
                   {recipe.title}
                 </h3>
 
-                <p className="font-lora text-gray-600 text-sm mb-4">
+                <p className="body-text text-[#A1A1A6] text-sm mb-4">
                   {recipe.description}
                 </p>
 
-                <div className="flex items-center gap-2 text-gray-600">
+                <div className="flex items-center gap-2 text-[#A1A1A6]">
                   <Eye size={18} />
-                  <span className="font-poppins text-sm">-- visualizaciones</span>
+                  <span className="text-sm">--</span>
                 </div>
               </div>
             </div>
           ))}
-        </div>
-
-        <div className="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="font-lora text-blue-800">
-            💡 <span className="font-semibold">Nota:</span> Las estadísticas de visualización se guardarán cuando se conecte a una base de datos. 
-            Actualmente, se pueden rastrear en tiempo real con la autenticación de usuarios.
-          </p>
         </div>
       </div>
     </main>

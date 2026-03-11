@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { ArrowLeft, Mail, Calendar } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export default function AdminUsuarios() {
@@ -36,10 +36,10 @@ export default function AdminUsuarios() {
 
   if (status === 'loading' || checking) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#FF3B30] mx-auto mb-4"></div>
+          <p className="text-[#A1A1A6]">Cargando...</p>
         </div>
       </main>
     );
@@ -47,10 +47,10 @@ export default function AdminUsuarios() {
 
   if (status === 'unauthenticated' || !isAdmin) {
     return (
-      <main className="min-h-screen bg-white flex items-center justify-center">
+      <main className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Denegado</h1>
-          <Link href="/" className="text-amber-600 hover:text-amber-700">
+          <h1 className="heading-section text-white mb-4">Acceso Denegado</h1>
+          <Link href="/" className="text-[#FF3B30] hover:text-[#FF453A]">
             Volver al inicio
           </Link>
         </div>
@@ -59,44 +59,44 @@ export default function AdminUsuarios() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-black">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200">
+      <header className="bg-black border-b border-gray-900">
         <div className="container-custom py-6">
-          <Link href="/admin/dashboard" className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 mb-6">
+          <Link href="/admin/dashboard" className="inline-flex items-center gap-2 text-[#FF3B30] hover:text-[#FF453A] mb-6 transition-colors">
             <ArrowLeft size={20} />
             Volver al Dashboard
           </Link>
-          <h1 className="font-montserrat text-3xl font-bold text-amber-900">Gestión de Usuarios</h1>
+          <h1 className="heading-section text-white">Gestión de Usuarios</h1>
         </div>
       </header>
 
       {/* Content */}
       <div className="container-custom py-12">
-        <div className="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+        <div className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
           <div className="p-8">
-            <h2 className="font-montserrat text-2xl font-bold text-amber-900 mb-6">Usuarios Registrados</h2>
+            <h2 className="text-2xl font-bold text-white mb-6">Usuarios Registrados</h2>
             
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
-                  <tr className="bg-gray-100 border-b-2 border-gray-300">
-                    <th className="px-6 py-4 text-left font-bold text-gray-700">Nombre</th>
-                    <th className="px-6 py-4 text-left font-bold text-gray-700">Email</th>
-                    <th className="px-6 py-4 text-left font-bold text-gray-700">Fecha de Registro</th>
-                    <th className="px-6 py-4 text-left font-bold text-gray-700">Acciones</th>
+                  <tr className="bg-white/5 border-b border-white/10">
+                    <th className="px-6 py-4 text-left font-bold text-white">Nombre</th>
+                    <th className="px-6 py-4 text-left font-bold text-white">Email</th>
+                    <th className="px-6 py-4 text-left font-bold text-white">Fecha de Registro</th>
+                    <th className="px-6 py-4 text-left font-bold text-white">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr className="border-b border-gray-200 hover:bg-gray-50">
-                    <td className="px-6 py-4 text-gray-900">
-                      <div className="font-poppins font-semibold">Sin datos</div>
-                      <p className="text-sm text-gray-600">Los usuarios aparecerán aquí</p>
+                  <tr className="border-b border-white/10 hover:bg-white/5">
+                    <td className="px-6 py-4 text-[#A1A1A6]">
+                      <div className="font-semibold text-white">Sin datos</div>
+                      <p className="text-sm text-[#6E6E73]">Los usuarios aparecerán aquí</p>
                     </td>
-                    <td className="px-6 py-4 text-gray-600">--</td>
-                    <td className="px-6 py-4 text-gray-600">--</td>
+                    <td className="px-6 py-4 text-[#A1A1A6]">--</td>
+                    <td className="px-6 py-4 text-[#A1A1A6]">--</td>
                     <td className="px-6 py-4">
-                      <button className="text-blue-600 hover:text-blue-700 font-semibold text-sm">
+                      <button className="text-[#FF3B30] hover:text-[#FF453A] font-semibold text-sm transition-colors">
                         Ver Detalles
                       </button>
                     </td>
@@ -105,10 +105,9 @@ export default function AdminUsuarios() {
               </table>
             </div>
 
-            <div className="mt-8 p-6 bg-blue-50 border border-blue-200 rounded-lg">
-              <p className="font-lora text-blue-800">
-                💡 <span className="font-semibold">Nota:</span> Los datos de usuarios se guardarán cuando se conecte a una base de datos. 
-                Actualmente, los usuarios se almacenan en memoria durante la sesión.
+            <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-lg">
+              <p className="body-text text-[#A1A1A6]">
+                💡 <span className="font-semibold text-white">Nota:</span> Los usuarios se mostrarán aquí cuando se conecte a una base de datos.
               </p>
             </div>
           </div>
