@@ -41,10 +41,16 @@ export const authOptions: NextAuthOptions = {
             }
 
             const hashedPassword = await bcrypt.hash(credentials.password, 10);
+
+            // Rol por defecto: user. Opcionalmente, podemos hacer admin al email histórico.
+            const role: 'user' | 'admin' =
+              credentials.email === 'admin@gordito.com' ? 'admin' : 'user';
+
             const newUser = await User.create({
               name: credentials.name,
               email: credentials.email,
               password: hashedPassword,
+              role,
             });
 
             console.log('✅ Usuario registrado:', newUser._id);
@@ -52,6 +58,7 @@ export const authOptions: NextAuthOptions = {
               id: newUser._id.toString(),
               email: newUser.email,
               name: newUser.name,
+              role: newUser.role,
             };
           } else {
             // Login
@@ -78,6 +85,7 @@ export const authOptions: NextAuthOptions = {
               id: user._id.toString(),
               email: user.email,
               name: user.name,
+              role: user.role,
             };
           }
         } catch (error) {
@@ -93,9 +101,10 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        token.id = user.id;
-        token.email = user.email;
-        token.name = user.name;
+        token.id = (user as any).id;
+        token.email = (user as any).email;
+        token.name = (user as any).name;
+        (token as any).role = (user as any).role || 'user';
       }
       return token;
     },
@@ -104,6 +113,7 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).id = token.id as string;
         session.user.email = token.email as string;
         session.user.name = token.name as string;
+        (session.user as any).role = (token as any).role || 'user';
       }
       return session;
     },

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { ArrowLeft, Mail, Filter } from 'lucide-react';
 
 type Lead = {
@@ -20,6 +21,7 @@ const sourceLabels: Record<Lead['source'], string> = {
 };
 
 export default function AdminLeadsPage() {
+  const { data: session, status } = useSession();
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | Lead['source']>('all');
@@ -39,6 +41,21 @@ export default function AdminLeadsPage() {
 
     loadLeads();
   }, []);
+
+  const isAdmin =
+    (session?.user as any)?.role === 'admin' ||
+    session?.user?.email === 'admin@gordito.com';
+
+  if (status === 'loading') {
+    return (
+      <main className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4" />
+          <p className="text-gray-600">Cargando...</p>
+        </div>
+      </main>
+    );
+  }
 
   const filteredLeads =
     filter === 'all' ? leads : leads.filter((lead) => lead.source === filter);
@@ -87,7 +104,15 @@ export default function AdminLeadsPage() {
             </div>
           </div>
 
-          {loading ? (
+          {!isAdmin ? (
+            <div className="text-center py-12">
+              <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Denegado</h1>
+              <p className="text-gray-600 mb-4">Solo administradores pueden ver los leads.</p>
+              <Link href="/" className="text-amber-600 hover:text-amber-700">
+                Volver al inicio
+              </Link>
+            </div>
+          ) : loading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4" />
               <p className="text-gray-600">Cargando leads...</p>

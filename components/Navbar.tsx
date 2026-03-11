@@ -57,7 +57,7 @@ export default function Navbar() {
             </Link>
 
             {/* Admin Link */}
-            {session?.user?.email === 'admin@gordito.com' && (
+            {(((session?.user as any)?.role === 'admin') || session?.user?.email === 'admin@gordito.com') && (
               <Link href="/admin/dashboard" className="text-[#FF3B30] hover:text-[#FF453A] font-bold flex items-center gap-1">
                 <Settings size={20} />
                 <span className="hidden sm:inline">Admin</span>

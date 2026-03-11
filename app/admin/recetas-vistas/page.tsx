@@ -19,7 +19,11 @@ export default function AdminRecetasVistas() {
     );
   }
 
-  if (status === 'unauthenticated' || session?.user?.email !== 'admin@gordito.com') {
+  const isAdmin =
+    (session?.user as any)?.role === 'admin' ||
+    session?.user?.email === 'admin@gordito.com';
+
+  if (status === 'unauthenticated' || !isAdmin) {
     return (
       <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
