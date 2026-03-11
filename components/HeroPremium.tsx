@@ -14,6 +14,7 @@ export default function HeroPremium() {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
   const containerRef = useRef(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
@@ -184,6 +185,13 @@ export default function HeroPremium() {
         setScrollProgress(progress);
         const frameIndex = Math.floor((progress / 100) * (TOTAL_FRAMES - 1));
         setCurrentFrame(frameIndex);
+        
+        // Hide scroll indicator after user scrolls past 5%
+        if (progress > 5) {
+          setShowScrollIndicator(false);
+        } else {
+          setShowScrollIndicator(true);
+        }
       }
     };
 
@@ -415,7 +423,28 @@ export default function HeroPremium() {
             </div>
           </div>
 
-          {/* Scroll Indicator */}
+          {/* Scroll Indicator - Center Bottom */}
+          <div 
+            className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 z-30 transition-opacity duration-500"
+            style={{
+              opacity: showScrollIndicator ? 1 : 0,
+              pointerEvents: showScrollIndicator ? 'auto' : 'none',
+            }}
+          >
+            <p className="text-white/70 text-sm tracking-widest uppercase font-light">
+              Scroll para explorar
+            </p>
+            <div 
+              className="animate-bounce"
+              style={{
+                animation: 'bounce 1.5s infinite',
+              }}
+            >
+              <ChevronDown size={24} className="text-white/50" />
+            </div>
+          </div>
+
+          {/* Scroll Progress Indicator - Right Side */}
           <div className="absolute bottom-8 right-8 flex flex-col items-center gap-4 z-30">
             <div className="flex flex-col gap-2">
               {[0, 1, 2].map((i) => (

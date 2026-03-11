@@ -23,6 +23,16 @@ body {
   font-family: var(--font-general);
 }
 
+/* Scroll Indicator Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
+
 /* Typography System - Apple Style */
 .heading-hero {
   font-family: var(--font-clash);
