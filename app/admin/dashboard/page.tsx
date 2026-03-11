@@ -5,12 +5,39 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { BarChart3, Users, ShoppingCart, Eye, LogOut, Mail } from 'lucide-react';
 import { signOut } from 'next-auth/react';
+import { useEffect, useState } from 'react';
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [checking, setChecking] = useState(true);
 
-  if (status === 'loading') {
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      setChecking(false);
+      return;
+    }
+
+    if (status === 'authenticated') {
+      const checkAdmin = async () => {
+        try {
+          const res = await fetch('/api/admin/check');
+          const data = await res.json();
+          setIsAdmin(data.isAdmin);
+        } catch (error) {
+          console.error('Error checking admin:', error);
+          setIsAdmin(false);
+        } finally {
+          setChecking(false);
+        }
+      };
+
+      checkAdmin();
+    }
+  }, [status]);
+
+  if (status === 'loading' || checking) {
     return (
       <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
@@ -20,10 +47,6 @@ export default function AdminDashboard() {
       </main>
     );
   }
-
-  const isAdmin =
-    (session?.user as any)?.role === 'admin' ||
-    session?.user?.email === 'admin@gordito.com';
 
   if (status === 'unauthenticated' || !isAdmin) {
     return (

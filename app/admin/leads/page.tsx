@@ -25,8 +25,36 @@ export default function AdminLeadsPage() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | Lead['source']>('all');
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
+    if (status === 'unauthenticated') {
+      setChecking(false);
+      return;
+    }
+
+    if (status === 'authenticated') {
+      const checkAdmin = async () => {
+        try {
+          const res = await fetch('/api/admin/check');
+          const data = await res.json();
+          setIsAdmin(data.isAdmin);
+        } catch (error) {
+          console.error('Error checking admin:', error);
+          setIsAdmin(false);
+        } finally {
+          setChecking(false);
+        }
+      };
+
+      checkAdmin();
+    }
+  }, [status]);
+
+  useEffect(() => {
+    if (!isAdmin) return;
+
     const loadLeads = async () => {
       try {
         const res = await fetch('/api/admin/leads');
@@ -40,13 +68,12 @@ export default function AdminLeadsPage() {
     };
 
     loadLeads();
-  }, []);
+  }, [isAdmin]);
 
-  const isAdmin =
-    (session?.user as any)?.role === 'admin' ||
-    session?.user?.email === 'admin@gordito.com';
+  const filteredLeads =
+    filter === 'all' ? leads : leads.filter((lead) => lead.source === filter);
 
-  if (status === 'loading') {
+  if (status === 'loading' || checking) {
     return (
       <main className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center">
@@ -57,8 +84,19 @@ export default function AdminLeadsPage() {
     );
   }
 
-  const filteredLeads =
-    filter === 'all' ? leads : leads.filter((lead) => lead.source === filter);
+  if (status === 'unauthenticated' || !isAdmin) {
+    return (
+      <main className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Denegado</h1>
+          <p className="text-gray-600 mb-4">Solo administradores pueden ver los leads.</p>
+          <Link href="/" className="text-amber-600 hover:text-amber-700">
+            Volver al inicio
+          </Link>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-white">
@@ -104,15 +142,7 @@ export default function AdminLeadsPage() {
             </div>
           </div>
 
-          {!isAdmin ? (
-            <div className="text-center py-12">
-              <h1 className="text-3xl font-bold text-amber-900 mb-4">Acceso Denegado</h1>
-              <p className="text-gray-600 mb-4">Solo administradores pueden ver los leads.</p>
-              <Link href="/" className="text-amber-600 hover:text-amber-700">
-                Volver al inicio
-              </Link>
-            </div>
-          ) : loading ? (
+          {loading ? (
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-amber-600 mx-auto mb-4" />
               <p className="text-gray-600">Cargando leads...</p>
@@ -186,4 +216,3 @@ export default function AdminLeadsPage() {
     </main>
   );
 }
-
