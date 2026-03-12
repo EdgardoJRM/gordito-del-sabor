@@ -370,7 +370,7 @@ export default function HeroPremium() {
               )}
               <canvas
                 ref={canvasRef}
-                className="w-full h-full object-contain md:object-cover opacity-50"
+                className="w-full h-full object-contain opacity-50"
                 style={{ 
                   display: 'block',
                 }}
