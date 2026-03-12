@@ -40,7 +40,7 @@ export async function POST(req: Request) {
 
     // Enviar email con Resend
     const emailResponse = await resend.emails.send({
-      from: 'El Gordito del Sabor <noreply@gorditodelsabor.com>',
+      from: 'onboarding@resend.dev', // Email de prueba de Resend
       to: email,
       subject: '¡Tu recetario está listo! Las 20 Recetas Favoritas del Sabor',
       html: `
