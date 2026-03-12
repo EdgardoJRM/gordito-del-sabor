@@ -2,6 +2,7 @@ import HeroPremium from '@/components/HeroPremium';
 import SaborSection from '@/components/SaborSection';
 import RecipesGrid from '@/components/RecipesGrid';
 import EbookSection from '@/components/EbookSection';
+import AmazonSection from '@/components/AmazonSection';
 import GorditoSection from '@/components/GorditoSection';
 import CommunityGrid from '@/components/CommunityGrid';
 import ProductLifestyle from '@/components/ProductLifestyle';
@@ -23,6 +24,9 @@ export default function Home() {
 
       {/* Ebook / Lead magnet */}
       <EbookSection />
+      
+      {/* Sección de Amazon - Productos de cocina */}
+      <AmazonSection />
       
       {/* Sección del Gordito */}
       <GorditoSection />
