@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { ArrowLeft, Clock, Users, ChefHat } from 'lucide-react';
 import FavoriteButton from '@/components/FavoriteButton';
 import AuthGate from '@/components/AuthGate';
+import RecipePromoBanner from '@/components/RecipePromoBanner';
 
 export const metadata: Metadata = {
   title: 'Receta | El Gordito del Sabor',
@@ -160,6 +161,9 @@ export default async function RecipeDetailPage({ params }: PageProps) {
                   <p className="body-text">{recipe.notes}</p>
                 </div>
               )}
+
+              {/* Ebook Promotion Banner */}
+              <RecipePromoBanner />
             </div>
 
             {/* Sidebar */}

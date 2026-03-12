@@ -407,16 +407,19 @@ export default function HeroPremium() {
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                   <button
-                    onClick={() => router.push('/recetas')}
+                    onClick={() => {
+                      const element = document.getElementById('ebook-section');
+                      element?.scrollIntoView({ behavior: 'smooth' });
+                    }}
                     className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
                   >
-                    Ver recetas
+                    Descargar Recetario Gratis
                   </button>
                   <button
-                    onClick={() => router.push('/tienda')}
+                    onClick={() => router.push('/recetas')}
                     className="btn-text inline-block border-2 border-white text-white py-4 px-10 rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105"
                   >
-                    Diseñar delantal
+                    Ver Recetas
                   </button>
                 </div>
               </div>

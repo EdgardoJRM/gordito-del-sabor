@@ -4,6 +4,7 @@ import './globals.css';
 import Footer from '@/components/Footer';
 import { AuthProvider } from '@/components/AuthProvider';
 import NavbarWrapper from '@/components/NavbarWrapper';
+import FloatingEbookCTA from '@/components/FloatingEbookCTA';
 
 // Clash Display - Para headings
 const clashDisplay = localFont({
@@ -63,6 +64,7 @@ export default function RootLayout({
       <body className={`${generalSans.className} ${clashDisplay.variable} ${generalSans.variable}`}>
         <AuthProvider>
           <NavbarWrapper />
+          <FloatingEbookCTA />
           {children}
           <Footer />
         </AuthProvider>
