@@ -362,7 +362,7 @@ export default function HeroPremium() {
             )}
 
             {/* Animated Product Image - Canvas Rendering */}
-            <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+            <div className="relative w-full h-full flex items-end justify-center pb-50 md:pb-0 md:items-center">
               {!imagesLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-white text-xl">Cargando animación...</div>
