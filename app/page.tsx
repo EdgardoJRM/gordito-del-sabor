@@ -1,49 +1,29 @@
 import HeroPremium from '@/components/HeroPremium';
-import SaborSection from '@/components/SaborSection';
-import RecipesGrid from '@/components/RecipesGrid';
 import EbookSection from '@/components/EbookSection';
-import AmazonSection from '@/components/AmazonSection';
+import RecipesGrid from '@/components/RecipesGrid';
 import GorditoSection from '@/components/GorditoSection';
-import CommunityGrid from '@/components/CommunityGrid';
 import ProductLifestyle from '@/components/ProductLifestyle';
-import VideosSection from '@/components/VideosSection';
-import Newsletter from '@/components/Newsletter';
 import FinalCTA from '@/components/FinalCTA';
 
 export default function Home() {
   return (
     <>
-      {/* Hero con animación del delantal */}
+      {/* 1. HERO - Marca + Cocina */}
       <HeroPremium />
       
-      {/* El sabor empieza aquí - Imagen grande + texto */}
-      <SaborSection />
-      
-      {/* Grid de recetas 3x2 */}
-      <RecipesGrid />
-
-      {/* Ebook / Lead magnet */}
+      {/* 2. RECETARIO - Lead Magnet */}
       <EbookSection />
       
-      {/* Sección de Amazon - Productos de cocina */}
-      <AmazonSection />
-      
-      {/* Sección del Gordito */}
+      {/* 3. RECETAS POPULARES */}
+      <RecipesGrid />
+
+      {/* 4. HISTORIA / PERSONALIDAD */}
       <GorditoSection />
       
-      {/* Grid de comunidad tipo Instagram */}
-      <CommunityGrid />
-      
-      {/* Productos lifestyle */}
+      {/* 5. PRODUCTO FUTURO - Delantal */}
       <ProductLifestyle />
       
-      {/* Videos */}
-      <VideosSection />
-      
-      {/* Newsletter */}
-      <Newsletter />
-      
-      {/* CTA final con imagen de fondo */}
+      {/* 6. CTA RECETARIO */}
       <FinalCTA />
     </>
   );
