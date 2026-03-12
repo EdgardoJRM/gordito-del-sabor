@@ -60,10 +60,10 @@ export async function POST(req: Request) {
                   <!-- HEADER -->
                   <tr>
                     <td align="center" style="background:#000000;padding:40px 20px">
-                      <h1 style="color:#ffffff;margin:0;font-size:42px;font-weight:bold;">
+                      <h1 style="color:#ffffff;margin:0;font-size:28px;font-weight:bold;">
                         🔥 El Gordito del Sabor
                       </h1>
-                      <p style="color:#cccccc;font-size:20px;margin-top:10px;margin-bottom:0;">
+                      <p style="color:#cccccc;font-size:18px;margin-top:10px;margin-bottom:0;">
                         Tu recetario gratis está listo
                       </p>
                     </td>
