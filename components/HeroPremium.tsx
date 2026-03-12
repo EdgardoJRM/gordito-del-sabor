@@ -331,10 +331,10 @@ export default function HeroPremium() {
       </nav>
 
       {/* Hero Animation Section - Desktop & Mobile */}
-      <section ref={containerRef} className={`relative w-full ${isMobile ? 'min-h-[500vh]' : 'min-h-[800vh]'} bg-black`}>
+      <section ref={containerRef} className={`relative w-full ${isMobile ? 'min-h-[400vh]' : 'min-h-[800vh]'} bg-black`}>
         {/* Fixed Background Animation Container */}
         <div 
-          className="fixed top-0 left-0 h-screen w-full z-0 transition-opacity duration-500 pt-24 md:pt-0"
+          className="fixed top-0 left-0 h-screen w-full z-0 transition-opacity duration-500"
           style={{
             opacity: scrollProgress < 90 ? 1 : 0,
             pointerEvents: scrollProgress < 90 ? 'auto' : 'none',
