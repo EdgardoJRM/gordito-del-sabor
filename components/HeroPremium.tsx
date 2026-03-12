@@ -407,10 +407,7 @@ export default function HeroPremium() {
                 {/* CTAs */}
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                   <button
-                    onClick={() => {
-                      const element = document.getElementById('ebook-section');
-                      element?.scrollIntoView({ behavior: 'smooth' });
-                    }}
+                    onClick={() => router.push('/recetario')}
                     className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
                   >
                     Descargar Recetario Gratis

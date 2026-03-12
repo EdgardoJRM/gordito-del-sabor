@@ -4,13 +4,8 @@ import { Download } from 'lucide-react';
 
 export default function RecipePromoBanner() {
   const handleClick = () => {
-    // Scroll to ebook section on homepage, or navigate to contact form
-    const element = document.getElementById('ebook-section');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.location.href = '/contacto?lead=ebook';
-    }
+    // Navigate to recetario landing page
+    window.location.href = '/recetario';
   };
 
   return (

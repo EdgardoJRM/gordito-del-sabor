@@ -1,0 +1,136 @@
+'use client';
+
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Download, Loader } from 'lucide-react';
+
+export default function EbookDownloadForm() {
+  const router = useRouter();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/ebook/download', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, phone }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Error al procesar tu solicitud');
+      }
+
+      setSubmitted(true);
+      // Redirigir a página de confirmación después de 1 segundo
+      setTimeout(() => {
+        router.push('/ebook/descarga');
+      }, 1000);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Error al enviar el formulario');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (submitted) {
+    return (
+      <div className="text-center py-12 space-y-4">
+        <div className="flex justify-center">
+          <div className="w-16 h-16 bg-[#FF3B30]/20 rounded-full flex items-center justify-center">
+            <Download size={32} className="text-[#FF3B30]" />
+          </div>
+        </div>
+        <p className="text-white font-bold text-lg">¡Procesando tu solicitud...</p>
+        <p className="body-text text-[#A1A1A6]">Redirigiendo a tu página de descarga...</p>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label htmlFor="name" className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+            Nombre Completo
+          </label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+            placeholder="Tu nombre"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="email" className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+            Correo Electrónico
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+            placeholder="tu@email.com"
+            required
+          />
+        </div>
+      </div>
+
+      <div>
+        <label htmlFor="phone" className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+          Número de Teléfono
+        </label>
+        <input
+          type="tel"
+          id="phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+          placeholder="+1 (787) XXX-XXXX"
+        />
+      </div>
+
+      {error && (
+        <div className="bg-[#FF3B30]/20 border border-[#FF3B30] rounded-2xl p-4">
+          <p className="text-[#FF3B30] text-sm font-bold">{error}</p>
+        </div>
+      )}
+
+      <button
+        type="submit"
+        disabled={loading}
+        className="w-full btn-text bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 rounded-full transition-all transform hover:scale-105 disabled:opacity-50 disabled:hover:scale-100 font-bold flex items-center justify-center gap-2"
+      >
+        {loading ? (
+          <>
+            <Loader size={20} className="animate-spin" />
+            Procesando...
+          </>
+        ) : (
+          <>
+            <Download size={20} />
+            Descargar Recetario Gratis
+          </>
+        )}
+      </button>
+
+      <p className="text-xs text-[#6E6E73] text-center">
+        Recibirás el recetario por email inmediatamente. Respetamos tu privacidad.
+      </p>
+    </form>
+  );
+}

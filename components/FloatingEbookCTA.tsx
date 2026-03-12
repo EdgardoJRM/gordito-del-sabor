@@ -16,8 +16,7 @@ export default function FloatingEbookCTA() {
   if (!isVisible) return null;
 
   const handleClick = () => {
-    const element = document.getElementById('ebook-section');
-    element?.scrollIntoView({ behavior: 'smooth' });
+    window.location.href = '/recetario';
   };
 
   return (

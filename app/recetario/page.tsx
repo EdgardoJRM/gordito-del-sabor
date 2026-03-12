@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Check, Download, Users, Star, Clock } from 'lucide-react';
+import EbookDownloadForm from '@/components/EbookDownloadForm';
 
 export const metadata: Metadata = {
   title: 'Las 20 Recetas Favoritas del Sabor | El Gordito del Sabor',
@@ -133,6 +134,24 @@ export default function RecetarioPage() {
           <p className="text-xs text-[#6E6E73] pt-4">
             Formato PDF • Descarga instantánea • Sin spam
           </p>
+        </div>
+      </section>
+
+      {/* Download Form Section */}
+      <section className="section-spacing bg-black border-t border-gray-900">
+        <div className="container-custom max-w-2xl">
+          <div className="text-center mb-12">
+            <h2 className="heading-section text-white mb-6">
+              Descarga tu recetario ahora
+            </h2>
+            <p className="body-text text-xl text-[#A1A1A6]">
+              Completa el formulario y recibirás el PDF directamente en tu email
+            </p>
+          </div>
+
+          <div className="bg-[#1C1C1E] border border-gray-900 rounded-3xl p-8 md:p-12">
+            <EbookDownloadForm />
+          </div>
         </div>
       </section>
 
