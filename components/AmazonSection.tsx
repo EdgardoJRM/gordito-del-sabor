@@ -3,38 +3,30 @@
 import { ShoppingCart, Star } from 'lucide-react';
 
 export default function AmazonSection() {
-  const products = [
+  const categories = [
     {
-      name: 'Sartén de Hierro Fundido',
-      description: 'Perfecta para cocinar como el Gordito',
-      price: '$45.99',
-      rating: 4.8,
-      reviews: 2500,
-      image: '🍳',
+      name: 'Utensilios de Cocina',
+      description: 'Sartenes, ollas y herramientas esenciales',
+      icon: '🍳',
+      link: 'https://www.amazon.com/shop/el.gordito.del.sabor',
     },
     {
-      name: 'Juego de Cuchillos Premium',
-      description: 'Cuchillos profesionales para tu cocina',
-      price: '$89.99',
-      rating: 4.9,
-      reviews: 1800,
-      image: '🔪',
+      name: 'Electrodomésticos',
+      description: 'Equipos modernos para tu cocina',
+      icon: '⚡',
+      link: 'https://www.amazon.com/shop/el.gordito.del.sabor',
     },
     {
-      name: 'Tabla de Corte de Madera',
-      description: 'Tabla de corte resistente y duradera',
-      price: '$34.99',
-      rating: 4.7,
-      reviews: 1200,
-      image: '🪵',
+      name: 'Cuchillos de Cocina',
+      description: 'Cuchillos profesionales y de calidad',
+      icon: '🔪',
+      link: 'https://www.amazon.com/shop/el.gordito.del.sabor',
     },
     {
-      name: 'Olla de Presión Rápida',
-      description: 'Cocina más rápido, sabor igual',
-      price: '$79.99',
-      rating: 4.8,
-      reviews: 3100,
-      image: '🍲',
+      name: 'Herramientas Especiales',
+      description: 'Para pizza, cocción y más',
+      icon: '🛠️',
+      link: 'https://www.amazon.com/shop/el.gordito.del.sabor',
     },
   ];
 
@@ -45,85 +37,96 @@ export default function AmazonSection() {
         <div className="text-center mb-16 space-y-4">
           <div className="inline-block">
             <span className="inline-block px-4 py-2 bg-[#FF9900]/20 text-[#FF9900] text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
-              🛒 Tienda del Gordito
+              🛒 Tienda Oficial del Gordito
             </span>
           </div>
           <h2 className="heading-section text-white">
             Cocina como el Gordito
           </h2>
           <p className="body-text text-xl md:text-2xl max-w-3xl mx-auto text-[#A1A1A6]">
-            Los utensilios y herramientas que usa el Gordito en su cocina. Compra en Amazon con nuestros links afiliados.
+            Descubre los utensilios y herramientas que usa el Gordito en su cocina. Todos disponibles en Amazon con nuestras recomendaciones personales.
           </p>
         </div>
 
-        {/* Products Grid */}
+        {/* Categories Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {products.map((product, index) => (
-            <div
+          {categories.map((category, index) => (
+            <a
               key={index}
-              className="group bg-white/5 border border-white/10 rounded-xl p-6 hover:border-[#FF9900]/50 hover:bg-white/10 transition-all duration-300"
+              href={category.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-white/5 border border-white/10 rounded-xl p-8 hover:border-[#FF9900]/50 hover:bg-white/10 transition-all duration-300 cursor-pointer"
             >
-              {/* Product Image */}
-              <div className="text-6xl mb-4 text-center">{product.image}</div>
+              {/* Category Icon */}
+              <div className="text-6xl mb-4 text-center group-hover:scale-110 transition-transform">
+                {category.icon}
+              </div>
 
-              {/* Product Name */}
-              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-[#FF9900] transition-colors">
-                {product.name}
+              {/* Category Name */}
+              <h3 className="text-white font-bold text-lg mb-2 group-hover:text-[#FF9900] transition-colors text-center">
+                {category.name}
               </h3>
 
               {/* Description */}
-              <p className="text-[#A1A1A6] text-sm mb-4 line-clamp-2">
-                {product.description}
+              <p className="text-[#A1A1A6] text-sm mb-6 text-center">
+                {category.description}
               </p>
 
-              {/* Rating */}
-              <div className="flex items-center gap-2 mb-4">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={14}
-                      className={i < Math.floor(product.rating) ? 'fill-[#FF9900] text-[#FF9900]' : 'text-gray-600'}
-                    />
-                  ))}
-                </div>
-                <span className="text-xs text-[#6E6E73]">
-                  {product.rating} ({product.reviews})
-                </span>
-              </div>
-
-              {/* Price */}
-              <div className="mb-4">
-                <p className="text-[#FF9900] font-bold text-xl">{product.price}</p>
-              </div>
-
               {/* CTA Button */}
-              <a
-                href={`https://amazon.com/s?k=${encodeURIComponent(product.name)}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full inline-flex items-center justify-center gap-2 bg-[#FF9900] hover:bg-[#FF9900]/90 text-black font-bold py-3 px-4 rounded-lg transition-all transform hover:scale-105"
-              >
+              <div className="flex items-center justify-center gap-2 bg-[#FF9900] group-hover:bg-[#FF9900]/90 text-black font-bold py-3 px-4 rounded-lg transition-all transform group-hover:scale-105">
                 <ShoppingCart size={18} />
-                Ver en Amazon
-              </a>
-            </div>
+                <span>Ver Productos</span>
+              </div>
+            </a>
           ))}
+        </div>
+
+        {/* Info Section */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Column 1 */}
+            <div className="text-center">
+              <div className="text-4xl mb-4">✅</div>
+              <h3 className="text-white font-bold mb-2">Productos Verificados</h3>
+              <p className="text-[#A1A1A6] text-sm">
+                Todos los productos están personalmente seleccionados por el Gordito
+              </p>
+            </div>
+
+            {/* Column 2 */}
+            <div className="text-center">
+              <div className="text-4xl mb-4">🚚</div>
+              <h3 className="text-white font-bold mb-2">Envío Rápido</h3>
+              <p className="text-[#A1A1A6] text-sm">
+                Disfruta de envío rápido con Amazon Prime
+              </p>
+            </div>
+
+            {/* Column 3 */}
+            <div className="text-center">
+              <div className="text-4xl mb-4">💰</div>
+              <h3 className="text-white font-bold mb-2">Mejores Precios</h3>
+              <p className="text-[#A1A1A6] text-sm">
+                Encuentra las mejores ofertas en Amazon
+              </p>
+            </div>
+          </div>
         </div>
 
         {/* Bottom CTA */}
         <div className="text-center">
-          <p className="text-[#A1A1A6] mb-6">
-            ¿No encuentras lo que buscas? Explora más productos en Amazon
+          <p className="text-[#A1A1A6] mb-6 text-lg">
+            Visita la tienda oficial del Gordito en Amazon
           </p>
           <a
-            href="https://amazon.com/s?k=cocina+profesional"
+            href="https://www.amazon.com/shop/el.gordito.del.sabor"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#FF9900] hover:bg-[#FF9900]/90 text-black font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105"
           >
             <ShoppingCart size={20} />
-            Explorar más en Amazon
+            Ir a la Tienda del Gordito
           </a>
         </div>
       </div>
