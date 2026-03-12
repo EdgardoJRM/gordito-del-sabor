@@ -21,7 +21,7 @@ export default function HeroPremium() {
   const animationFrameRef = useRef<number>();
 
   // Total frames available
-  const TOTAL_FRAMES = 240;
+  const TOTAL_FRAMES = 176;
 
   // Preload all images on mount with progress tracking
   useEffect(() => {
@@ -58,9 +58,9 @@ export default function HeroPremium() {
               });
               reject(new Error(`Failed to load frame ${frameNumber}`));
             };
-            fallbackImg.src = `/images/hero/ezgif-frame-${frameNumber}.png`;
+            fallbackImg.src = `/images/hero/webp/test/ezgif-frame-${frameNumber}.png`;
           };
-          image.src = `/images/hero/webp/ezgif-frame-${frameNumber}.webp`;
+          image.src = `/images/hero/webp/test/ezgif-frame-${frameNumber}.png`;
         });
         
         imagePromises.push(promise);
@@ -362,7 +362,7 @@ export default function HeroPremium() {
             )}
 
             {/* Animated Product Image - Canvas Rendering */}
-            <div className="relative w-full h-full flex items-center justify-center">
+            <div className="relative w-full h-full flex items-end justify-center pb-12 md:pb-0 md:items-center">
               {!imagesLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-white text-xl">Cargando animación...</div>
