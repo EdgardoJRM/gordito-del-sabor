@@ -11,6 +11,28 @@ const ROOT = path.join(__dirname, '..');
 const FONTS_DIR = path.join(ROOT, 'public/images/fonts');
 const OUTPUT = path.join(ROOT, 'public/ebooks/recetario.pdf');
 
+/**
+ * Imágenes JPEG/PNG (PDFKit no soporta WebP).
+ * Actualizar foto de portada/contraportada:
+ *   sips -s format jpeg public/images/ariel.webp --out public/ebooks/recetario-cover.jpg
+ */
+const COVER_IMAGE = path.join(ROOT, 'public/ebooks/recetario-cover.jpg');
+const INDEX_BANNER = path.join(ROOT, 'public/ebooks/recetario-cover.jpg');
+const BACK_PORTRAIT = path.join(ROOT, 'public/ebooks/recetario-cover.jpg');
+/** Rotación de fotos de comida por receta (variación visual) */
+const RECIPE_BANNER_POOL = [
+  'public/images/recipes/pernil.jpg',
+  'public/images/recipes/arroz-gandules.jpg',
+  'public/images/recipes/mofongo.jpg',
+  'public/images/recipes/tostones.jpg',
+  'public/images/recipes/alcapurrias.jpg',
+  'public/images/recipes/ceviche.jpg',
+];
+
+const COVER_HERO_H = 280;
+const INDEX_BANNER_H = 72;
+const RECIPE_BANNER_H = 88;
+
 const COLORS = {
   dark: '#1A1412',
   cream: '#FAF8F5',
@@ -28,6 +50,28 @@ function loadData() {
   return require('./recetas-data');
 }
 
+function imageFileOk(p) {
+  try {
+    return fs.existsSync(p);
+  } catch {
+    return false;
+  }
+}
+
+/** Inserta imagen; si falla el archivo, no hace nada */
+function drawImageCover(doc, imgPath, x, y, w, h) {
+  if (!imageFileOk(imgPath)) return;
+  try {
+    doc.image(imgPath, x, y, {
+      cover: [w, h],
+      align: 'center',
+      valign: 'center',
+    });
+  } catch {
+    /* formato no soportado o archivo dañado */
+  }
+}
+
 function registerFonts(doc) {
   doc.registerFont('ClashBold', path.join(FONTS_DIR, 'ClashDisplay-Bold.otf'));
   doc.registerFont('ClashLight', path.join(FONTS_DIR, 'ClashDisplay-Light.otf'));
@@ -39,30 +83,34 @@ function registerFonts(doc) {
 function drawCover(doc, data) {
   doc.rect(0, 0, PAGE.w, PAGE.h).fill(COLORS.dark);
 
-  let y = 180;
+  drawImageCover(doc, COVER_IMAGE, 0, 0, PAGE.w, COVER_HERO_H);
+  doc.rect(0, COVER_HERO_H - 1, PAGE.w, 3).fill(COLORS.terracotta);
+  doc.rect(0, COVER_HERO_H, PAGE.w, PAGE.h - COVER_HERO_H).fill(COLORS.dark);
+
+  let y = COVER_HERO_H + 44;
   doc.font('GenBold').fontSize(10).fillColor(COLORS.gold).text('RECETARIO DIGITAL', M.left, y, {
     width: CONTENT_W,
     align: 'center',
   });
   y += 36;
 
-  doc.font('ClashBold').fontSize(42).fillColor(COLORS.cream).text('LAS 20 RECETAS', M.left, y, {
+  doc.font('ClashBold').fontSize(40).fillColor(COLORS.cream).text('LAS 20 RECETAS', M.left, y, {
     width: CONTENT_W,
     align: 'center',
   });
-  y += 52;
+  y += 48;
 
-  doc.font('ClashLight').fontSize(38).fillColor(COLORS.gold).text('FAVORITAS DEL SABOR', M.left, y, {
+  doc.font('ClashLight').fontSize(36).fillColor(COLORS.gold).text('FAVORITAS DEL SABOR', M.left, y, {
     width: CONTENT_W,
     align: 'center',
   });
-  y += 100;
+  y += 36;
 
   doc.font('GenItalic').fontSize(14).fillColor('#D4C9BC').text(data.subtitulo, M.left, y, {
     width: CONTENT_W,
     align: 'center',
   });
-  y += 120;
+  y += 72;
 
   doc.font('GenReg').fontSize(12).fillColor('#9C8B80').text(data.autor, M.left, y, {
     width: CONTENT_W,
@@ -75,6 +123,10 @@ function drawCover(doc, data) {
 function drawIndex(doc, data) {
   doc.rect(0, 0, PAGE.w, PAGE.h).fill('#F5F0E8');
   let y = M.top;
+
+  drawImageCover(doc, INDEX_BANNER, M.left, y, CONTENT_W, INDEX_BANNER_H);
+  doc.rect(M.left, y + INDEX_BANNER_H, CONTENT_W, 2).fill(COLORS.terracotta);
+  y += INDEX_BANNER_H + 20;
 
   doc.font('ClashBold').fontSize(28).fillColor(COLORS.dark).text('Índice', M.left, y);
   y += 48;
@@ -113,6 +165,12 @@ function drawRecipe(doc, data, recipe, index) {
 
   doc.font('GenBold').fontSize(9).fillColor(COLORS.terracotta).text(`RECETA ${index + 1} / ${data.recetas.length}`, M.left, y);
   y += 20;
+
+  const accentPath = path.join(ROOT, RECIPE_BANNER_POOL[index % RECIPE_BANNER_POOL.length]);
+  y = ensureSpace(doc, y, RECIPE_BANNER_H + 24, onRecipePage);
+  drawImageCover(doc, accentPath, M.left, y, CONTENT_W, RECIPE_BANNER_H);
+  doc.rect(M.left, y + RECIPE_BANNER_H, CONTENT_W, 2).fill(COLORS.terracotta);
+  y += RECIPE_BANNER_H + 16;
 
   doc.font('ClashBold').fontSize(26).fillColor(COLORS.dark);
   const titleH = doc.heightOfString(recipe.nombre, { width: CONTENT_W });
@@ -175,7 +233,32 @@ function drawRecipe(doc, data, recipe, index) {
 
 function drawBackCover(doc, data) {
   doc.rect(0, 0, PAGE.w, PAGE.h).fill(COLORS.dark);
+
+  const portraitW = 168;
+  const portraitX = (PAGE.w - portraitW) / 2;
   let y = 200;
+  if (imageFileOk(BACK_PORTRAIT)) {
+    try {
+      doc.save();
+      doc.roundedRect(portraitX, 72, portraitW, portraitW, 8).clip();
+      doc.image(BACK_PORTRAIT, portraitX, 72, {
+        width: portraitW,
+        height: portraitW,
+        cover: [portraitW, portraitW],
+        align: 'center',
+        valign: 'center',
+      });
+      doc.restore();
+      doc
+        .lineWidth(1.5)
+        .strokeColor(COLORS.terracotta)
+        .roundedRect(portraitX, 72, portraitW, portraitW, 8)
+        .stroke();
+      y = 72 + portraitW + 36;
+    } catch {
+      /* sin retrato si falla */
+    }
+  }
 
   doc.font('ClashLight').fontSize(32).fillColor(COLORS.gold).text('Gracias por cocinar', M.left, y, {
     width: CONTENT_W,
