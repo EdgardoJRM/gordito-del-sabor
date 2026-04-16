@@ -6,9 +6,24 @@ import { AuthProvider } from '@/components/auth/AuthProvider';
 import NavbarWrapper from '@/components/layout/NavbarWrapper';
 import FloatingEbookCTA from '@/components/ebook/FloatingEbookCTA';
 
-// Clash Display - Para headings
+// Clash Display — headings (300–700)
 const clashDisplay = localFont({
   src: [
+    {
+      path: '../public/images/fonts/ClashDisplay-Light.otf',
+      weight: '300',
+      style: 'normal',
+    },
+    {
+      path: '../public/images/fonts/ClashDisplay-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/images/fonts/ClashDisplay-Semibold.otf',
+      weight: '600',
+      style: 'normal',
+    },
     {
       path: '../public/images/fonts/ClashDisplay-Bold.otf',
       weight: '700',
@@ -19,7 +34,7 @@ const clashDisplay = localFont({
   display: 'swap',
 });
 
-// General Sans - Para texto/UI
+// General Sans — texto / UI + italic
 const generalSans = localFont({
   src: [
     {
@@ -33,9 +48,24 @@ const generalSans = localFont({
       style: 'normal',
     },
     {
+      path: '../public/images/fonts/GeneralSans-Semibold.otf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
       path: '../public/images/fonts/GeneralSans-Bold.otf',
       weight: '700',
       style: 'normal',
+    },
+    {
+      path: '../public/images/fonts/GeneralSans-Italic.otf',
+      weight: '400',
+      style: 'italic',
+    },
+    {
+      path: '../public/images/fonts/GeneralSans-SemiboldItalic.otf',
+      weight: '600',
+      style: 'italic',
     },
   ],
   variable: '--font-general',

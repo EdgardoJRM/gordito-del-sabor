@@ -36,9 +36,25 @@ body {
 .heading-hero {
   font-family: var(--font-clash);
   font-weight: 700;
-  font-size: clamp(48px, 7vw, 96px);
-  line-height: 1.05;
+  font-size: clamp(60px, 9vw, 120px);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.heading-hero-light {
+  font-family: var(--font-clash);
+  font-weight: 300;
+  font-size: clamp(60px, 9vw, 120px);
+  line-height: 0.95;
   letter-spacing: -0.02em;
+}
+
+.label-eyebrow {
+  font-family: var(--font-general);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
 }
 
 .heading-section {
@@ -50,8 +66,9 @@ body {
 
 .subheadline {
   font-family: var(--font-general);
+  font-style: italic;
   font-weight: 400;
-  font-size: clamp(20px, 2vw, 24px);
+  font-size: clamp(18px, 2vw, 22px);
   color: #6b5b4e;
   line-height: 1.5;
 }

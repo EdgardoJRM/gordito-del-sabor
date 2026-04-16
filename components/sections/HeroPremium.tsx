@@ -30,13 +30,12 @@ export default function HeroPremium() {
 
           {/* Copy + CTAs */}
           <div className="lg:col-span-7 order-2 lg:order-1 text-center lg:text-left">
-            <p className="text-[#E8D4BC] text-xs md:text-sm tracking-[0.28em] uppercase mb-4">
+            <p className="label-eyebrow text-[#E8D4BC] mb-4">
               Recetas boricuas auténticas
             </p>
-            <h1 className="heading-hero text-[#FAF8F5] mb-4">
-              EL GORDITO
-              <br />
-              DEL SABOR
+            <h1 className="mb-4">
+              <span className="heading-hero block text-[#FAF8F5]">EL GORDITO</span>
+              <span className="heading-hero-light block text-[#E8D4BC]">del Sabor</span>
             </h1>
             <p className="subheadline text-[#D4C9BC] max-w-xl mx-auto lg:mx-0 mb-8">
               Recetas boricuas con sazón de verdad.
