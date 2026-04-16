@@ -3,11 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --color-primary: #d4a574;
-  --color-primary-dark: #b8860b;
-  --color-secondary: #2c1810;
-  --color-accent: #e8d4c4;
-  --color-light: #f5f1ed;
+  --color-bg: #faf8f5;
+  --color-bg-linen: #f2ede6;
+  --color-bg-dark: #1a1412;
+  --color-text: #1a1412;
+  --color-text-secondary: #6b5b4e;
+  --color-text-tertiary: #9c8b80;
+  --color-accent: #c4472b;
+  --color-accent-hover: #a8381f;
+  --color-gold: #b8860b;
+  --color-border: #e8e0d8;
+  --color-primary: #c4472b;
+  --color-primary-dark: #a8381f;
+  --color-secondary: #1a1412;
+  --color-light: #faf8f5;
 }
 
 * {
@@ -19,21 +28,11 @@ html {
 }
 
 body {
-  @apply bg-black text-white;
+  @apply bg-[#FAF8F5] text-[#1A1412];
   font-family: var(--font-general);
 }
 
-/* Scroll Indicator Animation */
-@keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(8px);
-  }
-}
-
-/* Typography System - Apple Style */
+/* Typography — editorial warm */
 .heading-hero {
   font-family: var(--font-clash);
   font-weight: 700;
@@ -53,7 +52,7 @@ body {
   font-family: var(--font-general);
   font-weight: 400;
   font-size: clamp(20px, 2vw, 24px);
-  color: #A1A1A6;
+  color: #6b5b4e;
   line-height: 1.5;
 }
 
@@ -62,7 +61,7 @@ body {
   font-weight: 400;
   font-size: 18px;
   line-height: 1.6;
-  color: #A1A1A6;
+  color: #6b5b4e;
 }
 
 .btn-text {
@@ -78,6 +77,40 @@ body {
   font-size: 15px;
 }
 
+/* Semantic surfaces */
+.bg-warm {
+  background-color: var(--color-bg);
+}
+
+.bg-linen {
+  background-color: var(--color-bg-linen);
+}
+
+.bg-dark-warm {
+  background-color: var(--color-bg-dark);
+}
+
+.text-earth {
+  color: var(--color-text-secondary);
+}
+
+.text-earth-light {
+  color: var(--color-text-tertiary);
+}
+
+.border-warm {
+  border-color: var(--color-border);
+}
+
+/* Scroll Indicator Animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(8px);
+  }
+}
 
 /* Custom animations */
 @keyframes shimmer {
@@ -93,7 +126,7 @@ body {
   animation: shimmer 2s infinite;
 }
 
-/* Utility classes - Apple Style */
+/* Utility classes */
 .container-custom {
   @apply max-w-[1200px] mx-auto px-6;
 }
@@ -101,5 +134,3 @@ body {
 .section-spacing {
   @apply py-32 md:py-40;
 }
-
-/* Remove old utility classes */

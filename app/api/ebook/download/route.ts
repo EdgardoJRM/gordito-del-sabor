@@ -131,7 +131,7 @@ export async function POST(req: Request) {
                     <td align="center" style="padding:40px">
                       <a href="https://gorditodelsabor.com/ebook/descarga?email=${encodeURIComponent(email)}"
                         style="
-                          background:#FF3B30;
+                          background:#C4472B;
                           color:#ffffff;
                           padding:18px 40px;
                           font-size:20px;
@@ -167,7 +167,7 @@ export async function POST(req: Request) {
                         Sígueme en Instagram
                       </p>
                       <p style="margin:0 0 20px 0;">
-                        <a href="https://instagram.com/gorditodelsabor" style="color:#FF3B30;text-decoration:none;font-weight:bold;">
+                        <a href="https://instagram.com/gorditodelsabor" style="color:#C4472B;text-decoration:none;font-weight:bold;">
                           @gorditodelsabor
                         </a>
                       </p>

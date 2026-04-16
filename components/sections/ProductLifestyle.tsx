@@ -8,16 +8,16 @@ export default function ProductLifestyle() {
   ];
 
   return (
-    <section className="section-spacing bg-black">
+    <section className="section-spacing bg-[#FAF8F5]">
       <div className="container-custom">
         {/* Texto */}
         <div className="text-center mb-20 space-y-8">
           <div className="inline-block">
-            <span className="inline-block px-4 py-2 bg-[#FF3B30]/20 text-[#FF3B30] text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
+            <span className="inline-block px-4 py-2 bg-[#C4472B]/15 text-[#C4472B] text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
               Próximamente
             </span>
           </div>
-          <h2 className="heading-section text-white">
+          <h2 className="heading-section text-[#1A1412]">
             El delantal
             <br />
             del sabor.
@@ -25,7 +25,7 @@ export default function ProductLifestyle() {
           <p className="body-text text-xl md:text-2xl max-w-3xl mx-auto">
             Diseñado para los que cocinan con respeto.
           </p>
-          <p className="body-text text-lg text-[#A1A1A6] max-w-2xl mx-auto">
+          <p className="body-text text-lg text-[#6B5B4E] max-w-2xl mx-auto">
             Descarga el recetario mientras esperamos el lanzamiento.
           </p>
         </div>
@@ -35,18 +35,18 @@ export default function ProductLifestyle() {
           {lifestylePhotos.map((photo, index) => (
             <div
               key={index}
-              className="relative h-[500px] rounded-2xl overflow-hidden group"
+              className="relative h-[500px] rounded-2xl overflow-hidden group border border-[#E8E0D8] shadow-sm"
             >
               <img
                 src={`/images/lifestyle/${photo.image}`}
                 alt={`Lifestyle ${index + 1}`}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-60"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90"
                 onError={(e) => {
                   e.currentTarget.src = photo.fallback;
                 }}
               />
-              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                <span className="text-white font-bold text-lg">Próximamente</span>
+              <div className="absolute inset-0 bg-[#1A1412]/35 flex items-center justify-center">
+                <span className="text-[#FAF8F5] font-bold text-lg">Próximamente</span>
               </div>
             </div>
           ))}
@@ -59,7 +59,7 @@ export default function ProductLifestyle() {
               const element = document.getElementById('ebook-section');
               element?.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
+            className="btn-text inline-block bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
           >
             Descargar Recetario
           </button>

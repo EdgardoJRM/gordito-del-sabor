@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, Check, Download, Users, Star, Clock } from 'lucide-react';
+import { ArrowRight, Check, Download, Users, Star } from 'lucide-react';
 import EbookDownloadForm from '@/components/ebook/EbookDownloadForm';
 
 export const metadata: Metadata = {
@@ -82,149 +82,137 @@ export default function RecetarioPage() {
   ];
 
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-[#FAF8F5]">
       {/* Hero Section */}
-      <section className="relative min-h-screen bg-black flex items-center justify-center overflow-hidden pt-20">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-amber-950/20 opacity-60" />
+      <section className="relative min-h-screen bg-[#F2EDE6] flex items-center justify-center overflow-hidden pt-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FAF8F5] via-[#F2EDE6] to-[#C4472B]/10 opacity-90" />
         
-        {/* Decorative elements */}
-        <div className="absolute top-20 right-10 w-72 h-72 bg-amber-600/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-72 h-72 bg-orange-600/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-10 w-72 h-72 bg-[#C4472B]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-72 h-72 bg-[#B8860B]/10 rounded-full blur-3xl" />
 
         <div className="container-custom relative z-10 max-w-4xl mx-auto text-center space-y-8 px-4">
-          {/* Badge */}
           <div className="inline-block">
-            <span className="text-xs tracking-widest uppercase text-[#A1A1A6] bg-white/5 px-4 py-2 rounded-full border border-white/10">
+            <span className="text-xs tracking-widest uppercase text-[#6B5B4E] bg-white px-4 py-2 rounded-full border border-[#E8E0D8] shadow-sm">
               📚 Recetario Digital Gratuito
             </span>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="heading-hero text-white">
+          <h1 className="heading-hero text-[#1A1412]">
             Las 20 Recetas<br />
             Favoritas del Sabor
           </h1>
 
-          {/* Subheadline */}
           <p className="subheadline text-xl md:text-2xl max-w-2xl mx-auto">
             Recetas boricuas auténticas, fáciles de seguir, perfectas para cocinar en casa con sazón de verdad.
           </p>
 
-          {/* Social Proof */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-[#A1A1A6] pt-4">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-[#6B5B4E] pt-4">
             <div className="flex items-center gap-2">
-              <Users size={18} className="text-[#FF3B30]" />
+              <Users size={18} className="text-[#C4472B]" />
               <span>Más de 160,000 personas ya cocinan con el Gordito</span>
             </div>
           </div>
 
-          {/* CTA Button */}
           <div className="pt-8">
             <Link
               href="/contacto?lead=ebook"
-              className="btn-text inline-flex items-center gap-3 bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
+              className="btn-text inline-flex items-center gap-3 bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
             >
               <Download size={20} />
               Descargar Recetario Gratis
             </Link>
           </div>
 
-          {/* Info */}
-          <p className="text-xs text-[#6E6E73] pt-4">
+          <p className="text-xs text-[#9C8B80] pt-4">
             Formato PDF • Descarga instantánea • Sin spam
           </p>
         </div>
       </section>
 
-      {/* Download Form Section */}
-      <section className="section-spacing bg-black border-t border-gray-900">
+      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
         <div className="container-custom max-w-2xl">
           <div className="text-center mb-12">
-            <h2 className="heading-section text-white mb-6">
+            <h2 className="heading-section text-[#1A1412] mb-6">
               Descarga tu recetario ahora
             </h2>
-            <p className="body-text text-xl text-[#A1A1A6]">
+            <p className="body-text text-xl text-[#6B5B4E]">
               Completa el formulario y recibirás el PDF directamente en tu email
             </p>
           </div>
 
-          <div className="bg-[#1C1C1E] border border-gray-900 rounded-3xl p-8 md:p-12">
+          <div className="bg-white border border-[#E8E0D8] rounded-3xl p-8 md:p-12 shadow-sm">
             <EbookDownloadForm />
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="section-spacing bg-black border-t border-gray-900">
+      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="heading-section text-white mb-6">
+            <h2 className="heading-section text-[#1A1412] mb-6">
               ¿Qué incluye el recetario?
             </h2>
-            <p className="body-text text-xl text-[#A1A1A6] max-w-2xl mx-auto">
+            <p className="body-text text-xl text-[#6B5B4E] max-w-2xl mx-auto">
               Todo lo que necesitas para cocinar como el Gordito desde tu propia cocina.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {features.map((feature, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition-colors">
+              <div key={idx} className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-2xl p-8 hover:border-[#C4472B]/30 transition-colors shadow-sm">
                 <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="text-white font-bold text-lg mb-3">{feature.title}</h3>
-                <p className="body-text text-[#A1A1A6]">{feature.description}</p>
+                <h3 className="text-[#1A1412] font-bold text-lg mb-3">{feature.title}</h3>
+                <p className="body-text text-[#6B5B4E]">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Recipes Grid Section */}
-      <section className="section-spacing bg-black border-t border-gray-900">
+      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="heading-section text-white mb-6">
+            <h2 className="heading-section text-[#1A1412] mb-6">
               Las 20 Recetas
             </h2>
-            <p className="body-text text-xl text-[#A1A1A6] max-w-2xl mx-auto">
+            <p className="body-text text-xl text-[#6B5B4E] max-w-2xl mx-auto">
               Desde clásicos como el Pernil hasta favoritos como el Mofongo. Todas las recetas que necesitas.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {recipes.map((recipe, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-lg p-4 flex items-center gap-3 hover:bg-white/10 transition-colors">
-                <Check size={20} className="text-[#FF3B30] flex-shrink-0" />
-                <span className="body-text text-white">{recipe}</span>
+              <div key={idx} className="bg-white border border-[#E8E0D8] rounded-lg p-4 flex items-center gap-3 hover:border-[#C4472B]/25 transition-colors shadow-sm">
+                <Check size={20} className="text-[#C4472B] flex-shrink-0" />
+                <span className="body-text text-[#1A1412]">{recipe}</span>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="section-spacing bg-black border-t border-gray-900">
+      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
         <div className="container-custom">
           <div className="text-center mb-16">
-            <h2 className="heading-section text-white mb-6">
+            <h2 className="heading-section text-[#1A1412] mb-6">
               Lo que dicen nuestros cocineros
             </h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-2xl p-8">
+              <div key={idx} className="bg-white border border-[#E8E0D8] rounded-2xl p-8 shadow-sm">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="text-4xl">{testimonial.avatar}</div>
                   <div>
-                    <p className="text-white font-bold">{testimonial.name}</p>
-                    <p className="text-sm text-[#A1A1A6]">{testimonial.role}</p>
+                    <p className="text-[#1A1412] font-bold">{testimonial.name}</p>
+                    <p className="text-sm text-[#6B5B4E]">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="body-text text-[#A1A1A6] italic">"{testimonial.text}"</p>
+                <p className="body-text text-[#6B5B4E] italic">"{testimonial.text}"</p>
                 <div className="flex gap-1 mt-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={16} className="fill-[#FF3B30] text-[#FF3B30]" />
+                    <Star key={i} size={16} className="fill-[#C4472B] text-[#C4472B]" />
                   ))}
                 </div>
               </div>
@@ -233,11 +221,10 @@ export default function RecetarioPage() {
         </div>
       </section>
 
-      {/* Why This Ebook Section */}
-      <section className="section-spacing bg-black border-t border-gray-900">
+      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
         <div className="container-custom max-w-3xl">
           <div className="text-center mb-12">
-            <h2 className="heading-section text-white mb-6">
+            <h2 className="heading-section text-[#1A1412] mb-6">
               ¿Por qué descargar este recetario?
             </h2>
           </div>
@@ -271,11 +258,11 @@ export default function RecetarioPage() {
             ].map((item, idx) => (
               <div key={idx} className="flex gap-4">
                 <div className="flex-shrink-0">
-                  <Check size={24} className="text-[#FF3B30] mt-1" />
+                  <Check size={24} className="text-[#C4472B] mt-1" />
                 </div>
                 <div>
-                  <h3 className="text-white font-bold mb-1">{item.title}</h3>
-                  <p className="body-text text-[#A1A1A6]">{item.desc}</p>
+                  <h3 className="text-[#1A1412] font-bold mb-1">{item.title}</h3>
+                  <p className="body-text text-[#6B5B4E]">{item.desc}</p>
                 </div>
               </div>
             ))}
@@ -283,45 +270,43 @@ export default function RecetarioPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-spacing bg-gradient-to-br from-black via-black to-amber-950/20 border-t border-gray-900">
+      <section className="section-spacing bg-gradient-to-br from-[#F2EDE6] via-[#FAF8F5] to-[#C4472B]/5 border-t border-[#E8E0D8]">
         <div className="container-custom max-w-3xl text-center space-y-8">
-          <h2 className="heading-section text-white">
+          <h2 className="heading-section text-[#1A1412]">
             ¿Listo para cocinar?
           </h2>
 
-          <p className="body-text text-xl text-[#A1A1A6]">
+          <p className="body-text text-xl text-[#6B5B4E]">
             Descarga el recetario ahora y empieza a preparar las 20 recetas favoritas del Gordito. Totalmente gratis.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Link
               href="/contacto?lead=ebook"
-              className="btn-text inline-flex items-center justify-center gap-2 bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
+              className="btn-text inline-flex items-center justify-center gap-2 bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
             >
               <Download size={20} />
               Descargar Recetario
             </Link>
             <Link
               href="/recetas"
-              className="btn-text inline-flex items-center justify-center gap-2 border-2 border-white text-white py-5 px-12 rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105"
+              className="btn-text inline-flex items-center justify-center gap-2 border-2 border-[#1A1412] text-[#1A1412] py-5 px-12 rounded-full hover:bg-[#1A1412] hover:text-[#FAF8F5] transition-all transform hover:scale-105"
             >
               Ver Todas las Recetas
               <ArrowRight size={20} />
             </Link>
           </div>
 
-          <p className="text-xs text-[#6E6E73] pt-4">
+          <p className="text-xs text-[#9C8B80] pt-4">
             Descarga instantánea • Formato PDF • Compatible con todos los dispositivos
           </p>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="section-spacing bg-black border-t border-gray-900">
+      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
         <div className="container-custom max-w-3xl">
           <div className="text-center mb-16">
-            <h2 className="heading-section text-white mb-6">
+            <h2 className="heading-section text-[#1A1412] mb-6">
               Preguntas Frecuentes
             </h2>
           </div>
@@ -353,35 +338,34 @@ export default function RecetarioPage() {
                 a: 'Recibirás el PDF en tu email. Opcionalmente, puedes suscribirte a nuestro boletín para más recetas.',
               },
             ].map((item, idx) => (
-              <div key={idx} className="bg-white/5 border border-white/10 rounded-lg p-6">
-                <h3 className="text-white font-bold mb-3">{item.q}</h3>
-                <p className="body-text text-[#A1A1A6]">{item.a}</p>
+              <div key={idx} className="bg-white border border-[#E8E0D8] rounded-lg p-6 shadow-sm">
+                <h3 className="text-[#1A1412] font-bold mb-3">{item.q}</h3>
+                <p className="body-text text-[#6B5B4E]">{item.a}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="section-spacing bg-black border-t border-gray-900">
+      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
         <div className="container-custom max-w-2xl text-center space-y-8">
-          <h2 className="heading-section text-white">
+          <h2 className="heading-section text-[#1A1412]">
             Empieza tu viaje culinario hoy
           </h2>
 
-          <p className="body-text text-lg text-[#A1A1A6]">
+          <p className="body-text text-lg text-[#6B5B4E]">
             Únete a más de 160,000 personas que ya cocinan con el Gordito. Descarga el recetario gratis y descubre por qué nuestras recetas son las favoritas.
           </p>
 
           <Link
             href="/contacto?lead=ebook"
-            className="btn-text inline-flex items-center gap-3 bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
+            className="btn-text inline-flex items-center gap-3 bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 px-12 rounded-full transition-all transform hover:scale-105"
           >
             <Download size={20} />
             Descargar Ahora
           </Link>
 
-          <p className="text-xs text-[#6E6E73]">
+          <p className="text-xs text-[#9C8B80]">
             Descarga instantánea • Sin spam • Totalmente gratis
           </p>
         </div>

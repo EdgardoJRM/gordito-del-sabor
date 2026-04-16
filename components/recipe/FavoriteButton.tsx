@@ -68,8 +68,8 @@ export default function FavoriteButton({
         size={24}
         className={`transition-colors ${
           isLiked
-            ? 'fill-red-500 text-red-500'
-            : 'text-gray-400 hover:text-red-500'
+            ? 'fill-[#C4472B] text-[#C4472B]'
+            : 'text-[#9C8B80] hover:text-[#C4472B]'
         }`}
       />
     </button>

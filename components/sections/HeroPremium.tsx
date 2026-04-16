@@ -213,14 +213,14 @@ export default function HeroPremium() {
     <>
       {/* Fullscreen Loader */}
       {isLoading && (
-        <div className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-sm flex items-center justify-center">
+        <div className="fixed inset-0 z-[9999] bg-[#1A1412]/95 backdrop-blur-sm flex items-center justify-center">
           <div className="text-center space-y-8 px-4">
             {/* Logo with pulse animation */}
             <div className="animate-pulse">
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-2">
+              <h1 className="text-4xl md:text-6xl font-bold text-[#FAF8F5] mb-2">
                 El Gordito
               </h1>
-              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
+              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-[#E8C4A8] to-[#C4472B] bg-clip-text text-transparent">
                 del Sabor
               </h2>
             </div>
@@ -228,10 +228,10 @@ export default function HeroPremium() {
             {/* Progress Bar Container */}
             <div className="w-64 md:w-96 mx-auto">
               {/* Progress Bar Background */}
-              <div className="relative h-2 bg-gray-800 rounded-full overflow-hidden">
+              <div className="relative h-2 bg-[#3D322E] rounded-full overflow-hidden">
                 {/* Progress Bar Fill */}
                 <div 
-                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-amber-600 to-orange-600 rounded-full transition-all duration-300 ease-out"
+                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#C4472B] to-[#A8381F] rounded-full transition-all duration-300 ease-out"
                   style={{ width: `${loadingProgress}%` }}
                 >
                   {/* Shimmer effect */}
@@ -240,12 +240,12 @@ export default function HeroPremium() {
               </div>
 
               {/* Progress Percentage */}
-              <div className="mt-4 text-amber-400 font-bold text-xl md:text-2xl">
+              <div className="mt-4 text-[#E8C4A8] font-bold text-xl md:text-2xl">
                 {loadingProgress}%
               </div>
 
               {/* Loading Text */}
-              <div className="mt-2 text-gray-400 text-sm md:text-base">
+              <div className="mt-2 text-[#9C8B80] text-sm md:text-base">
                 Cargando experiencia...
               </div>
             </div>
@@ -254,22 +254,22 @@ export default function HeroPremium() {
       )}
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30">
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#1A1412]/40">
         <div className="container-custom py-4 md:py-6 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="text-lg md:text-xl font-bold text-white truncate">
+          <Link href="/" className="text-lg md:text-xl font-bold text-[#FAF8F5] truncate">
             El Gordito del Sabor
           </Link>
 
           {/* Center Links - Desktop */}
           <div className="hidden md:flex items-center gap-8">
-            <Link href="/tienda" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+            <Link href="/tienda" className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium">
               Delantales
             </Link>
-            <Link href="/recetas" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+            <Link href="/recetas" className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium">
               Recetas
             </Link>
-            <a href="#" className="text-gray-300 hover:text-white transition-colors text-sm font-medium">
+            <a href="#" className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium">
               Comunidad
             </a>
           </div>
@@ -277,7 +277,7 @@ export default function HeroPremium() {
           {/* CTA Button - Desktop */}
           <button
             onClick={() => router.push('/tienda')}
-            className="hidden md:block border border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all text-sm font-medium"
+            className="hidden md:block border border-[#FAF8F5] text-[#FAF8F5] px-6 py-2 rounded-full hover:bg-[#FAF8F5] hover:text-[#1A1412] transition-all text-sm font-medium"
           >
             Diseña tu delantal
           </button>
@@ -285,7 +285,7 @@ export default function HeroPremium() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white"
+            className="md:hidden text-[#FAF8F5]"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -293,25 +293,25 @@ export default function HeroPremium() {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-gray-800">
+          <div className="md:hidden bg-[#1A1412]/95 backdrop-blur-md border-t border-[#3D322E]">
             <div className="container-custom py-4 flex flex-col gap-4">
               <Link 
                 href="/tienda" 
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium py-2"
+                className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Delantales
               </Link>
               <Link 
                 href="/recetas" 
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium py-2"
+                className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Recetas
               </Link>
               <a 
                 href="#" 
-                className="text-gray-300 hover:text-white transition-colors text-sm font-medium py-2"
+                className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium py-2"
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Comunidad
@@ -321,7 +321,7 @@ export default function HeroPremium() {
                   router.push('/tienda');
                   setMobileMenuOpen(false);
                 }}
-                className="border border-white text-white px-6 py-2 rounded-full hover:bg-white hover:text-black transition-all text-sm font-medium w-full"
+                className="border border-[#FAF8F5] text-[#FAF8F5] px-6 py-2 rounded-full hover:bg-[#FAF8F5] hover:text-[#1A1412] transition-all text-sm font-medium w-full"
               >
                 Diseña tu delantal
               </button>
@@ -331,7 +331,7 @@ export default function HeroPremium() {
       </nav>
 
       {/* Hero Animation Section - Desktop & Mobile */}
-      <section ref={containerRef} className={`relative w-full ${isMobile ? 'min-h-[400vh]' : 'min-h-[800vh]'} bg-black`}>
+      <section ref={containerRef} className={`relative w-full ${isMobile ? 'min-h-[400vh]' : 'min-h-[800vh]'} bg-[#1A1412]`}>
         {/* Fixed Background Animation Container */}
         <div 
           className="fixed top-0 left-0 h-screen w-full z-0 transition-opacity duration-500"
@@ -341,13 +341,13 @@ export default function HeroPremium() {
           }}
         >
           {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-black via-black to-amber-950/10 opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#1A1412] via-[#1A1412] to-[#C4472B]/10 opacity-40" />
 
           {/* Animated Background Elements - Solo Desktop */}
           {!isMobile && (
             <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute top-20 right-20 w-96 h-96 bg-amber-600/10 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute bottom-20 left-20 w-96 h-96 bg-orange-600/10 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute top-20 right-20 w-96 h-96 bg-[#C4472B]/10 rounded-full blur-3xl animate-pulse" />
+              <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#B8860B]/10 rounded-full blur-3xl animate-pulse" />
             </div>
           )}
 
@@ -357,7 +357,7 @@ export default function HeroPremium() {
             {!isMobile && (
               <div className="absolute inset-0 flex items-center justify-center">
                 {/* Rim Light */}
-                <div className="absolute w-full h-full bg-gradient-to-r from-amber-500/20 to-transparent rounded-full blur-3xl" />
+                <div className="absolute w-full h-full bg-gradient-to-r from-[#C4472B]/15 to-transparent rounded-full blur-3xl" />
               </div>
             )}
 
@@ -365,7 +365,7 @@ export default function HeroPremium() {
             <div className="relative w-full h-full flex items-center justify-center">
               {!imagesLoaded && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-white text-xl">Cargando animación...</div>
+                  <div className="text-[#FAF8F5] text-xl">Cargando animación...</div>
                 </div>
               )}
               <canvas
@@ -379,7 +379,7 @@ export default function HeroPremium() {
           </div>
 
           {/* Bottom Gradient Fade */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent pointer-events-none" />
+          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1A1412] to-transparent pointer-events-none" />
 
           {/* Hero Content - Centered Text */}
           <div 
@@ -391,16 +391,16 @@ export default function HeroPremium() {
           >
             <div className="container-custom w-full px-4">
               {/* Centered Text Content */}
-              <div className="text-white space-y-8 max-w-3xl mx-auto text-center">
+              <div className="text-[#FAF8F5] space-y-8 max-w-3xl mx-auto text-center">
                 {/* Headline */}
-                <h1 className="heading-hero">
+                <h1 className="heading-hero text-[#FAF8F5]">
                   EL GORDITO
                   <br />
                   DEL SABOR
                 </h1>
 
                 {/* Subheadline */}
-                <p className="subheadline">
+                <p className="subheadline text-[#D4C9BC]">
                   Recetas boricuas con sazón de verdad.
                 </p>
 
@@ -408,13 +408,13 @@ export default function HeroPremium() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
                   <button
                     onClick={() => router.push('/recetario')}
-                    className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
+                    className="btn-text inline-block bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
                   >
                     Descargar Recetario Gratis
                   </button>
                   <button
                     onClick={() => router.push('/recetas')}
-                    className="btn-text inline-block border-2 border-white text-white py-4 px-10 rounded-full hover:bg-white hover:text-black transition-all transform hover:scale-105"
+                    className="btn-text inline-block border-2 border-[#FAF8F5] text-[#FAF8F5] py-4 px-10 rounded-full hover:bg-[#FAF8F5] hover:text-[#1A1412] transition-all transform hover:scale-105"
                   >
                     Ver Recetas
                   </button>
@@ -431,7 +431,7 @@ export default function HeroPremium() {
               pointerEvents: showScrollIndicator ? 'auto' : 'none',
             }}
           >
-            <p className="text-white/70 text-sm tracking-widest uppercase font-light">
+            <p className="text-[#FAF8F5]/75 text-sm tracking-widest uppercase font-light">
               Scroll para explorar
             </p>
             <div 
@@ -440,7 +440,7 @@ export default function HeroPremium() {
                 animation: 'bounce 1.5s infinite',
               }}
             >
-              <ChevronDown size={24} className="text-white/50" />
+              <ChevronDown size={24} className="text-[#FAF8F5]/55" />
             </div>
           </div>
 
@@ -451,12 +451,12 @@ export default function HeroPremium() {
                 <div
                   key={i}
                   className={`w-1 h-1 rounded-full transition-all ${
-                    scrollProgress > i * 33 ? 'bg-amber-500 h-2' : 'bg-gray-600'
+                    scrollProgress > i * 33 ? 'bg-[#C4472B] h-2' : 'bg-[#5c524c]'
                   }`}
                 />
               ))}
             </div>
-            <ChevronDown className="text-gray-600 animate-bounce" size={20} />
+            <ChevronDown className="text-[#6B5B4E] animate-bounce" size={20} />
           </div>
         </div>
       </section>
