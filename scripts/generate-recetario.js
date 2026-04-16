@@ -13,14 +13,13 @@ const OUTPUT = path.join(ROOT, 'public/ebooks/recetario.pdf');
 
 /**
  * Imágenes JPEG/PNG (PDFKit no soporta WebP).
- * Portada / índice / contraportada: Unsplash (Puerto Rico).
+ * Portada (columna izquierda) y contraportada: Unsplash (Puerto Rico).
  *   Bandera en playa — Ana Toledo
  *   https://unsplash.com/photos/red-and-white-flag-on-beach-shore-during-daytime-R7VNq6RMNM4
  * (Licencia Unsplash: uso comercial permitido.)
  */
 const HERO_PR = path.join(ROOT, 'public/ebooks/recetario-portada-pr.jpg');
 const COVER_IMAGE = HERO_PR;
-const INDEX_BANNER = HERO_PR;
 const BACK_PORTRAIT = HERO_PR;
 /** Rotación de fotos de comida por receta (variación visual) */
 const RECIPE_BANNER_POOL = [
@@ -32,8 +31,8 @@ const RECIPE_BANNER_POOL = [
   'public/images/recipes/ceviche.jpg',
 ];
 
-const COVER_HERO_H = 280;
-const INDEX_BANNER_H = 72;
+/** Ancho de la columna de imagen en portada (resto = tipografía) */
+const COVER_COL_W = 268;
 const RECIPE_BANNER_H = 88;
 
 const COLORS = {
@@ -86,37 +85,40 @@ function registerFonts(doc) {
 function drawCover(doc, data) {
   doc.rect(0, 0, PAGE.w, PAGE.h).fill(COLORS.dark);
 
-  drawImageCover(doc, COVER_IMAGE, 0, 0, PAGE.w, COVER_HERO_H);
-  doc.rect(0, COVER_HERO_H - 1, PAGE.w, 3).fill(COLORS.terracotta);
-  doc.rect(0, COVER_HERO_H, PAGE.w, PAGE.h - COVER_HERO_H).fill(COLORS.dark);
+  drawImageCover(doc, COVER_IMAGE, 0, 0, COVER_COL_W, PAGE.h);
+  doc.rect(COVER_COL_W - 1, 0, 2, PAGE.h).fill(COLORS.terracotta);
+  doc.rect(COVER_COL_W, 0, PAGE.w - COVER_COL_W, PAGE.h).fill(COLORS.dark);
 
-  let y = COVER_HERO_H + 44;
-  doc.font('GenBold').fontSize(10).fillColor(COLORS.gold).text('RECETARIO DIGITAL', M.left, y, {
-    width: CONTENT_W,
+  const textX = COVER_COL_W + 36;
+  const textW = PAGE.w - COVER_COL_W - 72;
+  let y = 168;
+
+  doc.font('GenBold').fontSize(10).fillColor(COLORS.gold).text('RECETARIO DIGITAL', textX, y, {
+    width: textW,
     align: 'center',
   });
-  y += 36;
+  y += 32;
 
-  doc.font('ClashBold').fontSize(40).fillColor(COLORS.cream).text('LAS 20 RECETAS', M.left, y, {
-    width: CONTENT_W,
+  doc.font('ClashBold').fontSize(34).fillColor(COLORS.cream).text('LAS 20 RECETAS', textX, y, {
+    width: textW,
     align: 'center',
   });
-  y += 48;
+  y += 42;
 
-  doc.font('ClashLight').fontSize(36).fillColor(COLORS.gold).text('FAVORITAS DEL SABOR', M.left, y, {
-    width: CONTENT_W,
+  doc.font('ClashLight').fontSize(30).fillColor(COLORS.gold).text('FAVORITAS DEL SABOR', textX, y, {
+    width: textW,
     align: 'center',
   });
-  y += 36;
+  y += 40;
 
-  doc.font('GenItalic').fontSize(14).fillColor('#D4C9BC').text(data.subtitulo, M.left, y, {
-    width: CONTENT_W,
+  doc.font('GenItalic').fontSize(13).fillColor('#D4C9BC').text(data.subtitulo, textX, y, {
+    width: textW,
     align: 'center',
   });
-  y += 72;
+  y += 64;
 
-  doc.font('GenReg').fontSize(12).fillColor('#9C8B80').text(data.autor, M.left, y, {
-    width: CONTENT_W,
+  doc.font('GenReg').fontSize(12).fillColor('#9C8B80').text(data.autor, textX, y, {
+    width: textW,
     align: 'center',
   });
 
@@ -126,10 +128,6 @@ function drawCover(doc, data) {
 function drawIndex(doc, data) {
   doc.rect(0, 0, PAGE.w, PAGE.h).fill('#F5F0E8');
   let y = M.top;
-
-  drawImageCover(doc, INDEX_BANNER, M.left, y, CONTENT_W, INDEX_BANNER_H);
-  doc.rect(M.left, y + INDEX_BANNER_H, CONTENT_W, 2).fill(COLORS.terracotta);
-  y += INDEX_BANNER_H + 20;
 
   doc.font('ClashBold').fontSize(28).fillColor(COLORS.dark).text('Índice', M.left, y);
   y += 48;
