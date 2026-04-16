@@ -13,12 +13,15 @@ const OUTPUT = path.join(ROOT, 'public/ebooks/recetario.pdf');
 
 /**
  * Imágenes JPEG/PNG (PDFKit no soporta WebP).
- * Actualizar foto de portada/contraportada:
- *   sips -s format jpeg public/images/ariel.webp --out public/ebooks/recetario-cover.jpg
+ * Portada / índice / contraportada: Unsplash (Puerto Rico).
+ *   Bandera en playa — Ana Toledo
+ *   https://unsplash.com/photos/red-and-white-flag-on-beach-shore-during-daytime-R7VNq6RMNM4
+ * (Licencia Unsplash: uso comercial permitido.)
  */
-const COVER_IMAGE = path.join(ROOT, 'public/ebooks/recetario-cover.jpg');
-const INDEX_BANNER = path.join(ROOT, 'public/ebooks/recetario-cover.jpg');
-const BACK_PORTRAIT = path.join(ROOT, 'public/ebooks/recetario-cover.jpg');
+const HERO_PR = path.join(ROOT, 'public/ebooks/recetario-portada-pr.jpg');
+const COVER_IMAGE = HERO_PR;
+const INDEX_BANNER = HERO_PR;
+const BACK_PORTRAIT = HERO_PR;
 /** Rotación de fotos de comida por receta (variación visual) */
 const RECIPE_BANNER_POOL = [
   'public/images/recipes/pernil.jpg',
