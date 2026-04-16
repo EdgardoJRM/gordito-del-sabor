@@ -4,7 +4,12 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Download, Loader } from 'lucide-react';
 
-export default function EbookDownloadForm() {
+type EbookDownloadFormProps = {
+  /** Se dispara al enviar OK, antes de redirigir (p. ej. analytics del funnel) */
+  onConversion?: () => void;
+};
+
+export default function EbookDownloadForm({ onConversion }: EbookDownloadFormProps) {
   const router = useRouter();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -32,7 +37,7 @@ export default function EbookDownloadForm() {
       }
 
       setSubmitted(true);
-      // Redirigir a página de confirmación después de 1 segundo
+      onConversion?.();
       setTimeout(() => {
         router.push('/ebook/descarga');
       }, 1000);

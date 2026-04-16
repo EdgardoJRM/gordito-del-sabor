@@ -1,138 +1,112 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Check, Download, Mail, ArrowRight } from 'lucide-react';
+import { ArrowRight, Check, Download, Mail, Sparkles } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Descarga Confirmada | El Gordito del Sabor',
-  description: 'Tu recetario está en camino. Revisa tu email para descargar Las 20 Recetas Favoritas del Sabor.',
+  description:
+    'Tu recetario está en camino. Revisa tu email para descargar Las 20 Recetas Favoritas del Sabor.',
 };
 
 export default function DescargaPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      {/* Success Section */}
-      <section className="min-h-screen flex items-center justify-center py-20 px-4">
-        <div className="container-custom max-w-2xl">
-          <div className="text-center space-y-8">
-            {/* Success Icon */}
+      {/* Bridge page estilo funnel: confirmación + siguiente paso claro */}
+      <section className="min-h-screen flex flex-col justify-center py-16 px-4">
+        <div className="container-custom max-w-2xl mx-auto space-y-10">
+          <div className="text-center space-y-6">
             <div className="flex justify-center">
               <div className="w-24 h-24 bg-[#C4472B]/20 rounded-full flex items-center justify-center">
-                <Check size={48} className="text-[#C4472B]" />
+                <Check size={48} className="text-[#C4472B]" aria-hidden />
               </div>
             </div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C4472B]">
+              Paso completado
+            </p>
+            <h1 className="heading-section text-[#1A1412]">¡Pedido recibido!</h1>
+            <p className="body-text text-xl text-[#6B5B4E]">
+              Tu recetario va hacia tu correo. Mientras tanto, aquí va tu siguiente movimiento.
+            </p>
+          </div>
 
-            {/* Main Message */}
-            <div className="space-y-4">
-              <h1 className="heading-section text-[#1A1412]">
-                ¡Listo!
-              </h1>
-              <p className="body-text text-2xl text-[#6B5B4E]">
-                Tu recetario está en camino
-              </p>
-            </div>
-
-            {/* Email Confirmation */}
-            <div className="bg-white border border-[#E8E0D8] rounded-2xl p-8 space-y-4 shadow-sm">
-              <div className="flex items-center justify-center gap-3 mb-4">
-                <Mail size={24} className="text-[#C4472B]" />
-                <p className="body-text text-lg text-[#1A1412]">Revisa tu email</p>
-              </div>
-              <p className="body-text text-[#6B5B4E]">
-                Hemos enviado un email con tu recetario "Las 20 Recetas Favoritas del Sabor" 
-                a tu bandeja de entrada. Si no lo ves en los próximos minutos, revisa tu carpeta de spam.
-              </p>
-            </div>
-
-            {/* What's Included */}
-            <div className="bg-[#F2EDE6] border border-[#E8E0D8] rounded-2xl p-8 space-y-6">
-              <h2 className="text-2xl font-bold text-[#1A1412]">Tu recetario incluye:</h2>
-              <div className="space-y-4">
-                <div className="flex items-start gap-4">
-                  <Check size={24} className="text-[#C4472B] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-bold text-[#1A1412]">20 Recetas Auténticas</p>
-                    <p className="body-text text-[#6B5B4E] text-sm">Las favoritas del Gordito, seleccionadas por popularidad y sabor</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Check size={24} className="text-[#C4472B] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-bold text-[#1A1412]">Instrucciones Claras</p>
-                    <p className="body-text text-[#6B5B4E] text-sm">Paso a paso, ingredientes accesibles, sin complicaciones</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-4">
-                  <Check size={24} className="text-[#C4472B] flex-shrink-0 mt-1" />
-                  <div>
-                    <p className="font-bold text-[#1A1412]">Sabor Boricua Auténtico</p>
-                    <p className="body-text text-[#6B5B4E] text-sm">Recetas tradicionales puertorriqueñas con sazón casero</p>
-                  </div>
+          <div className="rounded-2xl border-2 border-[#C4472B]/30 bg-gradient-to-br from-[#F2EDE6] to-[#FAF8F5] p-8 shadow-sm">
+            <div className="flex items-start gap-4">
+              <Sparkles className="text-[#C4472B] flex-shrink-0 mt-1" size={28} />
+              <div>
+                <h2 className="text-xl font-bold text-[#1A1412] mb-2">Paso 1: Revisa tu email</h2>
+                <p className="body-text text-sm mb-4">
+                  Buscá el mensaje con el PDF. Si no aparece en unos minutos, revisá spam o promociones.
+                </p>
+                <div className="flex items-center gap-3 rounded-xl bg-white border border-[#E8E0D8] p-4">
+                  <Mail size={22} className="text-[#C4472B]" />
+                  <p className="body-text text-sm text-[#1A1412]">
+                    Asunto parecido a: &quot;Las 20 Recetas Favoritas del Sabor&quot;
+                  </p>
                 </div>
               </div>
-            </div>
-
-            {/* Direct Download Button */}
-            <div className="space-y-4">
-              <p className="body-text text-[#6B5B4E]">
-                ¿No recibiste el email? Descarga directamente aquí:
-              </p>
-              <a
-                href="/ebooks/recetario.pdf"
-                download="Las-20-Recetas-Favoritas-del-Sabor.pdf"
-                className="inline-flex items-center gap-2 bg-[#C4472B] hover:bg-[#A8381F] text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105"
-              >
-                <Download size={20} />
-                Descargar PDF
-              </a>
-            </div>
-
-            {/* Next Steps */}
-            <div className="bg-[#FAF8F5] border border-[#C4472B]/25 rounded-2xl p-8 space-y-4">
-              <h3 className="text-xl font-bold text-[#1A1412]">Próximos pasos:</h3>
-              <ol className="body-text text-[#6B5B4E] space-y-3 text-left">
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#C4472B] flex-shrink-0">1.</span>
-                  <span>Abre el PDF en tu dispositivo favorito</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#C4472B] flex-shrink-0">2.</span>
-                  <span>Elige una receta que te llame la atención</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#C4472B] flex-shrink-0">3.</span>
-                  <span>Cocina con sazón y disfruta con tu familia</span>
-                </li>
-                <li className="flex gap-3">
-                  <span className="font-bold text-[#C4472B] flex-shrink-0">4.</span>
-                  <span>Comparte tus resultados en redes sociales</span>
-                </li>
-              </ol>
-            </div>
-
-            {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-              <Link
-                href="/recetas"
-                className="inline-flex items-center justify-center gap-2 bg-white hover:bg-[#F2EDE6] text-[#1A1412] font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 border border-[#E8E0D8]"
-              >
-                Ver Más Recetas
-                <ArrowRight size={20} />
-              </Link>
-              <Link
-                href="/"
-                className="inline-flex items-center justify-center gap-2 bg-[#C4472B] hover:bg-[#A8381F] text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105"
-              >
-                Volver al Inicio
-              </Link>
-            </div>
-
-            {/* Support */}
-            <div className="pt-8 border-t border-[#E8E0D8]">
-              <p className="body-text text-[#9C8B80] text-sm">
-                ¿Tienes preguntas? <Link href="/contacto" className="text-[#C4472B] hover:text-[#A8381F] font-bold">Contáctanos</Link>
-              </p>
             </div>
           </div>
+
+          <div className="bg-white border border-[#E8E0D8] rounded-2xl p-8 space-y-4 shadow-sm">
+            <h2 className="text-xl font-bold text-[#1A1412]">Paso 2: Abrí el PDF</h2>
+            <p className="body-text">
+              Guardalo en el celular o imprimilo. Elegí una receta y seguí los pasos tal cual: ahí está el sazón.
+            </p>
+            <a
+              href="/ebooks/recetario.pdf"
+              download="Las-20-Recetas-Favoritas-del-Sabor.pdf"
+              className="inline-flex items-center gap-2 bg-[#C4472B] hover:bg-[#A8381F] text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105"
+            >
+              <Download size={20} />
+              Descargar PDF ahora (por si el email tarda)
+            </a>
+          </div>
+
+          <div className="bg-[#1A1412] rounded-2xl p-8 text-[#FAF8F5] space-y-4">
+            <h2 className="text-xl font-bold">Paso 3: Subí el nivel en la cocina</h2>
+            <p className="text-[#E8E0D8] text-sm leading-relaxed">
+              El recetario es la base. En el sitio tenés más recetas y detalles cuando quieras profundizar.
+            </p>
+            <Link
+              href="/recetas"
+              className="inline-flex items-center gap-2 bg-[#C4472B] hover:bg-[#A8381F] text-white font-bold py-4 px-8 rounded-full transition-all"
+            >
+              Ver todas las recetas
+              <ArrowRight size={20} />
+            </Link>
+          </div>
+
+          <div className="bg-[#F2EDE6] border border-[#E8E0D8] rounded-2xl p-8 space-y-4">
+            <h2 className="text-lg font-bold text-[#1A1412]">Qué incluye tu recetario</h2>
+            <ul className="space-y-3">
+              {[
+                '20 recetas auténticas, favoritas de la comunidad',
+                'Pasos claros, sin vueltas',
+                'Ingredientes que consigues en el súper',
+              ].map((line) => (
+                <li key={line} className="flex items-start gap-3 body-text text-[#6B5B4E]">
+                  <Check size={20} className="text-[#C4472B] flex-shrink-0 mt-0.5" />
+                  {line}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+            <Link
+              href="/"
+              className="inline-flex items-center justify-center gap-2 border-2 border-[#E8E0D8] bg-white text-[#1A1412] font-bold py-4 px-8 rounded-full hover:bg-[#F2EDE6] transition-all"
+            >
+              Volver al inicio
+            </Link>
+          </div>
+
+          <p className="text-center body-text text-sm text-[#9C8B80] border-t border-[#E8E0D8] pt-8">
+            ¿Algo falló con el email?{' '}
+            <Link href="/contacto" className="text-[#C4472B] font-bold hover:underline">
+              Escríbenos
+            </Link>
+          </p>
         </div>
       </section>
     </main>
