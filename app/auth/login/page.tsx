@@ -52,12 +52,12 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black flex items-center justify-center py-12 px-4">
+    <main className="min-h-screen bg-[#FAF8F5] flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
-        <div className="bg-[#1C1C1E] rounded-3xl border border-gray-900 p-8 md:p-10">
+        <div className="bg-white rounded-3xl border border-[#E8E0D8] p-8 md:p-10 shadow-sm">
           {/* Header */}
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-bold text-white mb-3">
+            <h1 className="text-4xl font-bold text-[#1A1412] mb-3">
               {isSignUp ? 'Crear Cuenta' : 'Iniciar Sesión'}
             </h1>
             <p className="body-text">
@@ -69,9 +69,9 @@ export default function LoginPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="mb-6 p-4 bg-red-950/50 border border-red-900 rounded-2xl flex items-start gap-3">
-              <AlertCircle className="text-[#FF3B30] flex-shrink-0 mt-0.5" size={20} />
-              <p className="text-red-400 text-sm">{error}</p>
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start gap-3">
+              <AlertCircle className="text-[#C4472B] flex-shrink-0 mt-0.5" size={20} />
+              <p className="text-red-800 text-sm">{error}</p>
             </div>
           )}
 
@@ -79,18 +79,18 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-5">
             {isSignUp && (
               <div>
-                <label className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+                <label className="block text-sm font-bold text-[#1A1412] mb-3 uppercase tracking-wide">
                   Nombre Completo
                 </label>
                 <div className="relative">
-                  <User className="absolute left-4 top-4 text-[#6E6E73]" size={20} />
+                  <User className="absolute left-4 top-4 text-[#9C8B80]" size={20} />
                   <input
                     type="text"
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Tu nombre"
-                    className="w-full pl-12 pr-4 py-4 bg-black border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                    className="w-full pl-12 pr-4 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                     required={isSignUp}
                   />
                 </div>
@@ -98,36 +98,36 @@ export default function LoginPage() {
             )}
 
             <div>
-              <label className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+              <label className="block text-sm font-bold text-[#1A1412] mb-3 uppercase tracking-wide">
                 Email
               </label>
               <div className="relative">
-                <Mail className="absolute left-4 top-4 text-[#6E6E73]" size={20} />
+                <Mail className="absolute left-4 top-4 text-[#9C8B80]" size={20} />
                 <input
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="tu@email.com"
-                  className="w-full pl-12 pr-4 py-4 bg-black border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                   required
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+              <label className="block text-sm font-bold text-[#1A1412] mb-3 uppercase tracking-wide">
                 Contraseña
               </label>
               <div className="relative">
-                <Lock className="absolute left-4 top-4 text-[#6E6E73]" size={20} />
+                <Lock className="absolute left-4 top-4 text-[#9C8B80]" size={20} />
                 <input
                   type="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="w-full pl-12 pr-4 py-4 bg-black border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                   required
                 />
               </div>
@@ -136,7 +136,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-text w-full bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 rounded-full transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+              className="btn-text w-full bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 rounded-full transition-all transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
             >
               {loading
                 ? 'Procesando...'
@@ -156,7 +156,7 @@ export default function LoginPage() {
                   setError('');
                   setFormData({ email: '', password: '', name: '' });
                 }}
-                className="text-[#FF3B30] font-bold hover:text-[#FF453A]"
+                className="text-[#C4472B] font-bold hover:text-[#A8381F]"
               >
                 {isSignUp ? 'Inicia sesión' : 'Regístrate'}
               </button>
@@ -165,7 +165,7 @@ export default function LoginPage() {
 
           {/* Back Link */}
           <div className="mt-6 text-center">
-            <Link href="/" className="text-[#A1A1A6] hover:text-white text-sm font-bold transition-colors">
+            <Link href="/" className="text-[#6B5B4E] hover:text-[#1A1412] text-sm font-bold transition-colors">
               ← Volver al inicio
             </Link>
           </div>

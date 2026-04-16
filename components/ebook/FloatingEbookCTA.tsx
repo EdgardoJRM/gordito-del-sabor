@@ -8,9 +8,12 @@ export default function FloatingEbookCTA() {
   const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(false);
 
-  // Only show on homepage
   useEffect(() => {
-    setIsVisible(pathname === '/');
+    const show =
+      pathname === '/' ||
+      pathname === '/recetas' ||
+      pathname === '/recetario';
+    setIsVisible(show);
   }, [pathname]);
 
   if (!isVisible) return null;

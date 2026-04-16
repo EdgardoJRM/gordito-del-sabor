@@ -5,6 +5,7 @@ import { authOptions } from '@/lib/auth';
 import Link from 'next/link';
 import { ArrowLeft, Clock, Users, ChefHat } from 'lucide-react';
 import FavoriteButton from '@/components/recipe/FavoriteButton';
+import ShareRecipeButton from '@/components/recipe/ShareRecipeButton';
 import AuthGate from '@/components/auth/AuthGate';
 import RecipePromoBanner from '@/components/ebook/RecipePromoBanner';
 
@@ -70,8 +71,8 @@ export default async function RecipeDetailPage({ params }: PageProps) {
                   </div>
                   <div className="flex items-center gap-3">
                     {recipe.isPremium && (
-                      <span className="bg-[#C4472B] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide flex items-center gap-1">
-                        <span>🔒</span> Exclusiva
+                      <span className="bg-[#C4472B] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                        Exclusiva
                       </span>
                     )}
                     <FavoriteButton
@@ -116,8 +117,11 @@ export default async function RecipeDetailPage({ params }: PageProps) {
               </div>
 
               {/* Image */}
-              <div className="mb-16 h-96 bg-gradient-to-br from-[#F2EDE6] to-[#E8E0D8] rounded-3xl flex items-center justify-center border border-[#E8E0D8]">
-                <span className="text-9xl">🍳</span>
+              <div className="relative mb-16 h-96 rounded-3xl overflow-hidden border border-[#E8E0D8] bg-gradient-to-br from-[#F2EDE6] via-[#FAF8F5] to-[#E8E0D8] flex items-center justify-center">
+                <div className="absolute inset-0 opacity-[0.07] bg-[radial-gradient(circle_at_30%_20%,#C4472B_0%,transparent_50%),radial-gradient(circle_at_70%_80%,#1A1412_0%,transparent_45%)]" />
+                <span className="relative text-xs font-bold uppercase tracking-[0.4em] text-[#C4472B]/60">
+                  Receta
+                </span>
               </div>
 
               {/* Ingredients */}
@@ -193,9 +197,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
                   </div>
                 </div>
 
-                <button className="btn-text w-full mt-8 bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 rounded-full transition-all transform hover:scale-105">
-                  Compartir Receta
-                </button>
+                <ShareRecipeButton title={recipe.title} recipePath={`/recetas/${recipe.id}`} />
               </div>
             </div>
           </div>

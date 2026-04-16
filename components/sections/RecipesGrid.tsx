@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 const RECIPES = [
@@ -41,28 +42,32 @@ export default function RecipesGrid() {
   return (
     <section className="section-spacing bg-[#FAF8F5]">
       <div className="container-custom">
-        {/* Título */}
         <h2 className="heading-section text-center text-[#1A1412] mb-20">
           Recetas que saben
           <br />
           a casa.
         </h2>
 
-        {/* Grid 3x2 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {RECIPES.map((recipe, index) => (
             <div
               key={index}
+              role="button"
+              tabIndex={0}
               onClick={() => router.push('/recetas')}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') router.push('/recetas');
+              }}
               className="relative h-[400px] rounded-2xl overflow-hidden cursor-pointer group shadow-md"
             >
-              <img
+              <Image
                 src={recipe.image}
                 alt={recipe.name}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
               />
-              {/* Overlay con nombre */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1412]/90 via-[#1A1412]/25 to-transparent flex items-end p-6">
+              <div className="absolute inset-0 bg-gradient-to-t from-[#1A1412]/90 via-[#1A1412]/25 to-transparent flex items-end p-6 pointer-events-none">
                 <h3 className="text-2xl font-bold text-[#FAF8F5]">{recipe.name}</h3>
               </div>
             </div>

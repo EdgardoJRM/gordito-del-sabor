@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 const LIFESTYLE_PHOTOS = [
   {
     image:
@@ -22,7 +24,6 @@ export default function ProductLifestyle() {
   return (
     <section className="section-spacing bg-[#FAF8F5]">
       <div className="container-custom">
-        {/* Texto */}
         <div className="text-center mb-20 space-y-8">
           <div className="inline-block">
             <span className="inline-block px-4 py-2 bg-[#C4472B]/15 text-[#C4472B] text-xs font-bold rounded-full mb-6 uppercase tracking-wider">
@@ -42,28 +43,29 @@ export default function ProductLifestyle() {
           </p>
         </div>
 
-        {/* Grid de fotos lifestyle */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
           {LIFESTYLE_PHOTOS.map((photo, index) => (
             <div
               key={index}
               className="relative h-[500px] rounded-2xl overflow-hidden group border border-[#E8E0D8] shadow-sm"
             >
-              <img
+              <Image
                 src={photo.image}
                 alt={photo.alt}
-                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90"
+                fill
+                sizes="(max-width: 768px) 100vw, 33vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-110 opacity-90"
               />
-              <div className="absolute inset-0 bg-[#1A1412]/35 flex items-center justify-center">
+              <div className="absolute inset-0 bg-[#1A1412]/35 flex items-center justify-center pointer-events-none">
                 <span className="text-[#FAF8F5] font-bold text-lg">Próximamente</span>
               </div>
             </div>
           ))}
         </div>
 
-        {/* CTA */}
         <div className="text-center">
           <button
+            type="button"
             onClick={() => {
               const element = document.getElementById('ebook-section');
               element?.scrollIntoView({ behavior: 'smooth' });

@@ -9,15 +9,15 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-black">
+    <main className="min-h-screen bg-[#FAF8F5]">
       {/* Header */}
-      <section className="bg-black border-b border-gray-900 py-8">
+      <section className="bg-[#FAF8F5] border-b border-[#E8E0D8] py-8">
         <div className="container-custom">
-          <Link href="/" className="inline-flex items-center gap-2 text-[#A1A1A6] hover:text-white mb-8 transition-colors">
+          <Link href="/" className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors">
             <ArrowLeft size={20} />
             <span className="nav-text">Volver al inicio</span>
           </Link>
-          <h1 className="heading-section text-white mb-6">Contacto</h1>
+          <h1 className="heading-section text-[#1A1412] mb-6">Contacto</h1>
           <p className="body-text text-xl">
             Nos encantaría escuchar de ti
           </p>
@@ -33,17 +33,12 @@ export default function ContactPage() {
               <div className="space-y-8">
                 {[
                   {
-                    title: 'Dirección',
+                    title: 'Ubicación',
                     content: 'San Juan, Puerto Rico',
                     emoji: '📍',
                   },
                   {
-                    title: 'Teléfono',
-                    content: '+1 (787) XXX-XXXX',
-                    emoji: '📞',
-                  },
-                  {
-                    title: 'Email',
+                    title: 'Contacto principal',
                     content: 'info@gorditodelsabor.com',
                     emoji: '✉️',
                   },
@@ -56,7 +51,7 @@ export default function ContactPage() {
                   <div key={item.title}>
                     <div className="flex items-center gap-3 mb-3">
                       <span className="text-3xl">{item.emoji}</span>
-                      <h3 className="font-bold text-white">{item.title}</h3>
+                      <h3 className="font-bold text-[#1A1412]">{item.title}</h3>
                     </div>
                     <p className="body-text ml-12 whitespace-pre-line">{item.content}</p>
                   </div>
@@ -64,33 +59,24 @@ export default function ContactPage() {
               </div>
 
               {/* Social Links */}
-              <div className="mt-12 pt-8 border-t border-gray-900">
-                <h3 className="font-bold text-white mb-6">Síguenos</h3>
-                <div className="flex gap-4">
-                  {[
-                    { name: 'Facebook', emoji: '👍' },
-                    { name: 'Instagram', emoji: '📸' },
-                    { name: 'YouTube', emoji: '▶️' },
-                  ].map((social) => (
-                    <a
-                      key={social.name}
-                      href="#"
-                      className="w-14 h-14 bg-[#1C1C1E] border border-gray-900 rounded-full flex items-center justify-center text-2xl hover:border-gray-800 hover:scale-110 transition-all"
-                      title={social.name}
-                    >
-                      {social.emoji}
-                    </a>
-                  ))}
-                </div>
+              <div className="mt-12 pt-8 border-t border-[#E8E0D8]">
+                <h3 className="font-bold text-[#1A1412] mb-6">Síguenos</h3>
+                <p className="body-text text-sm mb-4">
+                  Pronto enlaces directos a redes. Mientras tanto, escríbenos a{' '}
+                  <a href="mailto:info@gorditodelsabor.com" className="text-[#C4472B] font-semibold hover:underline">
+                    info@gorditodelsabor.com
+                  </a>
+                  .
+                </p>
               </div>
             </div>
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <form className="space-y-6">
+              <form className="space-y-6 bg-white border border-[#E8E0D8] rounded-3xl p-8 md:p-10 shadow-sm">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+                    <label htmlFor="name" className="block text-sm font-bold text-[#1A1412] mb-3 uppercase tracking-wide">
                       Nombre Completo
                     </label>
                     <input
@@ -98,12 +84,12 @@ export default function ContactPage() {
                       id="name"
                       name="name"
                       required
-                      className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                      className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                       placeholder="Tu nombre"
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+                    <label htmlFor="email" className="block text-sm font-bold text-[#1A1412] mb-3 uppercase tracking-wide">
                       Correo Electrónico
                     </label>
                     <input
@@ -111,14 +97,14 @@ export default function ContactPage() {
                       id="email"
                       name="email"
                       required
-                      className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                      className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                       placeholder="tu@email.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+                  <label htmlFor="subject" className="block text-sm font-bold text-[#1A1412] mb-3 uppercase tracking-wide">
                     Asunto
                   </label>
                   <input
@@ -126,13 +112,13 @@ export default function ContactPage() {
                     id="subject"
                     name="subject"
                     required
-                    className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                    className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                     placeholder="¿Cuál es tu pregunta?"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-bold text-white mb-3 uppercase tracking-wide">
+                  <label htmlFor="message" className="block text-sm font-bold text-[#1A1412] mb-3 uppercase tracking-wide">
                     Mensaje
                   </label>
                   <textarea
@@ -140,22 +126,25 @@ export default function ContactPage() {
                     name="message"
                     rows={6}
                     required
-                    className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                    className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                     placeholder="Cuéntanos más..."
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="btn-text w-full bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 rounded-full transition-all transform hover:scale-105"
+                  className="btn-text w-full bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 rounded-full transition-all transform hover:scale-[1.01]"
                 >
                   Enviar Mensaje
                 </button>
+                <p className="text-xs text-[#9C8B80] text-center">
+                  El envío por formulario web puede conectarse a un backend más adelante. Por ahora, también puedes escribirnos directamente a info@gorditodelsabor.com
+                </p>
               </form>
 
               {/* FAQ */}
-              <div className="mt-16 pt-12 border-t border-gray-900">
-                <h3 className="text-3xl font-bold text-white mb-8">Preguntas Frecuentes</h3>
+              <div className="mt-16 pt-12 border-t border-[#E8E0D8]">
+                <h3 className="text-3xl font-bold text-[#1A1412] mb-8">Preguntas Frecuentes</h3>
                 <div className="space-y-4">
                   {[
                     {
@@ -171,8 +160,8 @@ export default function ContactPage() {
                       a: 'Actualmente no, pero estamos considerando ofrecerlas en el futuro.',
                     },
                   ].map((faq, index) => (
-                    <div key={index} className="bg-[#1C1C1E] border border-gray-900 rounded-2xl p-6 hover:border-gray-800 transition-all">
-                      <h4 className="font-bold text-white mb-3">{faq.q}</h4>
+                    <div key={index} className="bg-[#F2EDE6] border border-[#E8E0D8] rounded-2xl p-6 hover:border-[#C4472B]/25 transition-all">
+                      <h4 className="font-bold text-[#1A1412] mb-3">{faq.q}</h4>
                       <p className="body-text">{faq.a}</p>
                     </div>
                   ))}

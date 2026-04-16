@@ -38,14 +38,15 @@ export default function RecipesPage() {
                 <div className="bg-[#FAF8F5] rounded-3xl overflow-hidden h-full flex flex-col transition-all duration-300 hover:scale-105 border border-[#E8E0D8] hover:border-[#C4472B]/30 shadow-sm relative">
                   {/* Premium Badge */}
                   {recipe.isPremium && (
-                    <div className="absolute top-4 right-4 z-10 bg-[#C4472B] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide flex items-center gap-1">
-                      <span>🔒</span> Exclusiva
+                    <div className="absolute top-4 right-4 z-10 bg-[#C4472B] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                      Exclusiva
                     </div>
                   )}
 
-                  {/* Image placeholder */}
-                  <div className="h-56 bg-gradient-to-br from-[#F2EDE6] to-[#E8E0D8] flex items-center justify-center group-hover:from-[#E8E0D8] group-hover:to-[#F2EDE6] transition-colors">
-                    <span className="text-7xl">🍳</span>
+                  <div className="relative h-56 overflow-hidden bg-gradient-to-br from-[#F2EDE6] via-[#FAF8F5] to-[#E8E0D8] flex items-center justify-center group-hover:from-[#E8E0D8] group-hover:via-[#F2EDE6] group-hover:to-[#FAF8F5] transition-colors border-b border-[#E8E0D8]">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C4472B]/50">
+                      El Gordito del Sabor
+                    </span>
                   </div>
 
                   {/* Content */}

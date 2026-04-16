@@ -1,23 +1,32 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
+import { ChefHat } from 'lucide-react';
+
+const BLUR_BG =
+  'https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=1600&q=80';
 
 export default function AuthGate() {
   return (
     <main className="min-h-screen bg-[#FAF8F5] flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0 z-0">
-        <img
-          src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=1600&q=80"
-          alt="Comida boricua"
-          className="w-full h-full object-cover"
-          style={{ filter: 'blur(20px)' }}
+        <Image
+          src={BLUR_BG}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover scale-110 [filter:blur(20px)]"
+          aria-hidden
         />
         <div className="absolute inset-0 bg-[#FAF8F5]/85" />
       </div>
 
       <div className="relative z-10 max-w-md mx-auto px-6 text-center">
-        <div className="mb-8">
-          <span className="text-7xl">🍳</span>
+        <div className="mb-8 flex justify-center">
+          <span className="inline-flex h-16 w-16 items-center justify-center rounded-full border-2 border-[#C4472B]/30 bg-[#F2EDE6] text-[#C4472B]">
+            <ChefHat className="w-9 h-9" strokeWidth={1.5} />
+          </span>
         </div>
 
         <h1 className="heading-section text-[#1A1412] mb-6">
