@@ -122,14 +122,11 @@ function drawPageWatermarkAndFooter(doc, pageIndex) {
     width: PAGE.w,
     align: 'center',
   });
-  /* Dominio en terracota claro sobre negro (contraste alto vs. crema de página) */
-  doc.fillColor('#FF7B5C');
+  doc.fillColor('#FFFFFF');
   doc.font('GenBold').fontSize(9);
   doc.text(FOOTER_DOMAIN_LABEL, M.left, bandY + 30, {
     width: PAGE.w - M.left - M.right,
     align: 'left',
-    link: FOOTER_DOMAIN_URL,
-    underline: false,
   });
   doc.restore();
 }
