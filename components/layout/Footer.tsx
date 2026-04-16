@@ -22,7 +22,6 @@ export default function Footer() {
               <li><Link href="/recetas" className="hover:text-[#C4472B] transition">Recetas</Link></li>
               <li><Link href="/recetario" className="hover:text-[#C4472B] transition">Recetario</Link></li>
               <li><Link href="/categorias" className="hover:text-[#C4472B] transition">Categorías</Link></li>
-              <li><Link href="/tienda" className="hover:text-[#C4472B] transition">Tienda</Link></li>
               <li><Link href="/sobre-nosotros" className="hover:text-[#C4472B] transition">Sobre Nosotros</Link></li>
             </ul>
           </div>

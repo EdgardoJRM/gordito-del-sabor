@@ -126,10 +126,10 @@ export default function SuccessPage() {
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/tienda"
-                className="btn-text flex-1 bg-[#FF3B30] hover:bg-[#FF453A] text-white py-5 rounded-full transition-all transform hover:scale-105"
+                href="/recetas"
+                className="btn-text flex-1 bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 rounded-full transition-all transform hover:scale-105"
               >
-                Continuar Comprando
+                Ver recetas
               </Link>
               <Link
                 href="/"

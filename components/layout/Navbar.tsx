@@ -2,9 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Settings, ShoppingCart, Menu, X, User, LogOut } from 'lucide-react';
+import { Settings, Menu, X, User, LogOut } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
-import { useCartStore } from '@/lib/cart-store';
 
 type NavbarProps = {
   /** Estilo oscuro sobre el hero de la home (transparente + texto claro) */
@@ -14,7 +13,6 @@ type NavbarProps = {
 export default function Navbar({ overlayHero = false }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
-  const cartItems = useCartStore((state) => state.items);
 
   const onDark = overlayHero;
 
@@ -23,7 +21,6 @@ export default function Navbar({ overlayHero = false }: NavbarProps) {
     { label: 'Recetas', href: '/recetas' },
     { label: 'Recetario', href: '/recetario' },
     { label: 'Categorías', href: '/categorias' },
-    { label: 'Tienda', href: '/tienda' },
     { label: 'Sobre Nosotros', href: '/sobre-nosotros' },
     { label: 'Contacto', href: '/contacto' },
   ];
@@ -68,25 +65,8 @@ export default function Navbar({ overlayHero = false }: NavbarProps) {
             ))}
           </div>
 
-          {/* Right Side - Cart and Auth */}
+          {/* Right Side — Auth (tienda/carrito ocultos: sitio informativo + leads) */}
           <div className="flex items-center gap-4">
-            {/* Cart */}
-            <Link
-              href="/carrito"
-              className={
-                onDark
-                  ? 'relative text-[#FAF8F5]/90 hover:text-[#FAF8F5]'
-                  : 'relative text-[#6B5B4E] hover:text-[#1A1412]'
-              }
-            >
-              <ShoppingCart size={24} />
-              {cartItems.length > 0 && (
-                <span className="absolute -top-2 -right-2 bg-[#C4472B] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                  {cartItems.length}
-                </span>
-              )}
-            </Link>
-
             {/* Admin Link */}
             {(((session?.user as any)?.role === 'admin') || session?.user?.email === 'admin@gordito.com') && (
               <Link href="/admin/dashboard" className="text-[#C4472B] hover:text-[#A8381F] font-bold flex items-center gap-1">

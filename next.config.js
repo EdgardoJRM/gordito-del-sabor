@@ -11,6 +11,20 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      {
+        source: '/tienda',
+        destination: '/recetario',
+        permanent: false,
+      },
+      {
+        source: '/carrito',
+        destination: '/recetario',
+        permanent: false,
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;

@@ -42,7 +42,7 @@ export default function LoginPage() {
       if (result?.error) {
         setError(result.error);
       } else if (result?.ok) {
-        router.push('/tienda');
+        router.push('/recetas');
       }
     } catch (err) {
       setError('Ocurrió un error. Intenta de nuevo.');

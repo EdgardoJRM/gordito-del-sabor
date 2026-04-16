@@ -34,10 +34,10 @@ export default function FinalCTA() {
               Ver recetas
             </button>
             <button
-              onClick={() => router.push('/tienda')}
+              onClick={() => router.push('/recetario')}
               className="btn-text inline-block border-2 border-[#FAF8F5] text-[#FAF8F5] py-5 px-12 rounded-full hover:bg-[#FAF8F5] hover:text-[#1A1412] transition-all transform hover:scale-105"
             >
-              Diseñar delantal
+              Descargar Recetario
             </button>
           </div>
         </div>

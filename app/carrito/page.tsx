@@ -76,9 +76,9 @@ export default function CartPage() {
           <Link href="/" className="text-2xl font-bold text-white">
             El Gordito del Sabor
           </Link>
-          <Link href="/tienda" className="text-[#A1A1A6] hover:text-white font-bold transition-colors flex items-center gap-2">
+          <Link href="/recetario" className="text-[#A1A1A6] hover:text-white font-bold transition-colors flex items-center gap-2">
             <ArrowLeft size={20} />
-            Volver a la tienda
+            Volver al recetario
           </Link>
         </div>
       </header>
@@ -95,10 +95,10 @@ export default function CartPage() {
                 Tu carrito está vacío
               </h2>
               <Link
-                href="/tienda"
-                className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
+                href="/recetario"
+                className="btn-text inline-block bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
               >
-                Continuar Comprando
+                Descargar Recetario
               </Link>
             </div>
           ) : (

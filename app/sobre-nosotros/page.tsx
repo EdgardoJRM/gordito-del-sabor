@@ -170,8 +170,8 @@ export default function AboutPage() {
               <Link href="/recetas" className="btn-text inline-block bg-[#FF3B30] hover:bg-[#FF453A] text-white py-4 px-12 rounded-full transition-all transform hover:scale-105">
                 Explorar Recetas
               </Link>
-              <Link href="/tienda" className="btn-text inline-block bg-white hover:bg-gray-200 text-black py-4 px-12 rounded-full transition-all transform hover:scale-105">
-                Visitar Tienda
+              <Link href="/recetario" className="btn-text inline-block bg-white hover:bg-gray-200 text-black py-4 px-12 rounded-full transition-all transform hover:scale-105">
+                Descargar Recetario
               </Link>
             </div>
             <p className="body-text text-sm">
