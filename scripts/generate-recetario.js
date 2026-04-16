@@ -47,7 +47,11 @@ const M = { top: 56, bottom: 56, left: 54, right: 54 };
 const CONTENT_W = PAGE.w - M.left - M.right;
 
 const WATERMARK_TEXT = 'EL GORDITO DEL SABOR';
-const FOOTER_LINE = 'El Gordito del Sabor  ·  gorditodelsabor.com  ·  Recetario digital';
+/** Pie interior (desde la pág. 2): firma + web + IG */
+const FOOTER_LINE_INTERIOR =
+  'El Gordito del Sabor  ·  Web: gorditodelsabor.com  ·  @elgorditodelsaborpr  ·  Recetario digital';
+/** Pie solo en portada (pág. 1): una línea, distinta al resto */
+const FOOTER_LINE_COVER = 'gorditodelsabor.com  ·  @elgorditodelsaborpr';
 
 function loadData() {
   delete require.cache[require.resolve('./recetas-data')];
@@ -84,30 +88,45 @@ function registerFonts(doc) {
   doc.registerFont('GenItalic', path.join(FONTS_DIR, 'GeneralSans-Italic.otf'));
 }
 
-/** Marca de agua + firma en pie (dibujar al final con bufferPages + switchToPage) */
-function drawPageWatermarkAndFooter(doc) {
-  doc.save();
-  doc.opacity(0.09);
-  doc.font('ClashLight').fontSize(44).fillColor(COLORS.terracotta);
-  doc.rotate(-28, { origin: [PAGE.w / 2, PAGE.h / 2] });
-  doc.text(WATERMARK_TEXT, 0, PAGE.h / 2 - 22, {
-    width: PAGE.w,
-    align: 'center',
-  });
-  doc.restore();
+/**
+ * Marca de agua + firma en pie (dibujar al final con bufferPages + switchToPage).
+ * @param {number} pageIndex 0 = portada (pie distinto; sin marca de agua para no ensuciar el diseño)
+ */
+function drawPageWatermarkAndFooter(doc, pageIndex) {
+  const isCover = pageIndex === 0;
+
+  if (!isCover) {
+    doc.save();
+    doc.opacity(0.09);
+    doc.font('ClashLight').fontSize(44).fillColor(COLORS.terracotta);
+    doc.rotate(-28, { origin: [PAGE.w / 2, PAGE.h / 2] });
+    doc.text(WATERMARK_TEXT, 0, PAGE.h / 2 - 22, {
+      width: PAGE.w,
+      align: 'center',
+    });
+    doc.restore();
+  }
 
   doc.save();
   doc.opacity(1);
-  doc.font('GenItalic').fontSize(8.5).fillColor('#8A796E');
-  doc.text('— El Gordito del Sabor —', 0, PAGE.h - 44, {
-    width: PAGE.w,
-    align: 'center',
-  });
-  doc.font('GenReg').fontSize(7.5).fillColor('#A8988C');
-  doc.text(FOOTER_LINE, 0, PAGE.h - 30, {
-    width: PAGE.w,
-    align: 'center',
-  });
+  if (isCover) {
+    doc.font('GenReg').fontSize(7.5).fillColor('#9C8B80');
+    doc.text(FOOTER_LINE_COVER, 0, PAGE.h - 28, {
+      width: PAGE.w,
+      align: 'center',
+    });
+  } else {
+    doc.font('GenItalic').fontSize(8.5).fillColor('#8A796E');
+    doc.text('— El Gordito del Sabor —', 0, PAGE.h - 44, {
+      width: PAGE.w,
+      align: 'center',
+    });
+    doc.font('GenReg').fontSize(7.5).fillColor('#A8988C');
+    doc.text(FOOTER_LINE_INTERIOR, 0, PAGE.h - 30, {
+      width: PAGE.w,
+      align: 'center',
+    });
+  }
   doc.restore();
 }
 
@@ -368,7 +387,7 @@ function main() {
   const range = doc.bufferedPageRange();
   for (let i = 0; i < range.count; i++) {
     doc.switchToPage(range.start + i);
-    drawPageWatermarkAndFooter(doc);
+    drawPageWatermarkAndFooter(doc, i);
   }
 
   doc.end();
