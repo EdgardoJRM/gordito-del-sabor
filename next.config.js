@@ -6,11 +6,11 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'images.unsplash.com',
+        pathname: '/**',
       },
     ],
   },
 };
 
 module.exports = nextConfig;
-

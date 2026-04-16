@@ -23,6 +23,7 @@ export default function HeroPremium() {
                 className="object-cover object-top"
                 sizes="(max-width: 1024px) 85vw, 0px"
                 priority
+                unoptimized
               />
             </div>
           </div>
@@ -50,6 +51,7 @@ export default function HeroPremium() {
                   fill
                   className="object-cover"
                   sizes="56px"
+                  unoptimized
                 />
               </div>
               <div className="text-left">
