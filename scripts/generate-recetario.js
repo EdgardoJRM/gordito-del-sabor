@@ -47,11 +47,9 @@ const M = { top: 56, bottom: 56, left: 54, right: 54 };
 const CONTENT_W = PAGE.w - M.left - M.right;
 
 const WATERMARK_TEXT = 'EL GORDITO DEL SABOR';
-/** Pie interior (desde la pág. 2): firma + web + IG */
-const FOOTER_LINE_INTERIOR =
-  'El Gordito del Sabor  ·  Web: gorditodelsabor.com  ·  @elgorditodelsaborpr  ·  Recetario digital';
-/** Pie solo en portada (pág. 1): una línea, distinta al resto */
-const FOOTER_LINE_COVER = 'gorditodelsabor.com  ·  @elgorditodelsaborpr';
+const FOOTER_HANDLE = '[@EL GORDITO DEL SABOR]';
+const FOOTER_DOMAIN_LABEL = 'GORDITODELSABOR.COM';
+const FOOTER_DOMAIN_URL = 'https://gorditodelsabor.com';
 
 function loadData() {
   delete require.cache[require.resolve('./recetas-data')];
@@ -109,24 +107,18 @@ function drawPageWatermarkAndFooter(doc, pageIndex) {
 
   doc.save();
   doc.opacity(1);
-  if (isCover) {
-    doc.font('GenReg').fontSize(7.5).fillColor('#9C8B80');
-    doc.text(FOOTER_LINE_COVER, 0, PAGE.h - 28, {
-      width: PAGE.w,
-      align: 'center',
-    });
-  } else {
-    doc.font('GenItalic').fontSize(8.5).fillColor('#8A796E');
-    doc.text('— El Gordito del Sabor —', 0, PAGE.h - 44, {
-      width: PAGE.w,
-      align: 'center',
-    });
-    doc.font('GenReg').fontSize(7.5).fillColor('#A8988C');
-    doc.text(FOOTER_LINE_INTERIOR, 0, PAGE.h - 30, {
-      width: PAGE.w,
-      align: 'center',
-    });
-  }
+  doc.font('GenBold').fontSize(8.5).fillColor(isCover ? '#B5A89A' : '#8A796E');
+  doc.text(FOOTER_HANDLE, 0, PAGE.h - 42, {
+    width: PAGE.w,
+    align: 'center',
+  });
+  doc.font('GenBold').fontSize(8).fillColor(isCover ? '#D4C9BC' : COLORS.terracotta);
+  doc.text(FOOTER_DOMAIN_LABEL, M.left, PAGE.h - 26, {
+    width: 280,
+    align: 'left',
+    link: FOOTER_DOMAIN_URL,
+    underline: false,
+  });
   doc.restore();
 }
 
