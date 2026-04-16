@@ -46,6 +46,9 @@ const PAGE = { w: 612, h: 792 };
 const M = { top: 56, bottom: 56, left: 54, right: 54 };
 const CONTENT_W = PAGE.w - M.left - M.right;
 
+const WATERMARK_TEXT = 'EL GORDITO DEL SABOR';
+const FOOTER_LINE = 'El Gordito del Sabor  ·  gorditodelsabor.com  ·  Recetario digital';
+
 function loadData() {
   delete require.cache[require.resolve('./recetas-data')];
   return require('./recetas-data');
@@ -79,6 +82,33 @@ function registerFonts(doc) {
   doc.registerFont('GenReg', path.join(FONTS_DIR, 'GeneralSans-Regular.otf'));
   doc.registerFont('GenBold', path.join(FONTS_DIR, 'GeneralSans-Bold.otf'));
   doc.registerFont('GenItalic', path.join(FONTS_DIR, 'GeneralSans-Italic.otf'));
+}
+
+/** Marca de agua + firma en pie (dibujar al final con bufferPages + switchToPage) */
+function drawPageWatermarkAndFooter(doc) {
+  doc.save();
+  doc.opacity(0.09);
+  doc.font('ClashLight').fontSize(44).fillColor(COLORS.terracotta);
+  doc.rotate(-28, { origin: [PAGE.w / 2, PAGE.h / 2] });
+  doc.text(WATERMARK_TEXT, 0, PAGE.h / 2 - 22, {
+    width: PAGE.w,
+    align: 'center',
+  });
+  doc.restore();
+
+  doc.save();
+  doc.opacity(1);
+  doc.font('GenItalic').fontSize(8.5).fillColor('#8A796E');
+  doc.text('— El Gordito del Sabor —', 0, PAGE.h - 44, {
+    width: PAGE.w,
+    align: 'center',
+  });
+  doc.font('GenReg').fontSize(7.5).fillColor('#A8988C');
+  doc.text(FOOTER_LINE, 0, PAGE.h - 30, {
+    width: PAGE.w,
+    align: 'center',
+  });
+  doc.restore();
 }
 
 function drawCover(doc, data) {
@@ -313,6 +343,7 @@ function main() {
   const doc = new PDFDocument({
     size: 'LETTER',
     margins: { top: M.top, bottom: M.bottom, left: M.left, right: M.right },
+    bufferPages: true,
   });
 
   registerFonts(doc);
@@ -333,6 +364,12 @@ function main() {
 
   doc.addPage();
   drawBackCover(doc, data);
+
+  const range = doc.bufferedPageRange();
+  for (let i = 0; i < range.count; i++) {
+    doc.switchToPage(range.start + i);
+    drawPageWatermarkAndFooter(doc);
+  }
 
   doc.end();
 
