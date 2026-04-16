@@ -1,12 +1,24 @@
 'use client';
 
-export default function ProductLifestyle() {
-  const lifestylePhotos = [
-    { image: 'apron-cooking.jpg', fallback: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80' },
-    { image: 'apron-food.jpg', fallback: 'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=80' },
-    { image: 'apron-detail.jpg', fallback: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80' },
-  ];
+const LIFESTYLE_PHOTOS = [
+  {
+    image:
+      'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80',
+    alt: 'Cocina con delantal',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1466637574441-749b8f19452f?w=800&q=80',
+    alt: 'Comida en mesa',
+  },
+  {
+    image:
+      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80',
+    alt: 'Detalle de cocina',
+  },
+];
 
+export default function ProductLifestyle() {
   return (
     <section className="section-spacing bg-[#FAF8F5]">
       <div className="container-custom">
@@ -32,18 +44,15 @@ export default function ProductLifestyle() {
 
         {/* Grid de fotos lifestyle */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          {lifestylePhotos.map((photo, index) => (
+          {LIFESTYLE_PHOTOS.map((photo, index) => (
             <div
               key={index}
               className="relative h-[500px] rounded-2xl overflow-hidden group border border-[#E8E0D8] shadow-sm"
             >
               <img
-                src={`/images/lifestyle/${photo.image}`}
-                alt={`Lifestyle ${index + 1}`}
+                src={photo.image}
+                alt={photo.alt}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 opacity-90"
-                onError={(e) => {
-                  e.currentTarget.src = photo.fallback;
-                }}
               />
               <div className="absolute inset-0 bg-[#1A1412]/35 flex items-center justify-center">
                 <span className="text-[#FAF8F5] font-bold text-lg">Próximamente</span>

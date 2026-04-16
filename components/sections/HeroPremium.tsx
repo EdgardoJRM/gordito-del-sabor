@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 
-const CHEF_IMAGE = '/images/hero/webp/ezgif-frame-001.webp';
+const CHEF_IMAGE =
+  'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80';
 
 export default function HeroPremium() {
   return (
