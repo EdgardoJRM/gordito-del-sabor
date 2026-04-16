@@ -107,14 +107,19 @@ function drawPageWatermarkAndFooter(doc, pageIndex) {
 
   doc.save();
   doc.opacity(1);
-  doc.font('GenBold').fontSize(8.5).fillColor(isCover ? '#B5A89A' : '#8A796E');
-  doc.text(FOOTER_HANDLE, 0, PAGE.h - 42, {
+  const bandH = 48;
+  const bandY = PAGE.h - bandH;
+  doc.rect(0, bandY, PAGE.w, bandH).fill('#1A1412');
+  doc.fillColor('#FAF8F5');
+  doc.font('GenBold').fontSize(9.5);
+  doc.text(FOOTER_HANDLE, 0, bandY + 10, {
     width: PAGE.w,
     align: 'center',
   });
-  doc.font('GenBold').fontSize(8).fillColor(isCover ? '#D4C9BC' : COLORS.terracotta);
-  doc.text(FOOTER_DOMAIN_LABEL, M.left, PAGE.h - 26, {
-    width: 280,
+  doc.fillColor(COLORS.gold);
+  doc.font('GenBold').fontSize(8.5);
+  doc.text(FOOTER_DOMAIN_LABEL, M.left, bandY + 28, {
+    width: PAGE.w - M.left - M.right,
     align: 'left',
     link: FOOTER_DOMAIN_URL,
     underline: false,
