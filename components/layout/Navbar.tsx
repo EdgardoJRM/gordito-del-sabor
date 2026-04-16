@@ -6,10 +6,17 @@ import { Settings, ShoppingCart, Menu, X, User, LogOut } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import { useCartStore } from '@/lib/cart-store';
 
-export default function Navbar() {
+type NavbarProps = {
+  /** Estilo oscuro sobre el hero de la home (transparente + texto claro) */
+  overlayHero?: boolean;
+};
+
+export default function Navbar({ overlayHero = false }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
   const cartItems = useCartStore((state) => state.items);
+
+  const onDark = overlayHero;
 
   const navItems = [
     { label: 'Inicio', href: '/' },
@@ -22,12 +29,24 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-lg border-b border-[#E8E0D8]">
+    <nav
+      className={
+        onDark
+          ? 'sticky top-0 z-50 bg-[#1A1412]/45 backdrop-blur-md border-b border-white/10 transition-colors duration-300'
+          : 'sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-lg border-b border-[#E8E0D8] transition-colors duration-300'
+      }
+    >
       <div className="container-custom">
         <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-[#1A1412] font-bold text-xl tracking-tight">
+            <span
+              className={
+                onDark
+                  ? 'text-[#FAF8F5] font-bold text-xl tracking-tight'
+                  : 'text-[#1A1412] font-bold text-xl tracking-tight'
+              }
+            >
               El Gordito del Sabor
             </span>
           </Link>
@@ -38,7 +57,11 @@ export default function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="nav-text text-[#6B5B4E] hover:text-[#1A1412] transition-colors"
+                className={
+                  onDark
+                    ? 'nav-text text-[#FAF8F5]/90 hover:text-[#FAF8F5] transition-colors'
+                    : 'nav-text text-[#6B5B4E] hover:text-[#1A1412] transition-colors'
+                }
               >
                 {item.label}
               </Link>
@@ -48,7 +71,14 @@ export default function Navbar() {
           {/* Right Side - Cart and Auth */}
           <div className="flex items-center gap-4">
             {/* Cart */}
-            <Link href="/carrito" className="relative text-[#6B5B4E] hover:text-[#1A1412]">
+            <Link
+              href="/carrito"
+              className={
+                onDark
+                  ? 'relative text-[#FAF8F5]/90 hover:text-[#FAF8F5]'
+                  : 'relative text-[#6B5B4E] hover:text-[#1A1412]'
+              }
+            >
               <ShoppingCart size={24} />
               {cartItems.length > 0 && (
                 <span className="absolute -top-2 -right-2 bg-[#C4472B] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
@@ -68,7 +98,14 @@ export default function Navbar() {
             {/* Auth */}
             {session ? (
               <div className="hidden md:flex items-center gap-3">
-                <Link href="/perfil" className="flex items-center gap-2 text-[#1A1412] hover:text-[#6B5B4E] transition-colors">
+                <Link
+                  href="/perfil"
+                  className={
+                    onDark
+                      ? 'flex items-center gap-2 text-[#FAF8F5] hover:text-white transition-colors'
+                      : 'flex items-center gap-2 text-[#1A1412] hover:text-[#6B5B4E] transition-colors'
+                  }
+                >
                   <User size={20} />
                   <span className="nav-text font-bold">{session.user?.name}</span>
                 </Link>
@@ -90,7 +127,7 @@ export default function Navbar() {
 
             {/* Mobile Menu Button */}
             <button
-              className="md:hidden text-[#1A1412]"
+              className={onDark ? 'md:hidden text-[#FAF8F5]' : 'md:hidden text-[#1A1412]'}
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
@@ -101,20 +138,43 @@ export default function Navbar() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden pb-4 border-t border-[#E8E0D8]">
+          <div
+            className={
+              onDark
+                ? 'md:hidden pb-4 border-t border-white/15 bg-[#1A1412]/95'
+                : 'md:hidden pb-4 border-t border-[#E8E0D8]'
+            }
+          >
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="nav-text block py-2 text-[#6B5B4E] hover:text-[#1A1412]"
+                className={
+                  onDark
+                    ? 'nav-text block py-2 text-[#FAF8F5]/90 hover:text-[#FAF8F5]'
+                    : 'nav-text block py-2 text-[#6B5B4E] hover:text-[#1A1412]'
+                }
                 onClick={() => setIsOpen(false)}
               >
                 {item.label}
               </Link>
             ))}
             {session ? (
-              <div className="pt-4 border-t border-[#E8E0D8] mt-4 space-y-2">
-                <Link href="/perfil" className="flex items-center gap-2 text-[#1A1412] hover:text-[#6B5B4E] py-2 transition-colors">
+              <div
+                className={
+                  onDark
+                    ? 'pt-4 border-t border-white/15 mt-4 space-y-2'
+                    : 'pt-4 border-t border-[#E8E0D8] mt-4 space-y-2'
+                }
+              >
+                <Link
+                  href="/perfil"
+                  className={
+                    onDark
+                      ? 'flex items-center gap-2 text-[#FAF8F5] hover:text-white py-2 transition-colors'
+                      : 'flex items-center gap-2 text-[#1A1412] hover:text-[#6B5B4E] py-2 transition-colors'
+                  }
+                >
                   <User size={20} />
                   <span className="font-bold">{session.user?.name}</span>
                 </Link>
@@ -132,7 +192,11 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/auth/login"
-                className="block py-2 text-[#C4472B] hover:text-[#A8381F] font-bold mt-4 pt-4 border-t border-[#E8E0D8]"
+                className={
+                  onDark
+                    ? 'block py-2 text-[#E8A090] hover:text-[#FAF8F5] font-bold mt-4 pt-4 border-t border-white/15'
+                    : 'block py-2 text-[#C4472B] hover:text-[#A8381F] font-bold mt-4 pt-4 border-t border-[#E8E0D8]'
+                }
                 onClick={() => setIsOpen(false)}
               >
                 Iniciar Sesión

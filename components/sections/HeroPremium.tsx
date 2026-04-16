@@ -1,465 +1,102 @@
-'use client';
-
-import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { ChevronDown, Menu, X } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 export default function HeroPremium() {
-  const router = useRouter();
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentFrame, setCurrentFrame] = useState(0);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-  const [loadingProgress, setLoadingProgress] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
-  const [showScrollIndicator, setShowScrollIndicator] = useState(true);
-  const containerRef = useRef(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const imagesRef = useRef<HTMLImageElement[]>([]);
-  const animationFrameRef = useRef<number>();
-
-  // Total frames available
-  const TOTAL_FRAMES = 240;
-
-  // Preload all images on mount with progress tracking
-  useEffect(() => {
-    const loadImages = async () => {
-      const imagePromises: Promise<HTMLImageElement>[] = [];
-      
-      for (let i = 0; i < TOTAL_FRAMES; i++) {
-        const frameNumber = String(i + 1).padStart(3, '0');
-        
-        const promise = new Promise<HTMLImageElement>((resolve, reject) => {
-          const image = new Image();
-          image.onload = () => {
-            // Update progress when each image loads
-            setLoadingProgress((prev) => {
-              const newProgress = Math.round(((prev / 100) * TOTAL_FRAMES + 1) / TOTAL_FRAMES * 100);
-              return Math.min(newProgress, 99); // Cap at 99% until all done
-            });
-            resolve(image);
-          };
-          image.onerror = () => {
-            // Fallback to PNG if WebP fails
-            const fallbackImg = new Image();
-            fallbackImg.onload = () => {
-              setLoadingProgress((prev) => {
-                const newProgress = Math.round(((prev / 100) * TOTAL_FRAMES + 1) / TOTAL_FRAMES * 100);
-                return Math.min(newProgress, 99);
-              });
-              resolve(fallbackImg);
-            };
-            fallbackImg.onerror = () => {
-              setLoadingProgress((prev) => {
-                const newProgress = Math.round(((prev / 100) * TOTAL_FRAMES + 1) / TOTAL_FRAMES * 100);
-                return Math.min(newProgress, 99);
-              });
-              reject(new Error(`Failed to load frame ${frameNumber}`));
-            };
-            fallbackImg.src = `/images/hero/webp/test/ezgif-frame-${frameNumber}.png`;
-          };
-          image.src = `/images/hero/webp/ezgif-frame-${frameNumber}.webp`;
-        });
-        
-        imagePromises.push(promise);
-      }
-
-      try {
-        const loadedImages = await Promise.all(imagePromises);
-        imagesRef.current = loadedImages;
-        setImagesLoaded(true);
-        setLoadingProgress(100);
-        
-        // Small delay for smooth transition
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 500);
-        
-        // Draw first frame
-        if (canvasRef.current && loadedImages[0]) {
-          const canvas = canvasRef.current;
-          const ctx = canvas.getContext('2d', { alpha: false });
-          if (ctx) {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
-            // Draw image centered and scaled
-            const scale = Math.max(canvas.width / loadedImages[0].width, canvas.height / loadedImages[0].height);
-            const x = (canvas.width / 2) - (loadedImages[0].width / 2) * scale;
-            const y = (canvas.height / 2) - (loadedImages[0].height / 2) * scale;
-            
-            ctx.drawImage(loadedImages[0], x, y, loadedImages[0].width * scale, loadedImages[0].height * scale);
-          }
-        }
-      } catch (error) {
-        console.error('Error loading images:', error);
-        setIsLoading(false);
-      }
-    };
-
-    loadImages();
-
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, []);
-
-  // Block scroll while loading
-  useEffect(() => {
-    if (isLoading) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isLoading]);
-
-  // Draw frame on canvas
-  const drawFrame = (frameIndex: number) => {
-    if (!canvasRef.current || !imagesRef.current[frameIndex]) return;
-    
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d', { alpha: false });
-    if (!ctx) return;
-
-    const img = imagesRef.current[frameIndex];
-    
-    // Clear and draw
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
-    // Draw image centered and scaled to cover
-    const scale = Math.max(canvas.width / img.width, canvas.height / img.height);
-    const x = (canvas.width / 2) - (img.width / 2) * scale;
-    const y = (canvas.height / 2) - (img.height / 2) * scale;
-    
-    ctx.drawImage(img, x, y, img.width * scale, img.height * scale);
-  };
-
-  // Handle window resize
-  useEffect(() => {
-    if (!imagesLoaded) return;
-
-    const handleResize = () => {
-      if (canvasRef.current) {
-        canvasRef.current.width = window.innerWidth;
-        canvasRef.current.height = window.innerHeight;
-        drawFrame(currentFrame);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [imagesLoaded, currentFrame]);
-
-  // Update frame when currentFrame changes
-  useEffect(() => {
-    if (!imagesLoaded) return;
-    
-    animationFrameRef.current = requestAnimationFrame(() => {
-      drawFrame(currentFrame);
-    });
-
-    return () => {
-      if (animationFrameRef.current) {
-        cancelAnimationFrame(animationFrameRef.current);
-      }
-    };
-  }, [currentFrame, imagesLoaded]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      // Calcular el progreso basado en el scroll dentro del hero
-      const heroHeight = window.innerHeight * (isMobile ? 4 : 8); // 400vh mobile, 800vh desktop
-      const scrolled = window.scrollY;
-      
-      if (scrolled < heroHeight) {
-        const progress = Math.min((scrolled / heroHeight) * 100, 100);
-        setScrollProgress(progress);
-        const frameIndex = Math.floor((progress / 100) * (TOTAL_FRAMES - 1));
-        setCurrentFrame(frameIndex);
-        
-        // Hide scroll indicator after user scrolls past 5%
-        if (progress > 5) {
-          setShowScrollIndicator(false);
-        } else {
-          setShowScrollIndicator(true);
-        }
-      }
-    };
-
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    checkMobile();
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', checkMobile);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', checkMobile);
-    };
-  }, [isMobile]);
-
   return (
-    <>
-      {/* Fullscreen Loader */}
-      {isLoading && (
-        <div className="fixed inset-0 z-[9999] bg-[#1A1412]/95 backdrop-blur-sm flex items-center justify-center">
-          <div className="text-center space-y-8 px-4">
-            {/* Logo with pulse animation */}
-            <div className="animate-pulse">
-              <h1 className="text-4xl md:text-6xl font-bold text-[#FAF8F5] mb-2">
-                El Gordito
-              </h1>
-              <h2 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-[#E8C4A8] to-[#C4472B] bg-clip-text text-transparent">
-                del Sabor
-              </h2>
-            </div>
-
-            {/* Progress Bar Container */}
-            <div className="w-64 md:w-96 mx-auto">
-              {/* Progress Bar Background */}
-              <div className="relative h-2 bg-[#3D322E] rounded-full overflow-hidden">
-                {/* Progress Bar Fill */}
-                <div 
-                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-[#C4472B] to-[#A8381F] rounded-full transition-all duration-300 ease-out"
-                  style={{ width: `${loadingProgress}%` }}
-                >
-                  {/* Shimmer effect */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-                </div>
-              </div>
-
-              {/* Progress Percentage */}
-              <div className="mt-4 text-[#E8C4A8] font-bold text-xl md:text-2xl">
-                {loadingProgress}%
-              </div>
-
-              {/* Loading Text */}
-              <div className="mt-2 text-[#9C8B80] text-sm md:text-base">
-                Cargando experiencia...
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#1A1412]/40">
-        <div className="container-custom py-4 md:py-6 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="text-lg md:text-xl font-bold text-[#FAF8F5] truncate">
-            El Gordito del Sabor
-          </Link>
-
-          {/* Center Links - Desktop */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/tienda" className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium">
-              Delantales
-            </Link>
-            <Link href="/recetas" className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium">
-              Recetas
-            </Link>
-            <a href="#" className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium">
-              Comunidad
-            </a>
-          </div>
-
-          {/* CTA Button - Desktop */}
-          <button
-            onClick={() => router.push('/tienda')}
-            className="hidden md:block border border-[#FAF8F5] text-[#FAF8F5] px-6 py-2 rounded-full hover:bg-[#FAF8F5] hover:text-[#1A1412] transition-all text-sm font-medium"
-          >
-            Diseña tu delantal
-          </button>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-[#FAF8F5]"
-          >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-[#1A1412]/95 backdrop-blur-md border-t border-[#3D322E]">
-            <div className="container-custom py-4 flex flex-col gap-4">
-              <Link 
-                href="/tienda" 
-                className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Delantales
-              </Link>
-              <Link 
-                href="/recetas" 
-                className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Recetas
-              </Link>
-              <a 
-                href="#" 
-                className="text-[#D4C9BC] hover:text-[#FAF8F5] transition-colors text-sm font-medium py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Comunidad
-              </a>
-              <button
-                onClick={() => {
-                  router.push('/tienda');
-                  setMobileMenuOpen(false);
-                }}
-                className="border border-[#FAF8F5] text-[#FAF8F5] px-6 py-2 rounded-full hover:bg-[#FAF8F5] hover:text-[#1A1412] transition-all text-sm font-medium w-full"
-              >
-                Diseña tu delantal
-              </button>
-            </div>
-          </div>
-        )}
-      </nav>
-
-      {/* Hero Animation Section - Desktop & Mobile */}
-      <section ref={containerRef} className={`relative w-full ${isMobile ? 'min-h-[400vh]' : 'min-h-[800vh]'} bg-[#1A1412]`}>
-        {/* Fixed Background Animation Container */}
-        <div 
-          className="fixed top-0 left-0 h-screen w-full z-0 transition-opacity duration-500"
-          style={{
-            opacity: scrollProgress < 90 ? 1 : 0,
-            pointerEvents: scrollProgress < 90 ? 'auto' : 'none',
-          }}
-        >
-          {/* Background Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#1A1412] via-[#1A1412] to-[#C4472B]/10 opacity-40" />
-
-          {/* Animated Background Elements - Solo Desktop */}
-          {!isMobile && (
-            <div className="absolute inset-0 overflow-hidden">
-              <div className="absolute top-20 right-20 w-96 h-96 bg-[#C4472B]/10 rounded-full blur-3xl animate-pulse" />
-              <div className="absolute bottom-20 left-20 w-96 h-96 bg-[#B8860B]/10 rounded-full blur-3xl animate-pulse" />
-            </div>
-          )}
-
-          {/* Background Animation - Fondo Pantalla Completa */}
-          <div className="absolute inset-0 z-0 flex items-center justify-center">
-            {/* Lighting Effects - Solo Desktop */}
-            {!isMobile && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                {/* Rim Light */}
-                <div className="absolute w-full h-full bg-gradient-to-r from-[#C4472B]/15 to-transparent rounded-full blur-3xl" />
-              </div>
-            )}
-
-            {/* Animated Product Image - Canvas Rendering */}
-            <div className="relative w-full h-full flex items-center justify-center">
-              {!imagesLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-[#FAF8F5] text-xl">Cargando animación...</div>
-                </div>
-              )}
-              <canvas
-                ref={canvasRef}
-                className="w-full h-full object-contain md:object-cover opacity-50"
-                style={{ 
-                  display: 'block',
-                }}
+    <section
+      id="site-hero"
+      className="relative -mt-[4.5rem] pt-[4.5rem] min-h-[100svh] flex flex-col justify-center bg-[#1A1412] overflow-hidden"
+    >
+      <div className="container-custom relative z-10 flex-1 flex items-center py-16 md:py-24 lg:py-28">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
+          {/* Mobile: chef arriba (estilo Alex Guarnaschelli) */}
+          <div className="lg:hidden order-1 w-full max-w-sm mx-auto">
+            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+              <Image
+                src="/images/team/gordito.jpg"
+                alt="El Gordito del Sabor"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 1024px) 85vw, 0px"
+                priority
               />
             </div>
           </div>
 
-          {/* Bottom Gradient Fade */}
-          <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#1A1412] to-transparent pointer-events-none" />
+          {/* Copy + CTAs */}
+          <div className="lg:col-span-7 order-2 lg:order-1 text-center lg:text-left">
+            <p className="text-[#E8D4BC] text-xs md:text-sm tracking-[0.28em] uppercase mb-4">
+              Recetas boricuas auténticas
+            </p>
+            <h1 className="heading-hero text-[#FAF8F5] mb-4">
+              EL GORDITO
+              <br />
+              DEL SABOR
+            </h1>
+            <p className="subheadline text-[#D4C9BC] max-w-xl mx-auto lg:mx-0 mb-8">
+              Recetas boricuas con sazón de verdad.
+            </p>
 
-          {/* Hero Content - Centered Text */}
-          <div 
-            className="absolute inset-0 flex items-center justify-center z-20"
-            style={{
-              opacity: Math.max(0, 1 - scrollProgress / 30),
-              pointerEvents: scrollProgress > 30 ? 'none' : 'auto',
-            }}
-          >
-            <div className="container-custom w-full px-4">
-              {/* Centered Text Content */}
-              <div className="text-[#FAF8F5] space-y-8 max-w-3xl mx-auto text-center">
-                {/* Headline */}
-                <h1 className="heading-hero text-[#FAF8F5]">
-                  EL GORDITO
-                  <br />
-                  DEL SABOR
-                </h1>
-
-                {/* Subheadline */}
-                <p className="subheadline text-[#D4C9BC]">
-                  Recetas boricuas con sazón de verdad.
-                </p>
-
-                {/* CTAs */}
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
-                  <button
-                    onClick={() => router.push('/recetario')}
-                    className="btn-text inline-block bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 px-10 rounded-full transition-all transform hover:scale-105"
-                  >
-                    Descargar Recetario Gratis
-                  </button>
-                  <button
-                    onClick={() => router.push('/recetas')}
-                    className="btn-text inline-block border-2 border-[#FAF8F5] text-[#FAF8F5] py-4 px-10 rounded-full hover:bg-[#FAF8F5] hover:text-[#1A1412] transition-all transform hover:scale-105"
-                  >
-                    Ver Recetas
-                  </button>
-                </div>
+            {/* Social proof — avatar solo desktop (en móvil ya hay foto grande arriba) */}
+            <div className="hidden md:flex items-center justify-center lg:justify-start gap-4 mb-10">
+              <div className="relative h-14 w-14 rounded-full overflow-hidden ring-2 ring-[#FAF8F5]/25 shadow-lg shrink-0">
+                <Image
+                  src="/images/team/gordito.jpg"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="56px"
+                />
+              </div>
+              <div className="text-left">
+                <p className="text-[#FAF8F5] font-bold text-sm md:text-base">160K+ seguidores</p>
+                <p className="text-[#9C8B80] text-xs md:text-sm">Sazón real en redes</p>
               </div>
             </div>
-          </div>
-
-          {/* Scroll Indicator - Center Bottom */}
-          <div 
-            className="absolute bottom-12 left-1/2 transform -translate-x-1/2 flex flex-col items-center gap-3 z-30 transition-opacity duration-500"
-            style={{
-              opacity: showScrollIndicator ? 1 : 0,
-              pointerEvents: showScrollIndicator ? 'auto' : 'none',
-            }}
-          >
-            <p className="text-[#FAF8F5]/75 text-sm tracking-widest uppercase font-light">
-              Scroll para explorar
+            <p className="md:hidden text-[#9C8B80] text-sm mb-10">
+              <span className="text-[#FAF8F5] font-bold">160K+ seguidores</span>
+              {' · '}
+              Sazón real en redes
             </p>
-            <div 
-              className="animate-bounce"
-              style={{
-                animation: 'bounce 1.5s infinite',
-              }}
-            >
-              <ChevronDown size={24} className="text-[#FAF8F5]/55" />
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+              <Link
+                href="/recetario"
+                className="btn-text inline-flex items-center justify-center bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 px-10 rounded-full transition-colors shadow-lg"
+              >
+                Descargar Recetario Gratis
+              </Link>
+              <Link
+                href="/recetas"
+                className="btn-text inline-flex items-center justify-center border-2 border-[#FAF8F5] text-[#FAF8F5] py-4 px-10 rounded-full hover:bg-[#FAF8F5] hover:text-[#1A1412] transition-colors"
+              >
+                Ver Recetas
+              </Link>
             </div>
           </div>
 
-          {/* Scroll Progress Indicator - Right Side */}
-          <div className="absolute bottom-8 right-8 flex flex-col items-center gap-4 z-30">
-            <div className="flex flex-col gap-2">
-              {[0, 1, 2].map((i) => (
-                <div
-                  key={i}
-                  className={`w-1 h-1 rounded-full transition-all ${
-                    scrollProgress > i * 33 ? 'bg-[#C4472B] h-2' : 'bg-[#5c524c]'
-                  }`}
-                />
-              ))}
+          {/* Food image — solo desktop (columna derecha) */}
+          <div className="hidden lg:block lg:col-span-5 lg:order-2 w-full max-w-none">
+            <div className="relative aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+              <Image
+                src="/images/ariel.webp"
+                alt="Plato boricua — El Gordito del Sabor"
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 90vw, 40vw"
+                priority
+              />
             </div>
-            <ChevronDown className="text-[#6B5B4E] animate-bounce" size={20} />
           </div>
         </div>
-      </section>
-    </>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="relative z-10 pb-10 flex flex-col items-center gap-2">
+        <span className="text-[#FAF8F5]/50 text-xs tracking-[0.2em] uppercase">Explorar</span>
+        <ChevronDown className="text-[#FAF8F5]/40 animate-bounce" size={22} aria-hidden />
+      </div>
+    </section>
   );
 }
