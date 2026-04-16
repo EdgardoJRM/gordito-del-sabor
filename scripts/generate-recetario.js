@@ -13,10 +13,9 @@ const OUTPUT = path.join(ROOT, 'public/ebooks/recetario.pdf');
 
 /**
  * Imágenes JPEG/PNG (PDFKit no soporta WebP).
- * Portada (columna izquierda) y contraportada: Unsplash (Puerto Rico).
- *   Bandera en playa — Ana Toledo
- *   https://unsplash.com/photos/red-and-white-flag-on-beach-shore-during-daytime-R7VNq6RMNM4
- * (Licencia Unsplash: uso comercial permitido.)
+ * Portada / contraportada: garita y mar en El Morro (Viejo San Juan), Puerto Rico.
+ *   Carlos Ojeda — https://unsplash.com/photos/a-stone-tower-on-a-cliff-ni8hsOkcFj8
+ * (Licencia Unsplash.)
  */
 const HERO_PR = path.join(ROOT, 'public/ebooks/recetario-portada-pr.jpg');
 const COVER_IMAGE = HERO_PR;
@@ -89,37 +88,45 @@ function drawCover(doc, data) {
   doc.rect(COVER_COL_W - 1, 0, 2, PAGE.h).fill(COLORS.terracotta);
   doc.rect(COVER_COL_W, 0, PAGE.w - COVER_COL_W, PAGE.h).fill(COLORS.dark);
 
-  const textX = COVER_COL_W + 36;
-  const textW = PAGE.w - COVER_COL_W - 72;
-  let y = 168;
+  const textX = COVER_COL_W + 32;
+  const textW = PAGE.w - COVER_COL_W - 64;
 
-  doc.font('GenBold').fontSize(10).fillColor(COLORS.gold).text('RECETARIO DIGITAL', textX, y, {
-    width: textW,
-    align: 'center',
+  const blocks = [
+    { font: 'GenBold', size: 9, color: COLORS.gold, text: 'RECETARIO DIGITAL', gap: 26 },
+    { font: 'ClashBold', size: 27, color: COLORS.cream, text: 'LAS 20 RECETAS', gap: 16 },
+    { font: 'ClashLight', size: 24, color: COLORS.gold, text: 'FAVORITAS DEL SABOR', gap: 22 },
+    {
+      font: 'GenItalic',
+      size: 12,
+      color: '#D4C9BC',
+      text: data.subtitulo,
+      lineGap: 4,
+      gap: 36,
+    },
+    { font: 'GenReg', size: 11, color: '#9C8B80', text: data.autor, gap: 0 },
+  ];
+
+  let totalH = 0;
+  const heights = [];
+  blocks.forEach((b, i) => {
+    doc.font(b.font).fontSize(b.size);
+    const opts = { width: textW, align: 'center' };
+    if (b.lineGap != null) opts.lineGap = b.lineGap;
+    const h = doc.heightOfString(b.text, opts);
+    heights.push(h);
+    totalH += h;
+    if (i < blocks.length - 1) totalH += blocks[i].gap;
   });
-  y += 32;
 
-  doc.font('ClashBold').fontSize(34).fillColor(COLORS.cream).text('LAS 20 RECETAS', textX, y, {
-    width: textW,
-    align: 'center',
-  });
-  y += 42;
+  let y = Math.max(48, (PAGE.h - totalH) / 2);
 
-  doc.font('ClashLight').fontSize(30).fillColor(COLORS.gold).text('FAVORITAS DEL SABOR', textX, y, {
-    width: textW,
-    align: 'center',
-  });
-  y += 40;
-
-  doc.font('GenItalic').fontSize(13).fillColor('#D4C9BC').text(data.subtitulo, textX, y, {
-    width: textW,
-    align: 'center',
-  });
-  y += 64;
-
-  doc.font('GenReg').fontSize(12).fillColor('#9C8B80').text(data.autor, textX, y, {
-    width: textW,
-    align: 'center',
+  blocks.forEach((b, i) => {
+    doc.font(b.font).fontSize(b.size).fillColor(b.color);
+    const opts = { width: textW, align: 'center' };
+    if (b.lineGap != null) opts.lineGap = b.lineGap;
+    doc.text(b.text, textX, y, opts);
+    y += heights[i];
+    if (i < blocks.length - 1) y += b.gap;
   });
 
   doc.addPage();
