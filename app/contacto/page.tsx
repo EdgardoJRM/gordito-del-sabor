@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
+import { SOCIAL_URLS } from '@/lib/social-links';
 
 export const metadata: Metadata = {
   title: 'Contacto | El Gordito del Sabor',
@@ -61,21 +62,32 @@ export default function ContactPage() {
               {/* Social Links */}
               <div className="mt-12 pt-8 border-t border-[#E8E0D8]">
                 <h3 className="font-bold text-[#1A1412] mb-6">Síguenos</h3>
-                <div className="flex gap-4">
-                  {[
-                    { name: 'Facebook', emoji: '👍' },
-                    { name: 'Instagram', emoji: '📸' },
-                    { name: 'YouTube', emoji: '▶️' },
-                  ].map((social) => (
-                    <a
-                      key={social.name}
-                      href="#"
-                      className="w-14 h-14 bg-[#F2EDE6] border border-[#E8E0D8] rounded-full flex items-center justify-center text-2xl hover:border-[#C4472B]/40 hover:scale-110 transition-all"
-                      title={social.name}
-                    >
-                      {social.emoji}
-                    </a>
-                  ))}
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href={SOCIAL_URLS.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-14 h-14 bg-[#F2EDE6] border border-[#E8E0D8] rounded-full flex items-center justify-center text-2xl hover:border-[#C4472B]/40 hover:scale-110 transition-all"
+                    title="Facebook — El Gordito del Sabor"
+                  >
+                    👍
+                  </a>
+                  <a
+                    href={SOCIAL_URLS.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-14 h-14 bg-[#F2EDE6] border border-[#E8E0D8] rounded-full flex items-center justify-center text-2xl hover:border-[#C4472B]/40 hover:scale-110 transition-all"
+                    title="Instagram — @elgorditodelsaborpr"
+                  >
+                    📸
+                  </a>
+                  <span
+                    className="w-14 h-14 bg-[#F2EDE6]/60 border border-dashed border-[#E8E0D8] rounded-full flex items-center justify-center text-2xl text-[#9C8B80] cursor-default"
+                    title="Canal de YouTube: enlace próximamente"
+                    aria-hidden
+                  >
+                    ▶️
+                  </span>
                 </div>
               </div>
             </div>

@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 import dbConnect from '@/lib/mongodb';
 import Lead from '@/lib/models/Lead';
+import { SOCIAL_URLS } from '@/lib/social-links';
 import fs from 'fs';
 import path from 'path';
 
@@ -167,8 +168,8 @@ export async function POST(req: Request) {
                         Sígueme en Instagram
                       </p>
                       <p style="margin:0 0 20px 0;">
-                        <a href="https://instagram.com/gorditodelsabor" style="color:#C4472B;text-decoration:none;font-weight:bold;">
-                          @gorditodelsabor
+                        <a href="${SOCIAL_URLS.instagram}" style="color:#C4472B;text-decoration:none;font-weight:bold;">
+                          @elgorditodelsaborpr
                         </a>
                       </p>
                       <p style="margin:0;">

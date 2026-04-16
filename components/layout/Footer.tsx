@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { SOCIAL_URLS } from '@/lib/social-links';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -44,10 +45,26 @@ export default function Footer() {
               <li>Email: info@gorditodelsabor.com</li>
               <li>Teléfono: +1 (787) XXX-XXXX</li>
               <li className="pt-2">
-                <div className="flex gap-4">
-                  <a href="#" className="hover:text-[#C4472B] transition">Facebook</a>
-                  <a href="#" className="hover:text-[#C4472B] transition">Instagram</a>
-                  <a href="#" className="hover:text-[#C4472B] transition">YouTube</a>
+                <div className="flex flex-wrap gap-4">
+                  <a
+                    href={SOCIAL_URLS.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#C4472B] transition"
+                  >
+                    Facebook
+                  </a>
+                  <a
+                    href={SOCIAL_URLS.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-[#C4472B] transition"
+                  >
+                    Instagram
+                  </a>
+                  <span className="text-[#6B5B4E]" title="Enlace del canal próximamente">
+                    YouTube
+                  </span>
                 </div>
               </li>
             </ul>
