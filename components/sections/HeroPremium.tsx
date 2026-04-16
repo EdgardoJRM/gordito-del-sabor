@@ -2,6 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ChevronDown } from 'lucide-react';
 
+const CHEF_IMAGE = '/images/hero/webp/ezgif-frame-001.webp';
+
 export default function HeroPremium() {
   return (
     <section
@@ -14,7 +16,7 @@ export default function HeroPremium() {
           <div className="lg:hidden order-1 w-full max-w-sm mx-auto">
             <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
               <Image
-                src="/images/team/gordito.jpg"
+                src={CHEF_IMAGE}
                 alt="El Gordito del Sabor"
                 fill
                 className="object-cover object-top"
@@ -42,7 +44,7 @@ export default function HeroPremium() {
             <div className="hidden md:flex items-center justify-center lg:justify-start gap-4 mb-10">
               <div className="relative h-14 w-14 rounded-full overflow-hidden ring-2 ring-[#FAF8F5]/25 shadow-lg shrink-0">
                 <Image
-                  src="/images/team/gordito.jpg"
+                  src={CHEF_IMAGE}
                   alt=""
                   fill
                   className="object-cover"

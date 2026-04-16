@@ -30,12 +30,9 @@ export default function GorditoSection() {
           {/* Imagen grande */}
           <div className="relative h-[600px] rounded-3xl overflow-hidden order-1 lg:order-2 shadow-lg border border-[#E8E0D8]">
             <img
-              src="/images/gordito-profile.jpg"
+              src="/images/hero/webp/ezgif-frame-001.webp"
               alt="El Gordito del Sabor"
               className="w-full h-full object-cover"
-              onError={(e) => {
-                e.currentTarget.src = 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=800&q=80';
-              }}
             />
           </div>
         </div>
