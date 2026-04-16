@@ -4,7 +4,7 @@ import { Clock, Users, ChefHat, ArrowLeft } from 'lucide-react';
 import { recipes } from '@/lib/recipes-data';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
-import AuthGate from '@/components/AuthGate';
+import AuthGate from '@/components/auth/AuthGate';
 
 export const metadata: Metadata = {
   title: 'Todas las Recetas | El Gordito del Sabor',

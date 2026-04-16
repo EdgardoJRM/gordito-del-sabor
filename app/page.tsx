@@ -1,9 +1,9 @@
-import HeroPremium from '@/components/HeroPremium';
-import EbookSection from '@/components/EbookSection';
-import RecipesGrid from '@/components/RecipesGrid';
-import GorditoSection from '@/components/GorditoSection';
-import ProductLifestyle from '@/components/ProductLifestyle';
-import FinalCTA from '@/components/FinalCTA';
+import HeroPremium from '@/components/sections/HeroPremium';
+import EbookSection from '@/components/sections/EbookSection';
+import RecipesGrid from '@/components/sections/RecipesGrid';
+import GorditoSection from '@/components/sections/GorditoSection';
+import ProductLifestyle from '@/components/sections/ProductLifestyle';
+import FinalCTA from '@/components/sections/FinalCTA';
 
 export default function Home() {
   return (

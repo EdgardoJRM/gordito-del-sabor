@@ -4,9 +4,9 @@ import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/lib/auth';
 import Link from 'next/link';
 import { ArrowLeft, Clock, Users, ChefHat } from 'lucide-react';
-import FavoriteButton from '@/components/FavoriteButton';
-import AuthGate from '@/components/AuthGate';
-import RecipePromoBanner from '@/components/RecipePromoBanner';
+import FavoriteButton from '@/components/recipe/FavoriteButton';
+import AuthGate from '@/components/auth/AuthGate';
+import RecipePromoBanner from '@/components/ebook/RecipePromoBanner';
 
 export const metadata: Metadata = {
   title: 'Receta | El Gordito del Sabor',

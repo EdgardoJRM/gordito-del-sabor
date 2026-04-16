@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import Footer from '@/components/Footer';
-import { AuthProvider } from '@/components/AuthProvider';
-import NavbarWrapper from '@/components/NavbarWrapper';
-import FloatingEbookCTA from '@/components/FloatingEbookCTA';
+import Footer from '@/components/layout/Footer';
+import { AuthProvider } from '@/components/auth/AuthProvider';
+import NavbarWrapper from '@/components/layout/NavbarWrapper';
+import FloatingEbookCTA from '@/components/ebook/FloatingEbookCTA';
 
 // Clash Display - Para headings
 const clashDisplay = localFont({

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, Check, Download, Users, Star, Clock } from 'lucide-react';
-import EbookDownloadForm from '@/components/EbookDownloadForm';
+import EbookDownloadForm from '@/components/ebook/EbookDownloadForm';
 
 export const metadata: Metadata = {
   title: 'Las 20 Recetas Favoritas del Sabor | El Gordito del Sabor',
