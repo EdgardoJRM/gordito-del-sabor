@@ -107,18 +107,25 @@ function drawPageWatermarkAndFooter(doc, pageIndex) {
 
   doc.save();
   doc.opacity(1);
-  const bandH = 48;
+  const bandH = 50;
   const bandY = PAGE.h - bandH;
-  doc.rect(0, bandY, PAGE.w, bandH).fill('#1A1412');
-  doc.fillColor('#FAF8F5');
-  doc.font('GenBold').fontSize(9.5);
-  doc.text(FOOTER_HANDLE, 0, bandY + 10, {
+  /* Franja negra sólida (no crema: si falla el rect, antes el texto crema era invisible sobre #FAF8F5) */
+  doc.fillColor('#000000');
+  doc.rect(0, bandY, PAGE.w, bandH).fill();
+  doc.strokeColor(COLORS.terracotta);
+  doc.lineWidth(2);
+  doc.moveTo(0, bandY).lineTo(PAGE.w, bandY).stroke();
+
+  doc.fillColor('#FFFFFF');
+  doc.font('GenBold').fontSize(10);
+  doc.text(FOOTER_HANDLE, 0, bandY + 11, {
     width: PAGE.w,
     align: 'center',
   });
-  doc.fillColor(COLORS.gold);
-  doc.font('GenBold').fontSize(8.5);
-  doc.text(FOOTER_DOMAIN_LABEL, M.left, bandY + 28, {
+  /* Dominio en terracota claro sobre negro (contraste alto vs. crema de página) */
+  doc.fillColor('#FF7B5C');
+  doc.font('GenBold').fontSize(9);
+  doc.text(FOOTER_DOMAIN_LABEL, M.left, bandY + 30, {
     width: PAGE.w - M.left - M.right,
     align: 'left',
     link: FOOTER_DOMAIN_URL,
