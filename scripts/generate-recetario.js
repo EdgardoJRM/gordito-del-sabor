@@ -45,10 +45,14 @@ const COLORS = {
 const PAGE = { w: 612, h: 792 };
 const M = { top: 56, bottom: 56, left: 54, right: 54 };
 const CONTENT_W = PAGE.w - M.left - M.right;
+/** Aire entre el final de Preparación y el bloque Nota del chef */
+const NOTA_CHEF_TOP_GAP = 20;
+/** Aire entre el último renglón de la nota y la franja del pie */
+const NOTA_CHEF_BOTTOM_PAD = 12;
 
 const WATERMARK_TEXT = 'EL GORDITO DEL SABOR';
-const FOOTER_HANDLE = '[@EL GORDITO DEL SABOR]';
-const FOOTER_DOMAIN_LABEL = 'GORDITODELSABOR.COM';
+const FOOTER_SIGNATURE = '@EL GORDITO DEL SABOR';
+const FOOTER_LINK_LABEL = 'gorditodelsabor.com';
 const FOOTER_DOMAIN_URL = 'https://gorditodelsabor.com';
 
 function loadData() {
@@ -86,49 +90,44 @@ function registerFonts(doc) {
   doc.registerFont('GenItalic', path.join(FONTS_DIR, 'GeneralSans-Italic.otf'));
 }
 
-/**
- * Marca de agua + firma en pie (dibujar al final con bufferPages + switchToPage).
- * @param {number} pageIndex 0 = portada (pie distinto; sin marca de agua para no ensuciar el diseño)
- */
-function drawPageWatermarkAndFooter(doc, pageIndex) {
-  const isCover = pageIndex === 0;
-
-  if (!isCover) {
-    doc.save();
-    doc.opacity(0.09);
-    doc.font('ClashLight').fontSize(44).fillColor(COLORS.terracotta);
-    doc.rotate(-28, { origin: [PAGE.w / 2, PAGE.h / 2] });
-    doc.text(WATERMARK_TEXT, 0, PAGE.h / 2 - 22, {
-      width: PAGE.w,
-      align: 'center',
-    });
-    doc.restore();
-  }
-
+/** Marca de agua diagonal (tras el fondo de la página) */
+function drawDiagonalWatermark(doc) {
   doc.save();
-  doc.opacity(1);
-  const bandH = 50;
+  doc.opacity(0.09);
+  doc.font('ClashLight').fontSize(44).fillColor(COLORS.terracotta);
+  doc.rotate(-28, { origin: [PAGE.w / 2, PAGE.h / 2] });
+  const wmW = doc.widthOfString(WATERMARK_TEXT);
+  doc.text(WATERMARK_TEXT, (PAGE.w - wmW) / 2, PAGE.h / 2 - 22, { lineBreak: false });
+  doc.restore();
+}
+
+/**
+ * Firma al pie: llamar al terminar CADA página, antes de doc.addPage().
+ * Sin `width` en text() aquí: y está bajo maxY y LineWrapper dispara páginas en blanco.
+ */
+function drawFooterBand(doc) {
+  const bandH = 46;
   const bandY = PAGE.h - bandH;
-  /* Franja negra sólida (no crema: si falla el rect, antes el texto crema era invisible sobre #FAF8F5) */
-  doc.fillColor('#000000');
+  const textY = bandY + 16;
+
+  doc.fillColor('#FFFFFF');
   doc.rect(0, bandY, PAGE.w, bandH).fill();
   doc.strokeColor(COLORS.terracotta);
-  doc.lineWidth(2);
+  doc.lineWidth(1);
   doc.moveTo(0, bandY).lineTo(PAGE.w, bandY).stroke();
 
-  doc.fillColor('#FFFFFF');
-  doc.font('GenBold').fontSize(10);
-  doc.text(FOOTER_HANDLE, 0, bandY + 11, {
-    width: PAGE.w,
-    align: 'center',
-  });
-  doc.fillColor('#FFFFFF');
+  doc.fillColor(COLORS.dark);
   doc.font('GenBold').fontSize(9);
-  doc.text(FOOTER_DOMAIN_LABEL, M.left, bandY + 30, {
-    width: PAGE.w - M.left - M.right,
-    align: 'left',
+  doc.text(FOOTER_SIGNATURE, M.left, textY, { lineBreak: false });
+
+  doc.font('GenBold').fontSize(9).fillColor(COLORS.terracotta);
+  const linkW = doc.widthOfString(FOOTER_LINK_LABEL);
+  doc.text(FOOTER_LINK_LABEL, PAGE.w - M.right - linkW, textY, {
+    lineBreak: false,
+    link: FOOTER_DOMAIN_URL,
+    textWidth: linkW,
+    wordCount: 1,
   });
-  doc.restore();
 }
 
 function drawCover(doc, data) {
@@ -179,11 +178,17 @@ function drawCover(doc, data) {
     if (i < blocks.length - 1) y += b.gap;
   });
 
+  drawFooterBand(doc);
   doc.addPage();
 }
 
-function drawIndex(doc, data) {
+function drawIndexPageBackground(doc) {
   doc.rect(0, 0, PAGE.w, PAGE.h).fill('#F5F0E8');
+  drawDiagonalWatermark(doc);
+}
+
+function drawIndex(doc, data) {
+  drawIndexPageBackground(doc);
   let y = M.top;
 
   doc.font('ClashBold').fontSize(28).fillColor(COLORS.dark).text('Índice', M.left, y);
@@ -192,20 +197,22 @@ function drawIndex(doc, data) {
   doc.font('GenReg').fontSize(11).fillColor(COLORS.earth);
   data.recetas.forEach((r, i) => {
     if (y > PAGE.h - M.bottom - 24) {
+      drawFooterBand(doc);
       doc.addPage();
-      doc.rect(0, 0, PAGE.w, PAGE.h).fill('#F5F0E8');
+      drawIndexPageBackground(doc);
       y = M.top;
     }
     const line = `${String(i + 1).padStart(2, '0')}.  ${r.nombre}`;
     doc.text(line, M.left, y, { width: CONTENT_W });
-    y += 22;
+    y = doc.y + 6;
   });
 
-  doc.addPage();
+  drawFooterBand(doc);
 }
 
 function ensureSpace(doc, y, needed, onNewPage) {
   if (y + needed > PAGE.h - M.bottom) {
+    drawFooterBand(doc);
     doc.addPage();
     if (onNewPage) onNewPage();
     return M.top;
@@ -216,13 +223,14 @@ function ensureSpace(doc, y, needed, onNewPage) {
 function drawRecipe(doc, data, recipe, index) {
   const onRecipePage = () => {
     doc.rect(0, 0, PAGE.w, PAGE.h).fill('#FAF8F5');
+    drawDiagonalWatermark(doc);
   };
 
   onRecipePage();
   let y = M.top;
 
   doc.font('GenBold').fontSize(9).fillColor(COLORS.terracotta).text(`RECETA ${index + 1} / ${data.recetas.length}`, M.left, y);
-  y += 20;
+  y = doc.y + 20;
 
   const accentPath = path.join(ROOT, RECIPE_BANNER_POOL[index % RECIPE_BANNER_POOL.length]);
   y = ensureSpace(doc, y, RECIPE_BANNER_H + 24, onRecipePage);
@@ -231,39 +239,37 @@ function drawRecipe(doc, data, recipe, index) {
   y += RECIPE_BANNER_H + 16;
 
   doc.font('ClashBold').fontSize(26).fillColor(COLORS.dark);
-  const titleH = doc.heightOfString(recipe.nombre, { width: CONTENT_W });
   doc.text(recipe.nombre, M.left, y, { width: CONTENT_W });
-  y += titleH + 16;
+  y = doc.y + 16;
 
   const meta = `Tiempo: ${recipe.tiempo}   ·   Porciones: ${recipe.porciones}   ·   Dificultad: ${recipe.dificultad}`;
   doc.font('GenReg').fontSize(10).fillColor(COLORS.earth).text(meta, M.left, y, { width: CONTENT_W });
-  y += 28;
+  y = doc.y + 28;
 
   if (recipe.intro && String(recipe.intro).trim()) {
     doc.font('GenItalic').fontSize(10).fillColor(COLORS.earth);
     const introH = doc.heightOfString(recipe.intro, { width: CONTENT_W });
     y = ensureSpace(doc, y, introH + 16, onRecipePage);
     doc.text(recipe.intro, M.left, y, { width: CONTENT_W });
-    y += introH + 20;
+    y = doc.y + 20;
   }
 
   doc.font('GenBold').fontSize(12).fillColor(COLORS.dark).text('Ingredientes', M.left, y);
-  y += 22;
+  y = doc.y + 22;
 
   doc.font('GenReg').fontSize(11).fillColor(COLORS.dark);
-  doc.font('GenReg').fontSize(11);
   recipe.ingredientes.forEach((ing) => {
     const block = `•  ${ing}`;
     const h = doc.heightOfString(block, { width: CONTENT_W - 12 });
     y = ensureSpace(doc, y, h + 8, onRecipePage);
     doc.fillColor(COLORS.dark).text(block, M.left + 8, y, { width: CONTENT_W - 12 });
-    y += h + 10;
+    y = doc.y + 10;
   });
 
   y += 12;
   y = ensureSpace(doc, y, 40, onRecipePage);
   doc.font('GenBold').fontSize(12).fillColor(COLORS.dark).text('Preparación', M.left, y);
-  y += 22;
+  y = doc.y + 22;
 
   doc.font('GenReg').fontSize(11).fillColor(COLORS.dark);
   recipe.instrucciones.forEach((step, si) => {
@@ -271,22 +277,26 @@ function drawRecipe(doc, data, recipe, index) {
     const h = doc.heightOfString(body, { width: CONTENT_W });
     y = ensureSpace(doc, y, h + 10, onRecipePage);
     doc.text(body, M.left, y, { width: CONTENT_W, align: 'left' });
-    y += h + 12;
+    /* Tras text() con width, PDFKit puede paginar solo; y += h desincroniza y deja huecos o páginas raras */
+    y = doc.y + 12;
   });
 
   if (recipe.notas && String(recipe.notas).trim()) {
-    y += 8;
-    y = ensureSpace(doc, y, 60, onRecipePage);
+    y += NOTA_CHEF_TOP_GAP;
+    doc.font('GenReg').fontSize(10);
+    const nh = doc.heightOfString(recipe.notas, { width: CONTENT_W });
+    const notaBlockH = 1 + 16 + 22 + nh + NOTA_CHEF_BOTTOM_PAD;
+    y = ensureSpace(doc, y, notaBlockH, onRecipePage);
     doc.rect(M.left, y, CONTENT_W, 1).fill(COLORS.terracotta);
     y += 16;
     doc.font('GenBold').fontSize(10).fillColor(COLORS.terracotta).text('Nota del chef', M.left, y);
-    y += 18;
+    y = doc.y + 18;
     doc.font('GenReg').fontSize(10);
-    const nh = doc.heightOfString(recipe.notas, { width: CONTENT_W });
-    y = ensureSpace(doc, y, nh + 8, onRecipePage);
     doc.fillColor(COLORS.earth).text(recipe.notas, M.left, y, { width: CONTENT_W });
-    y += nh + 8;
+    y = doc.y + NOTA_CHEF_BOTTOM_PAD;
   }
+
+  drawFooterBand(doc);
 }
 
 function drawBackCover(doc, data) {
@@ -322,35 +332,37 @@ function drawBackCover(doc, data) {
     width: CONTENT_W,
     align: 'center',
   });
-  y += 48;
+  y = doc.y + 20;
 
   doc.font('ClashBold').fontSize(36).fillColor(COLORS.cream).text('con sazón de verdad', M.left, y, {
     width: CONTENT_W,
     align: 'center',
   });
-  y += 100;
+  y = doc.y + 28;
 
   doc.font('GenReg').fontSize(12).fillColor('#D4C9BC').text('Más recetas y contenido en:', M.left, y, {
     width: CONTENT_W,
     align: 'center',
   });
-  y += 28;
+  y = doc.y + 16;
 
   doc.font('GenBold').fontSize(14).fillColor(COLORS.terracotta).text(data.sitio.replace('https://', ''), M.left, y, {
     width: CONTENT_W,
     align: 'center',
     link: data.sitio,
   });
-  y += 48;
+  y = doc.y + 24;
 
   doc.font('GenReg').fontSize(11).fillColor('#9C8B80').text('Instagram', M.left, y, { width: CONTENT_W, align: 'center' });
-  y += 18;
+  y = doc.y + 12;
 
   doc.font('GenBold').fontSize(12).fillColor(COLORS.cream).text(data.instagram, M.left, y, {
     width: CONTENT_W,
     align: 'center',
     link: data.instagramUrl,
   });
+
+  drawFooterBand(doc);
 }
 
 function main() {
@@ -363,7 +375,6 @@ function main() {
   const doc = new PDFDocument({
     size: 'LETTER',
     margins: { top: M.top, bottom: M.bottom, left: M.left, right: M.right },
-    bufferPages: true,
   });
 
   registerFonts(doc);
@@ -376,20 +387,12 @@ function main() {
   drawIndex(doc, data);
 
   data.recetas.forEach((r, i) => {
+    doc.addPage();
     drawRecipe(doc, data, r, i);
-    if (i < data.recetas.length - 1) {
-      doc.addPage();
-    }
   });
 
   doc.addPage();
   drawBackCover(doc, data);
-
-  const range = doc.bufferedPageRange();
-  for (let i = 0; i < range.count; i++) {
-    doc.switchToPage(range.start + i);
-    drawPageWatermarkAndFooter(doc, i);
-  }
 
   doc.end();
 
