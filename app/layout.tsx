@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
-import Footer from '@/components/layout/Footer';
 import { AuthProvider } from '@/components/auth/AuthProvider';
-import NavbarWrapper from '@/components/layout/NavbarWrapper';
-import FloatingEbookCTA from '@/components/ebook/FloatingEbookCTA';
+import SiteChrome from '@/components/layout/SiteChrome';
 
 // Clash Display — headings (300–700)
 const clashDisplay = localFont({
@@ -93,10 +91,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${generalSans.className} ${clashDisplay.variable} ${generalSans.variable}`}>
         <AuthProvider>
-          <NavbarWrapper />
-          <FloatingEbookCTA />
-          {children}
-          <Footer />
+          <SiteChrome>{children}</SiteChrome>
         </AuthProvider>
       </body>
     </html>
