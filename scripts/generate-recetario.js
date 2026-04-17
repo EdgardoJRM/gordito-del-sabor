@@ -20,19 +20,11 @@ const OUTPUT = path.join(ROOT, 'public/ebooks/recetario.pdf');
 const HERO_PR = path.join(ROOT, 'public/ebooks/recetario-portada-pr.jpg');
 const COVER_IMAGE = HERO_PR;
 const BACK_PORTRAIT = HERO_PR;
-/** Rotación de fotos de comida por receta (variación visual) */
-const RECIPE_BANNER_POOL = [
-  'public/images/recipes/pernil.jpg',
-  'public/images/recipes/arroz-gandules.jpg',
-  'public/images/recipes/mofongo.jpg',
-  'public/images/recipes/tostones.jpg',
-  'public/images/recipes/alcapurrias.jpg',
-  'public/images/recipes/ceviche.jpg',
-];
 
 /** Ancho de la columna de imagen en portada (resto = tipografía) */
 const COVER_COL_W = 268;
-const RECIPE_BANNER_H = 88;
+/** Columna lateral de foto en páginas de receta (misma idea que portada) */
+const RECIPE_IMG_COL_W = 228;
 /** Espacio vertical extra entre párrafos en bienvenida e historias (doble salto en el texto fuente) */
 const STORY_PARAGRAPH_GAP = 16;
 
@@ -382,33 +374,38 @@ function drawWrappedParagraphs(doc, text, x, y, maxW, style, ensureSpaceFn, onNe
 }
 
 function drawRecipe(doc, data, recipe, index) {
+  const imgRel = recipe.imagen && String(recipe.imagen).trim();
+  const imgAbs = imgRel ? path.join(ROOT, imgRel) : '';
+  const hasImg = Boolean(imgRel && imageFileOk(imgAbs));
+
+  const textLeft = hasImg ? RECIPE_IMG_COL_W + 24 : M.left;
+  const recipeTextW = hasImg ? PAGE.w - textLeft - M.right : CONTENT_W;
+
   const onRecipePage = () => {
     doc.rect(0, 0, PAGE.w, PAGE.h).fill('#FAF8F5');
     drawDiagonalWatermark(doc);
+    if (hasImg) {
+      drawImageCover(doc, imgAbs, 0, 0, RECIPE_IMG_COL_W, PAGE.h);
+      doc.rect(RECIPE_IMG_COL_W - 1, 0, 2, PAGE.h).fill(COLORS.terracotta);
+    }
   };
 
   onRecipePage();
   let y = M.top;
 
-  doc.font('GenBold').fontSize(9).fillColor(COLORS.terracotta).text(`RECETA ${index + 1} / ${data.recetas.length}`, M.left, y);
+  doc.font('GenBold').fontSize(9).fillColor(COLORS.terracotta).text(`RECETA ${index + 1} / ${data.recetas.length}`, textLeft, y);
   y = doc.y + 20;
 
-  const accentPath = path.join(ROOT, RECIPE_BANNER_POOL[index % RECIPE_BANNER_POOL.length]);
-  y = ensureSpace(doc, y, RECIPE_BANNER_H + 24, onRecipePage);
-  drawImageCover(doc, accentPath, M.left, y, CONTENT_W, RECIPE_BANNER_H);
-  doc.rect(M.left, y + RECIPE_BANNER_H, CONTENT_W, 2).fill(COLORS.terracotta);
-  y += RECIPE_BANNER_H + 16;
-
   doc.font('ClashBold').fontSize(26);
-  const titleLines = wrapTextToLines(doc, recipe.nombre, CONTENT_W, {});
+  const titleLines = wrapTextToLines(doc, recipe.nombre, recipeTextW, {});
   const titleLh = textLineHeight(doc, 2);
   y = ensureSpace(doc, y, titleLines.length * titleLh + 16, onRecipePage);
   y = drawWrappedBlock(
     doc,
     recipe.nombre,
-    M.left,
+    textLeft,
     y,
-    CONTENT_W,
+    recipeTextW,
     { font: 'ClashBold', fontSize: 26, fillColor: COLORS.dark, lineGap: 2 },
     ensureSpace,
     onRecipePage
@@ -417,15 +414,15 @@ function drawRecipe(doc, data, recipe, index) {
 
   const meta = `Tiempo: ${recipe.tiempo}   ·   Porciones: ${recipe.porciones}   ·   Dificultad: ${recipe.dificultad}`;
   doc.font('GenReg').fontSize(10);
-  const metaLines = wrapTextToLines(doc, meta, CONTENT_W, {});
+  const metaLines = wrapTextToLines(doc, meta, recipeTextW, {});
   const metaLh = textLineHeight(doc, 1);
   y = ensureSpace(doc, y, metaLines.length * metaLh + 28, onRecipePage);
   y = drawWrappedBlock(
     doc,
     meta,
-    M.left,
+    textLeft,
     y,
-    CONTENT_W,
+    recipeTextW,
     { font: 'GenReg', fontSize: 10, fillColor: COLORS.earth, lineGap: 1 },
     ensureSpace,
     onRecipePage
@@ -434,15 +431,15 @@ function drawRecipe(doc, data, recipe, index) {
 
   if (recipe.intro && String(recipe.intro).trim()) {
     doc.font('GenItalic').fontSize(10);
-    const introLines = wrapTextToLines(doc, recipe.intro, CONTENT_W, {});
+    const introLines = wrapTextToLines(doc, recipe.intro, recipeTextW, {});
     const introLh = textLineHeight(doc, 2);
     y = ensureSpace(doc, y, introLines.length * introLh + 20, onRecipePage);
     y = drawWrappedBlock(
       doc,
       recipe.intro,
-      M.left,
+      textLeft,
       y,
-      CONTENT_W,
+      recipeTextW,
       { font: 'GenItalic', fontSize: 10, fillColor: COLORS.earth, lineGap: 2 },
       ensureSpace,
       onRecipePage
@@ -452,11 +449,11 @@ function drawRecipe(doc, data, recipe, index) {
 
   const ingHeaderH = doc.font('GenBold').fontSize(12).currentLineHeight(true);
   y = ensureSpace(doc, y, ingHeaderH + 22, onRecipePage);
-  doc.fillColor(COLORS.dark).text('Ingredientes', M.left, y, { lineBreak: false });
+  doc.fillColor(COLORS.dark).text('Ingredientes', textLeft, y, { lineBreak: false });
   y += ingHeaderH + 22;
 
   doc.font('GenReg').fontSize(11).fillColor(COLORS.dark);
-  const ingMaxW = CONTENT_W - 12;
+  const ingMaxW = recipeTextW - 12;
   const ingLh = textLineHeight(doc, 1);
   recipe.ingredientes.forEach((ing) => {
     const block = `•  ${ing}`;
@@ -465,7 +462,7 @@ function drawRecipe(doc, data, recipe, index) {
     y = drawWrappedBlock(
       doc,
       block,
-      M.left + 8,
+      textLeft + 8,
       y,
       ingMaxW,
       { font: 'GenReg', fontSize: 11, fillColor: COLORS.dark, lineGap: 1 },
@@ -478,21 +475,21 @@ function drawRecipe(doc, data, recipe, index) {
   y += 12;
   const prepHeaderH = doc.font('GenBold').fontSize(12).currentLineHeight(true);
   y = ensureSpace(doc, y, prepHeaderH + 22, onRecipePage);
-  doc.fillColor(COLORS.dark).text('Preparación', M.left, y, { lineBreak: false });
+  doc.fillColor(COLORS.dark).text('Preparación', textLeft, y, { lineBreak: false });
   y += prepHeaderH + 22;
 
   doc.font('GenReg').fontSize(11).fillColor(COLORS.dark);
   const stepLh = textLineHeight(doc, 2);
   recipe.instrucciones.forEach((step, si) => {
     const body = `${si + 1}. ${step}`;
-    const lines = wrapTextToLines(doc, body, CONTENT_W, {});
+    const lines = wrapTextToLines(doc, body, recipeTextW, {});
     y = ensureSpace(doc, y, lines.length * stepLh + 12, onRecipePage);
     y = drawWrappedBlock(
       doc,
       body,
-      M.left,
+      textLeft,
       y,
-      CONTENT_W,
+      recipeTextW,
       { font: 'GenReg', fontSize: 11, fillColor: COLORS.dark, lineGap: 2 },
       ensureSpace,
       onRecipePage
@@ -503,23 +500,23 @@ function drawRecipe(doc, data, recipe, index) {
   if (recipe.notas && String(recipe.notas).trim()) {
     y += NOTA_CHEF_TOP_GAP;
     doc.font('GenReg').fontSize(10);
-    const notaLines = wrapTextToLines(doc, recipe.notas, CONTENT_W, {});
+    const notaLines = wrapTextToLines(doc, recipe.notas, recipeTextW, {});
     const notaLh = textLineHeight(doc, 2);
     const nh = notaLines.length * notaLh;
     doc.font('GenBold').fontSize(10);
     const chefLabelH = doc.currentLineHeight(true);
     const notaBlockH = 1 + 16 + chefLabelH + 18 + nh + NOTA_CHEF_BOTTOM_PAD;
     y = ensureSpace(doc, y, notaBlockH, onRecipePage);
-    doc.rect(M.left, y, CONTENT_W, 1).fill(COLORS.terracotta);
+    doc.rect(textLeft, y, recipeTextW, 1).fill(COLORS.terracotta);
     y += 16;
-    doc.font('GenBold').fontSize(10).fillColor(COLORS.terracotta).text('Nota del chef', M.left, y, { lineBreak: false });
+    doc.font('GenBold').fontSize(10).fillColor(COLORS.terracotta).text('Nota del chef', textLeft, y, { lineBreak: false });
     y += chefLabelH + 18;
     y = drawWrappedBlock(
       doc,
       recipe.notas,
-      M.left,
+      textLeft,
       y,
-      CONTENT_W,
+      recipeTextW,
       { font: 'GenReg', fontSize: 10, fillColor: COLORS.earth, lineGap: 2 },
       ensureSpace,
       onRecipePage

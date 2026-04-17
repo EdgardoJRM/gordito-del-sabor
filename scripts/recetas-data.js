@@ -82,6 +82,7 @@ module.exports = {
   recetas: [
     {
       nombre: 'Salmuera',
+      imagen: 'public/Imagenes20recetas/Salmuera.jpeg',
       intro: 'Antes de tirarte a la parrilla, esto es lo que le da sabor de verdad y ayuda a que la carne no salga seca. La guardas en la nevera y la usas cuando toque. Eso es bello.',
       tiempo: '25 min activo + mín. 4 h reposo',
       porciones: 'N/A (líquido para marinar)',
@@ -110,6 +111,7 @@ module.exports = {
     },
     {
       nombre: 'Hamburger de Churrasco a mi Estilo',
+      imagen: 'public/Imagenes20recetas/Hamburger de Churrasco.jpeg',
       intro: 'Churrasco molido no tiene que ser caro para saber a gloria. La salsa con miel y tocineta crujiente lo sube a otro nivel. Una copa de vino y pa\'lante.',
       tiempo: '35–45 min',
       porciones: '~4 hamburguesas',
@@ -140,6 +142,7 @@ module.exports = {
     },
     {
       nombre: 'Biftec Encebollado a mi Estilo',
+      imagen: 'public/Imagenes20recetas/Biftec Encebollado a Mi Estilo.jpeg',
       intro: 'Esto es marinar con cabeza: cebolla, emulsión de aceite y vinagre, y fuego bajo hasta que el bistec se ponga tierno. Con arroz y habichuelas queda de película.',
       tiempo: '~30 min prep. + 4 h macerado + ~1 h cocción',
       porciones: '8–10',
@@ -171,6 +174,7 @@ module.exports = {
     },
     {
       nombre: 'Arroz Chino',
+      imagen: 'public/Imagenes20recetas/arroz-chino-ai.jpg',
       intro: 'Arroz blanco ya cocido, sésamo, jamón, cerdo ahumado y huevo revuelto. Es rápido, rinde y la casa huele a comida china de verdad.',
       tiempo: '30–40 min',
       porciones: '6–8',
@@ -206,6 +210,7 @@ module.exports = {
     },
     {
       nombre: 'Pork Belly',
+      imagen: 'public/Imagenes20recetas/Pork Belly.jpeg',
       intro: 'Cuadricula la piel, sazona, envuélvelo en aluminio como casita y al air fryer. La carne jugosa y el cuero crocante no fallan. Una cava fría y listo.',
       tiempo: '~50 min (air fryer)',
       porciones: '4–6',
@@ -232,6 +237,7 @@ module.exports = {
     },
     {
       nombre: 'Tostones en Air Fryer',
+      imagen: 'public/Imagenes20recetas/tostones-airfryer-ai.jpg',
       intro: 'Mantequilla, aceite, ajo y dos pasadas en el air fryer. Quedan crujientes sin tanto aceite de freidora. El mayo-ketchup con ajo cierra el combo.',
       tiempo: '~25 min',
       porciones: '2–4',
@@ -261,6 +267,7 @@ module.exports = {
     },
     {
       nombre: 'Sazonador para Pollo, Cerdo y Pescado',
+      imagen: 'public/Imagenes20recetas/sazonador-ai.jpg',
       intro: 'Un frasco que te saca de todo: pollo, chuleta, pescado. Para carne roja yo sigo con sal y pimienta nada más. Mezclas, guardas y cocinas.',
       tiempo: '10 min',
       porciones: 'Múltiples aplicaciones',
@@ -284,6 +291,7 @@ module.exports = {
     },
     {
       nombre: 'Chimichurri con Ribeye y Tostones',
+      imagen: 'public/Imagenes20recetas/chimichurri-ribeye-ai.jpg',
       intro: 'Perejil, cilantro, cebolla, pimientos y mucho aceite de oliva. Lo dejas reposar y después va sobre churrasco, pollo, tostones… lo que sea. Si quieres atajo, cebolla y pimientos congelados picados.',
       tiempo: '40 min activo + mín. 4 h reposo (ideal 24 h)',
       porciones: '~2 tazas de salsa',
@@ -315,6 +323,7 @@ module.exports = {
     },
     {
       nombre: 'Guineitos en Escabeche',
+      imagen: 'public/Imagenes20recetas/Guineitos en Escabeche.jpeg',
       intro: 'Guineos verdes, montón de cebolla, aceite, vinagre y sabor fuerte. De un día para otro en la nevera y eso pica distinto. Para acompañar cualquier cosa.',
       tiempo: '~1 h 15 min + reposo overnight',
       porciones: 'Tanda grande',
@@ -344,6 +353,7 @@ module.exports = {
     },
     {
       nombre: 'Ensalada de Coditos',
+      imagen: 'public/Imagenes20recetas/Ensalada de Coditos.jpeg',
       intro: 'Mayo, sour cream, miel, mostaza y vegetales bien picaditos. La dejas fría y sale cremosa. Puedes meter zanahoria, guisantes o maíz si te gusta jugar.',
       tiempo: '25 min + mín. 2 h en nevera',
       porciones: '6–8',
@@ -375,6 +385,7 @@ module.exports = {
     },
     {
       nombre: 'Lomo de Cerdo Relleno de Arroz Mamposteao',
+      imagen: 'public/Imagenes20recetas/Lomo relleno de mamposteado.jpeg',
       intro: 'Abres el lomo mariposa, le metes mamposteao, recao y plátano maduro frito, enrollas, amarras y al horno. Cuando lo cortes, el relleno habla solo.',
       tiempo: '~1 h 30 min (incluye horno y reposo)',
       porciones: '8–10',
@@ -406,6 +417,7 @@ module.exports = {
     },
     {
       nombre: 'Tacada a mi Estilo',
+      imagen: 'public/Imagenes20recetas/Tacada a Mi Estilo.jpeg',
       intro: 'Paella o sartén grande: sellas carnes, metes vegetales al centro, tomate, jalapeños y queso al final. Nachos, tacos o derecho del fogón. Tú mandas en las cantidades.',
       tiempo: '~45 min',
       porciones: '10+ (fiesta)',
@@ -438,6 +450,7 @@ module.exports = {
     },
     {
       nombre: 'Hamburger de Tocineta a mi Estilo',
+      imagen: 'public/Imagenes20recetas/Hamburger de Tocineta a mi estilo..jpeg',
       intro: 'Chorizo parrillero mezclado con carne molida, envuelto en tocineta en capas y al BBQ: fuego directo primero, indirecto después. No hace falta mucho más condimento.',
       tiempo: '~45 min (incluye BBQ)',
       porciones: '4–6',
@@ -462,6 +475,7 @@ module.exports = {
     },
     {
       nombre: 'Churrasco Enrollado Relleno',
+      imagen: 'public/Imagenes20recetas/Churrasco Relleno Enrollad.jpeg',
       intro: 'Aplastas el churrasco, le metes jamón serrano o prosciutto, queso, enrollas y al grill. Pocos ingredientes, plato que sirve de picadera o principal. Vino tinto no pelea.',
       tiempo: '~45 min + 10 min reposo',
       porciones: '4 medallones',
@@ -484,6 +498,7 @@ module.exports = {
     },
     {
       nombre: 'Hamburger en Plantilla de Pastelillo',
+      imagen: 'public/Imagenes20recetas/Hamburger Envuelto en Plantilla de Pastelillos.jpeg',
       intro: 'Carne, queso, bacon y masa de pastelillo: es croqueta gigante con alma de burger. Cuatro ingredientes sencillos, resultado que no se olvida.',
       tiempo: '~35 min',
       porciones: '4',
@@ -511,6 +526,7 @@ module.exports = {
     },
     {
       nombre: 'Pernil al Caldero al Estilo Boricua',
+      imagen: 'public/Imagenes20recetas/Perinal al caldero al estilo boricua.jpeg',
       intro: 'Pernil en pedazos, macerado, sellado en caldero y cocido lento con viandas y caldo. Se deshace solo. Sirves con arroz, tostones, tacos… lo que tengas.',
       tiempo: '~3 h (+ 2 h macerado)',
       porciones: '10+',
@@ -551,6 +567,7 @@ module.exports = {
     },
     {
       nombre: 'Coquito de Café',
+      imagen: 'public/Imagenes20recetas/Coquito de cafe.jpeg',
       intro: 'Crema de coco, leches, ron, licor de café y expreso batidos. Frío de un día para otro y lo sirves con canela. Sin alcohol también sabe.',
       tiempo: '15 min + 3–5 h en nevera (ideal overnight)',
       porciones: '~10–12 copas',
@@ -576,6 +593,7 @@ module.exports = {
     },
     {
       nombre: 'Chili con Carne',
+      imagen: 'public/Imagenes20recetas/chilli con carne.jpeg',
       intro: 'Carne molida escurrida, especias, tomate en cubos, habichuelas y caldo. Al final queso rallado y cilantro. Cerveza fría y mesa llena.',
       tiempo: '~35 min',
       porciones: '8',
@@ -608,6 +626,7 @@ module.exports = {
     },
     {
       nombre: 'Mongolian Beef',
+      imagen: 'public/Imagenes20recetas/mongolian beef.jpeg',
       intro: 'Flank steak fino con baking soda y maicena para textura, luego sartén fuerte con ajo, cebolla y salsa soya. En media hora tienes cena con arroz blanco.',
       tiempo: '~30 min',
       porciones: '4',
@@ -643,6 +662,7 @@ module.exports = {
     },
     {
       nombre: 'Bolitas de Queso Rellenas de Guayaba',
+      imagen: 'public/Imagenes20recetas/Bolitas de Guayaba.jpeg',
       intro: 'Mozzarella, maicena y huevo hacen la masa; metes guayaba adentro, frío un rato y fríes con paciencia o air fryer. Parmesano arriba y salsa al gusto.',
       tiempo: '35 min (incluye frío y cocción)',
       porciones: '8–12 bolitas',
