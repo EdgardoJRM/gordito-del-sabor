@@ -82,6 +82,29 @@ function drawImageCover(doc, imgPath, x, y, w, h) {
   }
 }
 
+/**
+ * Imagen tipo cover recortada al rectángulo (evita que JPEG “sangre” sobre la columna de texto).
+ */
+function drawImageCoverClipped(doc, imgPath, x, y, w, h) {
+  if (!imageFileOk(imgPath)) return;
+  try {
+    doc.save();
+    doc.rect(x, y, w, h).clip();
+    drawImageCover(doc, imgPath, x, y, w, h);
+    doc.restore();
+  } catch {
+    /* clip o imagen falló */
+  }
+}
+
+/** Marca de agua solo en un rectángulo (p. ej. columna de texto de recetas) */
+function drawDiagonalWatermarkInRect(doc, rx, ry, rw, rh) {
+  doc.save();
+  doc.rect(rx, ry, rw, rh).clip();
+  drawDiagonalWatermark(doc);
+  doc.restore();
+}
+
 function registerFonts(doc) {
   doc.registerFont('ClashBold', path.join(FONTS_DIR, 'ClashDisplay-Bold.otf'));
   doc.registerFont('ClashLight', path.join(FONTS_DIR, 'ClashDisplay-Light.otf'));
@@ -382,11 +405,18 @@ function drawRecipe(doc, data, recipe, index) {
   const recipeTextW = hasImg ? PAGE.w - textLeft - M.right : CONTENT_W;
 
   const onRecipePage = () => {
-    doc.rect(0, 0, PAGE.w, PAGE.h).fill('#FAF8F5');
-    drawDiagonalWatermark(doc);
+    doc.rect(0, 0, PAGE.w, PAGE.h).fill(COLORS.cream);
     if (hasImg) {
-      drawImageCover(doc, imgAbs, 0, 0, RECIPE_IMG_COL_W, PAGE.h);
+      drawImageCoverClipped(doc, imgAbs, 0, 0, RECIPE_IMG_COL_W, PAGE.h);
       doc.rect(RECIPE_IMG_COL_W - 1, 0, 2, PAGE.h).fill(COLORS.terracotta);
+      // Repintar la columna de texto en crema (la imagen cover puede sangrar en PDFKit) y marca de agua solo ahí
+      const rightX = RECIPE_IMG_COL_W + 2;
+      const rightW = PAGE.w - rightX;
+      const bodyH = PAGE.h - FOOTER_BAND_H;
+      doc.rect(rightX, 0, rightW, bodyH).fill(COLORS.cream);
+      drawDiagonalWatermarkInRect(doc, rightX, 0, rightW, bodyH);
+    } else {
+      drawDiagonalWatermark(doc);
     }
   };
 
