@@ -16,7 +16,7 @@ type Lead = {
 };
 
 const sourceLabels: Record<Lead['source'], string> = {
-  ebook: 'Ebook',
+  ebook: 'Recetario (PDF)',
   contact: 'Contacto',
   newsletter: 'Newsletter',
 };
@@ -124,7 +124,7 @@ export default function AdminLeadsPage() {
             <div className="flex flex-wrap gap-2">
               {[
                 { id: 'all', label: 'Todos' },
-                { id: 'ebook', label: 'Ebook' },
+                { id: 'ebook', label: 'Recetario' },
                 { id: 'newsletter', label: 'Newsletter' },
                 { id: 'contact', label: 'Contacto' },
               ].map((option) => (

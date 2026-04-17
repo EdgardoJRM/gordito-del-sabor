@@ -156,7 +156,7 @@ export default function AdminDashboard() {
               <p className="body-text text-[#A1A1A6] text-sm">
                 {!statsLoading && stats ? (
                   <>
-                    📚 {stats.leadsBySource.ebook} | 📧 {stats.leadsBySource.newsletter} | 💬 {stats.leadsBySource.contact}
+                    Recetario {stats.leadsBySource.ebook} · Newsletter {stats.leadsBySource.newsletter} · Contacto {stats.leadsBySource.contact}
                   </>
                 ) : (
                   'Cargando...'
