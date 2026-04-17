@@ -74,6 +74,9 @@ export const metadata: Metadata = {
   title: 'El Gordito del Sabor | Recetas Auténticas Puertorriqueñas',
   description: 'Descubre recetas auténticas puertorriqueñas, desde comida criolla hasta platos gourmet. Aprende a cocinar con El Gordito del Sabor.',
   keywords: 'recetas puertorriqueñas, comida criolla, recetas fáciles, cocina puertorriqueña',
+  icons: {
+    icon: [{ url: '/icon.svg', type: 'image/svg+xml' }],
+  },
   openGraph: {
     title: 'El Gordito del Sabor | Recetas Auténticas Puertorriqueñas',
     description: 'Descubre recetas auténticas puertorriqueñas, desde comida criolla hasta platos gourmet.',

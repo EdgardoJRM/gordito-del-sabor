@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <title>Boricua</title>
+  <defs>
+    <clipPath id="round32">
+      <rect width="32" height="32" rx="7" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#round32)">
+    <rect width="32" height="32" fill="#0038A8" />
+    <path
+      fill="#FFFFFF"
+      d="M16 7l1.8 5.5h5.86l-4.74 3.44 1.8 5.54L16 19.6l-4.72 3.44 1.8-5.54-4.74-3.44h5.86L16 7z"
+    />
+    <rect y="22" width="32" height="10" fill="#CE1126" />
+  </g>
+</svg>
