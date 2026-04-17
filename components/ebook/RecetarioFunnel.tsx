@@ -113,7 +113,7 @@ export default function RecetarioFunnel() {
           <h1 className="heading-hero text-[#FAF8F5] leading-[1.08] drop-shadow-sm">
             Las 20 recetas que la comunidad del Gordito pide una y otra vez
           </h1>
-          <p className="subheadline text-lg md:text-2xl text-[#E8E0D8] max-w-2xl mx-auto font-medium">
+          <p className="subheadline text-lg md:text-2xl text-[#FAF4EE] max-w-2xl mx-auto font-normal leading-relaxed drop-shadow-sm">
             Sin complicarte. Con ingredientes de verdad. Para que en tu casa se huela sazón boricua — aunque no hayas nacido frente al fogón.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">

@@ -14,28 +14,29 @@ export const metadata: Metadata = {
   },
 };
 
+/** Misma lista y orden que `scripts/recetas-data.js` (PDF) */
 const RECIPES = [
-  'Arroz con Gandules',
-  'Pernil Asado',
-  'Mofongo',
-  'Camarones al Ajillo',
-  'Pollo Guisado',
-  'Bistec Encebollado',
-  'Alcapurrias',
-  'Pasteles',
-  'Ropa Vieja',
-  'Tostones',
-  'Bacalao a la Vizcaína',
-  'Arroz con Pollo',
-  'Carne Guisada',
-  'Empanadillas',
-  'Sorullitos',
-  'Habichuelas Guisadas',
-  'Chuletas Fritas',
-  'Yuca con Mojo',
-  'Ensalada de Pulpo',
-  'Flan Casero',
-];
+  'Salmuera',
+  'Hamburger de Churrasco a mi Estilo',
+  'Biftec Encebollado a mi Estilo',
+  'Arroz Chino',
+  'Pork Belly',
+  'Tostones en Air Fryer',
+  'Sazonador para Pollo, Cerdo y Pescado',
+  'Chimichurri con Ribeye y Tostones',
+  'Guineitos en Escabeche',
+  'Ensalada de Coditos',
+  'Lomo de Cerdo Relleno de Arroz Mamposteao',
+  'Tacada a mi Estilo',
+  'Hamburger de Tocineta a mi Estilo',
+  'Churrasco Enrollado Relleno',
+  'Hamburger en Plantilla de Pastelillo',
+  'Pernil al Caldero al Estilo Boricua',
+  'Coquito de Café',
+  'Chili con Carne',
+  'Mongolian Beef',
+  'Bolitas de Queso Rellenas de Guayaba',
+] as const;
 
 const TESTIMONIALS = [
   {
