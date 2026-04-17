@@ -393,7 +393,14 @@ function drawRecipe(doc, data, recipe, index) {
   onRecipePage();
   let y = M.top;
 
-  doc.font('GenBold').fontSize(9).fillColor(COLORS.terracotta).text(`RECETA ${index + 1} / ${data.recetas.length}`, textLeft, y);
+  doc
+    .font('GenBold')
+    .fontSize(9)
+    .fillColor(COLORS.terracotta)
+    .text(`RECETA ${index + 1} / ${data.recetas.length}`, textLeft, y, {
+      width: recipeTextW,
+      lineBreak: false,
+    });
   y = doc.y + 20;
 
   doc.font('ClashBold').fontSize(26);
@@ -449,7 +456,10 @@ function drawRecipe(doc, data, recipe, index) {
 
   const ingHeaderH = doc.font('GenBold').fontSize(12).currentLineHeight(true);
   y = ensureSpace(doc, y, ingHeaderH + 22, onRecipePage);
-  doc.fillColor(COLORS.dark).text('Ingredientes', textLeft, y, { lineBreak: false });
+  doc.fillColor(COLORS.dark).text('Ingredientes', textLeft, y, {
+    width: recipeTextW,
+    lineBreak: false,
+  });
   y += ingHeaderH + 22;
 
   doc.font('GenReg').fontSize(11).fillColor(COLORS.dark);
@@ -475,7 +485,10 @@ function drawRecipe(doc, data, recipe, index) {
   y += 12;
   const prepHeaderH = doc.font('GenBold').fontSize(12).currentLineHeight(true);
   y = ensureSpace(doc, y, prepHeaderH + 22, onRecipePage);
-  doc.fillColor(COLORS.dark).text('Preparación', textLeft, y, { lineBreak: false });
+  doc.fillColor(COLORS.dark).text('Preparación', textLeft, y, {
+    width: recipeTextW,
+    lineBreak: false,
+  });
   y += prepHeaderH + 22;
 
   doc.font('GenReg').fontSize(11).fillColor(COLORS.dark);
@@ -509,7 +522,11 @@ function drawRecipe(doc, data, recipe, index) {
     y = ensureSpace(doc, y, notaBlockH, onRecipePage);
     doc.rect(textLeft, y, recipeTextW, 1).fill(COLORS.terracotta);
     y += 16;
-    doc.font('GenBold').fontSize(10).fillColor(COLORS.terracotta).text('Nota del chef', textLeft, y, { lineBreak: false });
+    doc
+      .font('GenBold')
+      .fontSize(10)
+      .fillColor(COLORS.terracotta)
+      .text('Nota del chef', textLeft, y, { width: recipeTextW, lineBreak: false });
     y += chefLabelH + 18;
     y = drawWrappedBlock(
       doc,
