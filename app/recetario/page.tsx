@@ -4,38 +4,38 @@ import { ArrowRight, Check, Download, Star } from 'lucide-react';
 import RecetarioFunnel from '@/components/ebook/RecetarioFunnel';
 
 export const metadata: Metadata = {
-  title: 'Las 20 Recetas Favoritas del Sabor | El Gordito del Sabor',
+  title: 'Las 20 Recetas Favoritas Del Sabor | El Gordito del Sabor',
   description:
     'Descarga el recetario digital con las 20 recetas más populares del Gordito. Recetas boricuas auténticas, fáciles de seguir, perfectas para cocinar en casa.',
   openGraph: {
-    title: 'Las 20 Recetas Favoritas del Sabor',
+    title: 'Las 20 Recetas Favoritas Del Sabor',
     description: 'Descarga gratis el recetario con las 20 recetas más populares del Gordito.',
     type: 'website',
   },
 };
 
-/** Misma lista y orden que `scripts/recetas-data.js` (PDF) */
+/** Vista previa de platos del recetario (misma lista que el email de descarga). */
 const RECIPES = [
-  'Salmuera',
-  'Hamburger de Churrasco a mi Estilo',
-  'Biftec Encebollado a mi Estilo',
-  'Arroz Chino',
-  'Pork Belly',
-  'Tostones en Air Fryer',
-  'Sazonador para Pollo, Cerdo y Pescado',
-  'Chimichurri con Ribeye y Tostones',
-  'Guineitos en Escabeche',
-  'Ensalada de Coditos',
-  'Lomo de Cerdo Relleno de Arroz Mamposteao',
-  'Tacada a mi Estilo',
-  'Hamburger de Tocineta a mi Estilo',
-  'Churrasco Enrollado Relleno',
-  'Hamburger en Plantilla de Pastelillo',
-  'Pernil al Caldero al Estilo Boricua',
-  'Coquito de Café',
-  'Chili con Carne',
-  'Mongolian Beef',
-  'Bolitas de Queso Rellenas de Guayaba',
+  'Arroz con Gandules',
+  'Pernil Asado',
+  'Mofongo',
+  'Camarones al Ajillo',
+  'Pollo Guisado',
+  'Bistec Encebollado',
+  'Alcapurrias',
+  'Pasteles',
+  'Ropa Vieja',
+  'Tostones',
+  'Bacalao a la Vizcaína',
+  'Arroz con Pollo',
+  'Carne Guisada',
+  'Empanadillas',
+  'Sorullitos',
+  'Habichuelas Guisadas',
+  'Chuletas Fritas',
+  'Yuca con Mojo',
+  'Ensalada de Pulpo',
+  'Flan Casero',
 ] as const;
 
 const TESTIMONIALS = [

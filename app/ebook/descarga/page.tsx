@@ -5,7 +5,7 @@ import { ArrowRight, Check, Download, Mail, Sparkles } from 'lucide-react';
 export const metadata: Metadata = {
   title: 'Descarga Confirmada | El Gordito del Sabor',
   description:
-    'Tu recetario está en camino. Revisa tu email para descargar Las 20 Recetas Favoritas del Sabor.',
+    'Tu recetario está en camino. Revisa tu email para descargar Las 20 Recetas Favoritas Del Sabor.',
 };
 
 export default function DescargaPage() {
@@ -40,7 +40,7 @@ export default function DescargaPage() {
                 <div className="flex items-center gap-3 rounded-xl bg-white border border-[#E8E0D8] p-4">
                   <Mail size={22} className="text-[#C4472B]" />
                   <p className="body-text text-sm text-[#1A1412]">
-                    Asunto parecido a: &quot;Las 20 Recetas Favoritas del Sabor&quot;
+                    Asunto parecido a: &quot;Las 20 Recetas Favoritas Del Sabor&quot;
                   </p>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef } from 'react';
 import { ArrowDown, Check, Gift, Lock, Users } from 'lucide-react';
 import EbookDownloadForm from '@/components/ebook/EbookDownloadForm';
+import { CONTACT_EMAIL } from '@/lib/contact-email';
 
 const FUNNEL_ID = 'recetario-scroll-v1';
 
@@ -248,7 +249,7 @@ export default function RecetarioFunnel() {
             <div>
               <p className="font-bold text-[#FAF8F5] mb-1">Garantía simple</p>
               <p className="text-sm text-[#C4B8AE] leading-relaxed">
-                Te mandamos el PDF al email que nos dejes. Si no llega, revisa spam o escríbenos a info@gorditodelsabor.com y lo resolvemos.
+                Te mandamos el PDF al email que nos dejes. Si no llega, revisa spam o escríbenos a {CONTACT_EMAIL} y lo resolvemos.
               </p>
             </div>
           </div>
@@ -268,7 +269,7 @@ export default function RecetarioFunnel() {
               ¿A qué email te enviamos el PDF?
             </h2>
             <p className="body-text text-[#6B5B4E]">
-              &quot;Las 20 Recetas Favoritas del Sabor&quot; — revisa spam si no lo ves en unos minutos.
+              &quot;Las 20 Recetas Favoritas Del Sabor&quot; — revisa spam si no lo ves en unos minutos.
             </p>
           </div>
 

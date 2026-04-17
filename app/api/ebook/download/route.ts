@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 import dbConnect from '@/lib/mongodb';
 import Lead from '@/lib/models/Lead';
 import { SOCIAL_URLS } from '@/lib/social-links';
+import { CONTACT_EMAIL } from '@/lib/contact-email';
 import fs from 'fs';
 import path from 'path';
 
@@ -42,8 +43,9 @@ export async function POST(req: Request) {
     // Enviar email con Resend
     const emailResponse = await resend.emails.send({
       from: 'El Gordito del Sabor <noreply@gorditodelsabor.com>',
+      replyTo: CONTACT_EMAIL,
       to: email,
-      subject: '¡Tu recetario está listo! Las 20 Recetas Favoritas del Sabor',
+      subject: '¡Tu recetario está listo! Las 20 Recetas Favoritas Del Sabor',
       html: `
         <!DOCTYPE html>
         <html>
@@ -172,6 +174,9 @@ export async function POST(req: Request) {
                           @elgorditodelsaborpr
                         </a>
                       </p>
+                      <p style="margin:0 0 8px 0;">
+                        ¿Dudas? Escríbenos a <a href="mailto:${CONTACT_EMAIL}" style="color:#C4472B;text-decoration:none;font-weight:bold;">${CONTACT_EMAIL}</a>
+                      </p>
                       <p style="margin:0;">
                         © El Gordito del Sabor
                       </p>
@@ -188,7 +193,7 @@ export async function POST(req: Request) {
       attachments: ebookBuffer
         ? [
             {
-              filename: 'Las-20-Recetas-Favoritas-del-Sabor.pdf',
+              filename: 'Las-20-Recetas-Favoritas-Del-Sabor.pdf',
               content: ebookBuffer,
             },
           ]

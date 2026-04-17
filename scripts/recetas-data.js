@@ -5,7 +5,7 @@
  */
 
 module.exports = {
-  titulo: 'Las 20 Recetas Favoritas del Sabor',
+  titulo: 'Las 20 Recetas Favoritas Del Sabor',
   subtitulo: 'Recetas boricuas con sazón de verdad',
   autor: 'El Gordito del Sabor',
   sitio: 'https://gorditodelsabor.com',

@@ -165,8 +165,8 @@ function drawCover(doc, data) {
 
   const blocks = [
     { font: 'GenBold', size: 9, color: COLORS.gold, text: 'RECETARIO DIGITAL', gap: 26 },
-    { font: 'ClashBold', size: 27, color: COLORS.cream, text: 'LAS 20 RECETAS', gap: 16 },
-    { font: 'ClashLight', size: 24, color: COLORS.gold, text: 'FAVORITAS DEL SABOR', gap: 22 },
+    { font: 'ClashBold', size: 27, color: COLORS.cream, text: 'LAS 20 RECETAS FAVORITAS', gap: 16 },
+    { font: 'ClashLight', size: 24, color: COLORS.gold, text: 'DEL SABOR', gap: 22 },
     {
       font: 'GenItalic',
       size: 12,

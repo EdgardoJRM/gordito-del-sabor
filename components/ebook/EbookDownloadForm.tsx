@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Download, Loader } from 'lucide-react';
+import { CONTACT_EMAIL } from '@/lib/contact-email';
 
 type EbookDownloadFormProps = {
   /** Se dispara al enviar OK, antes de redirigir (p. ej. analytics del funnel) */
@@ -134,7 +135,11 @@ export default function EbookDownloadForm({ onConversion }: EbookDownloadFormPro
       </button>
 
       <p className="text-xs text-[#9C8B80] text-center">
-        Recibirás el recetario por email inmediatamente. Respetamos tu privacidad.
+        Recibirás &quot;Las 20 Recetas Favoritas Del Sabor&quot; por email. Si respondes, lo hacemos desde{' '}
+        <a href={`mailto:${CONTACT_EMAIL}`} className="text-[#C4472B] font-semibold hover:underline">
+          {CONTACT_EMAIL}
+        </a>
+        . Respetamos tu privacidad.
       </p>
     </form>
   );
