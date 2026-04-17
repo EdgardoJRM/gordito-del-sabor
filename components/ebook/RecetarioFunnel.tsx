@@ -92,7 +92,7 @@ export default function RecetarioFunnel() {
 
   return (
     <div className="relative">
-      {/* —— Hero —— */}
+      {/* Hero */}
       <section
         data-funnel-section="hero"
         className="relative min-h-[88vh] flex flex-col items-center justify-center overflow-hidden"
@@ -115,7 +115,7 @@ export default function RecetarioFunnel() {
             Las 20 recetas que la comunidad del Gordito pide una y otra vez
           </h1>
           <p className="subheadline text-lg md:text-2xl text-[#FAF4EE] max-w-2xl mx-auto font-normal leading-relaxed drop-shadow-sm">
-            Sin complicarte. Con ingredientes de verdad. Para que en tu casa se huela sazón boricua — aunque no hayas nacido frente al fogón.
+            Sin complicarte. Con ingredientes de verdad. Para que en tu casa se huela sazón boricua, aunque no hayas nacido frente al fogón.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
             <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm px-5 py-2.5 text-sm text-[#FAF8F5]">
@@ -138,7 +138,7 @@ export default function RecetarioFunnel() {
         </div>
       </section>
 
-      {/* —— Galería de recetas reales —— */}
+      {/* Galería de recetas reales */}
       <section
         data-funnel-section="gallery"
         className="section-spacing bg-[#FAF8F5] border-b border-[#E8E0D8]"
@@ -177,12 +177,12 @@ export default function RecetarioFunnel() {
           </div>
 
           <p className="text-center mt-10 text-[#6B5B4E] font-medium">
-            Y <span className="text-[#C4472B] font-bold">14 recetas más</span> dentro del PDF — mismas fotos y pasos claros.
+            Y <span className="text-[#C4472B] font-bold">14 recetas más</span> dentro del PDF, con las mismas fotos y pasos claros.
           </p>
         </div>
       </section>
 
-      {/* —— Historia / problema —— */}
+      {/* Historia / problema */}
       <section
         data-funnel-section="story"
         className="section-spacing bg-gradient-to-b from-[#F2EDE6] to-[#FAF8F5] border-b border-[#E8E0D8]"
@@ -202,12 +202,12 @@ export default function RecetarioFunnel() {
           <p className="body-text text-lg md:text-xl text-[#1A1412] font-medium leading-relaxed">
             Este recetario es lo contrario:{' '}
             <span className="text-[#C4472B]">20 favoritas del Gordito</span>, con la comunidad probándolas antes que tú.
-            Pasos claros, medidas que funcionan en casa — sin humo.
+            Pasos claros, medidas que funcionan en casa. Sin humo.
           </p>
         </div>
       </section>
 
-      {/* —— Value stack —— */}
+      {/* Value stack */}
       <section
         data-funnel-section="stack"
         className="section-spacing bg-[#1A1412] text-[#FAF8F5] border-b border-[#E8E0D8]"
@@ -256,7 +256,7 @@ export default function RecetarioFunnel() {
         </div>
       </section>
 
-      {/* —— Opt-in —— */}
+      {/* Opt-in */}
       <section
         id="recetario-optin"
         data-funnel-section="optin"
@@ -269,7 +269,7 @@ export default function RecetarioFunnel() {
               ¿A qué email te enviamos el PDF?
             </h2>
             <p className="body-text text-[#6B5B4E]">
-              &quot;Las 20 Recetas Favoritas Del Sabor&quot; — revisa spam si no lo ves en unos minutos.
+              &quot;Las 20 Recetas Favoritas Del Sabor&quot;. Revisa spam si no lo ves en unos minutos.
             </p>
           </div>
 
