@@ -45,6 +45,10 @@ const COLORS = {
 const PAGE = { w: 612, h: 792 };
 const M = { top: 56, bottom: 56, left: 54, right: 54 };
 const CONTENT_W = PAGE.w - M.left - M.right;
+/** Pie manual (franja blanca). El texto del cuerpo no debe pasar de aquí o PDFKit pagina solo y deja huecos. */
+const FOOTER_BAND_H = 46;
+/** Tope Y del área de texto (encima de la franja del pie). Con margin:0 controlamos nosotros el flujo. */
+const CONTENT_TEXT_BOTTOM = PAGE.h - FOOTER_BAND_H - 14;
 /** Aire entre el final de Preparación y el bloque Nota del chef */
 const NOTA_CHEF_TOP_GAP = 20;
 /** Aire entre el último renglón de la nota y la franja del pie */
@@ -106,7 +110,7 @@ function drawDiagonalWatermark(doc) {
  * Sin `width` en text() aquí: y está bajo maxY y LineWrapper dispara páginas en blanco.
  */
 function drawFooterBand(doc) {
-  const bandH = 46;
+  const bandH = FOOTER_BAND_H;
   const bandY = PAGE.h - bandH;
   const textY = bandY + 16;
 
@@ -196,7 +200,7 @@ function drawIndex(doc, data) {
 
   doc.font('GenReg').fontSize(11).fillColor(COLORS.earth);
   data.recetas.forEach((r, i) => {
-    if (y > PAGE.h - M.bottom - 24) {
+    if (y > CONTENT_TEXT_BOTTOM - 28) {
       drawFooterBand(doc);
       doc.addPage();
       drawIndexPageBackground(doc);
@@ -211,7 +215,7 @@ function drawIndex(doc, data) {
 }
 
 function ensureSpace(doc, y, needed, onNewPage) {
-  if (y + needed > PAGE.h - M.bottom) {
+  if (y + needed > CONTENT_TEXT_BOTTOM) {
     drawFooterBand(doc);
     doc.addPage();
     if (onNewPage) onNewPage();
@@ -239,18 +243,26 @@ function drawRecipe(doc, data, recipe, index) {
   y += RECIPE_BANNER_H + 16;
 
   doc.font('ClashBold').fontSize(26).fillColor(COLORS.dark);
-  doc.text(recipe.nombre, M.left, y, { width: CONTENT_W });
+  const titleOpts = { width: CONTENT_W, lineGap: 2 };
+  const titleH = doc.heightOfString(recipe.nombre, titleOpts);
+  y = ensureSpace(doc, y, titleH + 16, onRecipePage);
+  doc.text(recipe.nombre, M.left, y, titleOpts);
   y = doc.y + 16;
 
   const meta = `Tiempo: ${recipe.tiempo}   ·   Porciones: ${recipe.porciones}   ·   Dificultad: ${recipe.dificultad}`;
-  doc.font('GenReg').fontSize(10).fillColor(COLORS.earth).text(meta, M.left, y, { width: CONTENT_W });
+  doc.font('GenReg').fontSize(10).fillColor(COLORS.earth);
+  const metaOpts = { width: CONTENT_W, lineGap: 1 };
+  const metaH = doc.heightOfString(meta, metaOpts);
+  y = ensureSpace(doc, y, metaH + 28, onRecipePage);
+  doc.text(meta, M.left, y, metaOpts);
   y = doc.y + 28;
 
   if (recipe.intro && String(recipe.intro).trim()) {
     doc.font('GenItalic').fontSize(10).fillColor(COLORS.earth);
-    const introH = doc.heightOfString(recipe.intro, { width: CONTENT_W });
+    const introOpts = { width: CONTENT_W, lineGap: 2 };
+    const introH = doc.heightOfString(recipe.intro, introOpts);
     y = ensureSpace(doc, y, introH + 16, onRecipePage);
-    doc.text(recipe.intro, M.left, y, { width: CONTENT_W });
+    doc.text(recipe.intro, M.left, y, introOpts);
     y = doc.y + 20;
   }
 
@@ -260,9 +272,10 @@ function drawRecipe(doc, data, recipe, index) {
   doc.font('GenReg').fontSize(11).fillColor(COLORS.dark);
   recipe.ingredientes.forEach((ing) => {
     const block = `•  ${ing}`;
-    const h = doc.heightOfString(block, { width: CONTENT_W - 12 });
+    const ingOpts = { width: CONTENT_W - 12, lineGap: 1 };
+    const h = doc.heightOfString(block, ingOpts);
     y = ensureSpace(doc, y, h + 8, onRecipePage);
-    doc.fillColor(COLORS.dark).text(block, M.left + 8, y, { width: CONTENT_W - 12 });
+    doc.fillColor(COLORS.dark).text(block, M.left + 8, y, ingOpts);
     y = doc.y + 10;
   });
 
@@ -274,17 +287,18 @@ function drawRecipe(doc, data, recipe, index) {
   doc.font('GenReg').fontSize(11).fillColor(COLORS.dark);
   recipe.instrucciones.forEach((step, si) => {
     const body = `${si + 1}. ${step}`;
-    const h = doc.heightOfString(body, { width: CONTENT_W });
+    const stepOpts = { width: CONTENT_W, align: 'left', lineGap: 2 };
+    const h = doc.heightOfString(body, stepOpts);
     y = ensureSpace(doc, y, h + 10, onRecipePage);
-    doc.text(body, M.left, y, { width: CONTENT_W, align: 'left' });
-    /* Tras text() con width, PDFKit puede paginar solo; y += h desincroniza y deja huecos o páginas raras */
+    doc.text(body, M.left, y, stepOpts);
     y = doc.y + 12;
   });
 
   if (recipe.notas && String(recipe.notas).trim()) {
     y += NOTA_CHEF_TOP_GAP;
     doc.font('GenReg').fontSize(10);
-    const nh = doc.heightOfString(recipe.notas, { width: CONTENT_W });
+    const notaOpts = { width: CONTENT_W, lineGap: 2 };
+    const nh = doc.heightOfString(recipe.notas, notaOpts);
     const notaBlockH = 1 + 16 + 22 + nh + NOTA_CHEF_BOTTOM_PAD;
     y = ensureSpace(doc, y, notaBlockH, onRecipePage);
     doc.rect(M.left, y, CONTENT_W, 1).fill(COLORS.terracotta);
@@ -292,7 +306,7 @@ function drawRecipe(doc, data, recipe, index) {
     doc.font('GenBold').fontSize(10).fillColor(COLORS.terracotta).text('Nota del chef', M.left, y);
     y = doc.y + 18;
     doc.font('GenReg').fontSize(10);
-    doc.fillColor(COLORS.earth).text(recipe.notas, M.left, y, { width: CONTENT_W });
+    doc.fillColor(COLORS.earth).text(recipe.notas, M.left, y, notaOpts);
     y = doc.y + NOTA_CHEF_BOTTOM_PAD;
   }
 
@@ -372,9 +386,11 @@ function main() {
     process.exit(1);
   }
 
+  /** margin 0: si no, el límite interno de PDFKit (~736) choca con el pie dibujado a 746 y doc.text() pagina mal. */
   const doc = new PDFDocument({
     size: 'LETTER',
-    margins: { top: M.top, bottom: M.bottom, left: M.left, right: M.right },
+    margins: 0,
+    bufferPages: false,
   });
 
   registerFonts(doc);
