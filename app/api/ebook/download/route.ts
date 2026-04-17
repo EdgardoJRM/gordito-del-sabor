@@ -102,29 +102,29 @@ export async function POST(req: Request) {
                   <tr>
                     <td style="padding:0 30px 30px 30px;font-size:16px;color:#333333;line-height:1.8">
                       <p style="margin:0 0 15px 0;font-weight:bold;">
-                        Prepárate para cocinar platos como:
+                        Las 20 recetas del PDF (mismo orden):
                       </p>
                       <ul style="margin:0;padding-left:20px;font-size:16px">
-                        <li>Arroz con Gandules</li>
-                        <li>Pernil Asado</li>
-                        <li>Mofongo</li>
-                        <li>Camarones al Ajillo</li>
-                        <li>Pollo Guisado</li>
-                        <li>Bistec Encebollado</li>
-                        <li>Alcapurrias</li>
-                        <li>Pasteles</li>
-                        <li>Ropa Vieja</li>
-                        <li>Tostones</li>
-                        <li>Bacalao a la Vizcaína</li>
-                        <li>Arroz con Pollo</li>
-                        <li>Carne Guisada</li>
-                        <li>Empanadillas</li>
-                        <li>Sorullitos</li>
-                        <li>Habichuelas Guisadas</li>
-                        <li>Chuletas Fritas</li>
-                        <li>Yuca con Mojo</li>
-                        <li>Ensalada de Pulpo</li>
-                        <li>Flan Casero</li>
+                        <li>Salmuera</li>
+                        <li>Hamburger de Churrasco a mi Estilo</li>
+                        <li>Biftec Encebollado a mi Estilo</li>
+                        <li>Arroz Chino</li>
+                        <li>Pork Belly</li>
+                        <li>Tostones en Air Fryer</li>
+                        <li>Sazonador para Pollo, Cerdo y Pescado</li>
+                        <li>Chimichurri con Ribeye y Tostones</li>
+                        <li>Guineitos en Escabeche</li>
+                        <li>Ensalada de Coditos</li>
+                        <li>Lomo de Cerdo Relleno de Arroz Mamposteao</li>
+                        <li>Tacada a mi Estilo</li>
+                        <li>Hamburger de Tocineta a mi Estilo</li>
+                        <li>Churrasco Enrollado Relleno</li>
+                        <li>Hamburger en Plantilla de Pastelillo</li>
+                        <li>Pernil al Caldero al Estilo Boricua</li>
+                        <li>Coquito de Café</li>
+                        <li>Chili con Carne</li>
+                        <li>Mongolian Beef</li>
+                        <li>Bolitas de Queso Rellenas de Guayaba</li>
                       </ul>
                     </td>
                   </tr>

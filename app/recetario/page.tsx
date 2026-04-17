@@ -14,28 +14,28 @@ export const metadata: Metadata = {
   },
 };
 
-/** Vista previa de platos del recetario (misma lista que el email de descarga). */
+/** Misma lista y orden que el PDF (`recetas-data.js` → `recetario.pdf`) y el email de descarga. */
 const RECIPES = [
-  'Arroz con Gandules',
-  'Pernil Asado',
-  'Mofongo',
-  'Camarones al Ajillo',
-  'Pollo Guisado',
-  'Bistec Encebollado',
-  'Alcapurrias',
-  'Pasteles',
-  'Ropa Vieja',
-  'Tostones',
-  'Bacalao a la Vizcaína',
-  'Arroz con Pollo',
-  'Carne Guisada',
-  'Empanadillas',
-  'Sorullitos',
-  'Habichuelas Guisadas',
-  'Chuletas Fritas',
-  'Yuca con Mojo',
-  'Ensalada de Pulpo',
-  'Flan Casero',
+  'Salmuera',
+  'Hamburger de Churrasco a mi Estilo',
+  'Biftec Encebollado a mi Estilo',
+  'Arroz Chino',
+  'Pork Belly',
+  'Tostones en Air Fryer',
+  'Sazonador para Pollo, Cerdo y Pescado',
+  'Chimichurri con Ribeye y Tostones',
+  'Guineitos en Escabeche',
+  'Ensalada de Coditos',
+  'Lomo de Cerdo Relleno de Arroz Mamposteao',
+  'Tacada a mi Estilo',
+  'Hamburger de Tocineta a mi Estilo',
+  'Churrasco Enrollado Relleno',
+  'Hamburger en Plantilla de Pastelillo',
+  'Pernil al Caldero al Estilo Boricua',
+  'Coquito de Café',
+  'Chili con Carne',
+  'Mongolian Beef',
+  'Bolitas de Queso Rellenas de Guayaba',
 ] as const;
 
 const TESTIMONIALS = [
@@ -96,7 +96,7 @@ export default function RecetarioPage() {
               Las 20 recetas dentro del PDF
             </h2>
             <p className="body-text text-lg">
-              Misma lista que verás en el recetario. Nada escondido.
+              Lo mismo que trae el PDF: mismas 20, mismo orden. Nada escondido.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
