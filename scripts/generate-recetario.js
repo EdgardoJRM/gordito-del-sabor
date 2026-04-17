@@ -193,6 +193,74 @@ function drawIndexPageBackground(doc) {
   drawDiagonalWatermark(doc);
 }
 
+/** Página de bienvenida (después de portada, antes del índice): fondo crema + marca de agua */
+function drawWelcomePage(doc, block) {
+  if (!block || !block.titulo || !block.texto) return;
+  drawIndexPageBackground(doc);
+  const onPage = () => {
+    drawIndexPageBackground(doc);
+  };
+  let y = M.top + 8;
+  doc.rect(M.left, y, 48, 2).fill(COLORS.terracotta);
+  y += 20;
+  y = drawWrappedBlock(
+    doc,
+    block.titulo,
+    M.left,
+    y,
+    CONTENT_W,
+    { font: 'ClashBold', fontSize: 24, fillColor: COLORS.dark, lineGap: 4 },
+    ensureSpace,
+    onPage
+  );
+  y += 24;
+  y = drawWrappedBlock(
+    doc,
+    block.texto,
+    M.left,
+    y,
+    CONTENT_W,
+    { font: 'GenReg', fontSize: 11, fillColor: COLORS.earth, lineGap: 5 },
+    ensureSpace,
+    onPage
+  );
+  drawFooterBand(doc);
+}
+
+/** Historia editorial: fondo oscuro, sin marca de agua */
+function drawStoryPage(doc, titulo, texto) {
+  if (!titulo || !texto) return;
+  const onPage = () => {
+    doc.rect(0, 0, PAGE.w, PAGE.h).fill(COLORS.dark);
+  };
+  onPage();
+  let y = M.top + 20;
+  doc.rect(M.left, y, 48, 2).fill(COLORS.terracotta);
+  y += 18;
+  y = drawWrappedBlock(
+    doc,
+    titulo,
+    M.left,
+    y,
+    CONTENT_W,
+    { font: 'ClashBold', fontSize: 22, fillColor: COLORS.cream, lineGap: 4 },
+    ensureSpace,
+    onPage
+  );
+  y += 22;
+  y = drawWrappedBlock(
+    doc,
+    texto,
+    M.left,
+    y,
+    CONTENT_W,
+    { font: 'GenReg', fontSize: 11, fillColor: COLORS.gold, lineGap: 5 },
+    ensureSpace,
+    onPage
+  );
+  drawFooterBand(doc);
+}
+
 function drawIndex(doc, data) {
   drawIndexPageBackground(doc);
   let y = M.top;
@@ -527,12 +595,44 @@ function main() {
 
   drawCover(doc, data);
 
+  if (data.bienvenida && data.bienvenida.titulo && data.bienvenida.texto) {
+    drawWelcomePage(doc, data.bienvenida);
+  }
+
+  doc.addPage();
   drawIndex(doc, data);
+
+  const historias = Array.isArray(data.historias) ? data.historias : [];
+  if (historias[0]) {
+    doc.addPage();
+    drawStoryPage(doc, historias[0].titulo, historias[0].texto);
+  }
 
   data.recetas.forEach((r, i) => {
     doc.addPage();
     drawRecipe(doc, data, r, i);
+    if (i === 2 && historias[1]) {
+      doc.addPage();
+      drawStoryPage(doc, historias[1].titulo, historias[1].texto);
+    }
+    if (i === 5 && historias[2]) {
+      doc.addPage();
+      drawStoryPage(doc, historias[2].titulo, historias[2].texto);
+    }
+    if (i === 9 && historias[3]) {
+      doc.addPage();
+      drawStoryPage(doc, historias[3].titulo, historias[3].texto);
+    }
+    if (i === 14 && historias[4]) {
+      doc.addPage();
+      drawStoryPage(doc, historias[4].titulo, historias[4].texto);
+    }
   });
+
+  if (data.cierre && data.cierre.titulo && data.cierre.texto) {
+    doc.addPage();
+    drawStoryPage(doc, data.cierre.titulo, data.cierre.texto);
+  }
 
   doc.addPage();
   drawBackCover(doc, data);

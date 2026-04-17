@@ -12,6 +12,73 @@ module.exports = {
   instagram: '@elgorditodelsaborpr',
   instagramUrl: 'https://www.instagram.com/elgorditodelsaborpr',
 
+  bienvenida: {
+    titulo: 'Bienvenido a la mesa de El Gordito del Sabor',
+    texto: [
+      'Este libro nace de una pasión real por la cocina, por Puerto Rico y por esos momentos que se crean cuando la comida reúne a la gente correcta alrededor de una mesa. El Gordito del Sabor representa esa esencia tan nuestra de demostrar cariño a través de un buen plato, de cocinar con intención y de compartir con el corazón.',
+      'Aquí no vas a encontrar recetas complicadas ni una cocina lejana. Vas a encontrar sabor, tradición, ideas prácticas y ese estilo sencillo que hace sentir que cocinar sí es posible. Porque si algo cree El Gordito, es que la comida no solo alimenta: también conecta, consuela, une y crea recuerdos.',
+      'Cada una de estas recetas lleva un pedazo de historia, de familia y de cultura boricua. Mi deseo es que este libro no solo te inspire a cocinar, sino también a disfrutar el proceso, a inventar, a compartir y a querer a los tuyos a través de lo que prepares.',
+      'Gracias por abrirme un espacio en tu cocina, en tu mesa y en tu hogar. Vamos a meterle sabor. Esto es bello.',
+    ].join('\n\n'),
+  },
+
+  historias: [
+    {
+      id: 'h1',
+      titulo: 'El Gordito del Sabor no es solo un nombre',
+      texto: [
+        'El Gordito del Sabor no nació para complicar la cocina ni para hacer sentir a nadie que cocinar es solo para expertos. Nació desde algo mucho más sencillo y mucho más poderoso: el deseo de compartir. Detrás de este nombre hay un apasionado de la cocina puertorriqueña, alguien que aprendió que una receta bien hecha puede decir mucho sin hablar demasiado.',
+        'El Gordito representa a esa persona que existe en tantas familias boricuas: la que siempre está dispuesta a cocinar, a servir, a reunir y a demostrar cariño a través de la comida. No es solo un personaje. Es una forma de querer. Es ese hermano, primo, tío o pana que sabe que muchas veces el amor se demuestra poniendo un plato en la mesa.',
+        'Por eso este libro no está hecho solo para que sigas pasos. Está hecho para que sientas que tú también puedes cocinar, compartir y crear momentos que la gente recuerde. Porque si algo cree El Gordito del Sabor, es que cuando la comida se hace con amor, siempre sabe mejor.',
+      ].join('\n\n'),
+    },
+    {
+      id: 'h2',
+      titulo: 'En muchas casas, el amor se servía en un plato',
+      texto: [
+        'Hay recuerdos que uno no olvida. No porque fueran lujosos, sino porque estaban llenos de verdad. El Gordito recuerda que, aun en medio de dificultades económicas, en la casa de sus padres siempre aparecía un plato de comida deliciosa para quien llegara. No había excesos. No había de más. Pero sí había algo que nunca faltaba: la intención de compartir.',
+        'Esa es una de las raíces más profundas de esta marca. La idea de que no hace falta tener mucho para dar algo valioso. A veces basta con una mesa, una olla caliente y las ganas de hacer sentir bien a alguien. En Puerto Rico, eso se entiende sin tener que explicarlo demasiado. Porque muchos crecimos viendo cómo la comida resolvía, unía y abrazaba.',
+        'Quizás por eso las recetas del Gordito se sienten tan cercanas. Porque no salen desde la apariencia. Salen desde la memoria. Desde una cocina real. Desde un hogar donde el sabor no dependía del lujo, sino del corazón con que se cocinaba.',
+      ].join('\n\n'),
+    },
+    {
+      id: 'h3',
+      titulo: 'Los códigos de la cocina se aprenden en casa',
+      texto: [
+        'El Gordito aprendió a cocinar como aprenden muchos puertorriqueños: viendo, ayudando, preguntando y probando. Su base vino de sus padres y de sus hermanos, especialmente del mayor. Ahí fue donde comenzó todo. Ahí fue donde aprendió los códigos de la comida, esos que no siempre se enseñan con medidas exactas, pero sí con costumbre, observación y cariño.',
+        'Después vino el aprendizaje autodidacta, la curiosidad y las ganas de seguir creciendo. Pero la raíz siempre fue la misma: la familia. Porque en nuestra cultura, la cocina no es solo una habilidad. También es herencia. Es identidad. Es una forma de mantener vivas las tradiciones que pasan de generación en generación.',
+        'Cada receta que encuentras aquí tiene algo de eso. Tiene algo del hogar, de la mesa compartida, de la enseñanza sencilla y del orgullo de saber que nuestros sabores cuentan quiénes somos. Y cuando una receta lleva eso adentro, deja de ser solo comida. Se convierte en historia.',
+      ].join('\n\n'),
+    },
+    {
+      id: 'h4',
+      titulo: 'Si yo puedo, tú también',
+      texto: [
+        'Una de las cosas más importantes para El Gordito del Sabor es que la gente no mire sus recetas desde lejos. Él no quiere que las vean y piensen “eso se ve brutal, pero yo no puedo hacerlo”. Al contrario. Quiere que cada persona sienta que sí puede intentarlo, aprender y hasta hacerlo a su manera.',
+        'Para él, cocinar nunca ha sido un acto de perfección. Ha sido un acto de amor. Una forma de dar. Una manera de decir “te pensé”, “te quise”, “te preparé esto con cariño”. Por eso su cocina es sencilla, práctica y sin complicaciones innecesarias. Porque lo importante no es impresionar. Lo importante es compartir.',
+        'Si este libro logra que alguien pierda el miedo a cocinar, se anime a preparar una receta para su familia o descubra que tiene más sazón del que pensaba, entonces ya cumplió su propósito. Porque cuando uno cocina desde el corazón, siempre deja algo bueno en la mesa.',
+      ].join('\n\n'),
+    },
+    {
+      id: 'h5',
+      titulo: 'Puerto Rico vive en cada bocado',
+      texto: [
+        'Puerto Rico no es un detalle dentro de la marca del Gordito. Es el centro. Es la raíz. Es la inspiración que le da sentido a todo. La cocina puertorriqueña, con su mezcla de influencias españolas, africanas y nativas, forma parte de una herencia rica, amplia y profundamente nuestra.',
+        'El sabor boricua no está solo en los ingredientes. Está en la manera de cocinar. En cómo se sirve. En cómo se insiste en que comas un poco más. En cómo se convierte cualquier comida en una experiencia de familia, conversación y encuentro. Esa forma tan nuestra de vivir la comida es parte esencial de lo que El Gordito del Sabor quiere representar.',
+        'Este libro también es una manera de honrar eso. De recordar que nuestras recetas no son cualquier cosa. Son cultura. Son memoria. Son orgullo. Y mientras sigamos cocinándolas, compartiéndolas y enseñándolas, una parte hermosa de Puerto Rico seguirá viva en cada mesa.',
+      ].join('\n\n'),
+    },
+  ],
+
+  cierre: {
+    titulo: 'Gracias por hacerle un espacio al Gordito en tu mesa',
+    texto: [
+      'De todas las cosas bonitas que puede traer este proyecto, hay una que El Gordito del Sabor nunca da por sentada: el privilegio de entrar, aunque sea un poquito, en los hogares de tanta gente. Poder estar presente en la mesa de otros, acompañar momentos en familia y formar parte de recuerdos nuevos es algo profundamente especial.',
+      'Por eso este libro también nace desde el agradecimiento. Gracias por abrirle espacio a estas recetas, por permitir que esta cocina llegue a tu casa y por seguir dándole vida a todo lo que representa esta marca. Si algo desea El Gordito, es que cada plato que prepares aquí te recuerde que cocinar sigue siendo una de las maneras más lindas de demostrar amor.',
+      'Si llegaste hasta aquí, gracias de corazón. Si estas páginas te dieron ganas de cocinar, compartir y querer a los tuyos un poco más, entonces esto es bello.',
+    ].join('\n\n'),
+  },
+
   recetas: [
     {
       nombre: 'Salmuera',
