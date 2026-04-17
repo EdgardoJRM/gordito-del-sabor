@@ -33,6 +33,8 @@ const RECIPE_BANNER_POOL = [
 /** Ancho de la columna de imagen en portada (resto = tipografía) */
 const COVER_COL_W = 268;
 const RECIPE_BANNER_H = 88;
+/** Espacio vertical extra entre párrafos en bienvenida e historias (doble salto en el texto fuente) */
+const STORY_PARAGRAPH_GAP = 16;
 
 const COLORS = {
   dark: '#1A1412',
@@ -214,7 +216,7 @@ function drawWelcomePage(doc, block) {
     onPage
   );
   y += 24;
-  y = drawWrappedBlock(
+  y = drawWrappedParagraphs(
     doc,
     block.texto,
     M.left,
@@ -222,7 +224,8 @@ function drawWelcomePage(doc, block) {
     CONTENT_W,
     { font: 'GenReg', fontSize: 11, fillColor: COLORS.earth, lineGap: 5 },
     ensureSpace,
-    onPage
+    onPage,
+    STORY_PARAGRAPH_GAP
   );
   drawFooterBand(doc);
 }
@@ -248,7 +251,7 @@ function drawStoryPage(doc, titulo, texto) {
     onPage
   );
   y += 22;
-  y = drawWrappedBlock(
+  y = drawWrappedParagraphs(
     doc,
     texto,
     M.left,
@@ -256,7 +259,8 @@ function drawStoryPage(doc, titulo, texto) {
     CONTENT_W,
     { font: 'GenReg', fontSize: 11, fillColor: COLORS.gold, lineGap: 5 },
     ensureSpace,
-    onPage
+    onPage,
+    STORY_PARAGRAPH_GAP
   );
   drawFooterBand(doc);
 }
@@ -356,6 +360,24 @@ function drawWrappedBlock(doc, text, x, y, maxW, style, ensureSpaceFn, onNewPage
     doc.text(line, x, cy, { lineBreak: false });
     cy += lh;
   }
+  return cy;
+}
+
+/**
+ * Varios párrafos separados por `\n\n` en el texto. `wrapTextToLines` ignora líneas vacías;
+ * aquí dibujamos cada bloque y añadimos separación explícita entre párrafos.
+ */
+function drawWrappedParagraphs(doc, text, x, y, maxW, style, ensureSpaceFn, onNewPage, gapBetweenParagraphs) {
+  const gap = gapBetweenParagraphs ?? STORY_PARAGRAPH_GAP;
+  const parts = String(text ?? '')
+    .split(/\n\n+/)
+    .map((p) => p.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  let cy = y;
+  parts.forEach((para, i) => {
+    if (i > 0) cy += gap;
+    cy = drawWrappedBlock(doc, para, x, cy, maxW, style, ensureSpaceFn, onNewPage);
+  });
   return cy;
 }
 
