@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 240" role="img" aria-label="Chef caricatura El Gordito">
+  <title>Chef Gordito</title>
+  <!-- Cuerpo / delantal -->
+  <ellipse cx="100" cy="195" rx="72" ry="38" fill="#C4472B"/>
+  <ellipse cx="100" cy="188" rx="68" ry="32" fill="#A8381F"/>
+  <!-- Brazos -->
+  <ellipse cx="38" cy="175" rx="22" ry="40" fill="#E8B89D" transform="rotate(-15 38 175)"/>
+  <ellipse cx="162" cy="175" rx="22" ry="40" fill="#E8B89D" transform="rotate(15 162 175)"/>
+  <!-- Cara -->
+  <circle cx="100" cy="105" r="58" fill="#E8B89D"/>
+  <ellipse cx="100" cy="118" rx="40" ry="28" fill="#DCA08A" opacity="0.45"/>
+  <!-- Ojos -->
+  <ellipse cx="82" cy="98" rx="10" ry="12" fill="#1A1412"/>
+  <ellipse cx="118" cy="98" rx="10" ry="12" fill="#1A1412"/>
+  <circle cx="85" cy="95" r="3" fill="#FAF8F5"/>
+  <circle cx="121" cy="95" r="3" fill="#FAF8F5"/>
+  <!-- Cejas -->
+  <path d="M68 82 Q82 74 96 80" stroke="#1A1412" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <path d="M104 80 Q118 74 132 82" stroke="#1A1412" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Sonrisa -->
+  <path d="M78 122 Q100 142 122 122" stroke="#1A1412" stroke-width="4" fill="none" stroke-linecap="round"/>
+  <!-- Mejillas -->
+  <circle cx="70" cy="112" r="10" fill="#E07050" opacity="0.35"/>
+  <circle cx="130" cy="112" r="10" fill="#E07050" opacity="0.35"/>
+  <!-- Gorro chef -->
+  <path d="M42 78 C42 40 158 40 158 78 L150 88 C110 72 90 72 50 88 Z" fill="#FAF8F5"/>
+  <rect x="38" y="82" width="124" height="18" rx="6" fill="#FAF8F5"/>
+  <ellipse cx="100" cy="40" rx="28" ry="22" fill="#FAF8F5"/>
+  <!-- Cuchara -->
+  <path d="M168 150 L188 120 L196 125 L178 168 Z" fill="#B8B0A8"/>
+  <rect x="175" y="165" width="8" height="52" rx="2" fill="#8A8278" transform="rotate(12 179 191)"/>
+</svg>

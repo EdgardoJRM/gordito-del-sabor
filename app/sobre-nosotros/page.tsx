@@ -1,183 +1,164 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft } from 'lucide-react';
+import Link from 'next/link';
+import { ArrowLeft, Heart, Users, Flame, GraduationCap } from 'lucide-react';
+import SectionHeader from '@/components/ui/SectionHeader';
+import Button from '@/components/ui/Button';
+import CommunityStats from '@/components/sections/CommunityStats';
+import { siteConfig } from '@/lib/site-config';
 
 export const metadata: Metadata = {
-  title: 'Sobre Nosotros | El Gordito del Sabor',
-  description: 'Conoce la historia de Ariel Leonardo Del Valle Matos y su pasión por la cocina puertorriqueña.',
+  title: 'Sobre nosotros | El Gordito del Sabor',
+  description:
+    'Historia de Ariel Leonardo Del Valle Matos, la comunidad del Gordito y la misión de llevar sazón boricua con respeto y claridad.',
 };
 
-export default function AboutPage() {
+const values = [
+  {
+    title: 'Sabor boricua',
+    text: 'Recetas con identidad: de la casa, sin postureo.',
+    Icon: Flame,
+  },
+  {
+    title: 'Familia primero',
+    text: 'La mesa es el lugar donde se arregla el día.',
+    Icon: Heart,
+  },
+  {
+    title: 'Comunidad',
+    text: 'Cocinar es más fácil cuando no estás solo.',
+    Icon: Users,
+  },
+  {
+    title: 'Enseñar con corazón',
+    text: 'Pasos claros para que te sientas capaz, no intimidado.',
+    Icon: GraduationCap,
+  },
+];
+
+const timeline = [
+  { year: 'Inicio', text: 'Ariel empieza a compartir sazón real en redes, con humor y técnica.' },
+  { year: 'Comunidad', text: 'La familia crece: recetas que la gente sí repite en casa.' },
+  { year: 'Hoy', text: 'Ecosistema: recetas, ebook, delantal, Bóveda y colaboraciones con marcas.' },
+];
+
+export default function SobreNosotrosPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      {/* Header */}
-      <section className="bg-[#FAF8F5] border-b border-[#E8E0D8] py-8">
+      <section className="border-b border-[#E8E0D8] bg-[#F2EDE6] py-8">
         <div className="container-custom">
-          <Link href="/" className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-6 transition-colors"
+          >
             <ArrowLeft size={20} />
             <span className="nav-text">Volver al inicio</span>
           </Link>
-          <h1 className="heading-section text-[#1A1412] mb-6">Sobre Nosotros</h1>
-          <p className="body-text text-xl max-w-3xl">
-            Conoce la historia de Ariel Leonardo Del Valle Matos y su pasión por la gastronomía latina
+          <p className="label-eyebrow text-[#6B5B4E] mb-3">Nuestra historia</p>
+          <h1 className="heading-section text-[#1A1412] max-w-4xl mb-4">
+            Se cocina con sazón, familia y comunidad
+          </h1>
+          <p className="body-text text-xl max-w-2xl">
+            El Gordito del Sabor nació en el fogón, no en una corporación. Aquí el respeto es por el ingrediente y por
+            la gente que cocina después del trabajo.
           </p>
         </div>
       </section>
 
-      {/* Main Story */}
       <section className="section-spacing">
         <div className="container-custom">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-32">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#1A1412] mb-8">¡Bienvenidos a El Gordito del Sabor!</h2>
-              <p className="body-text text-lg mb-6">
-                Soy <span className="font-bold text-[#1A1412]">Ariel Leonardo Del Valle Matos</span>, amante apasionado de la cocina y orgulloso representante de la gastronomía latina, especialmente de la deliciosa cocina boricua de mi Puerto Rico querido.
-              </p>
-              <p className="body-text text-lg mb-6">
-                En &quot;El Gordito del Sabor&quot;, comparto mi amor por la cocina a través de recetas auténticas y llenas de sabores vibrantes. Mi misión es llevar a tu hogar el deleite de la comida latina, haciendo que cada platillo sea una experiencia inolvidable para ti y tus seres queridos.
-              </p>
-              <p className="body-text text-lg">
-                Desde mi fogón hasta tu pantalla, te invito a explorar el mundo de la gastronomía conmigo. Aquí encontrarás recetas detalladas, vídeos cautivadores y la pasión que pongo en cada plato.
-              </p>
-            </div>
-            <div className="relative w-full h-[500px] rounded-3xl overflow-hidden shadow-lg border border-[#E8E0D8]">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            <div className="relative h-[420px] md:h-[520px] rounded-3xl overflow-hidden border border-[#E8E0D8] shadow-lg">
               <Image
                 src="/images/ariel.webp"
-                alt="Ariel Leonardo Del Valle Matos - El Gordito del Sabor"
+                alt="Ariel Leonardo Del Valle Matos — El Gordito del Sabor"
                 fill
                 className="object-cover"
+                sizes="(max-width:1024px) 100vw, 50vw"
                 priority
-                sizes="(max-width: 768px) 100vw, 50vw"
               />
             </div>
-          </div>
-
-          {/* Mission */}
-          <div className="bg-[#F2EDE6] rounded-3xl p-12 md:p-16 mb-32 border border-[#E8E0D8] shadow-sm">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1A1412] mb-8 text-center">Mi Misión</h2>
-            <p className="body-text text-lg text-center max-w-3xl mx-auto mb-6">
-              Desde los sabores reconfortantes de la comida boricua hasta los secretos culinarios de diversas nacionalidades, cada publicación está destinada a despertar tu paladar y avivar tu amor por la cocina.
-            </p>
-            <p className="body-text text-lg text-center max-w-3xl mx-auto">
-              Únete a nuestra comunidad culinaria, donde compartiré no solo recetas, sino también historias detrás de cada plato, consejos prácticos y momentos divertidos en la cocina. ¡Estoy aquí para inspirarte y hacerte sentir como un chef en tu propio hogar!
-            </p>
-          </div>
-
-          {/* Values */}
-          <div className="mb-32">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1A1412] mb-16 text-center">Lo que nos Define</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  title: 'Autenticidad',
-                  description: 'Recetas auténticas que honran la tradición culinaria puertorriqueña y latina.',
-                  emoji: '🎯',
-                },
-                {
-                  title: 'Pasión',
-                  description: 'Cada plato es preparado con amor y dedicación para ofrecerte lo mejor.',
-                  emoji: '❤️',
-                },
-                {
-                  title: 'Comunidad',
-                  description: 'Creemos en compartir conocimiento y crear una familia de amantes de la cocina.',
-                  emoji: '👨‍👩‍👧‍👦',
-                },
-              ].map((value) => (
-                <div key={value.title} className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-3xl p-8 text-center hover:border-[#C4472B]/30 transition-all hover:scale-[1.02] shadow-sm">
-                  <div className="text-6xl mb-6">{value.emoji}</div>
-                  <h3 className="text-2xl font-bold text-[#1A1412] mb-4">
-                    {value.title}
-                  </h3>
-                  <p className="body-text">{value.description}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* About the Chef */}
-          <div className="bg-[#F2EDE6] border border-[#E8E0D8] rounded-3xl p-12 md:p-16 mb-32 shadow-sm">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1A1412] mb-12 text-center">Sobre Ariel Leonardo Del Valle Matos</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div>
-                <p className="body-text text-lg mb-6">
-                  Con más de 10 años de experiencia en la cocina, Ariel ha dedicado su vida a perfeccionar el arte culinario puertorriqueño. Su pasión por la gastronomía latina lo ha llevado a explorar y dominar técnicas tradicionales y modernas.
-                </p>
-                <p className="body-text text-lg mb-6">
-                  Ariel cree que la comida es más que nutrición; es una forma de conectar con nuestra cultura, compartir momentos especiales con nuestras familias y crear recuerdos inolvidables alrededor de la mesa.
-                </p>
-                <p className="body-text text-lg">
-                  Su objetivo es hacer que la cocina puertorriqueña sea accesible para todos, desde principiantes hasta chefs experimentados, compartiendo no solo recetas, sino también la historia y el amor detrás de cada plato.
-                </p>
-              </div>
-              <div className="relative w-full h-[400px] rounded-3xl overflow-hidden border border-[#E8E0D8] shadow-md">
-                <Image
-                  src="/images/ariel.webp"
-                  alt="Ariel Leonardo Del Valle Matos"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+            <div className="space-y-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-[#1A1412]">Ariel Leonardo Del Valle Matos</h2>
+              <p className="body-text text-lg">
+                Soy Ariel. Cocino porque me gusta ver a la gente feliz con un plato honesto. Mi misión es simple:
+                que tú prepares comida boricua con confianza, sin sentir que necesitas ser chef para que quede brutal.
+              </p>
+              <p className="body-text text-lg">
+                En redes compartimos recetas, tips y ese “esto es bello” cuando algo sale como debe ser. En el sitio
+                estamos construyendo el hogar digital: delantal, libro, La Bóveda y alianzas con marcas que respeten a
+                la comunidad.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <Button href="/delantal">Ver preventa</Button>
+                <Button href="/recetario" variant="secondary">
+                  Recetario gratis
+                </Button>
               </div>
             </div>
           </div>
+        </div>
+      </section>
 
-          {/* What We Offer */}
-          <div className="mb-32">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1A1412] mb-16 text-center">¿Qué Encontrarás Aquí?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                {
-                  title: 'Recetas Detalladas',
-                  description: 'Paso a paso claro y fácil de seguir para que cualquiera pueda preparar deliciosos platillos.',
-                  icon: '📖',
-                },
-                {
-                  title: 'Historias Culinarias',
-                  description: 'Conoce la historia y tradición detrás de cada receta que compartimos.',
-                  icon: '📚',
-                },
-                {
-                  title: 'Consejos Prácticos',
-                  description: 'Trucos y técnicas para mejorar tus habilidades culinarias en la cocina.',
-                  icon: '💡',
-                },
-                {
-                  title: 'Comunidad Activa',
-                  description: 'Únete a una comunidad de amantes de la cocina que comparten tu pasión.',
-                  icon: '👥',
-                },
-              ].map((item) => (
-                <div key={item.title} className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-3xl p-8 hover:border-[#C4472B]/25 transition-all shadow-sm">
-                  <div className="text-5xl mb-6">{item.icon}</div>
-                  <h3 className="text-2xl font-bold text-[#1A1412] mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="body-text">{item.description}</p>
-                </div>
-              ))}
-            </div>
+      <section className="section-spacing bg-[#1A1412] text-[#FAF8F5] border-t border-[#2D2220]">
+        <div className="container-custom">
+          <SectionHeader
+            dark
+            title="Valores"
+            subtitle="Lo que no negociamos: autenticidad, claridad y respeto por tu tiempo en la cocina."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {values.map(({ title, text, Icon }) => (
+              <div
+                key={title}
+                className="rounded-2xl md:rounded-3xl border border-white/10 bg-white/5 p-8"
+              >
+                <Icon className="text-[#E8D4BC] mb-4" size={28} aria-hidden />
+                <h3 className="text-xl font-bold mb-3">{title}</h3>
+                <p className="text-[#C4B8AE] body-text">{text}</p>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* CTA */}
-          <div className="bg-gradient-to-br from-[#F2EDE6] to-[#FAF8F5] border border-[#E8E0D8] rounded-3xl p-12 md:p-16 text-center shadow-sm">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1A1412] mb-6">¡Prepárate para Explorar, Cocinar y Disfrutar!</h2>
-            <p className="body-text text-lg mb-12 max-w-2xl mx-auto">
-              Gracias por ser parte de esta deliciosa aventura. Estoy aquí para inspirarte y hacerte sentir como un chef en tu propio hogar.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-              <Link href="/recetas" className="btn-text inline-block bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 px-12 rounded-full transition-all transform hover:scale-105">
-                Explorar Recetas
-              </Link>
-              <Link href="/recetario" className="btn-text inline-block border-2 border-[#1A1412] text-[#1A1412] hover:bg-[#1A1412] hover:text-[#FAF8F5] py-4 px-12 rounded-full transition-all transform hover:scale-105">
-                Descargar Recetario
-              </Link>
-            </div>
-            <p className="body-text text-sm">
-              Con sabor y cariño, <span className="font-bold text-[#1A1412]">Ariel Leonardo Del Valle Matos</span>
-            </p>
-          </div>
+      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+        <div className="container-custom max-w-3xl mx-auto">
+          <SectionHeader title="Camino" subtitle="No es perfección. Es constancia con sabor." />
+          <ol className="space-y-8">
+            {timeline.map((t) => (
+              <li key={t.year} className="flex gap-6">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#C4472B] text-white text-xs font-bold text-center leading-tight px-1">
+                  {t.year}
+                </span>
+                <p className="body-text text-lg text-[#1A1412] pt-2">{t.text}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
+        <div className="container-custom">
+          <h2 className="heading-section text-[#1A1412] text-center mb-12 md:mb-16 max-w-2xl mx-auto">
+            La comunidad en números
+          </h2>
+          <CommunityStats />
+          <p className="text-center text-sm text-[#9C8B80] mt-8">
+            Edita métricas en <code className="rounded bg-[#F2EDE6] px-1">lib/site-config.ts</code>.
+          </p>
+        </div>
+      </section>
+
+      <section className="section-spacing bg-[#1A1412] border-t border-[#2D2220] text-center">
+        <div className="container-custom max-w-2xl mx-auto space-y-6">
+          <h2 className="heading-section text-[#FAF8F5] text-3xl md:text-4xl">Gracias por cocinar con nosotros</h2>
+          <p className="body-text text-lg text-[#C4B8AE]">
+            — {siteConfig.brandName}, {siteConfig.tagline}
+          </p>
+          <Button href="/preguntas" variant="ghost">
+            Preguntas frecuentes
+          </Button>
         </div>
       </section>
     </main>

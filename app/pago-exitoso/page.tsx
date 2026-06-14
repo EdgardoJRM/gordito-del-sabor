@@ -9,6 +9,7 @@ import { useCartStore } from '@/lib/cart-store';
 export default function SuccessPage() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session_id');
+  const isPapaEvent = searchParams.get('event') === 'papa';
   const clearCart = useCartStore((state) => state.clearCart);
   const [orderData, setOrderData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -67,7 +68,9 @@ export default function SuccessPage() {
 
             {/* Message */}
             <p className="body-text text-2xl mb-12">
-              Gracias por tu compra. Tu delantal personalizado está siendo preparado.
+              {isPapaEvent
+                ? 'Gracias. Tu delantal personalizado para papá entra en producción — te llega la confirmación por email.'
+                : 'Gracias por tu compra. Tu delantal personalizado está siendo preparado.'}
             </p>
 
             {/* Order Details */}
@@ -88,7 +91,9 @@ export default function SuccessPage() {
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="body-text">Próximo Paso:</span>
-                  <span className="text-white">Envío en 3-5 días</span>
+                  <span className="text-white">
+                    {isPapaEvent ? 'Bordado y envío Priority Mail' : 'Envío en 3-5 días'}
+                  </span>
                 </div>
               </div>
             </div>
@@ -126,10 +131,10 @@ export default function SuccessPage() {
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href="/recetas"
+                href={isPapaEvent ? '/el-sabor-de-papa' : '/recetas'}
                 className="btn-text flex-1 bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 rounded-full transition-all transform hover:scale-105"
               >
-                Ver recetas
+                {isPapaEvent ? 'Volver a El Sabor de Papá' : 'Ver recetas'}
               </Link>
               <Link
                 href="/"

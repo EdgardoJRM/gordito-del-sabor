@@ -3,42 +3,27 @@ import { MetadataRoute } from 'next';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://gorditodelsabor.com';
 
-  return [
-    {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 1,
-    },
-    {
-      url: `${baseUrl}/recetas`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/categorias`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/sobre-nosotros`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contacto`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/recetario`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.95,
-    },
+  const routes = [
+    '',
+    '/recetas',
+    '/categorias',
+    '/sobre-nosotros',
+    '/contacto',
+    '/recetario',
+    '/el-sabor-de-papa',
+    '/delantal',
+    '/la-boveda',
+    '/las-20-recetas-favoritas',
+    '/patrocinadores',
+    '/preguntas',
+    '/privacidad',
+    '/terminos',
   ];
+
+  return routes.map((path) => ({
+    url: `${baseUrl}${path}`,
+    lastModified: new Date(),
+    changeFrequency: path === '' ? 'weekly' : 'weekly',
+    priority: path === '' ? 1 : path === '/recetario' ? 0.95 : 0.8,
+  }));
 }
