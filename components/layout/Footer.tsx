@@ -17,7 +17,7 @@ export default function Footer() {
                 alt={siteConfig.brandName}
                 width={220}
                 height={50}
-                className="h-11 w-auto object-contain brightness-0 invert opacity-95"
+                className="h-11 w-auto object-contain"
               />
             </Link>
             <p className="body-text text-[#C4B8AE] text-lg leading-relaxed max-w-md">

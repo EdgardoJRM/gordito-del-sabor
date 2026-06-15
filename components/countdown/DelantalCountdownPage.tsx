@@ -93,7 +93,7 @@ export default function DelantalCountdownPage({ launchAtIso }: DelantalCountdown
             alt={siteConfig.brandName}
             width={220}
             height={52}
-            className="h-12 w-auto mx-auto mb-10 brightness-0 invert"
+            className="h-12 w-auto mx-auto mb-10"
             priority
           />
 

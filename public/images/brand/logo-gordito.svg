@@ -1,8 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 64" role="img" aria-label="El Gordito del Sabor">
   <title>El Gordito del Sabor</title>
-  <!-- Fondo suave para leer sobre fotos de comida -->
-  <rect x="0" y="0" width="280" height="64" rx="10" fill="#FAF8F5" fill-opacity="0.94" stroke="#E8E0D8" stroke-width="1"/>
-  <!-- Acento terracota -->
+  <rect x="0" y="0" width="280" height="64" rx="10" fill="#FAF8F5" stroke="#E8E0D8" stroke-width="1.5"/>
   <rect x="8" y="10" width="4" height="44" rx="2" fill="#C4472B"/>
   <text x="22" y="38" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="#1A1412">El Gordito</text>
   <text x="22" y="54" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif" font-size="13" font-weight="600" fill="#C4472B">del Sabor</text>

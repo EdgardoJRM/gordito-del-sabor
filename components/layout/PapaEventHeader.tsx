@@ -15,7 +15,7 @@ export default function PapaEventHeader() {
               alt={siteConfig.brandName}
               width={200}
               height={46}
-              className="h-10 w-auto brightness-0 invert object-contain"
+              className="h-10 w-auto object-contain"
               priority
             />
             <span className="sr-only">{siteConfig.brandName}</span>
