@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Settings, Menu, X, User, LogOut, CircleHelp, type LucideIcon } from 'lucide-react';
+import { Settings, Menu, X, User, LogOut, HelpCircle, type LucideIcon } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import Button from '@/components/ui/Button';
 import BrandLogo from '@/components/shared/BrandLogo';
@@ -18,7 +18,7 @@ const navItems: { label: string; href: string; icon?: LucideIcon }[] = [
   { label: 'Inicio', href: '/' },
   { label: 'Delantal de Papá', href: '/el-sabor-de-papa' },
   { label: 'Recetas', href: '/recetas' },
-  { label: 'Preguntas', href: '/preguntas', icon: CircleHelp },
+  { label: 'Preguntas', href: '/preguntas', icon: HelpCircle },
 ];
 
 export default function Navbar({ overlayHero = false, pinOnScroll = true }: NavbarProps) {
