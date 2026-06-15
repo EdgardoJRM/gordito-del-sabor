@@ -28,11 +28,34 @@ function bundleExtras(bundleId: string): string {
   if (bundleId === 'vip' || bundleId === 'legado') {
     return `
       <p style="margin:0 0 12px 0;">
-        En los próximos días recibirás también el <strong>video exclusivo de saludo</strong> y la invitación al <strong>grupo privado de WhatsApp</strong>.
+        Tu bundle incluye el <strong>video exclusivo de saludo</strong> — te lo enviamos por este correo en los próximos días.
       </p>
     `;
   }
   return '';
+}
+
+function comunidadBlock(): string {
+  return `
+    <tr>
+      <td style="padding:0 28px 28px 28px;">
+        <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#E8F5E9;border-radius:12px;border:1px solid #25D366;">
+          <tr>
+            <td style="padding:22px 20px;font-size:16px;line-height:1.6;color:#1A1412;text-align:center;">
+              <p style="margin:0 0 8px 0;font-weight:bold;color:#128C7E;">La Comunidad Del Sabor</p>
+              <p style="margin:0 0 16px 0;">
+                Únete al grupo de WhatsApp de la comunidad: recetas, sazón y familia Gordito.
+              </p>
+              <a href="${siteConfig.whatsappCommunity}"
+                style="background:#25D366;color:#ffffff;padding:14px 28px;font-size:16px;font-weight:bold;text-decoration:none;border-radius:999px;display:inline-block;">
+                Entrar a la comunidad
+              </a>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  `;
 }
 
 export function buildPapaCustomerEmailHtml(order: IPapaOrder): string {
@@ -117,6 +140,8 @@ export function buildPapaCustomerEmailHtml(order: IPapaOrder): string {
               </a>
             </td>
           </tr>
+
+          ${comunidadBlock()}
 
           <tr>
             <td align="center" style="padding:0 28px 32px 28px;">

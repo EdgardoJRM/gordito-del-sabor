@@ -12,9 +12,11 @@ export const siteConfig = {
   instagram: 'https://www.instagram.com/elgorditodelsaborpr',
   facebook: 'https://www.facebook.com/profile.php?id=100084882467280',
   tiktok: 'https://www.tiktok.com/@elgorditodelsaborpr',
-  /** Grupo de WhatsApp para dudas del delantal y la comunidad. */
+  /** Grupo de WhatsApp para dudas del delantal. */
   whatsappGroup:
     'https://chat.whatsapp.com/FqBwOTdgyW4Llib1qImkGb?s=cl&p=i&ilr=2',
+  /** Comunidad Del Sabor — incluida en el email de compra. */
+  whatsappCommunity: 'https://chat.whatsapp.com/HrUVCpLw4u931hNvvTFe1P',
   logoPath: '/images/brand/logo-gordito.png',
   mascotPath: '/images/brand/mascot-chef-gordito.svg',
   /** false = el recetario solo va con compra del delantal (email post-pago). */
