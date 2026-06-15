@@ -62,16 +62,11 @@ export async function handlePapaCheckoutCompleted(
 
   const existing = await PapaOrder.findOne({ stripeSessionId: hydrated.id });
   if (existing) {
-    const snapshot = await getPapaInventory();
-    try {
-      await sendPapaOrderEmails(existing, snapshot);
-      console.info('Papa webhook: pedido ya existía — emails reenviados', {
-        sessionId: hydrated.id,
-        email: existing.customerEmail,
-      });
-    } catch (error) {
-      console.error('Papa webhook: error reenviando emails', error);
-    }
+    console.info('Papa webhook: pedido duplicado, omitiendo', {
+      sessionId: hydrated.id,
+      email: existing.customerEmail,
+      emailsSentAt: existing.emailsSentAt ?? null,
+    });
     return;
   }
 
@@ -116,6 +111,8 @@ export async function handlePapaCheckoutCompleted(
 
   try {
     await sendPapaOrderEmails(order, snapshot);
+    order.emailsSentAt = new Date();
+    await order.save();
   } catch (error) {
     console.error('Papa webhook: error enviando emails', error);
   }

@@ -12,6 +12,7 @@ export interface IPapaOrder extends Document {
   customerName?: string;
   customFields: Record<string, string>;
   paymentLinkId?: string;
+  emailsSentAt?: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -63,6 +64,9 @@ const PapaOrderSchema = new Schema<IPapaOrder>(
     },
     paymentLinkId: {
       type: String,
+    },
+    emailsSentAt: {
+      type: Date,
     },
   },
   { timestamps: true }

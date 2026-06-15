@@ -106,6 +106,11 @@ async function main() {
   if (customerResult.error) throw new Error(`Cliente: ${customerResult.error.message}`);
 
   console.log('OK — emails enviados. ID cliente:', customerResult.data?.id);
+
+  await mongoose.connection.db
+    .collection('papaorders')
+    .updateOne({ stripeSessionId: SESSION_ID }, { $set: { emailsSentAt: new Date() } });
+
   await mongoose.disconnect();
 }
 
