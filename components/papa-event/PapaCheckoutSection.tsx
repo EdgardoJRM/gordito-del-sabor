@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { Check, Loader2 } from 'lucide-react';
 import {
   papaBundles,
@@ -8,14 +9,21 @@ import {
   validateEmbroideryNames,
   type PapaBundleId,
 } from '@/lib/papa-event';
+import { siteConfig } from '@/lib/site-config';
 
 export default function PapaCheckoutSection() {
+  const searchParams = useSearchParams();
   const [bundleId, setBundleId] = useState<PapaBundleId>('vip');
   const [name1, setName1] = useState('');
   const [name2, setName2] = useState('');
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [cancelled, setCancelled] = useState(false);
+
+  useEffect(() => {
+    setCancelled(searchParams.get('cancelled') === '1');
+  }, [searchParams]);
 
   const selected = papaBundles[bundleId];
   const isLegado = bundleId === 'legado';
@@ -64,19 +72,45 @@ export default function PapaCheckoutSection() {
   };
 
   return (
-    <section id="ordenar" className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8] scroll-mt-28">
-      <div className="container-custom max-w-5xl">
-        <div className="text-center mb-12">
-          <p className="label-eyebrow text-[#6B5B4E] mb-3">Edición Día de los Padres</p>
-          <h2 className="heading-section text-[#1A1412] text-3xl md:text-5xl mb-4">
-            Elige tu bundle y personaliza
+    <section
+      id="ordenar"
+      className="section-spacing-comfort bg-[#F2EDE6] border-t border-[#E8E0D8] scroll-mt-28"
+    >
+      <div className="container-custom max-w-4xl">
+        <div className="text-center mb-10">
+          <p className="comfort-eyebrow text-[#6B5B4E] mb-3">Paso 1: elige tu oferta</p>
+          <h2 className="heading-section-comfort text-[#1A1412] mb-4">
+            Personaliza y ordena tu delantal
           </h2>
           <p className="body-text text-lg max-w-2xl mx-auto">
-            Stock real en mano — sin preventa. Ordena hoy y recibe antes del Día de los Padres.
+            Stock en mano. Ordena hoy y recibe antes del Día de los Padres.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        {cancelled && (
+          <div
+            className="mb-8 rounded-2xl border-2 border-[#C4472B]/40 bg-[#FFF8F5] p-6 text-center"
+            role="status"
+          >
+            <p className="text-lg font-bold text-[#1A1412] mb-1">No se completó el pago</p>
+            <p className="body-text">
+              Puedes intentar de nuevo abajo. Si necesitas ayuda, escríbenos a{' '}
+              <a href={`mailto:${siteConfig.email}`} className="text-[#C4472B] font-bold underline">
+                {siteConfig.email}
+              </a>
+              .
+            </p>
+          </div>
+        )}
+
+        <div
+          role="radiogroup"
+          aria-labelledby="bundle-picker-label"
+          className="grid grid-cols-1 gap-5 mb-10"
+        >
+          <p id="bundle-picker-label" className="sr-only">
+            Selecciona tu oferta
+          </p>
           {(Object.keys(papaBundles) as PapaBundleId[]).map((id) => {
             const bundle = papaBundles[id];
             const active = bundleId === id;
@@ -84,24 +118,28 @@ export default function PapaCheckoutSection() {
               <button
                 key={id}
                 type="button"
+                role="radio"
+                aria-checked={active}
                 onClick={() => setBundleId(id)}
-                className={`relative text-left rounded-2xl border p-6 transition-all ${
+                className={`relative text-left rounded-2xl border-2 p-6 md:p-8 transition-all min-h-[120px] ${
                   active
                     ? 'border-[#C4472B] bg-[#FFF8F5] ring-2 ring-[#C4472B]/30 shadow-md'
                     : 'border-[#E8E0D8] bg-[#FAF8F5] hover:border-[#C4472B]/40'
                 }`}
               >
                 {bundle.badge && (
-                  <span className="absolute -top-3 left-4 rounded-full bg-[#C4472B] px-3 py-1 text-xs font-bold uppercase text-white">
+                  <span className="inline-block rounded-full bg-[#C4472B] px-4 py-1.5 text-sm font-bold text-white mb-3">
                     {bundle.badge}
                   </span>
                 )}
-                <h3 className="text-xl font-bold text-[#1A1412] mb-1">{bundle.title}</h3>
-                <p className="text-3xl font-bold text-[#C4472B] mb-4">{bundle.priceLabel}</p>
+                <div className="flex flex-wrap items-baseline justify-between gap-3 mb-4">
+                  <h3 className="text-2xl font-bold text-[#1A1412]">{bundle.title}</h3>
+                  <p className="text-3xl font-bold text-[#C4472B]">{bundle.priceLabel}</p>
+                </div>
                 <ul className="space-y-2">
                   {bundle.bullets.map((line) => (
-                    <li key={line} className="flex gap-2 text-sm text-[#6B5B4E]">
-                      <Check className="shrink-0 text-[#C4472B] mt-0.5" size={16} />
+                    <li key={line} className="flex gap-3 text-lg text-[#6B5B4E]">
+                      <Check className="shrink-0 text-[#C4472B] mt-1" size={20} aria-hidden />
                       {line}
                     </li>
                   ))}
@@ -111,14 +149,18 @@ export default function PapaCheckoutSection() {
           })}
         </div>
 
-        <div className="rounded-3xl border border-[#E8E0D8] bg-[#FAF8F5] p-8 md:p-10 shadow-sm max-w-2xl mx-auto">
-          <h3 className="text-xl font-bold text-[#1A1412] mb-6">
-            Personalización — {selected.title}
+        <div className="rounded-3xl border-2 border-[#E8E0D8] bg-[#FAF8F5] p-8 md:p-10 shadow-sm">
+          <h3 className="text-2xl font-bold text-[#1A1412] mb-2">
+            Paso 2: datos para el bordado
           </h3>
+          <p className="body-text text-lg mb-8">
+            Oferta seleccionada: <strong className="text-[#1A1412]">{selected.title}</strong> (
+            {selected.priceLabel})
+          </p>
 
-          <div className="space-y-5">
+          <div className="space-y-6">
             <div>
-              <label htmlFor="embroidery-1" className="block text-sm font-bold text-[#1A1412] mb-2">
+              <label htmlFor="embroidery-1" className="block text-lg font-bold text-[#1A1412] mb-2">
                 {isLegado ? 'Nombre delantal 1 (papá)' : 'Nombre a bordar'}
               </label>
               <input
@@ -128,16 +170,17 @@ export default function PapaCheckoutSection() {
                 value={name1}
                 onChange={(e) => setName1(e.target.value.slice(0, papaEvent.maxEmbroideryChars))}
                 placeholder="Ej: Papi"
-                className="w-full rounded-xl border border-[#E8E0D8] bg-white px-4 py-3 text-[#1A1412] focus:outline-none focus:ring-2 focus:ring-[#C4472B]"
+                className="input-comfort"
+                autoComplete="off"
               />
-              <p className="text-xs text-[#9C8B80] mt-1">
-                Máx. {papaEvent.maxEmbroideryChars} caracteres
+              <p className="text-base text-[#6B5B4E] mt-2">
+                Máximo {papaEvent.maxEmbroideryChars} letras. Escribe exactamente cómo quieres que salga.
               </p>
             </div>
 
             {isLegado && (
               <div>
-                <label htmlFor="embroidery-2" className="block text-sm font-bold text-[#1A1412] mb-2">
+                <label htmlFor="embroidery-2" className="block text-lg font-bold text-[#1A1412] mb-2">
                   Nombre delantal 2 (hijo/a)
                 </label>
                 <input
@@ -147,14 +190,15 @@ export default function PapaCheckoutSection() {
                   value={name2}
                   onChange={(e) => setName2(e.target.value.slice(0, papaEvent.maxEmbroideryChars))}
                   placeholder="Ej: Nene"
-                  className="w-full rounded-xl border border-[#E8E0D8] bg-white px-4 py-3 text-[#1A1412] focus:outline-none focus:ring-2 focus:ring-[#C4472B]"
+                  className="input-comfort"
+                  autoComplete="off"
                 />
               </div>
             )}
 
             <div>
-              <label htmlFor="checkout-email" className="block text-sm font-bold text-[#1A1412] mb-2">
-                Tu email (confirmación de orden)
+              <label htmlFor="checkout-email" className="block text-lg font-bold text-[#1A1412] mb-2">
+                Tu email (para la confirmación)
               </label>
               <input
                 id="checkout-email"
@@ -162,13 +206,14 @@ export default function PapaCheckoutSection() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@email.com"
-                className="w-full rounded-xl border border-[#E8E0D8] bg-white px-4 py-3 text-[#1A1412] focus:outline-none focus:ring-2 focus:ring-[#C4472B]"
+                className="input-comfort"
+                autoComplete="email"
               />
             </div>
           </div>
 
           {error && (
-            <p className="mt-4 text-sm font-medium text-[#C4472B]" role="alert">
+            <p className="mt-6 text-lg font-bold text-[#C4472B]" role="alert">
               {error}
             </p>
           )}
@@ -177,20 +222,25 @@ export default function PapaCheckoutSection() {
             type="button"
             onClick={handleCheckout}
             disabled={loading}
-            className="btn-text mt-8 w-full bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 rounded-full transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            className="btn-text mt-8 w-full bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 rounded-full transition-all shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[56px] text-xl"
           >
             {loading ? (
               <>
-                <Loader2 className="animate-spin" size={20} />
+                <Loader2 className="animate-spin" size={24} />
                 Abriendo pago seguro…
               </>
             ) : (
-              `Pagar ${selected.priceLabel} con Stripe`
+              `Pagar ${selected.priceLabel} — pago seguro`
             )}
           </button>
 
-          <p className="text-xs text-center text-[#9C8B80] mt-4">
-            Pago seguro con Stripe · Envío calculado en checkout · Hecho en Puerto Rico
+          <p className="text-base text-center text-[#6B5B4E] mt-6 leading-relaxed">
+            Pago seguro con Stripe · Envío en checkout · Hecho en Puerto Rico
+            <br />
+            ¿Dudas?{' '}
+            <a href={`mailto:${siteConfig.email}`} className="text-[#C4472B] font-bold underline">
+              Escríbenos
+            </a>
           </p>
         </div>
       </div>

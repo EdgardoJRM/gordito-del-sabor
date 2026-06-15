@@ -2,7 +2,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 
 type Variant = 'primary' | 'secondary' | 'dark' | 'ghost';
-type Size = 'md' | 'sm';
+type Size = 'md' | 'sm' | 'lg';
 
 export type ButtonProps = {
   children: ReactNode;
@@ -28,8 +28,9 @@ const variants: Record<Variant, string> = {
 };
 
 const sizes: Record<Size, string> = {
-  md: 'py-4 px-8 md:px-10 text-base',
-  sm: 'py-2.5 px-6 text-sm',
+  md: 'py-4 px-8 md:px-10 text-base min-h-[48px]',
+  sm: 'py-3 px-6 text-base min-h-[44px]',
+  lg: 'py-5 px-10 text-lg min-h-[56px]',
 };
 
 export default function Button({

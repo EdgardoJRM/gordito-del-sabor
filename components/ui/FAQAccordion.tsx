@@ -27,11 +27,11 @@ export default function FAQAccordion({ items, dark }: FAQAccordionProps) {
           <div key={item.id} className={dark ? 'bg-[#1A1412]' : 'bg-[#FAF8F5]'}>
             <button
               type="button"
-              className={`flex w-full items-center justify-between gap-4 px-6 py-5 text-left ${btn}`}
+              className={`flex w-full items-center justify-between gap-4 px-6 py-6 text-left min-h-[64px] ${btn}`}
               onClick={() => setOpenId(open ? null : item.id)}
               aria-expanded={open}
             >
-              <span className="font-bold text-base md:text-lg pr-2">{item.question}</span>
+              <span className="font-bold text-lg md:text-xl pr-2">{item.question}</span>
               <ChevronDown
                 className={`shrink-0 transition-transform ${open ? 'rotate-180' : ''} ${
                   dark ? 'text-[#E8D4BC]' : 'text-[#6B5B4E]'
@@ -41,7 +41,7 @@ export default function FAQAccordion({ items, dark }: FAQAccordionProps) {
               />
             </button>
             {open && (
-              <div className={`px-6 pb-5 body-text ${content}`}>{item.answer}</div>
+              <div className={`px-6 pb-6 body-text text-lg ${content}`}>{item.answer}</div>
             )}
           </div>
         );

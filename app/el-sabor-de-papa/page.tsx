@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import Image from 'next/image';
 import { Heart, Pencil, Shield, Clock } from 'lucide-react';
 import PapaStickyBar from '@/components/papa-event/PapaStickyBar';
@@ -34,13 +35,22 @@ const benefitIcons = {
   clock: Clock,
 };
 
+function CheckoutFallback() {
+  return (
+    <section className="section-spacing-comfort bg-[#F2EDE6] border-t border-[#E8E0D8]">
+      <div className="container-custom text-center py-12">
+        <p className="body-text text-lg">Cargando formulario de orden…</p>
+      </div>
+    </section>
+  );
+}
+
 export default function ElSaborDePapaPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
       <PapaStickyBar />
 
-      {/* Hero */}
-      <section className="relative min-h-[85vh] flex items-end overflow-hidden bg-[#1A1412]">
+      <section className="relative min-h-[75vh] flex items-end overflow-hidden bg-[#1A1412]">
         <Image
           src="/images/social/source-gordito-pavo-oficial.jpg"
           alt="El Gordito del Sabor — edición Día de los Padres"
@@ -49,46 +59,44 @@ export default function ElSaborDePapaPage() {
           className="object-cover object-center opacity-70"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1412] via-[#1A1412]/55 to-[#1A1412]/20" />
-        <div className="relative container-custom pb-16 md:pb-24 pt-32 w-full min-w-0">
-          <span className="inline-block max-w-full rounded-full bg-[#C4472B] px-3 py-1.5 sm:px-4 text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wide sm:tracking-wider text-white mb-6">
-            Edición ultra-limitada: solo {papaEvent.totalAprons} unidades
-          </span>
-          <h1 className="heading-hero text-[#FAF8F5] max-w-4xl mb-6 break-words hyphens-auto">
-            Regala un legado: el delantal personalizado de El Gordito del Sabor
-          </h1>
-          <p className="subheadline text-[#E8D4BC] max-w-2xl mb-8 break-words">
-            Este Día de los Padres, ponle su nombre al regalo más sabroso de Puerto Rico. Stock en
-            mano — sin preventa.
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A1412] via-[#1A1412]/60 to-[#1A1412]/25" />
+        <div className="relative container-custom pb-14 md:pb-20 pt-28 w-full min-w-0">
+          <p className="comfort-eyebrow text-[#E8D4BC] mb-4">
+            Solo {papaEvent.totalAprons} unidades · Día de los Padres
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 mb-6 w-full max-w-full">
-            <Button href="#ordenar" variant="primary" className="shadow-xl w-full sm:w-auto text-center">
-              Personalizar mi delantal ahora
-            </Button>
-          </div>
-          <p className="text-sm text-[#C4B8AE]">{papaEvent.socialProof}</p>
+          <h1 className="heading-hero text-[#FAF8F5] max-w-3xl mb-6 break-words">
+            El delantal personalizado que papá va a usar con orgullo
+          </h1>
+          <p className="text-xl md:text-2xl text-[#E8D4BC] max-w-2xl mb-8 leading-relaxed">
+            Ponle su nombre al regalo más sabroso de Puerto Rico. Stock en mano, sin preventa.
+          </p>
+          <Button href="#ordenar" size="lg" className="shadow-xl w-full sm:w-auto">
+            Personalizar mi delantal
+          </Button>
+          <p className="mt-6 text-lg text-[#C4B8AE]">{papaEvent.socialProof}</p>
         </div>
       </section>
 
-      {/* Benefits */}
-      <section className="section-spacing bg-[#FAF8F5]">
-        <div className="container-custom">
-          <h2 className="heading-section text-[#1A1412] text-center text-3xl md:text-4xl mb-12">
+      <section className="section-spacing-comfort bg-[#FAF8F5]">
+        <div className="container-custom max-w-4xl">
+          <h2 className="heading-section-comfort text-[#1A1412] text-center mb-10">
             ¿Por qué este delantal?
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {papaBenefits.map((item) => {
               const Icon = benefitIcons[item.icon];
               return (
                 <article
                   key={item.title}
-                  className="rounded-2xl border border-[#E8E0D8] bg-[#F2EDE6] p-6 text-center"
+                  className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-6 flex gap-4"
                 >
-                  <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#C4472B]/10 text-[#C4472B]">
-                    <Icon size={24} aria-hidden />
+                  <div className="shrink-0 flex h-12 w-12 items-center justify-center rounded-full bg-[#C4472B]/10 text-[#C4472B]">
+                    <Icon size={26} aria-hidden />
                   </div>
-                  <h3 className="font-bold text-[#1A1412] mb-2">{item.title}</h3>
-                  <p className="body-text text-sm">{item.text}</p>
+                  <div>
+                    <h3 className="text-xl font-bold text-[#1A1412] mb-2">{item.title}</h3>
+                    <p className="body-text text-lg">{item.text}</p>
+                  </div>
                 </article>
               );
             })}
@@ -96,26 +104,27 @@ export default function ElSaborDePapaPage() {
         </div>
       </section>
 
-      <PapaCheckoutSection />
+      <Suspense fallback={<CheckoutFallback />}>
+        <PapaCheckoutSection />
+      </Suspense>
 
-      {/* Steps */}
-      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
-        <div className="container-custom max-w-4xl">
-          <h2 className="heading-section text-[#1A1412] text-center text-3xl md:text-4xl mb-12">
+      <section className="section-spacing-comfort bg-[#FAF8F5] border-t border-[#E8E0D8]">
+        <div className="container-custom max-w-3xl">
+          <h2 className="heading-section-comfort text-[#1A1412] text-center mb-10">
             Así de fácil es ordenar
           </h2>
-          <ol className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <ol className="space-y-5">
             {papaSteps.map((step) => (
               <li
                 key={step.step}
-                className="flex gap-4 rounded-2xl border border-[#E8E0D8] bg-white p-6"
+                className="flex gap-5 rounded-2xl border-2 border-[#E8E0D8] bg-white p-6"
               >
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#C4472B] text-white font-bold">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#C4472B] text-white text-xl font-bold">
                   {step.step}
                 </span>
                 <div>
-                  <h3 className="font-bold text-[#1A1412] mb-1">{step.title}</h3>
-                  <p className="body-text text-sm">{step.text}</p>
+                  <h3 className="text-xl font-bold text-[#1A1412] mb-1">{step.title}</h3>
+                  <p className="body-text text-lg">{step.text}</p>
                 </div>
               </li>
             ))}
@@ -123,60 +132,55 @@ export default function ElSaborDePapaPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
-        <div className="container-custom max-w-4xl">
-          <h2 className="heading-section text-[#1A1412] text-center text-3xl md:text-4xl mb-10">
+      <section className="section-spacing-comfort bg-[#F2EDE6] border-t border-[#E8E0D8]">
+        <div className="container-custom max-w-xl">
+          <h2 className="heading-section-comfort text-[#1A1412] text-center mb-8">
             Lo que dice la familia
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-1 gap-6 max-w-xl mx-auto">
-            {papaTestimonials.map((t) => (
-              <TestimonialCard
-                key={t.id}
-                t={{ id: t.id, quote: t.quote, name: t.author, role: t.location, isReal: false }}
-              />
-            ))}
-          </div>
-          <div className="mt-10 flex flex-wrap justify-center gap-6 text-sm text-[#6B5B4E]">
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#E8E0D8] bg-[#FAF8F5] px-4 py-2 font-bold">
+          {papaTestimonials.map((t) => (
+            <TestimonialCard
+              key={t.id}
+              t={{ id: t.id, quote: t.quote, name: t.author, role: t.location, isReal: false }}
+            />
+          ))}
+          <div className="mt-8 flex flex-wrap justify-center gap-4 text-lg font-bold text-[#1A1412]">
+            <span className="rounded-full border-2 border-[#E8E0D8] bg-white px-5 py-3">
               Hecho en Puerto Rico
             </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-[#E8E0D8] bg-[#FAF8F5] px-4 py-2 font-bold">
-              Pago seguro con Stripe
+            <span className="rounded-full border-2 border-[#E8E0D8] bg-white px-5 py-3">
+              Pago seguro
             </span>
           </div>
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="section-spacing bg-[#1A1412]">
+      <section className="section-spacing-comfort bg-[#1A1412]">
         <div className="container-custom max-w-3xl">
-          <h2 className="heading-section text-[#FAF8F5] text-center text-3xl md:text-4xl mb-10">
+          <h2 className="heading-section-comfort text-[#FAF8F5] text-center mb-8">
             Preguntas frecuentes
           </h2>
           <FAQAccordion
             items={papaFaqs.map((f) => ({ id: f.id, question: f.question, answer: f.answer }))}
             dark
           />
-          <p className="text-center text-[#C4B8AE] mt-8 body-text">
+          <p className="text-center text-[#C4B8AE] mt-8 text-lg">
             ¿Más dudas? Escríbenos a{' '}
-            <a href={`mailto:${siteConfig.email}`} className="text-[#E8D4BC] underline">
+            <a href={`mailto:${siteConfig.email}`} className="text-[#E8D4BC] underline font-bold">
               {siteConfig.email}
             </a>
           </p>
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="section-spacing bg-[#C4472B] text-center">
+      <section className="section-spacing-comfort bg-[#C4472B] text-center">
         <div className="container-custom max-w-2xl space-y-6">
-          <h2 className="heading-section text-white text-3xl md:text-4xl">
-            Una vez se agoten los 100, no habrá más
+          <h2 className="heading-section-comfort text-white">
+            Cuando se agoten los 100, no habrá más
           </h2>
-          <p className="text-[#FFE8E0] text-lg">
+          <p className="text-xl text-[#FFE8E0] leading-relaxed">
             No dejes a papá con las manos vacías este domingo. Esto es bello — y se acaba.
           </p>
-          <Button href="#ordenar" variant="dark" className="bg-[#1A1412] border-[#1A1412]">
+          <Button href="#ordenar" variant="dark" size="lg" className="bg-[#1A1412] border-[#1A1412]">
             Personalizar mi delantal ahora
           </Button>
         </div>

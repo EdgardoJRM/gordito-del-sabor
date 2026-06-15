@@ -4,18 +4,8 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Download } from 'lucide-react';
 
-const FLOAT_PATHS = new Set([
-  '/',
-  '/recetas',
-  '/recetario',
-  '/el-sabor-de-papa',
-  '/delantal',
-  '/la-boveda',
-  '/las-20-recetas-favoritas',
-  '/sobre-nosotros',
-  '/patrocinadores',
-  '/preguntas',
-]);
+/** Rutas donde el recetario flotante ayuda sin competir con la compra del delantal. */
+const FLOAT_PATHS = new Set(['/recetas', '/recetario', '/sobre-nosotros']);
 
 export default function FloatingEbookCTA() {
   const pathname = usePathname();
@@ -30,12 +20,11 @@ export default function FloatingEbookCTA() {
   return (
     <a
       href="/recetario"
-      className="fixed bottom-8 right-8 z-40 flex items-center gap-2 bg-[#C4472B] hover:bg-[#A8381F] text-white font-bold py-3 px-6 rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-xl"
+      className="fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-[#1A1412] hover:bg-black text-white font-bold py-4 px-6 rounded-full transition-all shadow-lg text-base min-h-[52px]"
       title="Descargar recetario gratis"
     >
-      <Download size={20} />
-      <span className="hidden sm:inline">Recetario gratis</span>
-      <span className="sm:hidden">PDF</span>
+      <Download size={22} aria-hidden />
+      <span>Recetario gratis</span>
     </a>
   );
 }
