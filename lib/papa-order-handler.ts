@@ -71,7 +71,6 @@ export async function handlePapaCheckoutCompleted(
       });
     } catch (error) {
       console.error('Papa webhook: error reenviando emails', error);
-      throw error;
     }
     return;
   }

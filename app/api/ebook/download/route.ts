@@ -4,6 +4,7 @@ import dbConnect from '@/lib/mongodb';
 import Lead from '@/lib/models/Lead';
 import { SOCIAL_URLS } from '@/lib/social-links';
 import { CONTACT_EMAIL } from '@/lib/contact-email';
+import { getResendFromAddress } from '@/lib/resend-from';
 import { isRecetarioGratisEnabled } from '@/lib/recetario-access';
 import { getRecetarioPdfAttachment } from '@/lib/recetario-pdf';
 
@@ -46,7 +47,7 @@ export async function POST(req: Request) {
 
     // Enviar email con Resend
     const emailResponse = await resend.emails.send({
-      from: 'El Gordito del Sabor <noreply@gorditodelsabor.com>',
+      from: getResendFromAddress(),
       replyTo: CONTACT_EMAIL,
       to: email,
       subject: '¡Tu recetario está listo! Las 20 Recetas Favoritas Del Sabor',

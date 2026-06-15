@@ -6,7 +6,7 @@ import {
   buildPapaCustomerEmailHtml,
   getPapaCustomerEmailSubject,
 } from '@/lib/papa-customer-email';
-import { getRecetarioPdfAttachment } from '@/lib/recetario-pdf';
+import { getResendFromAddress } from '@/lib/resend-from';
 import type { InventorySnapshot } from '@/lib/papa-inventory';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -46,9 +46,10 @@ export async function sendPapaOrderEmails(
     return;
   }
 
+  const from = getResendFromAddress();
   const totalLabel = formatMoney(order.amountTotal, order.currency);
   const customFields = customFieldsHtml(order.customFields as Record<string, string>);
-  const pdfAttachments = getRecetarioPdfAttachment();
+  const customerHtml = buildPapaCustomerEmailHtml(order);
 
   const teamHtml = `
     <h2>Nuevo pedido — El Sabor de Papá</h2>
@@ -63,23 +64,20 @@ export async function sendPapaOrderEmails(
     <p><strong>Stripe session:</strong> ${order.stripeSessionId}</p>
   `;
 
-  const customerHtml = buildPapaCustomerEmailHtml(order, pdfAttachments.length > 0);
-
   const [teamResult, customerResult] = await Promise.all([
     resend.emails.send({
-      from: 'El Gordito del Sabor <noreply@gorditodelsabor.com>',
+      from,
       replyTo: CONTACT_EMAIL,
       to: notifyEmail(),
       subject: `Nuevo pedido Papá — ${order.bundleTitle} (${inventory.remaining} quedan)`,
       html: teamHtml,
     }),
     resend.emails.send({
-      from: 'El Gordito del Sabor <noreply@gorditodelsabor.com>',
+      from,
       replyTo: CONTACT_EMAIL,
       to: order.customerEmail,
       subject: getPapaCustomerEmailSubject(order),
       html: customerHtml,
-      attachments: pdfAttachments,
     }),
   ]);
 

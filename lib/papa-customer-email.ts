@@ -3,6 +3,9 @@ import { papaEvent } from '@/lib/papa-event';
 import { CONTACT_EMAIL } from '@/lib/contact-email';
 import { siteConfig } from '@/lib/site-config';
 import { SOCIAL_URLS } from '@/lib/social-links';
+import { getSiteUrl } from '@/lib/stripe';
+
+const RECETARIO_PDF_URL = `${getSiteUrl()}/ebooks/recetario.pdf`;
 
 function formatMoney(amountCents: number, currency: string): string {
   return new Intl.NumberFormat('es-PR', {
@@ -32,7 +35,7 @@ function bundleExtras(bundleId: string): string {
   return '';
 }
 
-export function buildPapaCustomerEmailHtml(order: IPapaOrder, hasPdf = true): string {
+export function buildPapaCustomerEmailHtml(order: IPapaOrder): string {
   const name = order.customerName?.trim();
   const greeting = name ? `Hola, <strong>${name}</strong>` : 'Hola';
   const totalLabel = formatMoney(order.amountTotal, order.currency);
@@ -95,20 +98,23 @@ export function buildPapaCustomerEmailHtml(order: IPapaOrder, hasPdf = true): st
 
           <tr>
             <td style="padding:0 28px 32px 28px;font-size:17px;line-height:1.65;color:#1A1412;">
-              <p style="margin:0 0 12px 0;font-weight:bold;">Tu recetario digital va adjunto</p>
+              <p style="margin:0 0 12px 0;font-weight:bold;">Tu recetario digital</p>
               <p style="margin:0 0 16px 0;">
-                Como parte de tu compra, aquí tienes <strong>Las 20 Recetas Favoritas del Sabor</strong> — sazón boricua de verdad, listas para tu cocina.
+                Como parte de tu compra, tienes <strong>Las 20 Recetas Favoritas del Sabor</strong> — sazón boricua de verdad, listas para tu cocina.
               </p>
-              ${
-                hasPdf
-                  ? `<p style="margin:0 0 16px 0;color:#6B5B4E;font-size:15px;">
-                      Busca el archivo <strong>Las-20-Recetas-Favoritas-Del-Sabor.pdf</strong> en este correo. Si no lo ves, revisa spam o promociones.
-                    </p>`
-                  : `<p style="margin:0 0 16px 0;color:#6B5B4E;font-size:15px;">
-                      Te lo reenviamos en breve si el adjunto no llegó.
-                    </p>`
-              }
+              <p style="margin:0 0 20px 0;color:#6B5B4E;font-size:15px;">
+                Descárgalo con el botón de abajo. Guárdalo en tu teléfono para tenerlo a mano en la cocina.
+              </p>
               ${bundleExtras(order.bundleId)}
+            </td>
+          </tr>
+
+          <tr>
+            <td align="center" style="padding:0 28px 16px 28px;">
+              <a href="${RECETARIO_PDF_URL}"
+                style="background:#1A1412;color:#ffffff;padding:16px 32px;font-size:17px;font-weight:bold;text-decoration:none;border-radius:999px;display:inline-block;">
+                Descargar recetario PDF
+              </a>
             </td>
           </tr>
 
