@@ -36,10 +36,28 @@ function resolveBundleFromPaymentLinks(session: Stripe.Checkout.Session): PapaBu
   return null;
 }
 
-function resolveBundleFromAmount(amountTotal: number | null): PapaBundleId | null {
-  if (amountTotal == null) return null;
+/** IDs de Payment Links live — deben coincidir con la cuenta de Stripe. */
+const stripePaymentLinkBundleById: Partial<Record<string, PapaBundleId>> = {
+  plink_1TicqVPV9eedAMsC7p9Apd5l: 'premium',
+  plink_1Tict8PV9eedAMsCPng7vqhz: 'vip',
+  plink_1TictWPV9eedAMsCgp88eSoH: 'legado',
+};
 
-  const match = bundleIds.find((id) => Math.round(papaBundles[id].price * 100) === amountTotal);
+function resolveBundleFromPaymentLinkId(session: Stripe.Checkout.Session): PapaBundleId | null {
+  const id =
+    typeof session.payment_link === 'string' ? session.payment_link : session.payment_link?.id;
+  if (!id) return null;
+  return stripePaymentLinkBundleById[id] ?? null;
+}
+
+function sessionPriceCents(session: Stripe.Checkout.Session): number | null {
+  return session.amount_subtotal ?? session.amount_total ?? null;
+}
+
+function resolveBundleFromAmount(amountCents: number | null): PapaBundleId | null {
+  if (amountCents == null) return null;
+
+  const match = bundleIds.find((id) => Math.round(papaBundles[id].price * 100) === amountCents);
   return match ?? null;
 }
 
@@ -80,13 +98,16 @@ export function resolvePapaBundleFromSession(
     return metadataBundle;
   }
 
+  const fromPaymentLinkId = resolveBundleFromPaymentLinkId(session);
+  if (fromPaymentLinkId) return fromPaymentLinkId;
+
   const fromLink = resolveBundleFromPaymentLinks(session);
   if (fromLink) return fromLink;
 
   const fromLineItems = resolveBundleFromLineItems(session);
   if (fromLineItems) return fromLineItems;
 
-  return resolveBundleFromAmount(session.amount_total);
+  return resolveBundleFromAmount(sessionPriceCents(session));
 }
 
 export function isPapaCheckoutSession(session: Stripe.Checkout.Session): boolean {
