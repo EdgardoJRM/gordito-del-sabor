@@ -1,11 +1,11 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Settings, Menu, X, User, LogOut } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import Button from '@/components/ui/Button';
+import BrandLogo from '@/components/shared/BrandLogo';
 import { siteConfig } from '@/lib/site-config';
 
 type NavbarProps = {
@@ -35,12 +35,11 @@ export default function Navbar({ overlayHero = false }: NavbarProps) {
       <div className="container-custom">
         <div className="flex justify-between items-center py-4">
           <Link href="/" className="flex items-center gap-3 min-w-0">
-            <Image
-              src={siteConfig.logoPath}
-              alt={siteConfig.brandName}
+            <BrandLogo
               width={64}
               height={64}
-              className="h-14 w-14 md:h-16 md:w-16 object-contain"
+              className="h-14 w-14 md:h-16 md:w-16"
+              imageClassName="h-full w-full object-contain"
               priority
             />
             <span className="sr-only">{siteConfig.brandName}</span>

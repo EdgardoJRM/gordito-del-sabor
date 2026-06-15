@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
+import BrandLogo from '@/components/shared/BrandLogo';
 import { siteConfig } from '@/lib/site-config';
 import { usePapaInventory } from '@/hooks/usePapaInventory';
 
@@ -13,12 +13,11 @@ export default function PapaEventHeader() {
       <div className="container-custom">
         <div className="flex justify-between items-center gap-4 py-4">
           <Link href="/" className="flex items-center gap-3 min-w-0">
-            <Image
-              src={siteConfig.logoPath}
-              alt={siteConfig.brandName}
+            <BrandLogo
               width={64}
               height={64}
-              className="h-14 w-14 md:h-16 md:w-16 object-contain"
+              className="h-14 w-14 md:h-16 md:w-16"
+              imageClassName="h-full w-full object-contain"
               priority
             />
             <span className="sr-only">{siteConfig.brandName}</span>

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import BrandLogo from '@/components/shared/BrandLogo';
 import { Bell, Loader2 } from 'lucide-react';
 import { siteConfig } from '@/lib/site-config';
 
@@ -88,12 +88,11 @@ export default function DelantalCountdownPage({ launchAtIso }: DelantalCountdown
     <main className="min-h-screen bg-[#1A1412] text-[#FAF8F5] flex flex-col">
       <div className="flex-1 flex items-center justify-center px-6 py-16">
         <div className="w-full max-w-xl text-center">
-          <Image
-            src={siteConfig.logoPath}
-            alt={siteConfig.brandName}
+          <BrandLogo
             width={112}
             height={112}
-            className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-10 object-contain"
+            className="h-24 w-24 md:h-28 md:w-28 mx-auto mb-10"
+            imageClassName="h-full w-full object-contain"
             priority
           />
 

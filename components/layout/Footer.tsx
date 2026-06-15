@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import Image from 'next/image';
+import BrandLogo from '@/components/shared/BrandLogo';
 import { SOCIAL_URLS } from '@/lib/social-links';
 import { siteConfig } from '@/lib/site-config';
 
@@ -12,12 +12,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
           <div>
             <Link href="/" className="inline-block mb-5">
-              <Image
-                src={siteConfig.logoPath}
-                alt={siteConfig.brandName}
+              <BrandLogo
                 width={72}
                 height={72}
-                className="h-16 w-16 md:h-[4.5rem] md:w-[4.5rem] object-contain"
+                className="h-16 w-16 md:h-[4.5rem] md:w-[4.5rem]"
+                imageClassName="h-full w-full object-contain"
               />
             </Link>
             <p className="body-text text-[#C4B8AE] text-lg leading-relaxed max-w-md">
