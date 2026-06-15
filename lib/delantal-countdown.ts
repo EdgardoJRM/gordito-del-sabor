@@ -30,7 +30,7 @@ export function getDelantalLaunchAtMs(): number {
 }
 
 export function isDelantalCountdownEnabled(): boolean {
-  return process.env.DELANTAL_COUNTDOWN_ENABLED !== 'false';
+  return process.env.DELANTAL_COUNTDOWN_ENABLED === 'true';
 }
 
 /** true = sitio bloqueado, solo página de countdown. */
@@ -46,5 +46,6 @@ export function isCountdownAllowedPath(pathname: string): boolean {
   if (pathname === '/icon.svg' || pathname === '/robots.txt') return true;
   if (pathname.startsWith('/api/leads')) return true;
   if (pathname.startsWith('/api/webhooks/')) return true;
+  if (pathname.startsWith('/api/papa-event/')) return true;
   return false;
 }
