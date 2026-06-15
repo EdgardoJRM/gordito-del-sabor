@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { MessageCircle } from 'lucide-react';
 import BrandLogo from '@/components/shared/BrandLogo';
 import { siteConfig } from '@/lib/site-config';
 import { usePapaInventory } from '@/hooks/usePapaInventory';
@@ -23,12 +24,15 @@ export default function PapaEventHeader() {
             <span className="sr-only">{siteConfig.brandName}</span>
           </Link>
           <div className="flex items-center gap-3">
-            <Link
-              href="/preguntas"
-              className="hidden sm:inline nav-text text-[#E8D4BC] hover:text-white transition-colors"
+            <a
+              href={siteConfig.whatsappGroup}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center gap-1.5 nav-text text-[#E8D4BC] hover:text-white transition-colors"
             >
-              Ayuda
-            </Link>
+              <MessageCircle size={20} aria-hidden />
+              Dudas
+            </a>
             {inventory.soldOut && !loading ? (
               <span className="btn-text inline-flex items-center justify-center bg-[#6B5B4E] text-white/90 py-4 px-6 md:px-8 rounded-full min-h-[52px] cursor-default">
                 Agotado

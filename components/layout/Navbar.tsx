@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Settings, Menu, X, User, LogOut } from 'lucide-react';
+import { Settings, Menu, X, User, LogOut, CircleHelp, type LucideIcon } from 'lucide-react';
 import { useSession, signOut } from 'next-auth/react';
 import Button from '@/components/ui/Button';
 import BrandLogo from '@/components/shared/BrandLogo';
@@ -14,11 +14,11 @@ type NavbarProps = {
   pinOnScroll?: boolean;
 };
 
-const navItems = [
+const navItems: { label: string; href: string; icon?: LucideIcon }[] = [
   { label: 'Inicio', href: '/' },
   { label: 'Delantal de Papá', href: '/el-sabor-de-papa' },
   { label: 'Recetas', href: '/recetas' },
-  { label: 'Preguntas', href: '/preguntas' },
+  { label: 'Preguntas', href: '/preguntas', icon: CircleHelp },
 ];
 
 export default function Navbar({ overlayHero = false, pinOnScroll = true }: NavbarProps) {
@@ -49,19 +49,23 @@ export default function Navbar({ overlayHero = false, pinOnScroll = true }: Navb
           </Link>
 
           <div className="hidden lg:flex gap-8 items-center">
-            {navItems.map((item) => (
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
               <Link
                 key={item.href}
                 href={item.href}
                 className={
                   onDark
-                    ? 'nav-text text-[#FAF8F5]/90 hover:text-[#FAF8F5] transition-colors'
-                    : 'nav-text text-[#6B5B4E] hover:text-[#1A1412] transition-colors'
+                    ? 'nav-text inline-flex items-center gap-1.5 text-[#FAF8F5]/90 hover:text-[#FAF8F5] transition-colors'
+                    : 'nav-text inline-flex items-center gap-1.5 text-[#6B5B4E] hover:text-[#1A1412] transition-colors'
                 }
               >
+                {Icon ? <Icon size={18} aria-hidden /> : null}
                 {item.label}
               </Link>
-            ))}
+            );
+            })}
             <Button href="/el-sabor-de-papa" size="lg">
               Ordenar delantal
             </Button>
@@ -125,20 +129,24 @@ export default function Navbar({ overlayHero = false, pinOnScroll = true }: Navb
             }
           >
             <div className="flex flex-col gap-1 pt-3">
-              {navItems.map((item) => (
+              {navItems.map((item) => {
+                const Icon = item.icon;
+                return (
                 <Link
                   key={item.href}
                   href={item.href}
                   className={
                     onDark
-                      ? 'nav-text block py-3 px-2 text-[#FAF8F5] hover:bg-white/5 rounded-lg'
-                      : 'nav-text block py-3 px-2 text-[#1A1412] hover:bg-[#F2EDE6] rounded-lg'
+                      ? 'nav-text flex items-center gap-2 py-3 px-2 text-[#FAF8F5] hover:bg-white/5 rounded-lg'
+                      : 'nav-text flex items-center gap-2 py-3 px-2 text-[#1A1412] hover:bg-[#F2EDE6] rounded-lg'
                   }
                   onClick={() => setIsOpen(false)}
                 >
+                  {Icon ? <Icon size={20} aria-hidden /> : null}
                   {item.label}
                 </Link>
-              ))}
+              );
+              })}
               <div className="pt-4">
                 <Button href="/el-sabor-de-papa" size="lg" className="w-full" onClick={() => setIsOpen(false)}>
                   Ordenar delantal

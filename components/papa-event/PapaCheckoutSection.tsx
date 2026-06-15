@@ -214,8 +214,13 @@ export default function PapaCheckoutSection() {
             En el siguiente paso completas bordado, entrega y datos. Pago seguro con Stripe.
             <br />
             ¿Dudas?{' '}
-            <a href={`mailto:${siteConfig.email}`} className="text-[#C4472B] font-bold underline">
-              Escríbenos
+            <a
+              href={siteConfig.whatsappGroup}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#C4472B] font-bold underline"
+            >
+              Escríbenos en WhatsApp
             </a>
           </p>
         </div>

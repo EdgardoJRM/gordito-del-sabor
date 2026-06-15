@@ -258,7 +258,16 @@ export default function ElSaborDePapaPage() {
             items={papaFaqs.map((f) => ({ id: f.id, question: f.question, answer: f.answer }))}
           />
           <p className="text-center text-[#6B5B4E] mt-8 text-lg">
-            ¿Más dudas? Escríbenos a{' '}
+            ¿Más dudas?{' '}
+            <a
+              href={siteConfig.whatsappGroup}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#C4472B] underline font-bold"
+            >
+              Únete al grupo de WhatsApp
+            </a>
+            {' · '}
             <a href={`mailto:${siteConfig.email}`} className="text-[#C4472B] underline font-bold">
               {siteConfig.email}
             </a>

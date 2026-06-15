@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Mail, Package, HelpCircle } from 'lucide-react';
+import { MessageCircle, Package, HelpCircle } from 'lucide-react';
 import FAQAccordion, { type FaqAccordionItem } from '@/components/ui/FAQAccordion';
 import Button from '@/components/ui/Button';
 import { faqCategories, type FaqCategoryId } from '@/lib/faqs';
@@ -68,9 +68,18 @@ export function HelpCards() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
       <div className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-8">
-        <Mail className="text-[#C4472B] mb-4" size={32} aria-hidden />
-        <h3 className="text-xl font-bold text-[#1A1412] mb-2">Escríbenos</h3>
+        <MessageCircle className="text-[#C4472B] mb-4" size={32} aria-hidden />
+        <h3 className="text-xl font-bold text-[#1A1412] mb-2">Dudas</h3>
         <p className="body-text text-lg mb-4">Te ayudamos con tu orden o dudas del delantal.</p>
+        <a
+          className="inline-flex items-center gap-2 text-lg text-[#C4472B] font-bold hover:underline"
+          href={siteConfig.whatsappGroup}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Grupo de WhatsApp
+        </a>
+        <p className="body-text text-base mt-4 mb-1 text-[#6B5B4E]">También por email:</p>
         <a
           className="text-lg text-[#C4472B] font-bold hover:underline break-all"
           href={`mailto:${siteConfig.email}`}

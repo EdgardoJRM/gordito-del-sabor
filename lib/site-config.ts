@@ -6,12 +6,15 @@ export const siteConfig = {
   brandNameShort: 'El Gordito',
   tagline: 'Esto es bello',
   /** Email visible en footer y páginas de venta (preventa / sponsors). */
-  email: 'elgorditodelsabor@gmail.com',
+  email: 'elgorditodelsaborshop@gmail.com',
   /** Email de soporte existente en el proyecto (API leads, contacto). */
   supportEmail: 'info@gorditodelsabor.com',
   instagram: 'https://www.instagram.com/elgorditodelsaborpr',
   facebook: 'https://www.facebook.com/profile.php?id=100084882467280',
   tiktok: 'https://www.tiktok.com/@elgorditodelsaborpr',
+  /** Grupo de WhatsApp para dudas del delantal y la comunidad. */
+  whatsappGroup:
+    'https://chat.whatsapp.com/FqBwOTdgyW4Llib1qImkGb?s=cl&p=i&ilr=2',
   logoPath: '/images/brand/logo-gordito.png',
   mascotPath: '/images/brand/mascot-chef-gordito.svg',
   /** false = el recetario solo va con compra del delantal (email post-pago). */

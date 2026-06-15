@@ -1,6 +1,7 @@
 import type { IPapaOrder } from '@/lib/models/PapaOrder';
 import { papaEvent } from '@/lib/papa-event';
 import { CONTACT_EMAIL } from '@/lib/contact-email';
+import { siteConfig } from '@/lib/site-config';
 import { SOCIAL_URLS } from '@/lib/social-links';
 
 function formatMoney(amountCents: number, currency: string): string {
@@ -122,8 +123,9 @@ export function buildPapaCustomerEmailHtml(order: IPapaOrder, hasPdf = true): st
 
           <tr>
             <td style="padding:24px 28px 32px 28px;text-align:center;font-size:14px;line-height:1.6;color:#6B5B4E;border-top:1px solid #E8E0D8;">
-              <p style="margin:0 0 12px 0;">¿Dudas? Escríbenos a
-                <a href="mailto:${CONTACT_EMAIL}" style="color:#C4472B;font-weight:bold;text-decoration:none;">${CONTACT_EMAIL}</a>
+              <p style="margin:0 0 12px 0;">¿Dudas? Escríbenos en nuestro{' '}
+                <a href="${siteConfig.whatsappGroup}" style="color:#C4472B;font-weight:bold;text-decoration:none;">grupo de WhatsApp</a>
+                {' '}o a <a href="mailto:${CONTACT_EMAIL}" style="color:#C4472B;font-weight:bold;text-decoration:none;">${CONTACT_EMAIL}</a>
               </p>
               <p style="margin:0 0 12px 0;">
                 <a href="${SOCIAL_URLS.instagram}" style="color:#C4472B;text-decoration:none;font-weight:bold;">@elgorditodelsaborpr</a>
