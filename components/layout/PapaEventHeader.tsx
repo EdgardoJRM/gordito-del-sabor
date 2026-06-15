@@ -16,9 +16,9 @@ export default function PapaEventHeader() {
             <Image
               src={siteConfig.logoPath}
               alt={siteConfig.brandName}
-              width={44}
-              height={44}
-              className="h-11 w-11 object-contain"
+              width={64}
+              height={64}
+              className="h-14 w-14 md:h-16 md:w-16 object-contain"
               priority
             />
             <span className="sr-only">{siteConfig.brandName}</span>

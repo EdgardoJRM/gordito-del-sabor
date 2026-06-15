@@ -4,7 +4,7 @@ export const DELANTAL_COUNTDOWN_PATH = '/delantal-proximamente';
 /** Cookie para bypass de preview (solo quien tenga el secreto). */
 export const DELANTAL_PREVIEW_COOKIE = 'delantal_preview';
 
-const DEFAULT_LAUNCH_ISO = '2026-06-15T18:07:00.000Z';
+const DEFAULT_LAUNCH_ISO = '2026-06-15T18:37:00.000Z';
 
 export function getDelantalPreviewSecret(): string | null {
   const secret = process.env.DELANTAL_PREVIEW_SECRET?.trim();
