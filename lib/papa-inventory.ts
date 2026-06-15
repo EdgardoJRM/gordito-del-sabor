@@ -82,3 +82,24 @@ export async function releasePapaAprons(apronCount: number): Promise<void> {
     { $inc: { soldUnits: -apronCount } }
   );
 }
+
+/** Fija disponibles = totalUnits - soldUnits (p. ej. 99 de 100). */
+export async function setPapaInventoryRemaining(remaining: number): Promise<InventorySnapshot> {
+  await dbConnect();
+
+  const totalUnits = papaEvent.totalAprons;
+  const clamped = Math.max(0, Math.min(totalUnits, Math.round(remaining)));
+  const soldUnits = totalUnits - clamped;
+
+  const doc = await EventInventory.findOneAndUpdate(
+    { eventId: PAPA_EVENT_ID },
+    { $set: { totalUnits, soldUnits }, $setOnInsert: { eventId: PAPA_EVENT_ID } },
+    { upsert: true, new: true }
+  );
+
+  return {
+    total: doc.totalUnits,
+    sold: doc.soldUnits,
+    remaining: Math.max(0, doc.totalUnits - doc.soldUnits),
+  };
+}
