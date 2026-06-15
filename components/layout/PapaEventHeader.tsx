@@ -9,7 +9,7 @@ export default function PapaEventHeader() {
   const { inventory, loading } = usePapaInventory();
 
   return (
-    <header className="sticky top-0 z-50 bg-[#1A1412]/95 backdrop-blur-lg border-b border-white/10">
+    <header className="relative bg-[#1A1412]/95 backdrop-blur-lg border-b border-white/10">
       <div className="container-custom">
         <div className="flex justify-between items-center gap-4 py-4">
           <Link href="/" className="flex items-center gap-3 min-w-0">

@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect, useCallback } from 'react';
 import Navbar from '@/components/layout/Navbar';
 
-export default function NavbarWrapper() {
+export default function NavbarWrapper({ pinOnScroll = true }: { pinOnScroll?: boolean }) {
   const pathname = usePathname();
   const isHome = pathname === '/';
 
@@ -40,5 +40,5 @@ export default function NavbarWrapper() {
     };
   }, [isHome, updateFromHero]);
 
-  return <Navbar overlayHero={overlayHero} />;
+  return <Navbar overlayHero={overlayHero} pinOnScroll={pinOnScroll} />;
 }

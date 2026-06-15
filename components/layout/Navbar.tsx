@@ -10,6 +10,8 @@ import { siteConfig } from '@/lib/site-config';
 
 type NavbarProps = {
   overlayHero?: boolean;
+  /** false cuando el nav va dentro del shell sticky con la barra de inventario */
+  pinOnScroll?: boolean;
 };
 
 const navItems = [
@@ -19,17 +21,18 @@ const navItems = [
   { label: 'Preguntas', href: '/preguntas' },
 ];
 
-export default function Navbar({ overlayHero = false }: NavbarProps) {
+export default function Navbar({ overlayHero = false, pinOnScroll = true }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
   const onDark = overlayHero;
+  const positionClass = pinOnScroll ? 'sticky top-0 z-50' : 'relative';
 
   return (
     <nav
       className={
         onDark
-          ? 'sticky top-0 z-50 bg-[#1A1412]/45 backdrop-blur-md border-b border-white/10 transition-colors duration-300'
-          : 'sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-lg border-b border-[#E8E0D8] transition-colors duration-300'
+          ? `${positionClass} bg-[#1A1412]/45 backdrop-blur-md border-b border-white/10 transition-colors duration-300`
+          : `${positionClass} bg-[#FAF8F5]/95 backdrop-blur-lg border-b border-[#E8E0D8] transition-colors duration-300`
       }
     >
       <div className="container-custom">

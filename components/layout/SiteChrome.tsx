@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import NavbarWrapper from '@/components/layout/NavbarWrapper';
 import RecetarioFunnelHeader from '@/components/layout/RecetarioFunnelHeader';
 import PapaEventHeader from '@/components/layout/PapaEventHeader';
+import PapaLaunchStickyShell from '@/components/papa-event/PapaLaunchStickyShell';
 import FloatingEbookCTA from '@/components/ebook/FloatingEbookCTA';
 import Footer from '@/components/layout/Footer';
 
@@ -20,6 +21,10 @@ function isPapaEventPath(pathname: string | null) {
 function isCountdownPath(pathname: string | null) {
   if (!pathname) return false;
   return pathname === '/delantal-proximamente';
+}
+
+function isPapaLaunchPath(pathname: string | null) {
+  return pathname === '/' || isPapaEventPath(pathname);
 }
 
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
@@ -40,13 +45,18 @@ export default function SiteChrome({ children }: { children: React.ReactNode }) 
     );
   }
 
-  if (isPapaEventPath(pathname)) {
-    return (
-      <>
+  if (isPapaLaunchPath(pathname)) {
+    const header =
+      pathname === '/' ? (
+        <NavbarWrapper pinOnScroll={false} />
+      ) : (
         <PapaEventHeader />
+      );
+
+    return (
+      <PapaLaunchStickyShell header={header} footer={<Footer />}>
         {children}
-        <Footer />
-      </>
+      </PapaLaunchStickyShell>
     );
   }
 

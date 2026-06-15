@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import PapaStickyBar from '@/components/papa-event/PapaStickyBar';
 import {
   ComfortHomeHero,
   ComfortHomeWhy,
@@ -22,7 +21,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <PapaStickyBar />
       <ComfortHomeHero />
       <ComfortHomeWhy />
       <ComfortHomeHow />

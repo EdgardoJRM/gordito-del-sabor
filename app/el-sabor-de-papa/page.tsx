@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Image from 'next/image';
 import { Check } from 'lucide-react';
-import PapaStickyBar from '@/components/papa-event/PapaStickyBar';
 import PapaCheckoutSection from '@/components/papa-event/PapaCheckoutSection';
 import PapaSocialProofCard from '@/components/papa-event/PapaSocialProofCard';
 import FAQAccordion from '@/components/ui/FAQAccordion';
@@ -45,8 +44,6 @@ function CheckoutFallback() {
 export default function ElSaborDePapaPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      <PapaStickyBar />
-
       {/* 1. HERO */}
       <section className="relative min-h-[80vh] flex items-end overflow-hidden bg-[#1A1412]">
         <Image

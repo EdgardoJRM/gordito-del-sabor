@@ -12,7 +12,7 @@ export default function PapaStickyBar() {
 
   return (
     <div
-      className={`sticky top-[72px] z-40 text-white shadow-lg ${
+      className={`text-white shadow-lg ${
         inventory.soldOut ? 'bg-[#1A1412]' : 'bg-[#C4472B]'
       }`}
     >
