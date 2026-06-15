@@ -24,7 +24,12 @@ export async function POST(request: NextRequest) {
     request.nextUrl.searchParams.get('secret') ??
     request.headers.get('x-delantal-secret');
 
-  if (!isValidDelantalPreviewToken(secret)) {
+  const inventoryResetSecret = process.env.PAPA_INVENTORY_RESET_SECRET?.trim();
+  const authorized =
+    isValidDelantalPreviewToken(secret) ||
+    (inventoryResetSecret && secret === inventoryResetSecret);
+
+  if (!authorized) {
     return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
   }
 
