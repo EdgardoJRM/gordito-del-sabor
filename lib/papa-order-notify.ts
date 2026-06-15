@@ -90,4 +90,11 @@ export async function sendPapaOrderEmails(
     console.error('Error enviando email al cliente:', customerResult.error);
     throw new Error(customerResult.error.message);
   }
+
+  console.info('Papa order emails sent', {
+    sessionId: order.stripeSessionId,
+    customerEmail: order.customerEmail,
+    teamId: teamResult.data?.id,
+    customerId: customerResult.data?.id,
+  });
 }
