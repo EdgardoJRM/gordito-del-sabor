@@ -1,3 +1,5 @@
+import { papaEvent } from '@/lib/papa-event';
+
 export type FaqCategoryId = 'delantal' | 'boveda' | 'pagos' | 'envios' | 'sponsors' | 'preventa' | 'libro';
 
 export type FaqItem = { q: string; a: string };
@@ -11,37 +13,37 @@ export type FaqCategory = {
 export const faqCategories: FaqCategory[] = [
   {
     id: 'preventa',
-    label: 'Preventa',
+    label: 'Delantal de Papá',
     items: [
       {
-        q: '¿Qué es la preventa oficial?',
-        a: 'Es la primera producción del Delantal “Esto es bello” hecha para la comunidad. Por eso el tiempo de entrega es por ronda, no inventario infinito.',
+        q: '¿Cuántos delantales hay disponibles?',
+        a: `Solo ${papaEvent.totalAprons} unidades en esta edición del Día de los Padres. Cuando se agoten, no habrá más en esta ronda.`,
       },
       {
-        q: '¿Cuánto tarda en llegar mi delantal?',
-        a: 'Aproximadamente 4 semanas desde tu orden. Lo decimos claro desde el principio: no es mercancía genérica en un almacén, es producción con intención.',
+        q: '¿Llega antes del Día de los Padres?',
+        a: `Sí, si ordenas antes del ${papaEvent.orderDeadlineLabel}. Enviamos por USPS Priority Mail en todo Puerto Rico.`,
       },
       {
-        q: '¿Qué recibo el mismo día que ordeno?',
-        a: 'El ebook digital de cortesía y tu cupón del 10% para la próxima compra (según cómo esté configurado tu checkout y email).',
+        q: '¿Qué puedo escribir en el bordado?',
+        a: `Nombres, apodos o frases cortas. Máximo ${papaEvent.maxEmbroideryChars} caracteres por delantal.`,
       },
     ],
   },
   {
     id: 'delantal',
-    label: 'Delantal',
+    label: 'Ofertas y bundles',
     items: [
       {
-        q: '¿Qué incluye el Delantal oficial?',
-        a: 'El delantal con diseño exclusivo, ebook digital de cortesía y 10% OFF en tu próxima orden oficial, más el storytelling de ser parte del lanzamiento.',
+        q: '¿Qué incluye cada oferta?',
+        a: 'Premium ($49.99): delantal + recetario digital. VIP ($59.99): delantal + recetario + video de saludo de El Gordito. Legado ($84.99): 2 delantales + recetario.',
       },
       {
-        q: '¿Puedo cambiar talla o color después?',
-        a: 'Si necesitas cambiar datos de la orden, escríbenos lo antes posible a soporte. Una vez en producción, puede haber limitaciones.',
+        q: '¿Es preventa o ya tienen stock?',
+        a: 'Stock en mano. Ordenas hoy y entramos a bordar y empacar. Sin espera de producción por ronda.',
       },
       {
         q: '¿Hacen devoluciones?',
-        a: 'Queremos que quedes feliz. Si hay un defecto de fabricación, lo resolvemos. Para preferencias de talla/color, revisa la política al activar checkout.',
+        a: 'Si hay un defecto de fabricación, lo resolvemos. Escríbenos con tu número de orden y fotos del producto.',
       },
     ],
   },
@@ -82,12 +84,12 @@ export const faqCategories: FaqCategory[] = [
     label: 'Envíos',
     items: [
       {
-        q: '¿Envían a Puerto Rico y Estados Unidos?',
-        a: 'Sí, esa es la intención. Costos exactos se confirman en checkout según peso y carrier.',
+        q: '¿Envían a todo Puerto Rico?',
+        a: 'Sí. Usamos USPS Priority Mail. El costo de envío se calcula en el checkout de Stripe según tu dirección.',
       },
       {
         q: '¿Puedo cambiar mi dirección?',
-        a: 'Escríbenos a soporte con tu número de orden. Mientras no haya salido de producción, casi siempre se puede ajustar.',
+        a: 'Escríbenos a soporte con tu número de orden lo antes posible. Mientras no haya salido, casi siempre se puede ajustar.',
       },
     ],
   },
@@ -97,11 +99,11 @@ export const faqCategories: FaqCategory[] = [
     items: [
       {
         q: '¿Qué métodos de pago aceptan?',
-        a: 'Los que habilites en tu pasarela (tarjeta, Apple Pay, etc.). El sitio enlaza a checkout externo configurable.',
+        a: 'Tarjetas principales a través de Stripe. Verás el cargo como El Gordito del Sabor en tu estado de cuenta.',
       },
       {
         q: '¿El pago es seguro?',
-        a: 'Sí: el cobro ocurre en la plataforma de pago que conectes (Stripe, Shopify, etc.), no guardamos tarjetas en este sitio.',
+        a: 'Sí. El cobro ocurre en Stripe. Este sitio no guarda los datos de tu tarjeta.',
       },
     ],
   },

@@ -1,52 +1,52 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowLeft } from 'lucide-react';
-import SectionHeader from '@/components/ui/SectionHeader';
 import FaqByCategory, { HelpCards } from '@/components/preguntas/FaqByCategory';
+import Button from '@/components/ui/Button';
 
 export const metadata: Metadata = {
-  title: 'Preguntas frecuentes y ayuda | El Gordito del Sabor',
+  title: 'Preguntas y ayuda | El Gordito del Sabor',
   description:
-    'Respuestas sobre preventa del delantal, La Bóveda, envíos, pagos y patrocinadores. Contacto y soporte.',
+    'Respuestas claras sobre el delantal de Papá, envíos, pagos con Stripe y cómo ordenar. Contacto y soporte.',
 };
 
 export default function PreguntasPage() {
   return (
-    <main className="min-h-screen bg-[#F2EDE6]">
-      <section className="border-b border-[#E8E0D8] bg-[#FAF8F5] py-8">
-        <div className="container-custom">
+    <main className="min-h-screen bg-[#FAF8F5]">
+      <section className="border-b border-[#E8E0D8] bg-[#F2EDE6] py-10 md:py-14">
+        <div className="container-custom max-w-4xl">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-6 transition-colors"
+            className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors nav-text"
           >
-            <ArrowLeft size={20} />
-            <span className="nav-text">Volver al inicio</span>
+            <ArrowLeft size={22} />
+            Volver al inicio
           </Link>
-          <SectionHeader
-            align="left"
-            eyebrow="Ayuda"
-            title="Preguntas frecuentes"
-            subtitle="Objeciones claras, sin rodeo. Si no ves tu caso, escríbenos."
-          />
+          <p className="comfort-eyebrow text-[#6B5B4E] mb-3">Ayuda</p>
+          <h1 className="heading-section-comfort text-[#1A1412] mb-4">
+            Preguntas frecuentes
+          </h1>
+          <p className="body-text text-xl max-w-2xl">
+            Respuestas claras, sin rodeo. Si no ves tu caso, escríbenos y te ayudamos.
+          </p>
         </div>
       </section>
 
-      <section className="section-spacing">
-        <div className="container-custom max-w-6xl mx-auto">
+      <section className="section-spacing-comfort">
+        <div className="container-custom max-w-5xl mx-auto">
           <FaqByCategory />
           <HelpCards />
-          <div className="mt-16 rounded-2xl border border-[#E8E0D8] bg-[#1A1412] p-8 md:p-12 text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-[#FAF8F5] mb-4">Con tu preventa recibes esto</h2>
-            <p className="body-text text-[#C4B8AE] max-w-2xl mx-auto mb-8">
-              Ebook digital de cortesía, narrativa honesta de entrega por ronda, y cupón del 10% para tu próxima compra
-              oficial (según tu flujo de checkout).
+
+          <div className="mt-14 rounded-3xl border-2 border-[#C4472B]/30 bg-[#1A1412] p-8 md:p-12 text-center">
+            <h2 className="heading-section-comfort text-[#FAF8F5] mb-4">
+              ¿Listo para ordenar el delantal de papá?
+            </h2>
+            <p className="text-xl text-[#C4B8AE] max-w-2xl mx-auto mb-8 leading-relaxed">
+              Solo 100 unidades. Elige tu oferta, escribe el nombre a bordar y paga seguro en línea.
             </p>
-            <Link
-              href="/delantal"
-              className="btn-text inline-flex items-center justify-center rounded-full bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 px-10 transition-colors"
-            >
-              Ir al delantal
-            </Link>
+            <Button href="/el-sabor-de-papa#ordenar" size="lg">
+              Ordenar delantal ahora
+            </Button>
           </div>
         </div>
       </section>

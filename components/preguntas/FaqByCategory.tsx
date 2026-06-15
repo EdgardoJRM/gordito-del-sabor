@@ -10,10 +10,10 @@ import { siteConfig } from '@/lib/site-config';
 const TAB_ORDER: FaqCategoryId[] = [
   'preventa',
   'delantal',
+  'pagos',
+  'envios',
   'libro',
   'boveda',
-  'envios',
-  'pagos',
   'sponsors',
 ];
 
@@ -30,8 +30,12 @@ export default function FaqByCategory() {
   }, [tab]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12">
-      <div className="lg:col-span-4 space-y-2">
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
+      <div
+        className="lg:col-span-4 flex flex-col gap-2"
+        role="tablist"
+        aria-label="Categorías de ayuda"
+      >
         {TAB_ORDER.map((id) => {
           const label = faqCategories.find((c) => c.id === id)?.label ?? id;
           const active = tab === id;
@@ -39,11 +43,13 @@ export default function FaqByCategory() {
             <button
               key={id}
               type="button"
+              role="tab"
+              aria-selected={active}
               onClick={() => setTab(id)}
-              className={`w-full text-left rounded-xl px-4 py-3 text-sm font-bold transition border ${
+              className={`w-full text-left rounded-xl px-5 py-4 text-lg font-bold transition border-2 min-h-[56px] ${
                 active
-                  ? 'border-[#C4472B] bg-[#C4472B]/10 text-[#1A1412]'
-                  : 'border-[#E8E0D8] bg-[#FAF8F5] text-[#6B5B4E] hover:border-[#C4472B]/30'
+                  ? 'border-[#C4472B] bg-[#FFF8F5] text-[#1A1412] shadow-sm'
+                  : 'border-[#E8E0D8] bg-white text-[#6B5B4E] hover:border-[#C4472B]/40'
               }`}
             >
               {label}
@@ -51,7 +57,7 @@ export default function FaqByCategory() {
           );
         })}
       </div>
-      <div className="lg:col-span-8">
+      <div className="lg:col-span-8" role="tabpanel">
         <FAQAccordion items={items} />
       </div>
     </div>
@@ -60,30 +66,36 @@ export default function FaqByCategory() {
 
 export function HelpCards() {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16">
-      <div className="rounded-2xl border border-[#E8E0D8] bg-[#FAF8F5] p-8 shadow-sm">
-        <Mail className="text-[#C4472B] mb-4" size={28} aria-hidden />
-        <h3 className="font-bold text-lg text-[#1A1412] mb-2">Escríbenos</h3>
-        <p className="body-text text-sm mb-4">Soporte y órdenes.</p>
-        <a className="text-[#C4472B] font-bold hover:underline" href={`mailto:${siteConfig.supportEmail}`}>
-          {siteConfig.supportEmail}
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
+      <div className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-8">
+        <Mail className="text-[#C4472B] mb-4" size={32} aria-hidden />
+        <h3 className="text-xl font-bold text-[#1A1412] mb-2">Escríbenos</h3>
+        <p className="body-text text-lg mb-4">Te ayudamos con tu orden o dudas del delantal.</p>
+        <a
+          className="text-lg text-[#C4472B] font-bold hover:underline break-all"
+          href={`mailto:${siteConfig.email}`}
+        >
+          {siteConfig.email}
         </a>
       </div>
-      <div className="rounded-2xl border border-[#E8E0D8] bg-[#FAF8F5] p-8 shadow-sm">
-        <Package className="text-[#C4472B] mb-4" size={28} aria-hidden />
-        <h3 className="font-bold text-lg text-[#1A1412] mb-2">Estado de mi orden</h3>
-        <p className="body-text text-sm mb-4">Cuando conectes Shopify/Stripe, enlaza aquí el portal de clientes.</p>
-        <Button href="/contacto" variant="secondary" size="sm">
-          Contactar
+      <div className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-8">
+        <Package className="text-[#C4472B] mb-4" size={32} aria-hidden />
+        <h3 className="text-xl font-bold text-[#1A1412] mb-2">Ordenar delantal</h3>
+        <p className="body-text text-lg mb-6">Elige tu oferta, personaliza el bordado y paga seguro.</p>
+        <Button href="/el-sabor-de-papa#ordenar" size="lg" className="w-full">
+          Ir a ordenar
         </Button>
       </div>
-      <div className="rounded-2xl border border-[#E8E0D8] bg-[#FAF8F5] p-8 shadow-sm">
-        <HelpCircle className="text-[#C4472B] mb-4" size={28} aria-hidden />
-        <h3 className="font-bold text-lg text-[#1A1412] mb-2">Sponsors</h3>
-        <p className="body-text text-sm mb-4">Propuestas B2B y media kit.</p>
-        <Button href="/patrocinadores" variant="secondary" size="sm">
-          Patrocinadores
-        </Button>
+      <div className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-8">
+        <HelpCircle className="text-[#C4472B] mb-4" size={32} aria-hidden />
+        <h3 className="text-xl font-bold text-[#1A1412] mb-2">Soporte técnico</h3>
+        <p className="body-text text-lg mb-4">Para temas del sitio o recetario.</p>
+        <a
+          className="text-lg text-[#C4472B] font-bold hover:underline break-all"
+          href={`mailto:${siteConfig.supportEmail}`}
+        >
+          {siteConfig.supportEmail}
+        </a>
       </div>
     </div>
   );

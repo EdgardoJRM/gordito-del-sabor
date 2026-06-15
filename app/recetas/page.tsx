@@ -1,90 +1,111 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { Clock, Users, ChefHat, ArrowLeft } from 'lucide-react';
+import Button from '@/components/ui/Button';
 import { recipes } from '@/lib/recipes-data';
 
 export const metadata: Metadata = {
-  title: 'Todas las Recetas | El Gordito del Sabor',
-  description: 'Explora nuestra colección completa de recetas puertorriqueñas auténticas.',
+  title: 'Recetas boricuas | El Gordito del Sabor',
+  description:
+    'Recetas puertorriqueñas claras y con sazón de verdad. Fáciles de seguir desde el celular o la cocina.',
 };
 
 export default function RecipesPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      {/* Header */}
-      <section className="section-spacing bg-[#FAF8F5] border-b border-[#E8E0D8]">
-        <div className="container-custom">
-          <Link href="/" className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors">
-            <ArrowLeft size={20} />
-            <span className="nav-text">Volver al inicio</span>
+      <section className="section-spacing-comfort bg-[#F2EDE6] border-b border-[#E8E0D8]">
+        <div className="container-custom max-w-4xl">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors nav-text"
+          >
+            <ArrowLeft size={22} />
+            Volver al inicio
           </Link>
-          <h1 className="heading-section text-[#1A1412] mb-6">Todas las Recetas</h1>
-          <p className="body-text text-xl max-w-3xl">
-            Explora nuestra colección completa de recetas auténticas puertorriqueñas
+          <p className="comfort-eyebrow text-[#6B5B4E] mb-3">Cocina con nosotros</p>
+          <h1 className="heading-section-comfort text-[#1A1412] mb-4">Recetas boricuas</h1>
+          <p className="body-text text-xl max-w-2xl">
+            Platos con sazón de verdad. Toca una receta para ver ingredientes y pasos claros.
           </p>
         </div>
       </section>
 
-      {/* Recipes Grid */}
-      <section className="section-spacing bg-[#F2EDE6]">
+      <section className="section-spacing-comfort bg-[#FAF8F5]">
         <div className="container-custom">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {recipes.map((recipe) => (
-              <Link
-                key={recipe.id}
-                href={`/recetas/${recipe.id}`}
-                className="group"
-              >
-                <div className="bg-[#FAF8F5] rounded-3xl overflow-hidden h-full flex flex-col transition-all duration-300 hover:scale-105 border border-[#E8E0D8] hover:border-[#C4472B]/30 shadow-sm relative">
-                  {/* Premium Badge */}
+              <Link key={recipe.id} href={`/recetas/${recipe.id}`} className="group block">
+                <article className="relative bg-white rounded-2xl overflow-hidden h-full flex flex-col border-2 border-[#E8E0D8] hover:border-[#C4472B]/50 transition-colors shadow-sm">
                   {recipe.isPremium && (
-                    <div className="absolute top-4 right-4 z-10 bg-[#C4472B] text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide">
+                    <div className="absolute top-4 right-4 z-10 bg-[#C4472B] text-white px-4 py-1.5 rounded-full text-sm font-bold">
                       Exclusiva
                     </div>
                   )}
 
-                  <div className="relative h-56 overflow-hidden bg-gradient-to-br from-[#F2EDE6] via-[#FAF8F5] to-[#E8E0D8] flex items-center justify-center group-hover:from-[#E8E0D8] group-hover:via-[#F2EDE6] group-hover:to-[#FAF8F5] transition-colors border-b border-[#E8E0D8]">
-                    <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C4472B]/50">
-                      El Gordito del Sabor
-                    </span>
+                  <div className="relative h-52 md:h-56 overflow-hidden bg-[#F2EDE6]">
+                    {recipe.image ? (
+                      <Image
+                        src={recipe.image}
+                        alt={recipe.title}
+                        fill
+                        className="object-cover group-hover:scale-[1.02] transition-transform duration-300"
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        unoptimized={recipe.image.startsWith('http')}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-sm font-bold uppercase tracking-widest text-[#C4472B]/50">
+                          El Gordito del Sabor
+                        </span>
+                      </div>
+                    )}
                   </div>
 
-                  {/* Content */}
-                  <div className="p-6 flex flex-col flex-grow">
-                    <div className="mb-4 flex items-center justify-between gap-2">
-                      <span className="inline-block px-3 py-1 bg-[#F2EDE6] text-[#6B5B4E] text-xs font-bold rounded-full uppercase tracking-wide border border-[#E8E0D8]">
-                        {recipe.category}
-                      </span>
-                    </div>
+                  <div className="p-6 md:p-8 flex flex-col flex-grow">
+                    <span className="inline-block w-fit px-4 py-1.5 bg-[#F2EDE6] text-[#6B5B4E] text-sm font-bold rounded-full mb-4 border border-[#E8E0D8]">
+                      {recipe.category}
+                    </span>
 
-                    <h3 className="text-2xl font-bold text-[#1A1412] mb-3 group-hover:text-[#C4472B] transition">
+                    <h2 className="text-2xl md:text-3xl font-bold text-[#1A1412] mb-3 group-hover:text-[#C4472B] transition-colors">
                       {recipe.title}
-                    </h3>
+                    </h2>
 
-                    <p className="body-text text-sm mb-6 flex-grow">
-                      {recipe.description}
-                    </p>
+                    <p className="body-text text-lg mb-6 flex-grow">{recipe.description}</p>
 
-                    {/* Meta info */}
-                    <div className="flex gap-4 text-sm text-[#6B5B4E] border-t border-[#E8E0D8] pt-4">
-                      <div className="flex items-center gap-1">
-                        <Clock size={16} />
+                    <div className="flex flex-wrap gap-5 text-base text-[#6B5B4E] border-t-2 border-[#E8E0D8] pt-5">
+                      <div className="flex items-center gap-2">
+                        <Clock size={20} className="text-[#C4472B]" aria-hidden />
                         <span>{recipe.time}</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Users size={16} />
-                        <span>{recipe.servings}</span>
+                      <div className="flex items-center gap-2">
+                        <Users size={20} className="text-[#C4472B]" aria-hidden />
+                        <span>{recipe.servings} porciones</span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <ChefHat size={16} />
+                      <div className="flex items-center gap-2">
+                        <ChefHat size={20} className="text-[#C4472B]" aria-hidden />
                         <span>{recipe.difficulty}</span>
                       </div>
                     </div>
                   </div>
-                </div>
+                </article>
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section-spacing-comfort bg-[#1A1412] text-center">
+        <div className="container-custom max-w-2xl space-y-6">
+          <h2 className="heading-section-comfort text-[#FAF8F5]">
+            ¿Buscas un regalo para papá?
+          </h2>
+          <p className="text-xl text-[#C4B8AE] leading-relaxed">
+            El delantal personalizado de El Gordito del Sabor — solo 100 unidades para el Día de los Padres.
+          </p>
+          <Button href="/el-sabor-de-papa" size="lg">
+            Ver delantal de papá
+          </Button>
         </div>
       </section>
     </main>
