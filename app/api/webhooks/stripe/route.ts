@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { getStripe } from '@/lib/stripe';
 import { releasePapaAprons } from '@/lib/papa-inventory';
+import { handlePapaCheckoutCompleted } from '@/lib/papa-order-handler';
 
 export async function POST(request: NextRequest) {
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -32,8 +33,11 @@ export async function POST(request: NextRequest) {
       await handleExpiredSession(event.data.object as Stripe.Checkout.Session);
     }
 
-    if (event.type === 'checkout.session.completed') {
-      await handleCompletedSession(event.data.object as Stripe.Checkout.Session);
+    if (
+      event.type === 'checkout.session.completed' ||
+      event.type === 'checkout.session.async_payment_succeeded'
+    ) {
+      await handlePapaCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
     }
   } catch (error) {
     console.error('Webhook handler error:', error);
@@ -50,15 +54,4 @@ async function handleExpiredSession(session: Stripe.Checkout.Session) {
   if (apronCount > 0) {
     await releasePapaAprons(apronCount);
   }
-}
-
-async function handleCompletedSession(session: Stripe.Checkout.Session) {
-  if (session.metadata?.checkoutType !== 'papa-event') return;
-  // Inventario ya reservado al crear la sesión; aquí podrías guardar la orden en MongoDB o enviar email.
-  console.info('Papa event order completed', {
-    sessionId: session.id,
-    bundleId: session.metadata.bundleId,
-    embroideryNames: session.metadata.embroideryNames,
-    email: session.customer_details?.email ?? session.metadata.customerEmail,
-  });
 }

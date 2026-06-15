@@ -3,9 +3,12 @@ import type Stripe from 'stripe';
 import { getStripe, getSiteUrl } from '@/lib/stripe';
 import {
   getBundle,
+  getDeliveryLabel,
   papaBundles,
+  validateDeliveryMethod,
   validateEmbroideryNames,
   type PapaBundleId,
+  type PapaDeliveryMethod,
 } from '@/lib/papa-event';
 import { getPapaInventory, reservePapaAprons } from '@/lib/papa-inventory';
 
@@ -20,6 +23,7 @@ type CartLineItem = {
 type PapaCheckoutBody = {
   mode: 'papa-event';
   bundleId: PapaBundleId;
+  deliveryMethod: PapaDeliveryMethod;
   embroideryNames: string[];
   customerEmail: string;
 };
@@ -34,20 +38,26 @@ function isPapaBundleId(value: string): value is PapaBundleId {
   return value in papaBundles;
 }
 
-function buildPapaLineItem(bundleId: PapaBundleId, embroideryNames: string[]): Stripe.Checkout.SessionCreateParams.LineItem {
+function buildPapaLineItem(
+  bundleId: PapaBundleId,
+  embroideryNames: string[],
+  deliveryMethod: PapaDeliveryMethod
+): Stripe.Checkout.SessionCreateParams.LineItem {
   const bundle = getBundle(bundleId);
   const embroideryLabel = embroideryNames.map((n) => n.trim()).join(' · ');
+  const deliveryLabel = getDeliveryLabel(deliveryMethod);
 
   return {
     price_data: {
       currency: 'usd',
       product_data: {
         name: `El Sabor de Papá — ${bundle.title}`,
-        description: `Bordado: ${embroideryLabel}`,
+        description: `Bordado: ${embroideryLabel} · Entrega: ${deliveryLabel}`,
         metadata: {
           eventId: 'el-sabor-de-papa-2026',
           bundleId,
           apronCount: String(bundle.apronCount),
+          deliveryMethod,
         },
       },
       unit_amount: Math.round(bundle.price * 100),
@@ -73,10 +83,14 @@ export async function POST(request: NextRequest) {
 }
 
 async function handlePapaCheckout(body: PapaCheckoutBody) {
-  const { bundleId, embroideryNames, customerEmail } = body;
+  const { bundleId, deliveryMethod, embroideryNames, customerEmail } = body;
 
   if (!bundleId || !isPapaBundleId(bundleId)) {
     return NextResponse.json({ error: 'Bundle inválido.' }, { status: 400 });
+  }
+
+  if (!validateDeliveryMethod(deliveryMethod)) {
+    return NextResponse.json({ error: 'Selecciona un método de entrega válido.' }, { status: 400 });
   }
 
   const embroideryError = validateEmbroideryNames(bundleId, embroideryNames ?? []);
@@ -111,24 +125,28 @@ async function handlePapaCheckout(body: PapaCheckoutBody) {
   const trimmedNames = embroideryNames.map((n) => n.trim());
 
   try {
-    const session = await stripe.checkout.sessions.create({
+    const sessionParams: Stripe.Checkout.SessionCreateParams = {
       mode: 'payment',
-      line_items: [buildPapaLineItem(bundleId, trimmedNames)],
+      line_items: [buildPapaLineItem(bundleId, trimmedNames, deliveryMethod)],
       success_url: `${siteUrl}/pago-exitoso?session_id={CHECKOUT_SESSION_ID}&event=papa`,
       cancel_url: `${siteUrl}/el-sabor-de-papa?cancelled=1`,
       customer_email: email,
       phone_number_collection: { enabled: true },
-      shipping_address_collection: {
-        allowed_countries: ['US'],
-      },
       metadata: {
         checkoutType: 'papa-event',
         bundleId,
+        deliveryMethod,
         embroideryNames: JSON.stringify(trimmedNames),
         apronCount: String(bundle.apronCount),
         customerEmail: email,
       },
-    });
+    };
+
+    if (deliveryMethod === 'mail') {
+      sessionParams.shipping_address_collection = { allowed_countries: ['US'] };
+    }
+
+    const session = await stripe.checkout.sessions.create(sessionParams);
 
     return NextResponse.json({ url: session.url });
   } catch (error) {

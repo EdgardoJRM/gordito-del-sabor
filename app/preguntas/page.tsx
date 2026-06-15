@@ -39,13 +39,13 @@ export default function PreguntasPage() {
 
           <div className="mt-14 rounded-3xl border-2 border-[#C4472B]/30 bg-[#1A1412] p-8 md:p-12 text-center">
             <h2 className="heading-section-comfort text-[#FAF8F5] mb-4">
-              ¿Listo para ordenar el delantal de papá?
+              ¿Listo para asegurar el delantal de papá?
             </h2>
             <p className="text-xl text-[#C4B8AE] max-w-2xl mx-auto mb-8 leading-relaxed">
-              Solo 100 unidades. Elige tu oferta, escribe el nombre a bordar y paga seguro en línea.
+              Solo 100 unidades. Elige tu oferta y asegura el tuyo en el siguiente paso.
             </p>
             <Button href="/el-sabor-de-papa#ordenar" size="lg">
-              Ordenar delantal ahora
+              Asegura tu delantal
             </Button>
           </div>
         </div>

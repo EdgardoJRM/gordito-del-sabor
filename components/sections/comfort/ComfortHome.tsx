@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Gift, ShieldCheck, Truck, Heart } from 'lucide-react';
+import { Gift, MapPin, ShieldCheck, Heart } from 'lucide-react';
 import Button from '@/components/ui/Button';
-import { papaEvent } from '@/lib/papa-event';
+import { papaEvent, papaHero, papaTeamPhotos } from '@/lib/papa-event';
 import { siteConfig } from '@/lib/site-config';
 
 const whyItems = [
@@ -17,9 +17,9 @@ const whyItems = [
     text: 'Tela resistente para la cocina de verdad. Hecho para usarse, no para guardarse.',
   },
   {
-    icon: Truck,
-    title: 'Llega a tiempo',
-    text: `Ordena antes del ${papaEvent.orderDeadlineLabel} y recíbelo antes del Día de los Padres.`,
+    icon: MapPin,
+    title: 'Recogida garantizada',
+    text: `Recoge en ${papaEvent.pickupLocation} el ${papaEvent.pickupFriday} o ${papaEvent.pickupSaturday}. Listo antes del Domingo.`,
   },
   {
     icon: Heart,
@@ -29,10 +29,10 @@ const whyItems = [
 ];
 
 const steps = [
-  { n: 1, title: 'Entra a la página del delantal', text: 'Elige Premium, VIP o Legado.' },
-  { n: 2, title: 'Escribe el nombre a bordar', text: 'Indica exactamente cómo quieres que salga.' },
-  { n: 3, title: 'Paga seguro con Stripe', text: 'Tarjeta, dirección en PR y listo.' },
-  { n: 4, title: 'Papá lo recibe en casa', text: 'Empacado con amor desde Puerto Rico.' },
+  { n: 1, title: 'Elige tu oferta', text: 'Premium, VIP o Legado — según el regalo que quieras darle.' },
+  { n: 2, title: 'Asegura tu delantal', text: 'Completas bordado, entrega y datos en el siguiente paso.' },
+  { n: 3, title: 'Nosotros bordamos', text: 'A mano en 24–48 horas. Hecho en Puerto Rico.' },
+  { n: 4, title: 'Tú recibes', text: `Recogida en Área Metro o envío por correo.` },
 ];
 
 export function ComfortHomeHero() {
@@ -42,33 +42,30 @@ export function ComfortHomeHero() {
       className="relative -mt-[4.5rem] pt-[4.5rem] min-h-[90svh] flex items-center bg-[#1A1412] overflow-hidden"
     >
       <Image
-        src="/images/social/source-gordito-pavo-oficial.jpg"
-        alt="El Gordito del Sabor — delantal para papá"
+        src={papaTeamPhotos.hero}
+        alt="El Gordito del Sabor — El Sabor de Papá"
         fill
         priority
-        className="object-cover object-center opacity-60"
+        className="object-cover object-center opacity-70"
         sizes="100vw"
       />
       <div className="absolute inset-0 bg-gradient-to-r from-[#1A1412]/90 via-[#1A1412]/70 to-[#1A1412]/40" />
       <div className="container-custom relative z-10 py-16 md:py-24">
         <div className="max-w-2xl">
-          <p className="comfort-eyebrow text-[#E8D4BC] mb-4">
-            Edición Día de los Padres · Solo {papaEvent.totalAprons} unidades
-          </p>
-          <h1 className="heading-hero text-[#FAF8F5] mb-6">
-            El regalo perfecto para papá: su delantal con su nombre
-          </h1>
+          <p className="comfort-eyebrow text-[#E8D4BC] mb-4">{papaHero.eyebrow}</p>
+          <h1 className="heading-hero text-[#FAF8F5] mb-6 break-words">{papaHero.headline}</h1>
           <p className="text-xl md:text-2xl text-[#E8D4BC] leading-relaxed mb-8 max-w-xl">
-            Stock en mano. Sin preventa. Ordena hoy, personaliza el bordado y paga seguro en línea.
+            {papaHero.subheadline}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button href="/el-sabor-de-papa" size="lg" className="shadow-xl w-full sm:w-auto">
-              Ordenar delantal de papá
+            <Button href="/el-sabor-de-papa#ordenar" size="lg" className="shadow-xl w-full sm:w-auto">
+              {papaHero.cta}
             </Button>
             <Button href="/preguntas" variant="ghost" size="lg" className="w-full sm:w-auto">
               Tengo una pregunta
             </Button>
           </div>
+          <p className="mt-6 text-lg text-[#C4B8AE]">{papaEvent.socialProof}</p>
         </div>
       </div>
     </section>
@@ -83,7 +80,8 @@ export function ComfortHomeWhy() {
           ¿Por qué regalar este delantal?
         </h2>
         <p className="body-text text-lg text-center max-w-2xl mx-auto mb-12">
-          No es merch cualquiera. Es reconocimiento al sazón de papá, con el sello de El Gordito del Sabor.
+          No es merch cualquiera. Es reconocimiento al sazón de papá, con el sello de El Gordito del
+          Sabor.
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {whyItems.map((item) => {
@@ -104,6 +102,10 @@ export function ComfortHomeWhy() {
             );
           })}
         </div>
+        <p className="text-center text-base text-[#6B5B4E] mt-8 max-w-xl mx-auto">
+          Si eliges envío por correo, puede llegar después del Domingo. Para garantía a tiempo, elige
+          recogida.
+        </p>
       </div>
     </section>
   );
@@ -134,7 +136,7 @@ export function ComfortHomeHow() {
         </ol>
         <div className="text-center mt-12">
           <Button href="/el-sabor-de-papa#ordenar" size="lg">
-            Ir a personalizar mi delantal
+            Asegura tu delantal
           </Button>
         </div>
       </div>

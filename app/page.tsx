@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PapaStickyBar from '@/components/papa-event/PapaStickyBar';
 import {
   ComfortHomeHero,
   ComfortHomeWhy,
@@ -7,12 +8,12 @@ import {
 } from '@/components/sections/comfort/ComfortHome';
 
 export const metadata: Metadata = {
-  title: 'El Gordito del Sabor | Delantal personalizado para papá',
+  title: 'El Gordito del Sabor | El Sabor de Papá — Delantal personalizado',
   description:
-    'Regala el delantal personalizado de El Gordito del Sabor. Edición Día de los Padres, stock en mano, bordado con nombre y pago seguro.',
+    'Regala un legado, no solo un delantal. Edición Día de los Padres: 100 unidades, bordado con nombre, recogida garantizada en Área Metro y pago seguro.',
   openGraph: {
-    title: 'Delantal personalizado para papá | El Gordito del Sabor',
-    description: 'Solo 100 unidades. Ordena hoy con bordado personalizado.',
+    title: 'El Sabor de Papá | Delantal personalizado',
+    description: 'Solo 100 unidades. Bordado a mano. Recogida garantizada antes del Domingo.',
     type: 'website',
     locale: 'es_PR',
   },
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <PapaStickyBar />
       <ComfortHomeHero />
       <ComfortHomeWhy />
       <ComfortHomeHow />

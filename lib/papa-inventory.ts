@@ -1,12 +1,36 @@
 import dbConnect from '@/lib/mongodb';
 import EventInventory from '@/lib/models/EventInventory';
-import { PAPA_EVENT_ID, papaEvent } from '@/lib/papa-event';
+import { PAPA_EVENT_ID, papaBundles, papaEvent, type PapaBundleId } from '@/lib/papa-event';
 
 export type InventorySnapshot = {
   total: number;
   sold: number;
   remaining: number;
 };
+
+export type PapaInventoryResponse = InventorySnapshot & {
+  soldOut: boolean;
+  bundleAvailability: Record<PapaBundleId, boolean>;
+};
+
+export function buildPapaInventoryResponse(snapshot: InventorySnapshot): PapaInventoryResponse {
+  const bundleAvailability = Object.fromEntries(
+    (Object.keys(papaBundles) as PapaBundleId[]).map((id) => [
+      id,
+      snapshot.remaining >= papaBundles[id].apronCount,
+    ])
+  ) as Record<PapaBundleId, boolean>;
+
+  return {
+    ...snapshot,
+    soldOut: snapshot.remaining <= 0,
+    bundleAvailability,
+  };
+}
+
+export function isPapaBundleAvailable(bundleId: PapaBundleId, remaining: number): boolean {
+  return remaining >= papaBundles[bundleId].apronCount;
+}
 
 export async function getPapaInventory(): Promise<InventorySnapshot> {
   await dbConnect();

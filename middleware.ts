@@ -2,8 +2,10 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 import {
   DELANTAL_COUNTDOWN_PATH,
+  DELANTAL_PREVIEW_COOKIE,
   isCountdownAllowedPath,
   isDelantalCountdownActive,
+  isValidDelantalPreviewToken,
 } from '@/lib/delantal-countdown';
 
 export function middleware(request: NextRequest) {
@@ -12,9 +14,25 @@ export function middleware(request: NextRequest) {
   }
 
   const { pathname } = request.nextUrl;
+  const previewParam = request.nextUrl.searchParams.get('preview');
+  const previewCookie = request.cookies.get(DELANTAL_PREVIEW_COOKIE)?.value;
+  const hasPreview =
+    isValidDelantalPreviewToken(previewParam) || isValidDelantalPreviewToken(previewCookie);
 
-  if (isCountdownAllowedPath(pathname)) {
-    return NextResponse.next();
+  if (isCountdownAllowedPath(pathname) || hasPreview) {
+    const response = NextResponse.next();
+
+    if (isValidDelantalPreviewToken(previewParam)) {
+      response.cookies.set(DELANTAL_PREVIEW_COOKIE, previewParam, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 24 * 7,
+        path: '/',
+      });
+    }
+
+    return response;
   }
 
   if (pathname.startsWith('/api/')) {

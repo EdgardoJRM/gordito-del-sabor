@@ -3,8 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { siteConfig } from '@/lib/site-config';
+import { usePapaInventory } from '@/hooks/usePapaInventory';
 
 export default function PapaEventHeader() {
+  const { inventory, loading } = usePapaInventory();
+
   return (
     <header className="sticky top-0 z-50 bg-[#1A1412]/95 backdrop-blur-lg border-b border-white/10">
       <div className="container-custom">
@@ -27,12 +30,18 @@ export default function PapaEventHeader() {
             >
               Ayuda
             </Link>
-            <a
-              href="#ordenar"
-              className="btn-text inline-flex items-center justify-center bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 px-6 md:px-8 rounded-full transition-colors shadow-lg min-h-[52px]"
-            >
-              Ordenar ahora
-            </a>
+            {inventory.soldOut && !loading ? (
+              <span className="btn-text inline-flex items-center justify-center bg-[#6B5B4E] text-white/90 py-4 px-6 md:px-8 rounded-full min-h-[52px] cursor-default">
+                Agotado
+              </span>
+            ) : (
+              <a
+                href="#ordenar"
+                className="btn-text inline-flex items-center justify-center bg-[#C4472B] hover:bg-[#A8381F] text-white py-4 px-6 md:px-8 rounded-full transition-colors shadow-lg min-h-[52px]"
+              >
+                Asegura tu delantal
+              </a>
+            )}
           </div>
         </div>
       </div>

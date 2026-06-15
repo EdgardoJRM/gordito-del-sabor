@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { getPapaInventory } from '@/lib/papa-inventory';
+import { buildPapaInventoryResponse, getPapaInventory } from '@/lib/papa-inventory';
 
 export async function GET() {
   try {
-    const inventory = await getPapaInventory();
+    const inventory = buildPapaInventoryResponse(await getPapaInventory());
     return NextResponse.json(inventory);
   } catch (error) {
     console.error('Inventory error:', error);
