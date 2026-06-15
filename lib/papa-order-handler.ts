@@ -61,7 +61,20 @@ export async function handlePapaCheckoutCompleted(
   await dbConnect();
 
   const existing = await PapaOrder.findOne({ stripeSessionId: hydrated.id });
-  if (existing) return;
+  if (existing) {
+    const snapshot = await getPapaInventory();
+    try {
+      await sendPapaOrderEmails(existing, snapshot);
+      console.info('Papa webhook: pedido ya existía — emails reenviados', {
+        sessionId: hydrated.id,
+        email: existing.customerEmail,
+      });
+    } catch (error) {
+      console.error('Papa webhook: error reenviando emails', error);
+      throw error;
+    }
+    return;
+  }
 
   let order;
   try {

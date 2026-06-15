@@ -85,9 +85,11 @@ export async function sendPapaOrderEmails(
 
   if (teamResult.error) {
     console.error('Error enviando email al equipo:', teamResult.error);
+    throw new Error(teamResult.error.message);
   }
 
   if (customerResult.error) {
     console.error('Error enviando email al cliente:', customerResult.error);
+    throw new Error(customerResult.error.message);
   }
 }
