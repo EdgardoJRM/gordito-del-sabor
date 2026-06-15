@@ -43,6 +43,14 @@ function resolveBundleFromAmount(amountTotal: number | null): PapaBundleId | nul
   return match ?? null;
 }
 
+function resolveBundleFromLineItems(session: Stripe.Checkout.Session): PapaBundleId | null {
+  const items = session.line_items?.data ?? [];
+  if (items.length === 0) return null;
+
+  const unitAmount = items[0]?.price?.unit_amount ?? items[0]?.amount_subtotal ?? null;
+  return resolveBundleFromAmount(unitAmount);
+}
+
 export function extractPapaCustomFields(
   session: Stripe.Checkout.Session
 ): Record<string, string> {
@@ -75,12 +83,16 @@ export function resolvePapaBundleFromSession(
   const fromLink = resolveBundleFromPaymentLinks(session);
   if (fromLink) return fromLink;
 
+  const fromLineItems = resolveBundleFromLineItems(session);
+  if (fromLineItems) return fromLineItems;
+
   return resolveBundleFromAmount(session.amount_total);
 }
 
 export function isPapaCheckoutSession(session: Stripe.Checkout.Session): boolean {
   if (session.metadata?.checkoutType === 'papa-event') return true;
   if (session.metadata?.eventId === 'el-sabor-de-papa-2026') return true;
-  if (session.payment_link) return resolvePapaBundleFromSession(session) != null;
-  return false;
+  // Solo usamos Payment Links para El Sabor de Papá.
+  if (session.payment_link) return true;
+  return resolvePapaBundleFromSession(session) != null;
 }

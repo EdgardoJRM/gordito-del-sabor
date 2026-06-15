@@ -9,6 +9,24 @@ import {
   resolvePapaBundleFromSession,
 } from '@/lib/papa-stripe-session';
 import { sendPapaOrderEmails } from '@/lib/papa-order-notify';
+import { getStripe } from '@/lib/stripe';
+
+async function hydrateCheckoutSession(
+  session: Stripe.Checkout.Session
+): Promise<Stripe.Checkout.Session> {
+  try {
+    const stripe = getStripe();
+    return stripe.checkout.sessions.retrieve(session.id, {
+      expand: ['line_items', 'custom_fields'],
+    });
+  } catch (error) {
+    console.warn('Papa webhook: no se pudo expandir la sesión', {
+      sessionId: session.id,
+      error: error instanceof Error ? error.message : error,
+    });
+    return session;
+  }
+}
 
 export async function handlePapaCheckoutCompleted(
   session: Stripe.Checkout.Session
@@ -18,43 +36,50 @@ export async function handlePapaCheckoutCompleted(
     return;
   }
 
-  const bundleId = resolvePapaBundleFromSession(session);
+  const hydrated = await hydrateCheckoutSession(session);
+  const bundleId = resolvePapaBundleFromSession(hydrated);
   if (!bundleId) {
-    console.warn('Papa webhook: no se pudo identificar el bundle', { sessionId: session.id });
+    console.warn('Papa webhook: no se pudo identificar el bundle', {
+      sessionId: hydrated.id,
+      amountTotal: hydrated.amount_total,
+      paymentLink: hydrated.payment_link,
+    });
     return;
   }
 
   const bundle = papaBundles[bundleId];
   const customerEmail =
-    session.customer_details?.email?.trim() ||
-    session.customer_email?.trim() ||
-    session.metadata?.customerEmail?.trim();
+    hydrated.customer_details?.email?.trim() ||
+    hydrated.customer_email?.trim() ||
+    hydrated.metadata?.customerEmail?.trim();
 
   if (!customerEmail) {
-    console.warn('Papa webhook: pedido sin email', { sessionId: session.id, bundleId });
+    console.warn('Papa webhook: pedido sin email', { sessionId: hydrated.id, bundleId });
     return;
   }
 
   await dbConnect();
 
-  const existing = await PapaOrder.findOne({ stripeSessionId: session.id });
+  const existing = await PapaOrder.findOne({ stripeSessionId: hydrated.id });
   if (existing) return;
 
   let order;
   try {
     order = await PapaOrder.create({
-      stripeSessionId: session.id,
+      stripeSessionId: hydrated.id,
       eventId: PAPA_EVENT_ID,
       bundleId,
       bundleTitle: bundle.title,
       apronCount: bundle.apronCount,
-      amountTotal: session.amount_total ?? Math.round(bundle.price * 100),
-      currency: session.currency ?? 'usd',
+      amountTotal: hydrated.amount_total ?? Math.round(bundle.price * 100),
+      currency: hydrated.currency ?? 'usd',
       customerEmail,
-      customerName: session.customer_details?.name?.trim() || undefined,
-      customFields: extractPapaCustomFields(session),
+      customerName: hydrated.customer_details?.name?.trim() || undefined,
+      customFields: extractPapaCustomFields(hydrated),
       paymentLinkId:
-        typeof session.payment_link === 'string' ? session.payment_link : session.payment_link?.id,
+        typeof hydrated.payment_link === 'string'
+          ? hydrated.payment_link
+          : hydrated.payment_link?.id,
     });
   } catch (error) {
     const duplicate =
@@ -69,7 +94,7 @@ export async function handlePapaCheckoutCompleted(
   const inventory = await reservePapaAprons(bundle.apronCount);
   if (!inventory) {
     console.error('Papa webhook: sin inventario suficiente', {
-      sessionId: session.id,
+      sessionId: hydrated.id,
       bundleId,
       apronCount: bundle.apronCount,
     });
@@ -84,8 +109,9 @@ export async function handlePapaCheckoutCompleted(
   }
 
   console.info('Papa event order recorded', {
-    sessionId: session.id,
+    sessionId: hydrated.id,
     bundleId,
+    apronCount: bundle.apronCount,
     remaining: snapshot.remaining,
     email: customerEmail,
   });

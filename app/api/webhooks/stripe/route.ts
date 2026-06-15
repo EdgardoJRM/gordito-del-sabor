@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getStripe } from '@/lib/stripe';
 import { releasePapaAprons } from '@/lib/papa-inventory';
 import { handlePapaCheckoutCompleted } from '@/lib/papa-order-handler';
 
@@ -19,10 +18,9 @@ export async function POST(request: NextRequest) {
   }
 
   let event: Stripe.Event;
-  const stripe = getStripe();
 
   try {
-    event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
+    event = Stripe.webhooks.constructEvent(body, signature, webhookSecret);
   } catch (error) {
     console.error('Webhook signature error:', error);
     return NextResponse.json({ error: 'Firma inválida' }, { status: 400 });
