@@ -14,6 +14,8 @@ export const siteConfig = {
   tiktok: 'https://www.tiktok.com/@elgorditodelsaborpr',
   logoPath: '/images/brand/logo-gordito.png',
   mascotPath: '/images/brand/mascot-chef-gordito.svg',
+  /** false = el recetario solo va con compra del delantal (email post-pago). */
+  recetarioGratisEnabled: false,
   /** Placeholders: reemplaza con URLs reales de Stripe, Shopify, etc. */
   checkout: {
     delantal: 'PEGAR_URL_DEL_CHECKOUT_DELANTAL',

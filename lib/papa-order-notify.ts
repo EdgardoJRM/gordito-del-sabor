@@ -2,6 +2,11 @@ import { Resend } from 'resend';
 import type { IPapaOrder } from '@/lib/models/PapaOrder';
 import { siteConfig } from '@/lib/site-config';
 import { CONTACT_EMAIL } from '@/lib/contact-email';
+import {
+  buildPapaCustomerEmailHtml,
+  getPapaCustomerEmailSubject,
+} from '@/lib/papa-customer-email';
+import { getRecetarioPdfAttachment } from '@/lib/recetario-pdf';
 import type { InventorySnapshot } from '@/lib/papa-inventory';
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
@@ -43,6 +48,7 @@ export async function sendPapaOrderEmails(
 
   const totalLabel = formatMoney(order.amountTotal, order.currency);
   const customFields = customFieldsHtml(order.customFields as Record<string, string>);
+  const pdfAttachments = getRecetarioPdfAttachment();
 
   const teamHtml = `
     <h2>Nuevo pedido — El Sabor de Papá</h2>
@@ -57,14 +63,7 @@ export async function sendPapaOrderEmails(
     <p><strong>Stripe session:</strong> ${order.stripeSessionId}</p>
   `;
 
-  const customerHtml = `
-    <h2>¡Gracias! Tu delantal está en camino</h2>
-    <p>Hola${order.customerName ? ` ${order.customerName}` : ''},</p>
-    <p>Recibimos tu pedido de <strong>${order.bundleTitle}</strong> (${totalLabel}).</p>
-    <p>Estamos preparando el bordado. Si elegiste recogida en Área Metro, te contactamos con los detalles.</p>
-    <p>¿Dudas? Escríbenos a <a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>.</p>
-    <p>— El Gordito del Sabor</p>
-  `;
+  const customerHtml = buildPapaCustomerEmailHtml(order, pdfAttachments.length > 0);
 
   const [teamResult, customerResult] = await Promise.all([
     resend.emails.send({
@@ -78,8 +77,9 @@ export async function sendPapaOrderEmails(
       from: 'El Gordito del Sabor <noreply@gorditodelsabor.com>',
       replyTo: CONTACT_EMAIL,
       to: order.customerEmail,
-      subject: 'Confirmación — El Sabor de Papá',
+      subject: getPapaCustomerEmailSubject(order),
       html: customerHtml,
+      attachments: pdfAttachments,
     }),
   ]);
 

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { ArrowRight, Check, Download, Mail, Sparkles } from 'lucide-react';
+import { isRecetarioGratisEnabled } from '@/lib/recetario-access';
 
 export const metadata: Metadata = {
   title: 'Descarga Confirmada | El Gordito del Sabor',
@@ -9,6 +11,10 @@ export const metadata: Metadata = {
 };
 
 export default function DescargaPage() {
+  if (!isRecetarioGratisEnabled()) {
+    redirect('/el-sabor-de-papa');
+  }
+
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
       {/* Bridge page estilo funnel: confirmación + siguiente paso claro */}

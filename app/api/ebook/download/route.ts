@@ -4,13 +4,23 @@ import dbConnect from '@/lib/mongodb';
 import Lead from '@/lib/models/Lead';
 import { SOCIAL_URLS } from '@/lib/social-links';
 import { CONTACT_EMAIL } from '@/lib/contact-email';
-import fs from 'fs';
-import path from 'path';
+import { isRecetarioGratisEnabled } from '@/lib/recetario-access';
+import { getRecetarioPdfAttachment } from '@/lib/recetario-pdf';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req: Request) {
   try {
+    if (!isRecetarioGratisEnabled()) {
+      return NextResponse.json(
+        {
+          error:
+            'El recetario digital ya no está disponible por descarga gratuita. Viene incluido con la compra del delantal en El Sabor de Papá.',
+        },
+        { status: 410 }
+      );
+    }
+
     const { name, email, phone } = await req.json();
 
     // Validar campos requeridos
@@ -31,14 +41,8 @@ export async function POST(req: Request) {
     });
 
     // Leer el PDF del ebook
-    const ebookPath = path.join(process.cwd(), 'public/ebooks/recetario.pdf');
-    let ebookBuffer: Buffer | null = null;
-
-    try {
-      ebookBuffer = fs.readFileSync(ebookPath);
-    } catch (error) {
-      console.warn('Ebook PDF not found, sending email without attachment');
-    }
+    const pdfAttachments = getRecetarioPdfAttachment();
+    const ebookBuffer = pdfAttachments[0]?.content ?? null;
 
     // Enviar email con Resend
     const emailResponse = await resend.emails.send({

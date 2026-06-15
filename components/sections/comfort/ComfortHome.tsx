@@ -166,10 +166,6 @@ export function ComfortHomeTrust() {
           También puedes explorar{' '}
           <Link href="/recetas" className="text-[#E8D4BC] underline">
             nuestras recetas
-          </Link>{' '}
-          o bajar el{' '}
-          <Link href="/recetario" className="text-[#E8D4BC] underline">
-            recetario gratis
           </Link>
           .
         </p>

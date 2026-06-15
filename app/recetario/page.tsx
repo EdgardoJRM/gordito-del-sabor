@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { ArrowRight, Check, Download, Star } from 'lucide-react';
 import RecetarioFunnel from '@/components/ebook/RecetarioFunnel';
+import { isRecetarioGratisEnabled } from '@/lib/recetario-access';
 
 export const metadata: Metadata = {
   title: 'Las 20 Recetas Favoritas Del Sabor | El Gordito del Sabor',
@@ -83,6 +85,10 @@ const FAQ = [
 ];
 
 export default function RecetarioPage() {
+  if (!isRecetarioGratisEnabled()) {
+    redirect('/el-sabor-de-papa');
+  }
+
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
       {/* Funnel estilo Russell Brunson: hook → historia → value stack → opt-in */}

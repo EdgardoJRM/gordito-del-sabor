@@ -53,7 +53,7 @@ export const faqCategories: FaqCategory[] = [
     items: [
       {
         q: '¿El libro es lo mismo que el recetario gratis?',
-        a: 'Las 20 recetas favoritas son el corazón del contenido. El recetario en /recetario es lead magnet gratis; la página del libro puede venderse con bonos o bundle según tu campaña.',
+        a: 'Las 20 recetas favoritas son el mismo contenido del PDF. Ya no está disponible por descarga gratuita: viene incluido con la compra del delantal en El Sabor de Papá.',
       },
       {
         q: '¿En qué formato viene?',
