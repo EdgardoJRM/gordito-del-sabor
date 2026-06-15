@@ -22,7 +22,7 @@ export function middleware(request: NextRequest) {
   if (isCountdownAllowedPath(pathname) || hasPreview) {
     const response = NextResponse.next();
 
-    if (isValidDelantalPreviewToken(previewParam)) {
+    if (previewParam && isValidDelantalPreviewToken(previewParam)) {
       response.cookies.set(DELANTAL_PREVIEW_COOKIE, previewParam, {
         httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
