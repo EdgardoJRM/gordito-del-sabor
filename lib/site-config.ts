@@ -12,7 +12,7 @@ export const siteConfig = {
   instagram: 'https://www.instagram.com/elgorditodelsaborpr',
   facebook: 'https://www.facebook.com/profile.php?id=100084882467280',
   tiktok: 'https://www.tiktok.com/@elgorditodelsaborpr',
-  logoPath: '/images/brand/logo-gordito.svg',
+  logoPath: '/images/brand/logo-gordito.png',
   mascotPath: '/images/brand/mascot-chef-gordito.svg',
   /** Placeholders: reemplaza con URLs reales de Stripe, Shopify, etc. */
   checkout: {

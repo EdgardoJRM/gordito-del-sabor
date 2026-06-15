@@ -105,7 +105,7 @@ export default function PapaCheckoutSection() {
             ) : (
               <>
                 Quedan <strong className="text-[#1A1412]">{inventory.remaining}</strong> de{' '}
-                {inventory.total} delantales. Legado cuenta como 2. Elige la oferta y asegura el
+                {inventory.total} delantales. Elige la oferta y asegura el
                 tuyo en el siguiente paso.
               </>
             )}

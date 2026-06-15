@@ -21,7 +21,7 @@ export const papaTeamPhotos = {
   hero: '/images/team/gordito-photos/IMG_3572.jpg',
   problem: '/images/team/gordito-photos/IMG_3526.jpg',
   solution: '/images/team/gordito-photos/IMG_3531.jpg',
-  trust: '/images/team/gordito-photos/IMG_3571.jpg',
+  trust: '/images/team/gordito-photos/IMG_3526.jpg',
   gallery: [
     '/images/team/gordito-photos/IMG_3527.jpg',
     '/images/team/gordito-photos/IMG_3569.jpg',
@@ -232,31 +232,37 @@ export const papaSteps = [
   },
 ];
 
-export const papaTestimonials = [
+export const papaSocialProof = [
   {
-    id: 'maria',
-    quote:
-      'Mi papá lloró cuando lo vio. Mejor regalo que he hecho.',
-    author: 'María',
-    location: 'San Juan',
-    isReal: false,
+    id: 'instagram',
+    platform: 'Instagram',
+    stat: siteConfig.stats.instagram,
+    description:
+      'Seguidores que cocinan con nosotros cada día. Recetas, tips y sazón de verdad en tu feed.',
+    href: siteConfig.instagram,
   },
   {
-    id: 'carlos',
-    quote:
-      'La calidad es increíble. El bordado perfecto. Papá no se lo quita.',
-    author: 'Carlos',
-    location: 'Ponce',
-    isReal: false,
+    id: 'facebook',
+    platform: 'Facebook',
+    stat: siteConfig.stats.facebook,
+    description: `Comunidad activa en Meta con ${siteConfig.stats.engagementMeta} de engagement promedio.`,
+    href: siteConfig.facebook,
   },
   {
-    id: 'ana',
-    quote: '¡Esto es bello! El Gordito hizo un trabajo perfecto.',
-    author: 'Ana',
-    location: 'Mayagüez',
-    isReal: false,
+    id: 'tiktok',
+    platform: 'TikTok',
+    stat: siteConfig.stats.tiktok,
+    description: `Videos que llegan. ${siteConfig.stats.engagementTikTok} de engagement en la plataforma.`,
+    href: siteConfig.tiktok,
   },
-];
+  {
+    id: 'reach',
+    platform: 'Alcance mensual',
+    stat: siteConfig.stats.monthlyImpressions,
+    description: 'Impresiones al mes en nuestras redes. Gente real, no números inflados.',
+    href: siteConfig.instagram,
+  },
+] as const;
 
 export const papaGuarantees = [
   'Garantía de calidad en el bordado',

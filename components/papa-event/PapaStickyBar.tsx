@@ -27,7 +27,7 @@ export default function PapaStickyBar() {
               Solo quedan{' '}
               <span className="text-2xl md:text-3xl mx-1">{remaining}</span> de {total} delantales
               <span className="block text-sm font-normal text-white/85 mt-1">
-                {sold} vendidos · Legado cuenta como 2
+                {sold} vendidos
               </span>
             </>
           )}

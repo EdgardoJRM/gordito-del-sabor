@@ -15,9 +15,9 @@ export default function Footer() {
               <Image
                 src={siteConfig.logoPath}
                 alt={siteConfig.brandName}
-                width={220}
-                height={50}
-                className="h-11 w-auto object-contain"
+                width={48}
+                height={48}
+                className="h-11 w-11 object-contain"
               />
             </Link>
             <p className="body-text text-[#C4B8AE] text-lg leading-relaxed max-w-md">

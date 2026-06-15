@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import Image from 'next/image';
-import { Check, Star } from 'lucide-react';
+import { Check } from 'lucide-react';
 import PapaStickyBar from '@/components/papa-event/PapaStickyBar';
 import PapaCheckoutSection from '@/components/papa-event/PapaCheckoutSection';
+import PapaSocialProofCard from '@/components/papa-event/PapaSocialProofCard';
 import FAQAccordion from '@/components/ui/FAQAccordion';
-import TestimonialCard from '@/components/ui/TestimonialCard';
 import PapaOrderCta from '@/components/papa-event/PapaOrderCta';
 import {
   papaEvent,
@@ -15,8 +15,8 @@ import {
   papaProblem,
   papaSolution,
   papaSteps,
+  papaSocialProof,
   papaTeamPhotos,
-  papaTestimonials,
 } from '@/lib/papa-event';
 import { siteConfig } from '@/lib/site-config';
 
@@ -131,40 +131,26 @@ export default function ElSaborDePapaPage() {
 
       {/* 4. PRUEBA SOCIAL */}
       <section className="section-spacing-comfort bg-[#FAF8F5]">
-        <div className="container-custom max-w-3xl">
+        <div className="container-custom max-w-5xl">
           <h2 className="heading-section-comfort text-[#1A1412] text-center mb-4">
-            Lo que dicen nuestros clientes
+            Una comunidad que confía en nuestro sabor
           </h2>
-          <p className="text-center text-base text-[#9C8B80] mb-8">
-            Ejemplos de copy — reemplazar con testimonios verificados cuando estén disponibles.
+          <p className="text-center text-lg text-[#6B5B4E] mb-10 max-w-2xl mx-auto">
+            No inventamos números. Esto es lo que mueven nuestras redes cada mes — gente real
+            cocinando con El Gordito del Sabor.
           </p>
-          <div className="space-y-6">
-            {papaTestimonials.map((t) => (
-              <div key={t.id} className="relative">
-                <div className="flex gap-1 mb-2 text-[#C4472B]" aria-hidden>
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} size={18} fill="currentColor" />
-                  ))}
-                </div>
-                <TestimonialCard
-                  t={{
-                    id: t.id,
-                    quote: t.quote,
-                    name: t.author,
-                    role: t.location,
-                    isReal: t.isReal,
-                  }}
-                />
-              </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
+            {papaSocialProof.map((item) => (
+              <PapaSocialProofCard key={item.id} item={item} />
             ))}
           </div>
-          <div className="mt-10 relative aspect-video rounded-2xl overflow-hidden shadow-xl ring-1 ring-[#E8E0D8] mb-8">
+          <div className="mt-10 relative aspect-[4/5] max-w-md mx-auto rounded-2xl overflow-hidden shadow-xl ring-1 ring-[#E8E0D8] mb-8">
             <Image
               src={papaTeamPhotos.trust}
-              alt="El Gordito del Sabor en la cocina"
+              alt="El Gordito del Sabor con su delantal bordado"
               fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover object-center"
+              sizes="(max-width: 768px) 90vw, 448px"
             />
           </div>
           <div className="flex flex-wrap justify-center gap-4 text-lg font-bold text-[#1A1412]">

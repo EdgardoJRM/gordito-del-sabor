@@ -38,9 +38,9 @@ export default function Navbar({ overlayHero = false }: NavbarProps) {
             <Image
               src={siteConfig.logoPath}
               alt={siteConfig.brandName}
-              width={200}
-              height={46}
-              className="h-10 w-auto max-w-[200px] object-contain"
+              width={48}
+              height={48}
+              className="h-11 w-11 object-contain"
               priority
             />
             <span className="sr-only">{siteConfig.brandName}</span>

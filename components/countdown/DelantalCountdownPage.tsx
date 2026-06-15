@@ -91,9 +91,9 @@ export default function DelantalCountdownPage({ launchAtIso }: DelantalCountdown
           <Image
             src={siteConfig.logoPath}
             alt={siteConfig.brandName}
-            width={220}
-            height={52}
-            className="h-12 w-auto mx-auto mb-10"
+            width={64}
+            height={64}
+            className="h-16 w-16 mx-auto mb-10 object-contain"
             priority
           />
 
