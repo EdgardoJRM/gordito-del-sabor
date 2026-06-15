@@ -50,19 +50,19 @@ export default function ElSaborDePapaPage() {
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#1A1412] via-[#1A1412]/55 to-[#1A1412]/20" />
-        <div className="relative container-custom pb-16 md:pb-24 pt-32 w-full">
-          <span className="inline-block rounded-full bg-[#C4472B] px-4 py-1.5 text-xs md:text-sm font-bold uppercase tracking-wider text-white mb-6">
+        <div className="relative container-custom pb-16 md:pb-24 pt-32 w-full min-w-0">
+          <span className="inline-block max-w-full rounded-full bg-[#C4472B] px-3 py-1.5 sm:px-4 text-[10px] sm:text-xs md:text-sm font-bold uppercase tracking-wide sm:tracking-wider text-white mb-6">
             Edición ultra-limitada: solo {papaEvent.totalAprons} unidades
           </span>
-          <h1 className="heading-hero text-[#FAF8F5] max-w-4xl mb-6">
+          <h1 className="heading-hero text-[#FAF8F5] max-w-4xl mb-6 break-words hyphens-auto">
             Regala un legado: el delantal personalizado de El Gordito del Sabor
           </h1>
-          <p className="subheadline text-[#E8D4BC] max-w-2xl mb-8">
+          <p className="subheadline text-[#E8D4BC] max-w-2xl mb-8 break-words">
             Este Día de los Padres, ponle su nombre al regalo más sabroso de Puerto Rico. Stock en
             mano — sin preventa.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 mb-6">
-            <Button href="#ordenar" variant="primary" className="shadow-xl">
+          <div className="flex flex-col sm:flex-row gap-4 mb-6 w-full max-w-full">
+            <Button href="#ordenar" variant="primary" className="shadow-xl w-full sm:w-auto text-center">
               Personalizar mi delantal ahora
             </Button>
           </div>

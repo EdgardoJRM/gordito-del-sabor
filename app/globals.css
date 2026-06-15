@@ -36,9 +36,11 @@ body {
 .heading-hero {
   font-family: var(--font-clash);
   font-weight: 700;
-  font-size: clamp(60px, 9vw, 120px);
-  line-height: 0.95;
+  font-size: clamp(42px, 13vw, 120px);
+  line-height: 1.05;
   letter-spacing: -0.03em;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
 .heading-hero-light {
