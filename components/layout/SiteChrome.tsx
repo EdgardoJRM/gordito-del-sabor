@@ -17,8 +17,18 @@ function isPapaEventPath(pathname: string | null) {
   return pathname === '/el-sabor-de-papa' || pathname.startsWith('/el-sabor-de-papa/');
 }
 
+function isCountdownPath(pathname: string | null) {
+  if (!pathname) return false;
+  return pathname === '/delantal-proximamente';
+}
+
 export default function SiteChrome({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+
+  if (isCountdownPath(pathname)) {
+    return <>{children}</>;
+  }
+
   const funnel = isRecetarioFunnelPath(pathname);
 
   if (funnel) {

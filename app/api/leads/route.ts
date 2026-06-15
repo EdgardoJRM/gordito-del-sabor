@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       name?: string;
       email: string;
       phone?: string;
-      source: 'ebook' | 'contact' | 'newsletter' | 'sponsor';
+      source: 'ebook' | 'contact' | 'newsletter' | 'sponsor' | 'delantal-reminder';
       message?: string;
     };
 

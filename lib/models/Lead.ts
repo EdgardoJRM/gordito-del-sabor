@@ -4,7 +4,7 @@ export interface ILead extends Document {
   name?: string;
   email: string;
   phone?: string;
-  source: 'ebook' | 'contact' | 'newsletter' | 'sponsor';
+  source: 'ebook' | 'contact' | 'newsletter' | 'sponsor' | 'delantal-reminder';
   message?: string;
   createdAt: Date;
   updatedAt: Date;
@@ -26,7 +26,7 @@ const LeadSchema = new Schema<ILead>(
     },
     source: {
       type: String,
-      enum: ['ebook', 'contact', 'newsletter', 'sponsor'],
+      enum: ['ebook', 'contact', 'newsletter', 'sponsor', 'delantal-reminder'],
       required: true,
     },
     message: {
