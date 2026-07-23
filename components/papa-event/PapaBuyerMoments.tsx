@@ -12,7 +12,7 @@ export default function PapaBuyerMoments() {
           {papaBuyerMoments.items.map((item, index) => (
             <article
               key={item.id}
-              className="rounded-2xl border border-[#E8E0D8] bg-white p-6 md:p-8 relative"
+              className="rounded-lg border border-border-subtle bg-white p-6 md:p-8 relative"
             >
               <span className="absolute -top-3 left-6 bg-[#C4472B] text-white text-sm font-bold px-3 py-1 rounded-full">
                 {index + 1}

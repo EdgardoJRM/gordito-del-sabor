@@ -8,7 +8,7 @@ import { Download } from 'lucide-react';
  */
 export default function RecetarioFunnelHeader() {
   return (
-    <header className="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-lg border-b border-[#E8E0D8]">
+    <header className="sticky top-0 z-50 bg-[#FAF8F5]/95 backdrop-blur-lg hairline-b">
       <div className="container-custom">
         <div className="flex flex-wrap justify-between items-center gap-3 py-4">
           <p className="text-[#1A1412] font-bold text-lg md:text-xl tracking-tight">

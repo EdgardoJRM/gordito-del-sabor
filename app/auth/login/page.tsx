@@ -54,7 +54,7 @@ export default function LoginPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5] flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
-        <div className="bg-white rounded-3xl border border-[#E8E0D8] p-8 md:p-10 shadow-sm">
+        <div className="bg-white rounded-lg border border-border-subtle p-8 md:p-10 shadow-sm">
           {/* Header */}
           <div className="text-center mb-10">
             <h1 className="text-4xl font-bold text-[#1A1412] mb-3">
@@ -69,7 +69,7 @@ export default function LoginPage() {
 
           {/* Error Message */}
           {error && (
-            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-2xl flex items-start gap-3">
+            <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
               <AlertCircle className="text-[#C4472B] flex-shrink-0 mt-0.5" size={20} />
               <p className="text-red-800 text-sm">{error}</p>
             </div>
@@ -90,7 +90,7 @@ export default function LoginPage() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Tu nombre"
-                    className="w-full pl-12 pr-4 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+                    className="w-full pl-12 pr-4 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                     required={isSignUp}
                   />
                 </div>
@@ -109,7 +109,7 @@ export default function LoginPage() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="tu@email.com"
-                  className="w-full pl-12 pr-4 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                   required
                 />
               </div>
@@ -127,7 +127,7 @@ export default function LoginPage() {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="w-full pl-12 pr-4 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+                  className="w-full pl-12 pr-4 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                   required
                 />
               </div>

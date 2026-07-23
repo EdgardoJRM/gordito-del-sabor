@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 
 function BuyBoxFallback() {
   return (
-    <div className="animate-pulse space-y-4 rounded-lg border border-[#E8E0D8] p-6">
+    <div className="animate-pulse space-y-4 rounded-lg border border-border-subtle p-6">
       <div className="h-12 bg-[#E8E0D8] rounded-md" />
       <div className="h-12 bg-[#E8E0D8] rounded-md" />
       <div className="h-14 bg-[#E8E0D8] rounded-md" />
@@ -37,7 +37,7 @@ function BuyBoxFallback() {
 
 export default function DelantalElGorditoPage() {
   return (
-    <main id="papa-hero" className="min-h-screen bg-white pb-24 md:pb-12">
+    <main id="papa-hero" className="min-h-screen bg-warm pb-24 md:pb-12">
       <div className="container-custom py-8 md:py-12 lg:py-16">
         <nav className="text-sm text-[#6B5B4E] mb-8" aria-label="Breadcrumb">
           <Link href="/" className="hover:text-[#1A1412] hover:underline">
@@ -72,7 +72,7 @@ export default function DelantalElGorditoPage() {
         </div>
       </div>
 
-      <section className="border-t border-[#E8E0D8] bg-[#FAF8F5]">
+      <section className="hairline-t bg-warm-linen">
         <div className="container-custom max-w-3xl py-12 md:py-16">
           <h2 className="text-lg font-semibold uppercase tracking-wide text-[#1A1412] mb-8 text-center">
             Cómo funciona
@@ -90,7 +90,7 @@ export default function DelantalElGorditoPage() {
         </div>
       </section>
 
-      <section className="border-t border-[#E8E0D8]">
+      <section className="hairline-t">
         <div className="container-custom max-w-2xl py-12 md:py-16">
           <h2 className="text-lg font-semibold uppercase tracking-wide text-[#1A1412] mb-6">
             Preguntas frecuentes

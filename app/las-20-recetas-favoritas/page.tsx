@@ -46,7 +46,7 @@ const libroFaqs =
 export default function Las20RecetasFavoritasPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      <section className="border-b border-[#E8E0D8] bg-[#F2EDE6] py-8">
+      <section className="hairline-b bg-[#F2EDE6] py-8">
         <div className="container-custom">
           <Link
             href="/"
@@ -86,7 +86,7 @@ export default function Las20RecetasFavoritasPage() {
       <section className="section-spacing bg-[#1A1412] border-t border-[#2D2220]">
         <div className="container-custom max-w-2xl mx-auto text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-bold text-[#FAF8F5]">¿Te pasa esto en la cocina?</h2>
-          <ul className="text-left space-y-4 rounded-2xl border border-white/10 bg-white/5 p-6 md:p-8">
+          <ul className="text-left space-y-4 rounded-lg border border-white/10 bg-white/5 p-6 md:p-8">
             {[
               'Guardas recetas en redes y después no las encuentras.',
               'Compras cosas raras que solo usas una vez.',
@@ -104,14 +104,14 @@ export default function Las20RecetasFavoritasPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#F2EDE6] hairline-t">
         <div className="container-custom max-w-2xl mx-auto">
           <div className="text-center mb-10 space-y-3">
             <Gift className="mx-auto text-[#C4472B]" size={40} aria-hidden />
             <h2 className="heading-section text-[#1A1412] text-3xl md:text-4xl">Stack de valor</h2>
             <p className="body-text text-lg">Un solo libro. Todo junto.</p>
           </div>
-          <div className="rounded-2xl border border-[#E8E0D8] bg-[#FAF8F5] divide-y divide-[#E8E0D8] overflow-hidden">
+          <div className="rounded-lg border border-border-subtle bg-[#FAF8F5] divide-y divide-border-subtle overflow-hidden">
             {VALUE_STACK.map((row) => (
               <div key={row.label} className="flex items-center justify-between gap-6 px-6 py-4">
                 <p className="font-bold text-[#1A1412]">{row.label}</p>
@@ -129,7 +129,7 @@ export default function Las20RecetasFavoritasPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#FAF8F5] hairline-t">
         <div className="container-custom">
           <SectionHeader
             title="Adelanto de lo que cocinas"
@@ -139,7 +139,7 @@ export default function Las20RecetasFavoritasPage() {
             {PREVIEW.map(({ file, label }) => (
               <article
                 key={file}
-                className="group relative overflow-hidden rounded-2xl border border-[#E8E0D8] bg-[#F2EDE6] shadow-sm"
+                className="group relative overflow-hidden rounded-lg border border-border-subtle bg-[#F2EDE6] shadow-sm"
               >
                 <div className="relative aspect-[4/3] w-full">
                   <Image
@@ -158,7 +158,7 @@ export default function Las20RecetasFavoritasPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#F2EDE6] hairline-t">
         <div className="container-custom max-w-lg mx-auto">
           <PricingCard offer={offers.libro} />
         </div>
@@ -174,7 +174,7 @@ export default function Las20RecetasFavoritasPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#FAF8F5] hairline-t">
         <div className="container-custom max-w-3xl mx-auto">
           <SectionHeader title="Testimonios" subtitle="Ejemplos — reemplaza por reales." />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -200,14 +200,14 @@ export default function Las20RecetasFavoritasPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#F2EDE6] hairline-t">
         <div className="container-custom max-w-3xl mx-auto">
           <SectionHeader title="Preguntas frecuentes" />
           <FAQAccordion items={libroFaqs} />
         </div>
       </section>
 
-      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8] text-center">
+      <section className="section-spacing bg-[#FAF8F5] hairline-t text-center">
         <div className="container-custom max-w-2xl mx-auto space-y-6">
           <h2 className="heading-section text-[#1A1412] text-3xl md:text-4xl">Oferta especial — consíguelo hoy</h2>
           <p className="body-text text-lg">

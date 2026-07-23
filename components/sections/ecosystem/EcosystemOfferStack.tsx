@@ -4,7 +4,7 @@ import { offers } from '@/lib/offers';
 
 export default function EcosystemOfferStack() {
   return (
-    <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
+    <section className="section-spacing bg-[#FAF8F5] hairline-t">
       <div className="container-custom">
         <SectionHeader
           eyebrow="Preventa oficial"

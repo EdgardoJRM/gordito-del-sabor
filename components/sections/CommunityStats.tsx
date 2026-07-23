@@ -15,7 +15,7 @@ export default function CommunityStats({ dark }: { dark?: boolean }) {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
       {items.map((row) => (
-        <div key={row.label} className={`rounded-2xl border p-8 text-center ${card}`}>
+        <div key={row.label} className={`rounded-lg border p-8 text-center ${card}`}>
           <p className={`text-sm font-bold uppercase tracking-wider ${sub}`}>{row.label}</p>
           <p className="mt-3 text-4xl md:text-5xl font-bold">{row.value}</p>
           <p className={`mt-2 text-sm ${sub}`}>Comunidad real, sazón real</p>

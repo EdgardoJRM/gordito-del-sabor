@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function TerminosPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      <section className="bg-[#FAF8F5] border-b border-[#E8E0D8] py-8">
+      <section className="bg-[#FAF8F5] hairline-b py-8">
         <div className="container-custom">
           <Link href="/" className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors">
             <ArrowLeft size={20} />

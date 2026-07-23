@@ -26,7 +26,7 @@ export default function PapaTrustBadges({ variant = 'light', className = '' }: P
         return (
           <li
             key={badge.id}
-            className={`flex items-start gap-3 rounded-xl border p-4 ${
+            className={`flex items-start gap-3 rounded-md border p-4 ${
               isDark
                 ? 'border-white/10 bg-white/5 text-[#FAF8F5]'
                 : 'border-[#E8E0D8] bg-white text-[#1A1412]'

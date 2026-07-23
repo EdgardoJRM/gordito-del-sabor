@@ -59,7 +59,7 @@ const recipes: Recipe[] = [
 export default function CategoryPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      <section className="bg-[#FAF8F5] border-b border-[#E8E0D8] py-12">
+      <section className="bg-[#FAF8F5] hairline-b py-12">
         <div className="container-custom">
           <Link href="/categorias" className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-6 transition-colors">
             <ArrowLeft size={20} />
@@ -81,8 +81,8 @@ export default function CategoryPage() {
                 href={`/recetas/${recipe.id}`}
                 className="group"
               >
-                <div className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-2xl overflow-hidden h-full flex flex-col transition-all hover:border-[#C4472B]/30 hover:shadow-md">
-                  <div className="relative h-48 bg-gradient-to-br from-[#F2EDE6] via-[#FAF8F5] to-[#E8E0D8] flex items-center justify-center border-b border-[#E8E0D8] group-hover:from-[#E8E0D8] group-hover:to-[#F2EDE6] transition-colors">
+                <div className="bg-[#FAF8F5] border border-border-subtle rounded-lg overflow-hidden h-full flex flex-col transition-all hover:border-[#C4472B]/30 hover:shadow-md">
+                  <div className="relative h-48 bg-gradient-to-br from-[#F2EDE6] via-[#FAF8F5] to-[#E8E0D8] flex items-center justify-center hairline-b group-hover:from-[#E8E0D8] group-hover:to-[#F2EDE6] transition-colors">
                     <span className="text-5xl" aria-hidden>
                       {recipe.emoji}
                     </span>
@@ -97,7 +97,7 @@ export default function CategoryPage() {
                       {recipe.description}
                     </p>
 
-                    <div className="flex gap-4 text-sm text-[#6B5B4E] border-t border-[#E8E0D8] pt-4">
+                    <div className="flex gap-4 text-sm text-[#6B5B4E] hairline-t pt-4">
                       <div className="flex items-center gap-1">
                         <Clock size={16} />
                         <span>{recipe.time}</span>

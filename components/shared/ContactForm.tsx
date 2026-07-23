@@ -64,7 +64,7 @@ export default function ContactForm() {
   return (
     <div className="lg:col-span-2">
       {isEbookLead && (
-        <div className="mb-8 rounded-2xl border border-[#FF3B30]/40 bg-[#1C1C1E] px-6 py-4">
+        <div className="mb-8 rounded-lg border border-[#FF3B30]/40 bg-[#1C1C1E] px-6 py-4">
           <p className="body-text text-sm">
             Estás a un paso de recibir el recetario{' '}
             <span className="text-white font-bold">"Las 20 Recetas Favoritas del Sabor"</span>.
@@ -87,7 +87,7 @@ export default function ContactForm() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                  className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                   placeholder="Tu nombre"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -102,7 +102,7 @@ export default function ContactForm() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                  className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -119,7 +119,7 @@ export default function ContactForm() {
                 id="phone"
                 name="phone"
                 required
-                className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                 placeholder="+1 (787) XXX-XXXX"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -139,7 +139,7 @@ export default function ContactForm() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                  className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                   placeholder="Tu nombre"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -154,7 +154,7 @@ export default function ContactForm() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                  className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                   placeholder="tu@email.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
@@ -171,7 +171,7 @@ export default function ContactForm() {
                 id="subject"
                 name="subject"
                 required
-                className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                 placeholder="¿Cuál es tu pregunta?"
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
@@ -187,7 +187,7 @@ export default function ContactForm() {
                 name="message"
                 rows={6}
                 required
-                className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                className="w-full px-6 py-4 bg-[#1C1C1E] border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                 placeholder="Cuéntanos más..."
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}

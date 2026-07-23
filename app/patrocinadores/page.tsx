@@ -42,7 +42,7 @@ export default function PatrocinadoresPage() {
         </div>
       </section>
 
-      <section className="section-spacing border-t border-[#E8E0D8]">
+      <section className="section-spacing hairline-t">
         <div className="container-custom">
           <SectionHeader
             title="Métricas (editables)"
@@ -52,14 +52,14 @@ export default function PatrocinadoresPage() {
             {sponsorMetricsDisplay.map((m) => (
               <div
                 key={m.label}
-                className="rounded-2xl border border-[#E8E0D8] bg-[#F2EDE6] p-8 text-center shadow-sm"
+                className="rounded-lg border border-border-subtle bg-[#F2EDE6] p-8 text-center shadow-sm"
               >
                 <BarChart3 className="mx-auto text-[#C4472B] mb-4" size={28} aria-hidden />
                 <p className="text-sm font-bold uppercase tracking-wider text-[#6B5B4E]">{m.label}</p>
                 <p className="mt-3 text-3xl font-bold text-[#1A1412]">{m.value}</p>
               </div>
             ))}
-            <div className="rounded-2xl border border-dashed border-[#C4472B]/40 bg-[#FFF8F5] p-8 text-center sm:col-span-2 lg:col-span-3">
+            <div className="rounded-lg border border-dashed border-[#C4472B]/40 bg-[#FFF8F5] p-8 text-center sm:col-span-2 lg:col-span-3">
               <p className="body-text text-[#1A1412]">
                 Audiencia: placeholder editable — {siteConfig.stats.audienceActiveNote}
               </p>
@@ -68,7 +68,7 @@ export default function PatrocinadoresPage() {
         </div>
       </section>
 
-      <section id="paquetes" className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8] scroll-mt-24">
+      <section id="paquetes" className="section-spacing bg-[#F2EDE6] hairline-t scroll-mt-24">
         <div className="container-custom">
           <SectionHeader
             title="Paquetes de colaboración"
@@ -78,7 +78,7 @@ export default function PatrocinadoresPage() {
             {sponsorPackages.map((pkg) => (
               <article
                 key={pkg.id}
-                className={`rounded-2xl md:rounded-3xl border p-8 md:p-10 bg-[#FAF8F5] shadow-sm ${
+                className={`rounded-lg md:rounded-lg border p-8 md:p-10 bg-[#FAF8F5] shadow-sm ${
                   pkg.recommended ? 'ring-2 ring-[#C4472B]/30 border-[#C4472B]/40' : 'border-[#E8E0D8]'
                 }`}
               >
@@ -115,7 +115,7 @@ export default function PatrocinadoresPage() {
           <ol className="space-y-6">
             {sponsorProcess.map((s) => (
               <li key={s.step} className="flex gap-4 items-start">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-[#C4472B] text-sm font-bold">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[#C4472B] text-sm font-bold">
                   {s.step}
                 </span>
                 <div>
@@ -128,7 +128,7 @@ export default function PatrocinadoresPage() {
         </div>
       </section>
 
-      <section id="solicitud" className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8] scroll-mt-24">
+      <section id="solicitud" className="section-spacing bg-[#FAF8F5] hairline-t scroll-mt-24">
         <div className="container-custom max-w-3xl mx-auto">
           <div className="flex items-center gap-3 mb-8">
             <Mail className="text-[#C4472B]" size={28} aria-hidden />
@@ -138,7 +138,7 @@ export default function PatrocinadoresPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8] text-center">
+      <section className="section-spacing bg-[#F2EDE6] hairline-t text-center">
         <div className="container-custom max-w-2xl mx-auto space-y-6">
           <h2 className="heading-section text-[#1A1412] text-3xl md:text-4xl">¿Listo para sazón con data?</h2>
           <p className="body-text text-lg">

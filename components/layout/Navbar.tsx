@@ -31,8 +31,8 @@ export default function Navbar({ overlayHero = false, pinOnScroll = true }: Navb
     <nav
       className={
         onDark
-          ? `${positionClass} bg-[#1A1412]/45 backdrop-blur-md border-b border-white/10 transition-colors duration-300`
-          : `${positionClass} bg-[#FAF8F5]/95 backdrop-blur-lg border-b border-[#E8E0D8] transition-colors duration-300`
+          ? `${positionClass} bg-warm-dark/45 backdrop-blur-md border-b border-white/10 transition-colors duration-300`
+          : `${positionClass} bg-warm/95 backdrop-blur-lg hairline-b transition-colors duration-300`
       }
     >
       <div className="container-custom">
@@ -124,8 +124,8 @@ export default function Navbar({ overlayHero = false, pinOnScroll = true }: Navb
           <div
             className={
               onDark
-                ? 'lg:hidden pb-6 border-t border-white/15 bg-[#1A1412]/98'
-                : 'lg:hidden pb-6 border-t border-[#E8E0D8] bg-[#FAF8F5]'
+                ? 'lg:hidden pb-6 border-t border-white/15 bg-warm-dark/98'
+                : 'lg:hidden pb-6 hairline-t bg-warm'
             }
           >
             <div className="flex flex-col gap-1 pt-3">
@@ -137,8 +137,8 @@ export default function Navbar({ overlayHero = false, pinOnScroll = true }: Navb
                   href={item.href}
                   className={
                     onDark
-                      ? 'nav-text flex items-center gap-2 py-3 px-2 text-[#FAF8F5] hover:bg-white/5 rounded-lg'
-                      : 'nav-text flex items-center gap-2 py-3 px-2 text-[#1A1412] hover:bg-[#F2EDE6] rounded-lg'
+                      ? 'nav-text flex items-center gap-2 py-3 px-2 text-warm hover:bg-white/5 rounded-md'
+                      : 'nav-text flex items-center gap-2 py-3 px-2 text-warm-dark hover:bg-warm-linen rounded-md'
                   }
                   onClick={() => setIsOpen(false)}
                 >
@@ -154,7 +154,7 @@ export default function Navbar({ overlayHero = false, pinOnScroll = true }: Navb
               </div>
             </div>
             {session && (
-              <div className="pt-4 mt-4 border-t border-[#E8E0D8] space-y-2">
+              <div className="pt-4 mt-4 hairline-t space-y-2">
                 <Link
                   href="/perfil"
                   className="nav-text flex items-center gap-2 py-3 text-[#1A1412]"

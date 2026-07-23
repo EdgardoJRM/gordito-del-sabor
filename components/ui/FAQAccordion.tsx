@@ -13,35 +13,35 @@ type FAQAccordionProps = {
 export default function FAQAccordion({ items, dark }: FAQAccordionProps) {
   const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
-  const border = dark ? 'border-white/10' : 'border-[#E8E0D8]';
+  const divide = dark ? 'divide-white/10' : 'divide-border-subtle';
   const btn = dark
-    ? 'text-[#FAF8F5] hover:bg-white/5'
-    : 'text-[#1A1412] hover:bg-[#F2EDE6]';
-  const content = dark ? 'text-[#C4B8AE]' : 'text-[#6B5B4E]';
+    ? 'text-warm hover:bg-white/5'
+    : 'text-warm-dark hover:bg-warm-linen';
+  const content = dark ? 'text-[#C4B8AE]' : 'text-earth';
 
   return (
-    <div className={`divide-y rounded-2xl border ${border} overflow-hidden`}>
+    <div className={`divide-y ${divide}`}>
       {items.map((item) => {
         const open = openId === item.id;
         return (
-          <div key={item.id} className={dark ? 'bg-[#1A1412]' : 'bg-[#FAF8F5]'}>
+          <div key={item.id} className={dark ? 'bg-warm-dark' : 'bg-warm'}>
             <button
               type="button"
-              className={`flex w-full items-center justify-between gap-4 px-6 py-6 text-left min-h-[64px] ${btn}`}
+              className={`flex w-full items-center justify-between gap-4 px-1 py-5 text-left min-h-[56px] ${btn}`}
               onClick={() => setOpenId(open ? null : item.id)}
               aria-expanded={open}
             >
               <span className="font-bold text-lg md:text-xl pr-2">{item.question}</span>
               <ChevronDown
                 className={`shrink-0 transition-transform ${open ? 'rotate-180' : ''} ${
-                  dark ? 'text-[#E8D4BC]' : 'text-[#6B5B4E]'
+                  dark ? 'text-[#E8D4BC]' : 'text-earth'
                 }`}
                 size={22}
                 aria-hidden
               />
             </button>
             {open && (
-              <div className={`px-6 pb-6 body-text text-lg ${content}`}>{item.answer}</div>
+              <div className={`pb-5 body-text text-lg ${content}`}>{item.answer}</div>
             )}
           </div>
         );

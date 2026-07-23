@@ -71,7 +71,7 @@ export default function PapaCheckoutSection() {
     return (
       <section
         id="ordenar"
-        className="section-spacing-comfort bg-[#F2EDE6] border-t border-[#E8E0D8] scroll-mt-28"
+        className="section-spacing-comfort bg-[#F2EDE6] hairline-t scroll-mt-28"
       >
         <div className="container-custom max-w-3xl text-center">
           <p className="comfort-eyebrow text-[#6B5B4E] mb-3">Edición agotada</p>
@@ -96,7 +96,7 @@ export default function PapaCheckoutSection() {
   return (
     <section
       id="ordenar"
-      className="section-spacing-comfort bg-[#F2EDE6] border-t border-[#E8E0D8] scroll-mt-28"
+      className="section-spacing-comfort bg-[#F2EDE6] hairline-t scroll-mt-28"
     >
       <div className="container-custom max-w-4xl">
         <div className="text-center mb-10">
@@ -117,7 +117,7 @@ export default function PapaCheckoutSection() {
 
         {cancelled && (
           <div
-            className="mb-8 rounded-2xl border-2 border-[#C4472B]/40 bg-[#FFF8F5] p-6 text-center"
+            className="mb-8 rounded-lg border-2 border-[#C4472B]/40 bg-[#FFF8F5] p-6 text-center"
             role="status"
           >
             <p className="text-lg font-bold text-[#1A1412] mb-1">No se completó tu reserva</p>
@@ -156,7 +156,7 @@ export default function PapaCheckoutSection() {
                 aria-disabled={!available}
                 disabled={!available}
                 onClick={() => available && setBundleId(id)}
-                className={`relative text-left rounded-2xl border-2 p-6 md:p-8 transition-all min-h-[120px] ${
+                className={`relative text-left rounded-lg border-2 p-6 md:p-8 transition-all min-h-[120px] ${
                   !available
                     ? 'border-[#E8E0D8] bg-[#F0EBE4] opacity-60 cursor-not-allowed'
                     : active
@@ -193,7 +193,7 @@ export default function PapaCheckoutSection() {
           })}
         </div>
 
-        <div className="rounded-3xl border-2 border-[#E8E0D8] bg-[#FAF8F5] p-8 md:p-10 shadow-sm">
+        <div className="rounded-lg border border-border-subtle bg-[#FAF8F5] p-8 md:p-10 shadow-sm">
           <p className="body-text text-lg text-center mb-6">
             Oferta seleccionada:{' '}
             <strong className="text-[#1A1412]">

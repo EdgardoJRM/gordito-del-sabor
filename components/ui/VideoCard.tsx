@@ -30,7 +30,7 @@ export default function VideoCard({ title, subtitle, posterSrc, posterAlt, href 
   );
 
   return (
-    <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border border-[#E8E0D8] shadow-lg aspect-video w-full max-w-4xl mx-auto">
+    <div className="relative overflow-hidden rounded-lg shadow-media aspect-video w-full max-w-4xl mx-auto">
       <Image src={posterSrc} alt={posterAlt} fill className="object-cover" sizes="(max-width:768px) 100vw, 896px" />
       {href ? (
         <a href={href} className="absolute inset-0 group" aria-label={`Reproducir: ${title}`}>

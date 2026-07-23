@@ -13,7 +13,7 @@ export default function EcosystemHero() {
       <div className="container-custom relative z-10 flex-1 flex items-center py-16 md:py-24 lg:py-28">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
           <div className="lg:hidden order-1 w-full max-w-sm mx-auto">
-            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+            <div className="relative aspect-square rounded-lg overflow-hidden shadow-media ring-1 ring-white/10">
               <Image
                 src="/images/ariel.webp"
                 alt="Ariel — El Gordito del Sabor"
@@ -70,7 +70,7 @@ export default function EcosystemHero() {
           </div>
 
           <div className="hidden lg:block lg:col-span-5 lg:order-2 w-full max-w-none">
-            <div className="relative aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+            <div className="relative aspect-square lg:aspect-[4/5] rounded-lg overflow-hidden shadow-media ring-1 ring-white/10">
               <Image
                 src="/images/ariel.webp"
                 alt="El Gordito del Sabor — cocina boricua"

@@ -4,10 +4,10 @@ import Button from '@/components/ui/Button';
 
 export default function EcosystemBookTeaser() {
   return (
-    <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
+    <section className="section-spacing bg-[#FAF8F5] hairline-t">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
-          <div className="relative mx-auto w-full max-w-md aspect-[3/4] rounded-2xl border border-[#E8E0D8] bg-[#F2EDE6] shadow-xl overflow-hidden">
+          <div className="relative mx-auto w-full max-w-md aspect-[3/4] rounded-lg border border-border-subtle bg-[#F2EDE6] shadow-xl overflow-hidden">
             <Image
               src="/ebooks/recetario-portada-pr.jpg"
               alt="Las 20 Recetas Favoritas del Sabor — portada"

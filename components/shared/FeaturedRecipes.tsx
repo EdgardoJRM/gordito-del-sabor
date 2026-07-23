@@ -29,7 +29,7 @@ export default function FeaturedRecipes() {
               href={`/recetas/${recipe.id}`}
               className="group"
             >
-              <div className="card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl overflow-hidden h-full flex flex-col hover:border-amber-600 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-600/20">
+              <div className="card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-lg overflow-hidden h-full flex flex-col hover:border-amber-600 transition-all duration-300 hover:shadow-media hover:shadow-amber-600/20">
                 {/* Image placeholder */}
                 <div className="h-48 bg-gradient-to-br from-amber-900/30 to-orange-900/30 flex items-center justify-center group-hover:from-amber-800/40 group-hover:to-orange-800/40 transition-colors">
                   <span className="text-6xl">🍳</span>

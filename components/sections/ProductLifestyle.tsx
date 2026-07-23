@@ -47,7 +47,7 @@ export default function ProductLifestyle() {
           {LIFESTYLE_PHOTOS.map((photo, index) => (
             <div
               key={index}
-              className="relative h-[500px] rounded-2xl overflow-hidden group border border-[#E8E0D8] shadow-sm"
+              className="relative h-[500px] rounded-lg overflow-hidden group border border-border-subtle shadow-sm"
             >
               <Image
                 src={photo.image}

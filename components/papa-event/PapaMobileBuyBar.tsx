@@ -40,7 +40,7 @@ export default function PapaMobileBuyBar() {
   if (loading || inventory.soldOut || !visible) return null;
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50 md:hidden border-t border-[#E8E0D8] bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
+    <div className="fixed bottom-0 inset-x-0 z-50 md:hidden hairline-t bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-4px_20px_rgba(0,0,0,0.08)]">
       <div className="flex items-center gap-3 px-4 py-3">
         <div className="min-w-0 flex-1">
           <p className="text-sm font-semibold text-[#1A1412] truncate">{papaProductName}</p>

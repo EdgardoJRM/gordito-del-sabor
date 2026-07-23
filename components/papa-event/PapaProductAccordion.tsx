@@ -35,7 +35,7 @@ export default function PapaProductAccordion() {
   const [openId, setOpenId] = useState<string | null>('details');
 
   return (
-    <div className="border-t border-[#E8E0D8] divide-y divide-[#E8E0D8]">
+    <div className="hairline-t divide-y divide-border-subtle">
       {panels.map((panel) => {
         const open = openId === panel.id;
         return (
@@ -65,7 +65,7 @@ export function PapaProductFaqAccordion() {
   const [openId, setOpenId] = useState<string | null>(null);
 
   return (
-    <div className="border-t border-[#E8E0D8] divide-y divide-[#E8E0D8]">
+    <div className="hairline-t divide-y divide-border-subtle">
       {papaFaqs.map((faq) => {
         const open = openId === faq.id;
         return (

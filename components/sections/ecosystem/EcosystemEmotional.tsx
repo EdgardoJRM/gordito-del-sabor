@@ -2,7 +2,7 @@ import SectionHeader from '@/components/ui/SectionHeader';
 
 export default function EcosystemEmotional() {
   return (
-    <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+    <section className="section-spacing bg-[#F2EDE6] hairline-t">
       <div className="container-custom max-w-4xl mx-auto text-center">
         <SectionHeader
           eyebrow="Esto no es mercancía"

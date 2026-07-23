@@ -62,7 +62,7 @@ export default async function CategoriesPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
       {/* Header */}
-      <section className="bg-[#FAF8F5] border-b border-[#E8E0D8] py-8">
+      <section className="bg-[#FAF8F5] hairline-b py-8">
         <div className="container-custom">
           <Link href="/" className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors">
             <ArrowLeft size={20} />
@@ -85,7 +85,7 @@ export default async function CategoriesPage() {
                 href={`/categorias/${category.id}`}
                 className="group"
               >
-                <div className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-3xl p-8 hover:border-[#C4472B]/30 transition-all hover:scale-[1.02] h-full flex flex-col shadow-sm">
+                <div className="bg-[#FAF8F5] border border-border-subtle rounded-lg p-8 hover:border-[#C4472B]/30 transition-all hover:scale-[1.02] h-full flex flex-col shadow-sm">
                   <div className="text-7xl mb-6 group-hover:scale-110 transition-transform">
                     {category.emoji}
                   </div>
@@ -96,17 +96,17 @@ export default async function CategoriesPage() {
                     {category.description}
                   </p>
                   <div className="mb-6">
-                    <div className="inline-block px-4 py-2 bg-[#F2EDE6] text-[#6B5B4E] rounded-full text-sm font-bold border border-[#E8E0D8]">
+                    <div className="inline-block px-4 py-2 bg-[#F2EDE6] text-[#6B5B4E] rounded-full text-sm font-bold border border-border-subtle">
                       {category.count} recetas
                     </div>
                   </div>
-                  <div className="border-t border-[#E8E0D8] pt-6">
+                  <div className="hairline-t pt-6">
                     <p className="text-xs text-[#9C8B80] mb-3 uppercase tracking-wide font-bold">Recetas populares:</p>
                     <div className="flex flex-wrap gap-2">
                       {category.recipes.map((recipe) => (
                         <span
                           key={recipe}
-                          className="text-xs bg-white border border-[#E8E0D8] text-[#6B5B4E] px-3 py-1 rounded-full"
+                          className="text-xs bg-white border border-border-subtle text-[#6B5B4E] px-3 py-1 rounded-full"
                         >
                           {recipe}
                         </span>

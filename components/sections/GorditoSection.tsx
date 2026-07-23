@@ -31,7 +31,7 @@ export default function GorditoSection() {
             </button>
           </div>
 
-          <div className="relative h-[600px] rounded-3xl overflow-hidden order-1 lg:order-2 shadow-lg border border-[#E8E0D8]">
+          <div className="relative h-[600px] rounded-lg overflow-hidden order-1 lg:order-2 shadow-lg border border-border-subtle">
             <Image
               src={CHEF_IMAGE}
               alt="El Gordito del Sabor"

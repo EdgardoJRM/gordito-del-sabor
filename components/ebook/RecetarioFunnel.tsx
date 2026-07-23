@@ -141,7 +141,7 @@ export default function RecetarioFunnel() {
       {/* Galería de recetas reales */}
       <section
         data-funnel-section="gallery"
-        className="section-spacing bg-[#FAF8F5] border-b border-[#E8E0D8]"
+        className="section-spacing bg-[#FAF8F5] hairline-b"
       >
         <div className="container-custom max-w-6xl mx-auto px-4">
           <div className="text-center mb-12 max-w-2xl mx-auto space-y-3">
@@ -157,7 +157,7 @@ export default function RecetarioFunnel() {
             {GALLERY_RECIPES.map(({ file, label }) => (
               <article
                 key={file}
-                className="group relative overflow-hidden rounded-2xl border border-[#E8E0D8] bg-[#F2EDE6] shadow-sm hover:shadow-md transition-shadow"
+                className="group relative overflow-hidden rounded-lg border border-border-subtle bg-[#F2EDE6] shadow-sm hover:shadow-md transition-shadow"
               >
                 <div className="relative aspect-[4/3] w-full">
                   <Image
@@ -185,13 +185,13 @@ export default function RecetarioFunnel() {
       {/* Historia / problema */}
       <section
         data-funnel-section="story"
-        className="section-spacing bg-gradient-to-b from-[#F2EDE6] to-[#FAF8F5] border-b border-[#E8E0D8]"
+        className="section-spacing bg-gradient-to-b from-[#F2EDE6] to-[#FAF8F5] hairline-b"
       >
         <div className="container-custom max-w-2xl mx-auto px-4 space-y-10 text-center">
           <h2 className="heading-section text-[#1A1412] text-3xl md:text-4xl">
             ¿Te pasa esto en la cocina?
           </h2>
-          <ul className="text-left space-y-4 rounded-2xl border border-[#E8E0D8] bg-white p-6 md:p-8 shadow-sm">
+          <ul className="text-left space-y-4 rounded-lg border border-border-subtle bg-white p-6 md:p-8 shadow-sm">
             {PROBLEM_BULLETS.map((line) => (
               <li key={line} className="flex gap-3 body-text text-[#1A1412]">
                 <span className="text-[#C4472B] font-bold shrink-0">·</span>
@@ -210,7 +210,7 @@ export default function RecetarioFunnel() {
       {/* Value stack */}
       <section
         data-funnel-section="stack"
-        className="section-spacing bg-[#1A1412] text-[#FAF8F5] border-b border-[#E8E0D8]"
+        className="section-spacing bg-[#1A1412] text-[#FAF8F5] hairline-b"
       >
         <div className="container-custom max-w-2xl mx-auto px-4 space-y-10">
           <div className="text-center space-y-3">
@@ -219,7 +219,7 @@ export default function RecetarioFunnel() {
             <p className="text-[#C4B8AE] text-lg">Un solo PDF. Todo junto. Sin pagar nada.</p>
           </div>
 
-          <div className="rounded-3xl border border-[#C4472B]/40 bg-[#2a211d] p-6 md:p-10 space-y-4 shadow-xl">
+          <div className="rounded-lg border border-[#C4472B]/40 bg-[#2a211d] p-6 md:p-10 space-y-4 shadow-xl">
             {VALUE_STACK.map((row) => (
               <div
                 key={row.label}
@@ -238,13 +238,13 @@ export default function RecetarioFunnel() {
               <span className="text-lg font-bold">Valor aproximado</span>
               <span className="text-xl line-through text-[#9C8B80]">$93+</span>
             </div>
-            <div className="flex items-center justify-between rounded-2xl bg-[#C4472B] px-6 py-4">
+            <div className="flex items-center justify-between rounded-lg bg-[#C4472B] px-6 py-4">
               <span className="font-bold uppercase tracking-wide text-sm">Tu inversión</span>
               <span className="text-2xl font-bold">$0</span>
             </div>
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-[#2a211d] p-6 flex gap-4">
+          <div className="rounded-lg border border-white/10 bg-[#2a211d] p-6 flex gap-4">
             <Lock className="text-[#E8D4BC] shrink-0" size={28} aria-hidden />
             <div>
               <p className="font-bold text-[#FAF8F5] mb-1">Garantía simple</p>
@@ -260,7 +260,7 @@ export default function RecetarioFunnel() {
       <section
         id="recetario-optin"
         data-funnel-section="optin"
-        className="section-spacing bg-[#FAF8F5] border-b border-[#E8E0D8]"
+        className="section-spacing bg-[#FAF8F5] hairline-b"
       >
         <div className="container-custom max-w-xl mx-auto px-4 space-y-8">
           <div className="text-center space-y-3">
@@ -273,7 +273,7 @@ export default function RecetarioFunnel() {
             </p>
           </div>
 
-          <div className="rounded-3xl border border-[#E8E0D8] bg-white p-6 md:p-10 shadow-sm">
+          <div className="rounded-lg border border-border-subtle bg-white p-6 md:p-10 shadow-sm">
             <EbookDownloadForm
               onConversion={() =>
                 emitFunnelEvent('funnel_completed', { stepId: 'optin', stepIndex: 4 })

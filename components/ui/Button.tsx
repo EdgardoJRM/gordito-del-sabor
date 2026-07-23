@@ -17,14 +17,14 @@ export type ButtonProps = {
 };
 
 const base =
-  'btn-text inline-flex items-center justify-center rounded-full transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4472B] focus-visible:ring-offset-2 focus-visible:ring-offset-[#FAF8F5]';
+  'btn-text inline-flex items-center justify-center rounded-pill transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-warm';
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-[#C4472B] hover:bg-[#A8381F] text-white shadow-lg hover:shadow-xl',
+  primary: 'bg-accent hover:bg-accent-hover text-white shadow-soft hover:shadow-media',
   secondary:
-    'border-2 border-[#1A1412] text-[#1A1412] hover:bg-[#1A1412] hover:text-[#FAF8F5] bg-transparent',
-  dark: 'bg-[#1A1412] text-[#FAF8F5] hover:bg-black border border-[#2D2220]',
-  ghost: 'border-2 border-[#FAF8F5] text-[#FAF8F5] hover:bg-[#FAF8F5] hover:text-[#1A1412] bg-transparent',
+    'border border-warm-dark text-warm-dark hover:bg-warm-dark hover:text-warm bg-transparent',
+  dark: 'bg-warm-dark text-warm hover:bg-black',
+  ghost: 'border border-warm text-warm hover:bg-warm hover:text-warm-dark bg-transparent',
 };
 
 const sizes: Record<Size, string> = {

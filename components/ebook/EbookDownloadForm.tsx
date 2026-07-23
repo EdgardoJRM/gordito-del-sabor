@@ -75,7 +75,7 @@ export default function EbookDownloadForm({ onConversion }: EbookDownloadFormPro
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+            className="w-full px-6 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
             placeholder="Tu nombre"
             required
           />
@@ -89,7 +89,7 @@ export default function EbookDownloadForm({ onConversion }: EbookDownloadFormPro
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+            className="w-full px-6 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
             placeholder="tu@email.com"
             required
           />
@@ -105,13 +105,13 @@ export default function EbookDownloadForm({ onConversion }: EbookDownloadFormPro
           id="phone"
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
-          className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+          className="w-full px-6 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
           placeholder="+1 (787) XXX-XXXX"
         />
       </div>
 
       {error && (
-        <div className="bg-[#C4472B]/15 border border-[#C4472B]/40 rounded-2xl p-4">
+        <div className="bg-[#C4472B]/15 border border-[#C4472B]/40 rounded-lg p-4">
           <p className="text-[#A8381F] text-sm font-bold">{error}</p>
         </div>
       )}

@@ -6,7 +6,7 @@ import { siteConfig } from '@/lib/site-config';
 export default function RecipePromoBanner() {
   if (siteConfig.recetarioGratisEnabled) {
     return (
-      <div className="bg-[#FAF8F5] border border-[#C4472B]/25 rounded-2xl p-8 md:p-12 my-12 shadow-sm">
+      <div className="bg-[#FAF8F5] border border-[#C4472B]/25 rounded-lg p-8 md:p-12 my-12 shadow-sm">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="flex-1">
             <h3 className="text-2xl md:text-3xl font-bold text-[#1A1412] mb-2">
@@ -28,7 +28,7 @@ export default function RecipePromoBanner() {
   }
 
   return (
-    <div className="bg-[#FAF8F5] border border-[#C4472B]/25 rounded-2xl p-8 md:p-12 my-12 shadow-sm">
+    <div className="bg-[#FAF8F5] border border-[#C4472B]/25 rounded-lg p-8 md:p-12 my-12 shadow-sm">
       <div className="flex flex-col md:flex-row items-center justify-between gap-6">
         <div className="flex-1">
           <h3 className="text-2xl md:text-3xl font-bold text-[#1A1412] mb-2">

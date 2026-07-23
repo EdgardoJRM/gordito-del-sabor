@@ -53,7 +53,7 @@ export default function SuccessPage() {
       {/* Success Message */}
       <section className="section-spacing flex items-center">
         <div className="container-custom max-w-3xl">
-          <div className="bg-[#1C1C1E] border border-gray-900 rounded-3xl shadow-2xl p-12 md:p-16 text-center">
+          <div className="bg-[#1C1C1E] border border-gray-900 rounded-lg shadow-media p-12 md:p-16 text-center">
             {/* Icon */}
             <div className="mb-10 flex justify-center">
               <div className="relative">
@@ -75,7 +75,7 @@ export default function SuccessPage() {
             </p>
 
             {/* Order Details */}
-            <div className="bg-black border border-gray-900 rounded-3xl p-8 mb-10 text-left">
+            <div className="bg-black border border-gray-900 rounded-lg p-8 mb-10 text-left">
               <h2 className="text-2xl font-bold text-white mb-6">
                 Detalles de tu Orden
               </h2>
@@ -100,7 +100,7 @@ export default function SuccessPage() {
             </div>
 
             {/* Info Box */}
-            <div className="bg-gradient-to-br from-blue-950/50 to-blue-900/30 border border-blue-900/50 rounded-3xl p-8 mb-12 text-left">
+            <div className="bg-gradient-to-br from-blue-950/50 to-blue-900/30 border border-blue-900/50 rounded-lg p-8 mb-12 text-left">
               <div className="flex gap-4">
                 <Package className="text-blue-400 flex-shrink-0 mt-1" size={32} />
                 <div>

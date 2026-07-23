@@ -16,8 +16,8 @@ export default function PapaProductGallery({ theme = 'light' }: PapaProductGalle
   return (
     <div className="w-full">
       <div
-        className={`relative aspect-square rounded-lg overflow-hidden ${
-          isLight ? 'bg-[#FAF8F5] border border-[#E8E0D8]' : 'bg-[#2A221E] ring-1 ring-white/10 shadow-2xl'
+        className={`relative aspect-square media-frame ${
+          isLight ? 'bg-warm' : 'bg-[#2A221E]'
         }`}
       >
         <Image
@@ -38,9 +38,9 @@ export default function PapaProductGallery({ theme = 'light' }: PapaProductGalle
             onClick={() => setActiveIndex(index)}
             aria-label={item.caption}
             aria-current={index === activeIndex}
-            className={`relative h-16 w-16 shrink-0 rounded-md overflow-hidden border-2 transition-all ${
+            className={`relative h-16 w-16 shrink-0 rounded-md overflow-hidden border transition-all ${
               index === activeIndex
-                ? 'border-[#1A1412]'
+                ? 'border-warm-dark'
                 : isLight
                   ? 'border-transparent opacity-70 hover:opacity-100'
                   : 'border-white/20 opacity-75 hover:opacity-100'

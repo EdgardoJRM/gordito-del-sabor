@@ -8,7 +8,7 @@ export default function PapaEarlyUrgency() {
   const { inventory, loading } = usePapaInventory();
 
   return (
-    <section className="section-spacing-comfort bg-[#F2EDE6] border-y border-[#E8E0D8]">
+    <section className="section-spacing-comfort bg-[#F2EDE6] hairline-y">
       <div className="container-custom max-w-3xl">
         <p className="comfort-eyebrow text-[#6B5B4E] mb-3">{papaEarlyUrgency.eyebrow}</p>
         <h2 className="heading-section-comfort text-[#1A1412] mb-4">{papaEarlyUrgency.title}</h2>
@@ -26,7 +26,7 @@ export default function PapaEarlyUrgency() {
           {papaEarlyUrgency.offers.map((offer) => (
             <li
               key={offer.id}
-              className="rounded-xl border border-[#E8E0D8] bg-white p-5 text-[#1A1412]"
+              className="rounded-md border border-border-subtle bg-white p-5 text-[#1A1412]"
             >
               <p className="font-bold text-lg mb-1">
                 {offer.title} — {offer.price}

@@ -19,7 +19,7 @@ export default function BrandLogo({
 }: BrandLogoProps) {
   return (
     <span
-      className={`inline-flex items-center justify-center bg-white rounded-xl overflow-hidden shrink-0 ${className}`}
+      className={`inline-flex items-center justify-center bg-warm rounded-md overflow-hidden shrink-0 ${className}`}
     >
       <Image
         src={siteConfig.logoPath}

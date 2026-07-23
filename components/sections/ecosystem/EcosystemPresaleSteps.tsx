@@ -21,7 +21,7 @@ const steps = [
 
 export default function EcosystemPresaleSteps() {
   return (
-    <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
+    <section className="section-spacing bg-[#FAF8F5] hairline-t">
       <div className="container-custom">
         <SectionHeader
           eyebrow="Transparencia"
@@ -32,9 +32,9 @@ export default function EcosystemPresaleSteps() {
           {steps.map((s) => (
             <div
               key={s.n}
-              className="rounded-2xl md:rounded-3xl border border-[#E8E0D8] bg-[#F2EDE6] p-8 shadow-sm"
+              className="rounded-lg md:rounded-lg border border-border-subtle bg-[#F2EDE6] p-8 shadow-sm"
             >
-              <span className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#C4472B] text-white font-bold text-lg mb-6">
+              <span className="inline-flex h-12 w-12 items-center justify-center rounded-lg bg-[#C4472B] text-white font-bold text-lg mb-6">
                 {s.n}
               </span>
               <h3 className="text-xl font-bold text-[#1A1412] mb-3">{s.title}</h3>

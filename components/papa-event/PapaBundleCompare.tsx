@@ -48,10 +48,10 @@ export default function PapaBundleCompare() {
         <p className="text-lg text-[#6B5B4E]">{papaBundleCompare.subtitle}</p>
       </div>
 
-      <div className="hidden md:block overflow-x-auto rounded-2xl border border-[#E8E0D8] bg-white">
+      <div className="hidden md:block overflow-x-auto rounded-lg border border-border-subtle bg-white">
         <table className="w-full text-left">
           <thead>
-            <tr className="border-b border-[#E8E0D8]">
+            <tr className="hairline-b">
               <th className="p-5 text-[#6B5B4E] font-medium w-[40%]">Incluye</th>
               {bundleIds.map((id) => {
                 const bundle = papaBundles[id];
@@ -98,7 +98,7 @@ export default function PapaBundleCompare() {
           return (
             <article
               key={id}
-              className={`rounded-2xl border-2 p-5 ${
+              className={`rounded-lg border-2 p-5 ${
                 bundle.recommended
                   ? 'border-[#C4472B] bg-[#FFF8F5]'
                   : 'border-[#E8E0D8] bg-white'

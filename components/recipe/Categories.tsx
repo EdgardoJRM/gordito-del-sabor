@@ -77,7 +77,7 @@ export default function Categories() {
               href={`/categorias/${category.id}`}
               className="group"
             >
-              <div className="card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-2xl p-8 hover:border-amber-600 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-600/20 h-full">
+              <div className="card-hover bg-gradient-to-br from-gray-900 to-black border border-gray-800 rounded-lg p-8 hover:border-amber-600 transition-all duration-300 hover:shadow-media hover:shadow-amber-600/20 h-full">
                 <div className="text-5xl mb-4 group-hover:scale-110 transition-transform">
                   {category.emoji}
                 </div>

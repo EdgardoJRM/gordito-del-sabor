@@ -12,7 +12,7 @@ export default function ContactPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
       {/* Header */}
-      <section className="bg-[#FAF8F5] border-b border-[#E8E0D8] py-8">
+      <section className="bg-[#FAF8F5] hairline-b py-8">
         <div className="container-custom">
           <Link href="/" className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors">
             <ArrowLeft size={20} />
@@ -60,14 +60,14 @@ export default function ContactPage() {
               </div>
 
               {/* Social Links */}
-              <div className="mt-12 pt-8 border-t border-[#E8E0D8]">
+              <div className="mt-12 pt-8 hairline-t">
                 <h3 className="font-bold text-[#1A1412] mb-6">Síguenos</h3>
                 <div className="flex flex-wrap gap-4">
                   <a
                     href={SOCIAL_URLS.facebook}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-14 h-14 bg-[#F2EDE6] border border-[#E8E0D8] rounded-full flex items-center justify-center text-2xl hover:border-[#C4472B]/40 hover:scale-110 transition-all"
+                    className="w-14 h-14 bg-[#F2EDE6] border border-border-subtle rounded-full flex items-center justify-center text-2xl hover:border-[#C4472B]/40 hover:scale-110 transition-all"
                     title="Facebook — El Gordito del Sabor"
                   >
                     👍
@@ -76,7 +76,7 @@ export default function ContactPage() {
                     href={SOCIAL_URLS.instagram}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-14 h-14 bg-[#F2EDE6] border border-[#E8E0D8] rounded-full flex items-center justify-center text-2xl hover:border-[#C4472B]/40 hover:scale-110 transition-all"
+                    className="w-14 h-14 bg-[#F2EDE6] border border-border-subtle rounded-full flex items-center justify-center text-2xl hover:border-[#C4472B]/40 hover:scale-110 transition-all"
                     title="Instagram — @elgorditodelsaborpr"
                   >
                     📸
@@ -94,7 +94,7 @@ export default function ContactPage() {
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <form className="space-y-6 bg-white border border-[#E8E0D8] rounded-3xl p-8 md:p-10 shadow-sm">
+              <form className="space-y-6 bg-white border border-border-subtle rounded-lg p-8 md:p-10 shadow-sm">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-bold text-[#1A1412] mb-3 uppercase tracking-wide">
@@ -105,7 +105,7 @@ export default function ContactPage() {
                       id="name"
                       name="name"
                       required
-                      className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+                      className="w-full px-6 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                       placeholder="Tu nombre"
                     />
                   </div>
@@ -118,7 +118,7 @@ export default function ContactPage() {
                       id="email"
                       name="email"
                       required
-                      className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+                      className="w-full px-6 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                       placeholder="tu@email.com"
                     />
                   </div>
@@ -133,7 +133,7 @@ export default function ContactPage() {
                     id="subject"
                     name="subject"
                     required
-                    className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+                    className="w-full px-6 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                     placeholder="¿Cuál es tu pregunta?"
                   />
                 </div>
@@ -147,7 +147,7 @@ export default function ContactPage() {
                     name="message"
                     rows={6}
                     required
-                    className="w-full px-6 py-4 bg-white border border-[#E8E0D8] rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
+                    className="w-full px-6 py-4 bg-white border border-border-subtle rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C4472B] focus:border-transparent text-[#1A1412] placeholder-[#9C8B80]"
                     placeholder="Cuéntanos más..."
                   />
                 </div>
@@ -164,7 +164,7 @@ export default function ContactPage() {
               </form>
 
               {/* FAQ */}
-              <div className="mt-16 pt-12 border-t border-[#E8E0D8]">
+              <div className="mt-16 pt-12 hairline-t">
                 <h3 className="text-3xl font-bold text-[#1A1412] mb-8">Preguntas Frecuentes</h3>
                 <div className="space-y-4">
                   {[
@@ -181,7 +181,7 @@ export default function ContactPage() {
                       a: 'Actualmente no, pero estamos considerando ofrecerlas en el futuro.',
                     },
                   ].map((faq, index) => (
-                    <div key={index} className="bg-[#F2EDE6] border border-[#E8E0D8] rounded-2xl p-6 hover:border-[#C4472B]/25 transition-all">
+                    <div key={index} className="bg-[#F2EDE6] border border-border-subtle rounded-lg p-6 hover:border-[#C4472B]/25 transition-all">
                       <h4 className="font-bold text-[#1A1412] mb-3">{faq.q}</h4>
                       <p className="body-text">{faq.a}</p>
                     </div>

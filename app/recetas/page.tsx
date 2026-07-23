@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function RecipesPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      <section className="section-spacing-comfort bg-[#F2EDE6] border-b border-[#E8E0D8]">
+      <section className="section-spacing-comfort bg-[#F2EDE6] hairline-b">
         <div className="container-custom max-w-4xl">
           <Link
             href="/"
@@ -36,7 +36,7 @@ export default function RecipesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {recipes.map((recipe) => (
               <Link key={recipe.id} href={`/recetas/${recipe.id}`} className="group block">
-                <article className="relative bg-white rounded-2xl overflow-hidden h-full flex flex-col border-2 border-[#E8E0D8] hover:border-[#C4472B]/50 transition-colors shadow-sm">
+                <article className="relative bg-white rounded-lg overflow-hidden h-full flex flex-col border border-border-subtle hover:border-[#C4472B]/50 transition-colors shadow-sm">
                   {recipe.isPremium && (
                     <div className="absolute top-4 right-4 z-10 bg-[#C4472B] text-white px-4 py-1.5 rounded-full text-sm font-bold">
                       Exclusiva
@@ -63,7 +63,7 @@ export default function RecipesPage() {
                   </div>
 
                   <div className="p-6 md:p-8 flex flex-col flex-grow">
-                    <span className="inline-block w-fit px-4 py-1.5 bg-[#F2EDE6] text-[#6B5B4E] text-sm font-bold rounded-full mb-4 border border-[#E8E0D8]">
+                    <span className="inline-block w-fit px-4 py-1.5 bg-[#F2EDE6] text-[#6B5B4E] text-sm font-bold rounded-full mb-4 border border-border-subtle">
                       {recipe.category}
                     </span>
 

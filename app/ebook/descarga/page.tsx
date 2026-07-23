@@ -35,7 +35,7 @@ export default function DescargaPage() {
             </p>
           </div>
 
-          <div className="rounded-2xl border-2 border-[#C4472B]/30 bg-gradient-to-br from-[#F2EDE6] to-[#FAF8F5] p-8 shadow-sm">
+          <div className="rounded-lg border-2 border-[#C4472B]/30 bg-gradient-to-br from-[#F2EDE6] to-[#FAF8F5] p-8 shadow-sm">
             <div className="flex items-start gap-4">
               <Sparkles className="text-[#C4472B] flex-shrink-0 mt-1" size={28} />
               <div>
@@ -43,7 +43,7 @@ export default function DescargaPage() {
                 <p className="body-text text-sm mb-4">
                   Buscá el mensaje con el PDF. Si no aparece en unos minutos, revisá spam o promociones.
                 </p>
-                <div className="flex items-center gap-3 rounded-xl bg-white border border-[#E8E0D8] p-4">
+                <div className="flex items-center gap-3 rounded-md bg-white border border-border-subtle p-4">
                   <Mail size={22} className="text-[#C4472B]" />
                   <p className="body-text text-sm text-[#1A1412]">
                     Asunto parecido a: &quot;Las 20 Recetas Favoritas Del Sabor&quot;
@@ -53,7 +53,7 @@ export default function DescargaPage() {
             </div>
           </div>
 
-          <div className="bg-white border border-[#E8E0D8] rounded-2xl p-8 space-y-4 shadow-sm">
+          <div className="bg-white border border-border-subtle rounded-lg p-8 space-y-4 shadow-sm">
             <h2 className="text-xl font-bold text-[#1A1412]">Paso 2: Abrí el PDF</h2>
             <p className="body-text">
               Guardalo en el celular o imprimilo. Elegí una receta y seguí los pasos tal cual: ahí está el sazón.
@@ -68,7 +68,7 @@ export default function DescargaPage() {
             </a>
           </div>
 
-          <div className="bg-[#1A1412] rounded-2xl p-8 text-[#FAF8F5] space-y-4">
+          <div className="bg-[#1A1412] rounded-lg p-8 text-[#FAF8F5] space-y-4">
             <h2 className="text-xl font-bold">Paso 3: Subí el nivel en la cocina</h2>
             <p className="text-[#E8E0D8] text-sm leading-relaxed">
               El recetario es la base. En el sitio tenés más recetas y detalles cuando quieras profundizar.
@@ -82,7 +82,7 @@ export default function DescargaPage() {
             </Link>
           </div>
 
-          <div className="bg-[#F2EDE6] border border-[#E8E0D8] rounded-2xl p-8 space-y-4">
+          <div className="bg-[#F2EDE6] border border-border-subtle rounded-lg p-8 space-y-4">
             <h2 className="text-lg font-bold text-[#1A1412]">Qué incluye tu recetario</h2>
             <ul className="space-y-3">
               {[
@@ -101,13 +101,13 @@ export default function DescargaPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <Link
               href="/"
-              className="inline-flex items-center justify-center gap-2 border-2 border-[#E8E0D8] bg-white text-[#1A1412] font-bold py-4 px-8 rounded-full hover:bg-[#F2EDE6] transition-all"
+              className="inline-flex items-center justify-center gap-2 border border-border-subtle bg-white text-[#1A1412] font-bold py-4 px-8 rounded-full hover:bg-[#F2EDE6] transition-all"
             >
               Volver al inicio
             </Link>
           </div>
 
-          <p className="text-center body-text text-sm text-[#9C8B80] border-t border-[#E8E0D8] pt-8">
+          <p className="text-center body-text text-sm text-[#9C8B80] hairline-t pt-8">
             ¿Algo falló con el email?{' '}
             <Link href="/contacto" className="text-[#C4472B] font-bold hover:underline">
               Escríbenos

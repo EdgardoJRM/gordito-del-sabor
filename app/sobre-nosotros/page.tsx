@@ -45,7 +45,7 @@ const timeline = [
 export default function SobreNosotrosPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      <section className="border-b border-[#E8E0D8] bg-[#F2EDE6] py-8">
+      <section className="hairline-b bg-[#F2EDE6] py-8">
         <div className="container-custom">
           <Link
             href="/"
@@ -68,7 +68,7 @@ export default function SobreNosotrosPage() {
       <section className="section-spacing">
         <div className="container-custom">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div className="relative h-[420px] md:h-[520px] rounded-3xl overflow-hidden border border-[#E8E0D8] shadow-lg">
+            <div className="relative h-[420px] md:h-[520px] rounded-lg overflow-hidden border border-border-subtle shadow-lg">
               <Image
                 src="/images/ariel.webp"
                 alt="Ariel Leonardo Del Valle Matos — El Gordito del Sabor"
@@ -111,7 +111,7 @@ export default function SobreNosotrosPage() {
             {values.map(({ title, text, Icon }) => (
               <div
                 key={title}
-                className="rounded-2xl md:rounded-3xl border border-white/10 bg-white/5 p-8"
+                className="rounded-lg md:rounded-lg border border-white/10 bg-white/5 p-8"
               >
                 <Icon className="text-[#E8D4BC] mb-4" size={28} aria-hidden />
                 <h3 className="text-xl font-bold mb-3">{title}</h3>
@@ -122,13 +122,13 @@ export default function SobreNosotrosPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#F2EDE6] hairline-t">
         <div className="container-custom max-w-3xl mx-auto">
           <SectionHeader title="Camino" subtitle="No es perfección. Es constancia con sabor." />
           <ol className="space-y-8">
             {timeline.map((t) => (
               <li key={t.year} className="flex gap-6">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#C4472B] text-white text-xs font-bold text-center leading-tight px-1">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[#C4472B] text-white text-xs font-bold text-center leading-tight px-1">
                   {t.year}
                 </span>
                 <p className="body-text text-lg text-[#1A1412] pt-2">{t.text}</p>
@@ -138,7 +138,7 @@ export default function SobreNosotrosPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#FAF8F5] hairline-t">
         <div className="container-custom">
           <h2 className="heading-section text-[#1A1412] text-center mb-12 md:mb-16 max-w-2xl mx-auto">
             La comunidad en números

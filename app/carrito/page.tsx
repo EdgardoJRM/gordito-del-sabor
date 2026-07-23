@@ -108,7 +108,7 @@ export default function CartPage() {
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="bg-[#1C1C1E] border border-gray-900 rounded-3xl p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
+                    className="bg-[#1C1C1E] border border-gray-900 rounded-lg p-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
                   >
                     <div className="flex-1">
                       <h3 className="text-2xl font-bold text-white mb-2">
@@ -157,7 +157,7 @@ export default function CartPage() {
               </div>
 
               {/* Summary */}
-              <div className="bg-[#1C1C1E] border border-gray-900 rounded-3xl p-8 h-fit sticky top-24">
+              <div className="bg-[#1C1C1E] border border-gray-900 rounded-lg p-8 h-fit sticky top-24">
                 <h2 className="text-3xl font-bold text-white mb-8">
                   Resumen
                 </h2>

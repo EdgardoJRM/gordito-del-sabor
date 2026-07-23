@@ -5,7 +5,7 @@ import Button from '@/components/ui/Button';
 
 export default function EcosystemBovedaTeaser() {
   return (
-    <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+    <section className="section-spacing bg-[#F2EDE6] hairline-t">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
           <div className="order-2 lg:order-1 space-y-6">
@@ -36,7 +36,7 @@ export default function EcosystemBovedaTeaser() {
               </Button>
             </div>
           </div>
-          <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-2xl md:rounded-3xl overflow-hidden border border-[#E8E0D8] shadow-lg bg-[#1A1412]">
+          <div className="order-1 lg:order-2 relative aspect-[4/3] rounded-lg md:rounded-lg overflow-hidden border border-border-subtle shadow-lg bg-[#1A1412]">
             <Image
               src="/Imagenes20recetas/chimichurri-ribeye-ai.jpg"
               alt="Recetas en La Bóveda — vista mockup"

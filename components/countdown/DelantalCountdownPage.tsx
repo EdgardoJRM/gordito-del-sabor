@@ -118,7 +118,7 @@ export default function DelantalCountdownPage({ launchAtIso }: DelantalCountdown
             ].map((unit) => (
               <div
                 key={unit.label}
-                className="rounded-2xl border-2 border-[#C4472B]/40 bg-[#2D2220] py-6 md:py-8"
+                className="rounded-lg border-2 border-[#C4472B]/40 bg-[#2D2220] py-6 md:py-8"
               >
                 <p className="text-4xl md:text-6xl font-bold text-[#FAF8F5] tabular-nums">
                   {unit.value}
@@ -130,7 +130,7 @@ export default function DelantalCountdownPage({ launchAtIso }: DelantalCountdown
             ))}
           </div>
 
-          <div className="rounded-3xl border-2 border-[#E8E0D8]/20 bg-[#2D2220]/80 p-8 md:p-10 text-left">
+          <div className="rounded-lg border border-border-subtle/20 bg-[#2D2220]/80 p-8 md:p-10 text-left">
             <div className="flex items-center gap-3 mb-4">
               <Bell className="text-[#C4472B]" size={28} aria-hidden />
               <h2 className="text-xl md:text-2xl font-bold text-[#FAF8F5]">

@@ -46,10 +46,10 @@ export default function FaqByCategory() {
               role="tab"
               aria-selected={active}
               onClick={() => setTab(id)}
-              className={`w-full text-left rounded-xl px-5 py-4 text-lg font-bold transition border-2 min-h-[56px] ${
+              className={`w-full text-left rounded-md px-5 py-4 text-lg font-bold transition min-h-[56px] ${
                 active
-                  ? 'border-[#C4472B] bg-[#FFF8F5] text-[#1A1412] shadow-sm'
-                  : 'border-[#E8E0D8] bg-white text-[#6B5B4E] hover:border-[#C4472B]/40'
+                  ? 'bg-warm-linen text-warm-dark shadow-soft'
+                  : 'bg-transparent text-earth hover:bg-warm-linen/70'
               }`}
             >
               {label}
@@ -67,7 +67,7 @@ export default function FaqByCategory() {
 export function HelpCards() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-14">
-      <div className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-8">
+      <div className="surface-inset rounded-lg p-8">
         <MessageCircle className="text-[#C4472B] mb-4" size={32} aria-hidden />
         <h3 className="text-xl font-bold text-[#1A1412] mb-2">Dudas</h3>
         <p className="body-text text-lg mb-4">Te ayudamos con tu orden o dudas del delantal.</p>
@@ -87,7 +87,7 @@ export function HelpCards() {
           {siteConfig.email}
         </a>
       </div>
-      <div className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-8">
+      <div className="surface-inset rounded-lg p-8">
         <Package className="text-[#C4472B] mb-4" size={32} aria-hidden />
         <h3 className="text-xl font-bold text-[#1A1412] mb-2">Ordenar delantal</h3>
         <p className="body-text text-lg mb-6">Elige tu oferta y asegura tu Delantal El Gordito.</p>
@@ -95,7 +95,7 @@ export function HelpCards() {
           Ir a ordenar
         </Button>
       </div>
-      <div className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-8">
+      <div className="surface-inset rounded-lg p-8">
         <HelpCircle className="text-[#C4472B] mb-4" size={32} aria-hidden />
         <h3 className="text-xl font-bold text-[#1A1412] mb-2">Soporte técnico</h3>
         <p className="body-text text-lg mb-4">Para temas del sitio o recetario.</p>

@@ -46,7 +46,7 @@ export default function LaBovedaPage() {
         </div>
       </section>
 
-      <section className="section-spacing border-t border-[#E8E0D8]">
+      <section className="section-spacing hairline-t">
         <div className="container-custom max-w-3xl mx-auto text-center space-y-6">
           <h2 className="heading-section text-[#1A1412] text-3xl md:text-4xl">Qué hay dentro</h2>
           <p className="body-text text-lg">
@@ -56,7 +56,7 @@ export default function LaBovedaPage() {
         </div>
       </section>
 
-      <section id="planes" className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8] scroll-mt-24">
+      <section id="planes" className="section-spacing bg-[#F2EDE6] hairline-t scroll-mt-24">
         <div className="container-custom">
           <SectionHeader
             title="Planes"
@@ -86,7 +86,7 @@ export default function LaBovedaPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8] text-center">
+      <section className="section-spacing bg-[#FAF8F5] hairline-t text-center">
         <div className="container-custom max-w-2xl mx-auto space-y-6">
           <h2 className="heading-section text-[#1A1412] text-3xl md:text-4xl">Acceso fundador</h2>
           <p className="body-text text-lg">

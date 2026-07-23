@@ -66,7 +66,7 @@ export default function SponsorInquiryForm() {
 
   if (done) {
     return (
-      <div className="rounded-2xl border border-[#E8E0D8] bg-[#FAF8F5] p-10 text-center shadow-sm">
+      <div className="rounded-lg border border-border-subtle bg-[#FAF8F5] p-10 text-center shadow-sm">
         <p className="text-xl font-bold text-[#1A1412] mb-2">Listo. Recibimos tu solicitud.</p>
         <p className="body-text">
           Revisamos propuestas con calma. Si hace match con la comunidad, te respondemos por email.
@@ -79,10 +79,10 @@ export default function SponsorInquiryForm() {
   }
 
   const inputClass =
-    'w-full rounded-xl border border-[#E8E0D8] bg-white px-4 py-3 text-[#1A1412] placeholder:text-[#9C8B80] focus:border-[#C4472B] focus:outline-none focus:ring-2 focus:ring-[#C4472B]/25';
+    'w-full rounded-md border border-border-subtle bg-white px-4 py-3 text-[#1A1412] placeholder:text-[#9C8B80] focus:border-[#C4472B] focus:outline-none focus:ring-2 focus:ring-[#C4472B]/25';
 
   return (
-    <form onSubmit={onSubmit} className="rounded-2xl md:rounded-3xl border border-[#E8E0D8] bg-[#FAF8F5] p-8 md:p-10 shadow-sm space-y-6">
+    <form onSubmit={onSubmit} className="rounded-lg md:rounded-lg border border-border-subtle bg-[#FAF8F5] p-8 md:p-10 shadow-sm space-y-6">
       <h2 className="text-2xl font-bold text-[#1A1412]">Solicitud para marcas</h2>
       <p className="body-text text-sm">
         También puedes escribir directo a{' '}

@@ -48,7 +48,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
 
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      <section className="bg-[#F2EDE6] border-b border-[#E8E0D8] py-6">
+      <section className="bg-[#F2EDE6] hairline-b py-6">
         <div className="container-custom">
           <Link
             href="/recetas"
@@ -66,7 +66,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
             <div className="lg:col-span-2">
               <div className="mb-10">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-                  <span className="inline-block px-4 py-2 bg-[#F2EDE6] rounded-full border-2 border-[#E8E0D8] text-[#6B5B4E] font-bold text-base">
+                  <span className="inline-block px-4 py-2 bg-[#F2EDE6] rounded-full border border-border-subtle text-[#6B5B4E] font-bold text-base">
                     {recipe.category}
                   </span>
                   <div className="flex items-center gap-3">
@@ -111,7 +111,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
                 </div>
               </div>
 
-              <div className="relative mb-12 h-72 md:h-96 rounded-2xl overflow-hidden border-2 border-[#E8E0D8] bg-[#F2EDE6]">
+              <div className="relative mb-12 h-72 md:h-96 rounded-lg overflow-hidden border border-border-subtle bg-[#F2EDE6]">
                 {recipe.image ? (
                   <Image
                     src={recipe.image}
@@ -133,13 +133,13 @@ export default async function RecipeDetailPage({ params }: PageProps) {
 
               <div className="mb-12">
                 <h2 className="text-3xl font-bold text-[#1A1412] mb-6">Ingredientes</h2>
-                <div className="bg-white rounded-2xl p-6 md:p-8 border-2 border-[#E8E0D8]">
+                <div className="bg-white rounded-lg p-6 md:p-8 border border-border-subtle">
                   <ul className="space-y-4">
                     {recipe.ingredients.map((ingredient, index) => (
                       <li key={index} className="flex items-start gap-4">
                         <input
                           type="checkbox"
-                          className="mt-1.5 w-6 h-6 text-[#C4472B] border-2 border-[#E8E0D8] rounded focus:ring-[#C4472B]"
+                          className="mt-1.5 w-6 h-6 text-[#C4472B] border border-border-subtle rounded focus:ring-[#C4472B]"
                           aria-label={`Marcar: ${ingredient}`}
                         />
                         <span className="body-text text-lg">{ingredient}</span>
@@ -164,7 +164,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
               </div>
 
               {recipe.notes && (
-                <div className="bg-[#FFF8F5] border-2 border-[#E8E0D8] border-l-4 border-l-[#C4472B] p-6 md:p-8 rounded-2xl mb-10">
+                <div className="bg-[#FFF8F5] border border-border-subtle border-l-4 border-l-[#C4472B] p-6 md:p-8 rounded-lg mb-10">
                   <h3 className="font-bold text-[#1A1412] text-xl mb-3">Notas del Gordito</h3>
                   <p className="body-text text-lg">{recipe.notes}</p>
                 </div>
@@ -175,7 +175,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
 
             <div className="lg:col-span-1">
               <div className="space-y-6 lg:sticky lg:top-24">
-                <div className="bg-white rounded-2xl p-6 md:p-8 border-2 border-[#E8E0D8]">
+                <div className="bg-white rounded-lg p-6 md:p-8 border border-border-subtle">
                   <h3 className="text-xl font-bold text-[#1A1412] mb-6">Resumen</h3>
                   <dl className="space-y-5 text-lg">
                     <div>
@@ -200,7 +200,7 @@ export default async function RecipeDetailPage({ params }: PageProps) {
                   </div>
                 </div>
 
-                <div className="bg-[#1A1412] rounded-2xl p-6 md:p-8 text-center">
+                <div className="bg-[#1A1412] rounded-lg p-6 md:p-8 text-center">
                   <h3 className="text-xl font-bold text-[#FAF8F5] mb-3">Delantal El Gordito</h3>
                   <p className="text-[#C4B8AE] text-lg mb-6 leading-relaxed">
                     Bordado personalizado — edición limitada.

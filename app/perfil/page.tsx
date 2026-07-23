@@ -47,7 +47,7 @@ export default function ProfilePage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
       {/* Header */}
-      <header className="bg-[#FAF8F5] border-b border-[#E8E0D8]">
+      <header className="bg-[#FAF8F5] hairline-b">
         <div className="container-custom py-8">
           <Link href="/" className="inline-flex items-center gap-2 text-[#6B5B4E] hover:text-[#1A1412] mb-8 transition-colors">
             <ArrowLeft size={20} />
@@ -60,7 +60,7 @@ export default function ProfilePage() {
             </div>
             <button
               onClick={() => signOut({ redirect: true, callbackUrl: '/' })}
-              className="btn-text flex items-center gap-2 bg-[#F2EDE6] hover:bg-[#E8E0D8] text-[#1A1412] border border-[#E8E0D8] px-8 py-4 rounded-full transition-all transform hover:scale-105 w-fit"
+              className="btn-text flex items-center gap-2 bg-[#F2EDE6] hover:bg-[#E8E0D8] text-[#1A1412] border border-border-subtle px-8 py-4 rounded-full transition-all transform hover:scale-105 w-fit"
             >
               <LogOut size={20} />
               Cerrar Sesión
@@ -73,7 +73,7 @@ export default function ProfilePage() {
       <section className="section-spacing">
         <div className="container-custom">
           {/* User Info */}
-          <div className="bg-white border border-[#E8E0D8] rounded-3xl p-8 md:p-12 mb-16 shadow-sm">
+          <div className="bg-white border border-border-subtle rounded-lg p-8 md:p-12 mb-16 shadow-sm">
             <h2 className="text-3xl font-bold text-[#1A1412] mb-8">Información de Cuenta</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
@@ -114,7 +114,7 @@ export default function ProfilePage() {
             </div>
 
             {favorites.length === 0 ? (
-              <div className="bg-[#F2EDE6] border-2 border-dashed border-[#E8E0D8] rounded-3xl p-16 text-center">
+              <div className="bg-[#F2EDE6] border-2 border-dashed border-[#E8E0D8] rounded-lg p-16 text-center">
                 <Heart size={80} className="mx-auto text-[#C4472B]/40 mb-6" />
                 <h3 className="text-3xl font-bold text-[#1A1412] mb-4">
                   No tienes recetas favoritas
@@ -134,15 +134,15 @@ export default function ProfilePage() {
                 {favorites.map((recipe) => (
                   <div
                     key={recipe.id}
-                    className="bg-white border border-[#E8E0D8] rounded-3xl overflow-hidden hover:border-[#C4472B]/30 transition-all hover:scale-[1.02] shadow-sm"
+                    className="bg-white border border-border-subtle rounded-lg overflow-hidden hover:border-[#C4472B]/30 transition-all hover:scale-[1.02] shadow-sm"
                   >
-                    <div className="h-56 bg-gradient-to-br from-[#F2EDE6] via-[#FAF8F5] to-[#E8E0D8] flex items-center justify-center border-b border-[#E8E0D8]">
+                    <div className="h-56 bg-gradient-to-br from-[#F2EDE6] via-[#FAF8F5] to-[#E8E0D8] flex items-center justify-center hairline-b">
                       <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#C4472B]/70">Receta</span>
                     </div>
 
                     <div className="p-6">
                       <div className="mb-4">
-                        <span className="inline-block px-3 py-1 bg-[#F2EDE6] text-[#6B5B4E] text-xs font-bold rounded-full uppercase tracking-wide border border-[#E8E0D8]">
+                        <span className="inline-block px-3 py-1 bg-[#F2EDE6] text-[#6B5B4E] text-xs font-bold rounded-full uppercase tracking-wide border border-border-subtle">
                           {recipe.category}
                         </span>
                       </div>
@@ -168,7 +168,7 @@ export default function ProfilePage() {
                         </Link>
                         <button
                           onClick={() => removeFavorite(recipe.id)}
-                          className="px-4 py-3 bg-[#F2EDE6] text-[#C4472B] hover:bg-[#E8E0D8] border border-[#E8E0D8] rounded-full transition-colors"
+                          className="px-4 py-3 bg-[#F2EDE6] text-[#C4472B] hover:bg-[#E8E0D8] border border-border-subtle rounded-full transition-colors"
                           title="Eliminar de favoritos"
                         >
                           <Trash2 size={20} />

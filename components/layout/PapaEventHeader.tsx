@@ -10,7 +10,7 @@ export default function PapaEventHeader() {
   const { inventory, loading } = usePapaInventory();
 
   return (
-    <header className="bg-white border-b border-[#E8E0D8]">
+    <header className="bg-warm hairline-b">
       <div className="container-custom">
         <div className="flex justify-between items-center gap-4 h-16 md:h-[4.5rem]">
           <Link href="/" className="flex items-center gap-3 min-w-0">
@@ -39,7 +39,7 @@ export default function PapaEventHeader() {
             ) : (
               <a
                 href="#ordenar"
-                className="inline-flex items-center gap-2 bg-[#1A1412] hover:bg-[#2A221E] text-white text-xs font-semibold uppercase tracking-widest px-5 py-3 transition-colors min-h-[44px]"
+                className="inline-flex items-center gap-2 bg-warm-dark hover:bg-[#2A221E] text-white text-xs font-semibold uppercase tracking-widest px-5 py-3 transition-colors min-h-[44px] rounded-md"
               >
                 <ShoppingBag size={16} aria-hidden />
                 Comprar

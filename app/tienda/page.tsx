@@ -78,7 +78,7 @@ export default function StorePage() {
             {apronProducts.map((product) => (
               <div
                 key={product.id}
-                className="bg-[#1C1C1E] border border-gray-900 rounded-3xl overflow-hidden hover:border-gray-800 transition-all hover:scale-105"
+                className="bg-[#1C1C1E] border border-gray-900 rounded-lg overflow-hidden hover:border-gray-800 transition-all hover:scale-105"
               >
                 {/* Product Image */}
                 <div className="h-56 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center text-8xl">
@@ -121,7 +121,7 @@ export default function StorePage() {
                             setCustomText(e.target.value.slice(0, 20))
                           }
                           placeholder="Ej: El Flaco"
-                          className="w-full px-6 py-4 bg-black border border-gray-900 rounded-2xl focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
+                          className="w-full px-6 py-4 bg-black border border-gray-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#FF3B30] focus:border-transparent text-white placeholder-[#6E6E73]"
                         />
                         <p className="text-xs text-[#6E6E73] mt-2">
                           Se mostrará como: "<span className="text-white">{customText || 'Tu nombre'} del Sabor</span>"
@@ -161,7 +161,7 @@ export default function StorePage() {
       {/* Popup */}
       {showPopup && (
         <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-4">
-          <div className="bg-[#1C1C1E] border border-gray-900 rounded-3xl shadow-2xl max-w-md w-full p-8 relative">
+          <div className="bg-[#1C1C1E] border border-gray-900 rounded-lg shadow-media max-w-md w-full p-8 relative">
             {/* Close Button */}
             <button
               onClick={() => setShowPopup(false)}
@@ -185,7 +185,7 @@ export default function StorePage() {
               <p className="body-text text-lg mb-6">
                 {popupProduct?.name}
               </p>
-              <div className="bg-black border border-gray-900 rounded-2xl p-6 mb-6">
+              <div className="bg-black border border-gray-900 rounded-lg p-6 mb-6">
                 <p className="text-xl font-bold text-white mb-2">
                   "{popupProduct?.customText}"
                 </p>

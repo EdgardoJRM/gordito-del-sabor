@@ -16,7 +16,7 @@ export default function EcosystemFaqShort() {
   });
 
   return (
-    <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+    <section className="section-spacing bg-[#F2EDE6] hairline-t">
       <div className="container-custom max-w-3xl mx-auto">
         <SectionHeader
           title="Preguntas frecuentes"

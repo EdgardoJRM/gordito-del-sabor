@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function PreguntasPage() {
   return (
     <main className="min-h-screen bg-[#FAF8F5]">
-      <section className="border-b border-[#E8E0D8] bg-[#F2EDE6] py-10 md:py-14">
+      <section className="hairline-b bg-[#F2EDE6] py-10 md:py-14">
         <div className="container-custom max-w-4xl">
           <Link
             href="/"
@@ -37,7 +37,7 @@ export default function PreguntasPage() {
           <FaqByCategory />
           <HelpCards />
 
-          <div className="mt-14 rounded-3xl border-2 border-[#C4472B]/30 bg-[#1A1412] p-8 md:p-12 text-center">
+          <div className="mt-14 rounded-lg border-2 border-[#C4472B]/30 bg-[#1A1412] p-8 md:p-12 text-center">
             <h2 className="heading-section-comfort text-[#FAF8F5] mb-4">
               ¿Listo para asegurar tu Delantal El Gordito?
             </h2>

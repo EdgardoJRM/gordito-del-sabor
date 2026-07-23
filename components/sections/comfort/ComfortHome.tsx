@@ -34,7 +34,7 @@ export function ComfortHomeHero() {
             {papaHomeHero.subheadline}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button href={papaHomeHero.ctaPrimaryHref} size="lg" className="shadow-xl w-full sm:w-auto">
+            <Button href={papaHomeHero.ctaPrimaryHref} size="lg" className="w-full sm:w-auto">
               {papaHomeHero.ctaPrimary}
             </Button>
             <Button href={papaHomeHero.ctaSecondaryHref} variant="ghost" size="lg" className="w-full sm:w-auto">
@@ -52,7 +52,7 @@ export function ComfortHomeProduct() {
     <section className="section-spacing-comfort bg-[#FAF8F5]">
       <div className="container-custom max-w-6xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-          <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-[#E8E0D8] order-2 lg:order-1">
+          <div className="relative aspect-[4/5] media-frame order-2 lg:order-1">
             <Image
               src={papaTeamPhotos.solution}
               alt={papaProductName}
@@ -85,7 +85,7 @@ export function ComfortHomeProduct() {
 
 export function ComfortHomeRecetas() {
   return (
-    <section className="section-spacing-comfort bg-[#F2EDE6] border-y border-[#E8E0D8]">
+    <section className="section-spacing-comfort bg-warm-linen hairline-y">
       <div className="container-custom max-w-3xl text-center">
         <h2 className="heading-section-comfort text-[#1A1412] mb-5">Recetas que saben a casa</h2>
         <p className="text-xl text-[#6B5B4E] leading-relaxed mb-10">

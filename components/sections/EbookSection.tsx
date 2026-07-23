@@ -7,7 +7,7 @@ export default function EbookSection() {
   const router = useRouter();
 
   return (
-    <section id="ebook-section" className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+    <section id="ebook-section" className="section-spacing bg-[#F2EDE6] hairline-t">
       <div className="container-custom">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Text */}
@@ -49,7 +49,7 @@ export default function EbookSection() {
           </div>
 
           {/* Visual block */}
-          <div className="relative h-[360px] md:h-[420px] rounded-3xl overflow-hidden bg-[#FAF8F5] border border-[#E8E0D8] flex items-center justify-center shadow-sm">
+          <div className="relative h-[360px] md:h-[420px] rounded-lg overflow-hidden bg-[#FAF8F5] border border-border-subtle flex items-center justify-center shadow-sm">
             <div className="absolute inset-0 bg-gradient-to-br from-[#C4472B]/5 via-transparent to-[#B8860B]/5" />
             <div className="relative z-10 text-center px-8">
               <p className="text-sm tracking-[0.3em] uppercase text-[#6B5B4E] mb-4">

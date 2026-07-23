@@ -95,7 +95,7 @@ export default function RecetarioPage() {
       <RecetarioFunnel />
 
       {/* Prueba social + lista (refuerzo después del formulario para quien baja el scroll) */}
-      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]" aria-labelledby="lista-recetas">
+      <section className="section-spacing bg-[#F2EDE6] hairline-t" aria-labelledby="lista-recetas">
         <div className="container-custom">
           <div className="text-center mb-12 max-w-2xl mx-auto">
             <h2 id="lista-recetas" className="heading-section text-[#1A1412] mb-4 text-3xl md:text-5xl">
@@ -109,7 +109,7 @@ export default function RecetarioPage() {
             {RECIPES.map((recipe) => (
               <div
                 key={recipe}
-                className="bg-[#FAF8F5] border border-[#E8E0D8] rounded-lg p-4 flex items-center gap-3 shadow-sm"
+                className="bg-[#FAF8F5] border border-border-subtle rounded-lg p-4 flex items-center gap-3 shadow-sm"
               >
                 <Check size={20} className="text-[#C4472B] flex-shrink-0" aria-hidden />
                 <span className="body-text text-[#1A1412]">{recipe}</span>
@@ -128,14 +128,14 @@ export default function RecetarioPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#FAF8F5] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#FAF8F5] hairline-t">
         <div className="container-custom">
           <h2 className="heading-section text-[#1A1412] mb-12 text-center text-3xl md:text-5xl">
             Lo que dicen quienes ya cocinaron con el Gordito
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {TESTIMONIALS.map((t) => (
-              <div key={t.name} className="bg-white border border-[#E8E0D8] rounded-2xl p-8 shadow-sm">
+              <div key={t.name} className="bg-white border border-border-subtle rounded-lg p-8 shadow-sm">
                 <div className="flex items-center gap-4 mb-6">
                   <div className="text-4xl" aria-hidden>
                     {t.avatar}
@@ -157,14 +157,14 @@ export default function RecetarioPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-[#F2EDE6] border-t border-[#E8E0D8]">
+      <section className="section-spacing bg-[#F2EDE6] hairline-t">
         <div className="container-custom max-w-3xl">
           <h2 className="heading-section text-[#1A1412] mb-10 text-center text-3xl md:text-5xl">
             Preguntas frecuentes
           </h2>
           <div className="space-y-4">
             {FAQ.map((item) => (
-              <div key={item.q} className="bg-white border border-[#E8E0D8] rounded-lg p-6 shadow-sm">
+              <div key={item.q} className="bg-white border border-border-subtle rounded-lg p-6 shadow-sm">
                 <h3 className="text-[#1A1412] font-bold mb-2">{item.q}</h3>
                 <p className="body-text text-[#6B5B4E]">{item.a}</p>
               </div>
@@ -173,7 +173,7 @@ export default function RecetarioPage() {
         </div>
       </section>
 
-      <section className="section-spacing bg-gradient-to-br from-[#1A1412] to-[#2a211d] border-t border-[#E8E0D8] text-[#FAF8F5]">
+      <section className="section-spacing bg-gradient-to-br from-[#1A1412] to-[#2a211d] hairline-t text-[#FAF8F5]">
         <div className="container-custom max-w-2xl text-center space-y-6">
           <h2 className="text-2xl md:text-3xl font-bold">¿Listo para la sazón de verdad?</h2>
           <p className="text-[#E8E0D8] text-lg">

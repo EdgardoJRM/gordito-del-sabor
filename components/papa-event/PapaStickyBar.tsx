@@ -9,14 +9,14 @@ export default function PapaStickyBar() {
 
   if (inventory.soldOut) {
     return (
-      <div className="bg-[#FAF8F5] border-b border-[#E8E0D8] text-center py-2 text-xs text-[#6B5B4E]">
+      <div className="bg-[#FAF8F5] hairline-b text-center py-2 text-xs text-[#6B5B4E]">
         Edición agotada — gracias por el amor
       </div>
     );
   }
 
   return (
-    <div className="bg-[#FAF8F5] border-b border-[#E8E0D8] text-center py-2 text-xs text-[#6B5B4E]">
+    <div className="bg-[#FAF8F5] hairline-b text-center py-2 text-xs text-[#6B5B4E]">
       <span className="text-[#1A1412] font-medium">Envío gratis en PR</span>
       <span className="mx-2">·</span>
       Bordado a mano en 24–48 h

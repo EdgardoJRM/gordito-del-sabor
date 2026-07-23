@@ -15,7 +15,7 @@ export default function HeroPremium() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center w-full">
           {/* Mobile: chef arriba (estilo Alex Guarnaschelli) */}
           <div className="lg:hidden order-1 w-full max-w-sm mx-auto">
-            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+            <div className="relative aspect-square rounded-lg overflow-hidden shadow-media ring-1 ring-white/10">
               <Image
                 src={CHEF_IMAGE}
                 alt="El Gordito del Sabor"
@@ -82,7 +82,7 @@ export default function HeroPremium() {
 
           {/* Food image — solo desktop (columna derecha) */}
           <div className="hidden lg:block lg:col-span-5 lg:order-2 w-full max-w-none">
-            <div className="relative aspect-square lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+            <div className="relative aspect-square lg:aspect-[4/5] rounded-lg overflow-hidden shadow-media ring-1 ring-white/10">
               <Image
                 src="/images/ariel.webp"
                 alt="Plato boricua — El Gordito del Sabor"

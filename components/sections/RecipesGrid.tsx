@@ -58,7 +58,7 @@ export default function RecipesGrid() {
               onKeyDown={(e) => {
                 if (e.key === 'Enter' || e.key === ' ') router.push('/recetas');
               }}
-              className="relative h-[400px] rounded-2xl overflow-hidden cursor-pointer group shadow-md"
+              className="relative h-[400px] rounded-lg overflow-hidden cursor-pointer group shadow-md"
             >
               <Image
                 src={recipe.image}
