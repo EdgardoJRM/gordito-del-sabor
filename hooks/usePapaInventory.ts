@@ -40,9 +40,10 @@ export function usePapaInventory() {
     remaining: papaEvent.totalAprons,
     soldOut: false,
     bundleAvailability: {
+      clasico: true,
       premium: true,
       vip: true,
-      legado: true,
+      legado: false,
     },
   };
 

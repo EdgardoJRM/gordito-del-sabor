@@ -1,5 +1,5 @@
 import type { IPapaOrder } from '@/lib/models/PapaOrder';
-import { papaEvent, papaProductSlug } from '@/lib/papa-event';
+import { papaEvent, papaProductSlug, papaBundles } from '@/lib/papa-event';
 import { CONTACT_EMAIL } from '@/lib/contact-email';
 import { siteConfig } from '@/lib/site-config';
 import { SOCIAL_URLS } from '@/lib/social-links';
@@ -25,7 +25,7 @@ function embroideryLabel(customFields: Record<string, string>): string | null {
 }
 
 function bundleExtras(bundleId: string): string {
-  if (bundleId === 'vip' || bundleId === 'legado') {
+  if (papaBundles[bundleId as keyof typeof papaBundles]?.includesVipDigital) {
     return `
       <p style="margin:0 0 12px 0;">
         Tu bundle incluye el <strong>video exclusivo de saludo</strong> — te lo enviamos por este correo en los próximos días.
@@ -63,10 +63,13 @@ export function buildPapaCustomerEmailHtml(order: IPapaOrder): string {
   const greeting = name ? `Hola, <strong>${name}</strong>` : 'Hola';
   const totalLabel = formatMoney(order.amountTotal, order.currency);
   const bordado = embroideryLabel(order.customFields as Record<string, string>);
+  const isSinPersonalizar = order.bundleId === 'clasico';
 
-  const bordadoBlock = bordado
-    ? `<p style="margin:0 0 16px 0;">Bordado: <strong>${bordado}</strong></p>`
-    : '';
+  const bordadoBlock = isSinPersonalizar
+    ? `<p style="margin:0 0 16px 0;">Tu pedido es <strong>sin personalizar</strong> (código 35SPECIAL) — delantal con logo de la marca, sin bordado.</p>`
+    : bordado
+      ? `<p style="margin:0 0 16px 0;">Bordado: <strong>${bordado}</strong></p>`
+      : `<p style="margin:0 0 16px 0;">Recuerda escribirnos el nombre para el bordado si no lo pusiste en Stripe.</p>`;
 
   return `<!DOCTYPE html>
 <html lang="es">

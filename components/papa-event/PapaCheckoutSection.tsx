@@ -5,19 +5,23 @@ import { useSearchParams } from 'next/navigation';
 import { Check } from 'lucide-react';
 import {
   buildPapaStripeCheckoutUrl,
+  getShopBundleIds,
+  getDefaultShopBundleId,
   papaBundles,
   papaEvent,
   papaHero,
   papaProductName,
   type PapaBundleId,
 } from '@/lib/papa-event';
+import PapaBundleCompare from '@/components/papa-event/PapaBundleCompare';
+import PapaTrustBadges from '@/components/papa-event/PapaTrustBadges';
 import { siteConfig } from '@/lib/site-config';
 import { usePapaInventory } from '@/hooks/usePapaInventory';
 
 export default function PapaCheckoutSection() {
   const searchParams = useSearchParams();
   const { inventory, loading } = usePapaInventory();
-  const [bundleId, setBundleId] = useState<PapaBundleId>('vip');
+  const [bundleId, setBundleId] = useState<PapaBundleId>(getDefaultShopBundleId());
   const [error, setError] = useState<string | null>(null);
   const [cancelled, setCancelled] = useState(false);
 
@@ -29,9 +33,7 @@ export default function PapaCheckoutSection() {
     if (loading || inventory.soldOut) return;
 
     if (!inventory.bundleAvailability[bundleId]) {
-      const fallback = (Object.keys(papaBundles) as PapaBundleId[]).find(
-        (id) => inventory.bundleAvailability[id]
-      );
+      const fallback = getShopBundleIds().find((id) => inventory.bundleAvailability[id]);
       if (fallback) setBundleId(fallback);
     }
   }, [bundleId, inventory, loading]);
@@ -129,6 +131,10 @@ export default function PapaCheckoutSection() {
           </div>
         )}
 
+        <div className="mb-10">
+          <PapaBundleCompare />
+        </div>
+
         <div
           role="radiogroup"
           aria-labelledby="bundle-picker-label"
@@ -137,7 +143,7 @@ export default function PapaCheckoutSection() {
           <p id="bundle-picker-label" className="sr-only">
             Selecciona tu oferta
           </p>
-          {(Object.keys(papaBundles) as PapaBundleId[]).map((id) => {
+          {getShopBundleIds().map((id) => {
             const bundle = papaBundles[id];
             const active = bundleId === id;
             const available = inventory.bundleAvailability[id];
@@ -224,6 +230,8 @@ export default function PapaCheckoutSection() {
               Escríbenos en WhatsApp
             </a>
           </p>
+
+          <PapaTrustBadges className="mt-8" />
         </div>
       </div>
     </section>

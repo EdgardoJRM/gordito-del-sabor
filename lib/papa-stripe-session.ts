@@ -2,10 +2,12 @@ import type Stripe from 'stripe';
 import {
   getPapaStripePaymentLink,
   papaBundles,
+  papaNonPersonalizedPromo,
   type PapaBundleId,
 } from '@/lib/papa-event';
 
 const bundleIds = Object.keys(papaBundles) as PapaBundleId[];
+const nonPersonalizedPriceCents = Math.round(papaNonPersonalizedPromo.price * 100);
 
 function isPapaBundleId(value: string): value is PapaBundleId {
   return bundleIds.includes(value as PapaBundleId);
@@ -90,9 +92,7 @@ export function extractPapaCustomFields(
   return fields;
 }
 
-export function resolvePapaBundleFromSession(
-  session: Stripe.Checkout.Session
-): PapaBundleId | null {
+function resolveBaseBundleFromSession(session: Stripe.Checkout.Session): PapaBundleId | null {
   const metadataBundle = session.metadata?.bundleId;
   if (metadataBundle && isPapaBundleId(metadataBundle)) {
     return metadataBundle;
@@ -108,6 +108,37 @@ export function resolvePapaBundleFromSession(
   if (fromLineItems) return fromLineItems;
 
   return resolveBundleFromAmount(sessionPriceCents(session));
+}
+
+/** Pedido Personalizado con cupón 35SPECIAL → sin bordado (bundle interno `clasico`). */
+export function sessionUsesNonPersonalizedPromo(session: Stripe.Checkout.Session): boolean {
+  const base = resolveBaseBundleFromSession(session);
+  if (base !== 'premium') return false;
+
+  const paidCents = session.amount_total;
+  if (paidCents != null && paidCents === nonPersonalizedPriceCents) {
+    return true;
+  }
+
+  const discountCents = session.total_details?.amount_discount ?? 0;
+  if (discountCents > 0 && paidCents === nonPersonalizedPriceCents) {
+    return true;
+  }
+
+  return false;
+}
+
+export function resolvePapaBundleFromSession(
+  session: Stripe.Checkout.Session
+): PapaBundleId | null {
+  const base = resolveBaseBundleFromSession(session);
+  if (!base) return null;
+
+  if (sessionUsesNonPersonalizedPromo(session)) {
+    return 'clasico';
+  }
+
+  return base;
 }
 
 export function isPapaCheckoutSession(session: Stripe.Checkout.Session): boolean {

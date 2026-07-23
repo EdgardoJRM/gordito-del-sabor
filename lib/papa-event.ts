@@ -1,6 +1,6 @@
 import { siteConfig } from '@/lib/site-config';
 
-export type PapaBundleId = 'premium' | 'vip' | 'legado';
+export type PapaBundleId = 'clasico' | 'premium' | 'vip' | 'legado';
 export type PapaDeliveryMethod = 'pickup' | 'mail';
 
 export type PapaBundle = {
@@ -9,10 +9,30 @@ export type PapaBundle = {
   price: number;
   priceLabel: string;
   apronCount: number;
+  /** Si requiere nombre/texto para bordado en Stripe */
+  personalized: boolean;
+  /** Video + grupo WhatsApp privado (manual por ahora) */
+  includesVipDigital?: boolean;
+  /** false = solo pedidos históricos / webhook (no se muestra en tienda) */
+  shopVisible?: boolean;
   badge?: string;
   recommended?: boolean;
   bullets: string[];
 };
+
+/** Ofertas activas en la tienda — orden de visualización */
+export const papaShopBundleIds: PapaBundleId[] = ['premium', 'vip'];
+
+/** Cupón en Stripe para delantal sin bordado (mismo producto, no es variante en tienda) */
+export const papaNonPersonalizedPromo = {
+  code: '35SPECIAL',
+  price: 35,
+  priceLabel: '$35.00',
+  shortLabel: '$35',
+  title: 'Sin personalizar',
+  instructions:
+    'Elige Personalizado, paga en Stripe y aplica el código 35SPECIAL. Delantal con logo (sin nombre bordado).',
+} as const;
 
 export const PAPA_EVENT_ID = 'el-sabor-de-papa-2026';
 
@@ -72,9 +92,118 @@ export const papaHero = {
   eyebrow: 'Delantal personalizado · bordado a mano',
   headline: 'Cada regalo sin nombre es un regalo que se olvida en una semana.',
   subheadline:
-    'Un delantal con el nombre de esa persona bordado a mano no es un objeto. Es un reconocimiento. Solo hay unidades limitadas en Puerto Rico.',
+    'El nombre de esa persona bordado a mano en un delantal hecho en Puerto Rico. Un regalo que se usa todos los días — y que no se olvida.',
   cta: 'Asegura el tuyo ahora',
-  priceFrom: 'Desde $49.99',
+  priceFrom: 'Desde $35',
+  /** Versión corta del call-out para above-the-fold */
+  calloutShort:
+    'Para quienes quieren regalar algo con nombre, identidad y significado real — no otro regalo genérico.',
+} as const;
+
+export const papaHeroTrustPills = [
+  'Bordado a mano en 24–48 h',
+  'Hecho en Puerto Rico',
+  `${stats.instagram} en la comunidad`,
+  'Pago seguro con Stripe',
+] as const;
+
+export const papaProductGallery = [
+  {
+    id: 'hero',
+    src: papaTeamPhotos.solution,
+    alt: `${papaProductName} — delantal personalizado`,
+    caption: 'Bordado a mano en la pechera',
+  },
+  {
+    id: 'detail-1',
+    src: papaTeamPhotos.gallery[0],
+    alt: 'Detalle del delantal El Gordito del Sabor',
+    caption: 'Tela premium 100% algodón',
+  },
+  {
+    id: 'detail-2',
+    src: papaTeamPhotos.gallery[1],
+    alt: 'El Gordito del Sabor en cocina',
+    caption: 'Hecho para usarse de verdad',
+  },
+  {
+    id: 'team',
+    src: papaTeamPhotos.hero,
+    alt: 'Ariel de Valle — El Gordito del Sabor',
+    caption: 'Respaldo de la comunidad #1 de cocina en PR',
+  },
+] as const;
+
+export const papaBuyerMoments = {
+  title: 'Lo que pasa cuando lo regalan',
+  subtitle:
+    'No son reseñas inventadas — son los momentos que describes el copy y que la gente vive con un regalo personalizado.',
+  items: [
+    {
+      id: 'open',
+      title: 'Abre la caja',
+      text: 'Ve su nombre en la pechera. Se queda callado un segundo. Luego lo amarra y sonríe de ese modo en que alguien entiende que hiciste algo diferente.',
+    },
+    {
+      id: 'kitchen',
+      title: 'Lo usa en su cocina',
+      text: 'No termina en un cajón. Cada vez que cocina, su nombre está ahí. Cada vez que lo amarra, piensa en quien se lo regaló.',
+    },
+    {
+      id: 'visitors',
+      title: 'Cuando llegan visitas',
+      text: 'La gente pregunta de dónde es. Se convierte en conversación — y en orgullo de ser el chef de esa casa.',
+    },
+  ],
+} as const;
+
+export const papaBundleCompare = {
+  title: 'Compara las ofertas',
+  subtitle: 'Personalizado para regalar. VIP si quieres los extras digitales. Sin bordado: código 35SPECIAL.',
+  features: [
+    { id: 'aprons', label: 'Delantales personalizados', premium: '1', vip: '1', legado: '2' },
+    { id: 'embroidery', label: 'Bordado a mano', premium: true, vip: true, legado: true },
+    { id: 'recipe', label: 'Recetario digital', premium: true, vip: true, legado: true },
+    { id: 'video', label: 'Video exclusivo de Ariel', premium: false, vip: true, legado: true },
+    { id: 'whatsapp', label: 'Grupo privado WhatsApp', premium: false, vip: true, legado: true },
+    { id: 'delivery', label: 'Recogida o envío gratis', premium: true, vip: true, legado: true },
+  ],
+} as const;
+
+export const papaTrustBadges = [
+  { id: 'quality', label: 'Garantía de bordado', detail: 'Revisado antes de entregar' },
+  { id: 'stripe', label: 'Pago con Stripe', detail: 'Tarjeta segura' },
+  { id: 'pr', label: 'Hecho en Puerto Rico', detail: 'Bordado a mano local' },
+  { id: 'delivery', label: 'Recogida o correo', detail: 'Toda la isla' },
+] as const;
+
+export const papaPress = {
+  eyebrow: 'Visto en',
+  title: 'La comunidad de cocina que más mueve la isla',
+  items: [
+    {
+      id: 'telemundo',
+      label: 'Telemundo Puerto Rico',
+      detail: 'Cocina en vivo con El Gordito del Sabor',
+    },
+    {
+      id: 'meta',
+      label: `${stats.facebook} en Facebook`,
+      detail: `${stats.engagementMeta} engagement promedio`,
+    },
+    {
+      id: 'ig',
+      label: `${stats.instagram} en Instagram`,
+      detail: 'Recetas y sazón todos los días',
+    },
+  ],
+} as const;
+
+export const papaQuickOrder = {
+  title: '¿Ya sabes que este es el regalo?',
+  subtitle: 'Elige VIP — la opción más popular — o compara las tres ofertas abajo.',
+  cta: 'Ver ofertas y ordenar',
+  priceHighlight: 'VIP $59.99',
 } as const;
 
 export const papaLossHeadline = {
@@ -481,6 +610,27 @@ export const papaHighlights = [
   },
 ] as const;
 
+/** Copy corto para página tipo Shopify */
+export const papaShopProduct = {
+  vendor: 'El Gordito del Sabor',
+  tagline: 'Edición limitada · bordado a mano en Puerto Rico',
+  description:
+    'Delantal 100% algodón premium — el mismo que ves en las fotos con El Gordito. Personalizado con nombre bordado a mano, o sin bordado aplicando el código 35SPECIAL en Stripe. Hecho en Puerto Rico.',
+  shipping:
+    `Personalizado: bordado en ${papaEvent.embroideryTurnaround} tras confirmar. Sin personalizar (código 35SPECIAL): empaca más rápido. Recogida en ${papaEvent.pickupLocation} o envío gratis (${papaEvent.mailDeliveryDays}).`,
+  guarantee: `Garantía de calidad. ¿Problema? Escríbenos a ${siteConfig.email}.`,
+  steps: [
+    { step: 1, title: 'Elige oferta', text: 'Personalizado o Personalizado VIP.' },
+    {
+      step: 2,
+      title: 'Paga en Stripe',
+      text: 'Escribe el nombre a bordar. ¿Sin personalizar? Aplica el código 35SPECIAL al pagar.',
+    },
+    { step: 3, title: 'Preparamos tu pedido', text: `Bordado a mano si aplica (${papaEvent.embroideryTurnaround}).` },
+    { step: 4, title: 'Recibes', text: `Recogida en metro o correo (${papaEvent.mailDeliveryDays}).` },
+  ],
+} as const;
+
 export const papaGuaranteeSection = {
   title: 'Garantía de calidad total en el bordado',
   intro:
@@ -494,7 +644,7 @@ export const papaClose = {
   subtitle:
     'Las unidades son limitadas. Cada delantal se borda a mano. No hay producción en masa ni reposición inmediata garantizada. Si quieres darle a alguien un regalo que lleve su nombre, que se use de verdad y que no se olvide, este es el momento.',
   cta: 'Asegura el tuyo ahora',
-  priceFrom: 'Desde $49.99',
+  priceFrom: 'Desde $35',
   micro: papaCtaMicroDefault,
 } as const;
 
@@ -507,28 +657,45 @@ export const papaDisclaimers = [
 ] as const;
 
 export const papaBundles: Record<PapaBundleId, PapaBundle> = {
+  clasico: {
+    id: 'clasico',
+    title: 'Sin personalizar',
+    price: 35,
+    priceLabel: '$35.00',
+    apronCount: 1,
+    personalized: false,
+    shopVisible: false,
+    bullets: [
+      '1 delantal con logo El Gordito (sin nombre)',
+      'Recetario digital "Sabores de El Gordito"',
+      'Recogida en Área Metro o envío por correo',
+    ],
+  },
   premium: {
     id: 'premium',
-    title: 'Premium',
+    title: 'Personalizado',
     price: 49.99,
     priceLabel: '$49.99',
     apronCount: 1,
+    personalized: true,
+    recommended: true,
+    badge: 'Para regalar',
     bullets: [
-      '1 delantal personalizado con bordado a mano',
+      '1 delantal con tu nombre bordado a mano',
       'Recetario digital "Sabores de El Gordito"',
       'Recogida en Área Metro o envío por correo',
     ],
   },
   vip: {
     id: 'vip',
-    title: 'VIP',
+    title: 'Personalizado VIP',
     price: 59.99,
     priceLabel: '$59.99',
     apronCount: 1,
-    badge: 'Más popular',
-    recommended: true,
+    personalized: true,
+    includesVipDigital: true,
     bullets: [
-      '1 delantal personalizado con bordado a mano',
+      '1 delantal con tu nombre bordado a mano',
       'Recetario digital + video exclusivo de Ariel',
       'Acceso al grupo privado de WhatsApp',
       'Recogida en Área Metro o envío por correo',
@@ -536,11 +703,13 @@ export const papaBundles: Record<PapaBundleId, PapaBundle> = {
   },
   legado: {
     id: 'legado',
-    title: 'Legado',
+    title: 'Legado (archivado)',
     price: 84.99,
     priceLabel: '$84.99',
     apronCount: 2,
-    badge: 'Para dos nombres',
+    personalized: true,
+    includesVipDigital: true,
+    shopVisible: false,
     bullets: [
       '2 delantales personalizados (dos nombres distintos)',
       'Recetario digital + video exclusivo',
@@ -553,6 +722,7 @@ export const papaBundles: Record<PapaBundleId, PapaBundle> = {
 /** Payment Links de Stripe — cobro directo en Stripe (no API checkout). */
 export function getPapaStripePaymentLink(bundleId: PapaBundleId): string | null {
   const links: Record<PapaBundleId, string | undefined> = {
+    clasico: undefined,
     premium: process.env.NEXT_PUBLIC_STRIPE_LINK_PREMIUM,
     vip: process.env.NEXT_PUBLIC_STRIPE_LINK_VIP,
     legado: process.env.NEXT_PUBLIC_STRIPE_LINK_LEGADO,
@@ -680,7 +850,7 @@ export const papaFaqs = [
   {
     id: 'ready-time',
     question: '¿En cuánto tiempo está listo mi delantal?',
-    answer: `Cada pieza se borda a mano en ${papaEvent.embroideryTurnaround} tras confirmar la orden.`,
+    answer: `Sin personalizar (código ${papaNonPersonalizedPromo.code}): suele empacarse en 1–2 días hábiles. Personalizado: bordado a mano en ${papaEvent.embroideryTurnaround} tras confirmar la orden.`,
   },
   {
     id: 'when-receive',
@@ -694,13 +864,13 @@ export const papaFaqs = [
   },
   {
     id: 'text',
-    question: '¿Puedo poner cualquier nombre o texto en el bordado?',
-    answer: `Sí. En el siguiente paso al ordenar nos das exactamente lo que quieres bordar. Máximo ${papaEvent.maxEmbroideryChars} caracteres por delantal.`,
+    question: '¿Puedo pedir sin personalizar?',
+    answer: `Sí. Elige Personalizado y en Stripe aplica el código ${papaNonPersonalizedPromo.code} — te queda en ${papaNonPersonalizedPromo.priceLabel} (logo de la marca, sin nombre bordado). Es el mismo delantal de las fotos.`,
   },
   {
-    id: 'two-names',
-    question: '¿Puedo pedir dos delantales con nombres diferentes?',
-    answer: 'Sí. El paquete Legado incluye dos delantales personalizados con nombres distintos.',
+    id: 'embroidery-text',
+    question: '¿Puedo poner cualquier nombre en el bordado?',
+    answer: `Sí, en Personalizado y Personalizado VIP. Máximo ${papaEvent.maxEmbroideryChars} caracteres. Lo escribes en Stripe al pagar.`,
   },
   {
     id: 'change-name',
@@ -728,11 +898,37 @@ export function getBundle(id: PapaBundleId): PapaBundle {
   return papaBundles[id];
 }
 
+export function getShopBundleIds(): PapaBundleId[] {
+  return papaShopBundleIds.filter((id) => papaBundles[id].shopVisible !== false);
+}
+
+export function isPersonalizedBundle(bundleId: PapaBundleId): boolean {
+  return papaBundles[bundleId].personalized;
+}
+
+export function getLowestShopPriceLabel(): string {
+  return papaNonPersonalizedPromo.shortLabel;
+}
+
+export function getShopPriceFromLabel(): string {
+  return `Desde ${papaNonPersonalizedPromo.shortLabel}`;
+}
+
+export function getShopPriceSubtitle(): string {
+  return `Sin personalizar con ${papaNonPersonalizedPromo.code} · Personalizado ${papaBundles.premium.priceLabel} · VIP ${papaBundles.vip.priceLabel}`;
+}
+
+export function getDefaultShopBundleId(): PapaBundleId {
+  return papaShopBundleIds.find((id) => papaBundles[id].recommended) ?? 'premium';
+}
+
 export function getDeliveryLabel(method: PapaDeliveryMethod): string {
   return method === 'pickup' ? 'Recogida Área Metro' : 'Envío por correo';
 }
 
 export function validateEmbroideryNames(bundleId: PapaBundleId, names: string[]): string | null {
+  if (!isPersonalizedBundle(bundleId)) return null;
+
   const bundle = getBundle(bundleId);
   if (names.length !== bundle.apronCount) {
     return bundle.apronCount === 1

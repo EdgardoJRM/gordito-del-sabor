@@ -1,40 +1,29 @@
 'use client';
 
 import { usePapaInventory } from '@/hooks/usePapaInventory';
-import { papaProductName } from '@/lib/papa-event';
 
 export default function PapaStickyBar() {
   const { inventory, loading } = usePapaInventory();
 
-  if (loading) {
-    return (
-      <div className="bg-[#1A1412] text-white border-t border-white/10">
-        <div className="container-custom py-2.5 text-center text-sm text-[#C4B8AE]">
-          Cargando disponibilidad…
-        </div>
-      </div>
-    );
-  }
+  if (loading) return null;
 
   if (inventory.soldOut) {
     return (
-      <div className="bg-[#1A1412] text-white border-t border-white/10">
-        <div className="container-custom py-2.5 text-center text-sm font-medium text-[#E8D4BC]">
-          {papaProductName} — edición agotada
-        </div>
+      <div className="bg-[#FAF8F5] border-b border-[#E8E0D8] text-center py-2 text-xs text-[#6B5B4E]">
+        Edición agotada — gracias por el amor
       </div>
     );
   }
 
   return (
-    <div className="bg-[#1A1412] text-white border-t border-white/10">
-      <div className="container-custom py-2.5 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 text-sm text-[#E8D4BC]">
-        <span className="font-medium text-white">{papaProductName}</span>
-        <span className="hidden sm:inline text-[#6B5B4E]">·</span>
-        <span>
-          Quedan <strong className="text-white">{inventory.remaining}</strong> en esta edición
-        </span>
-      </div>
+    <div className="bg-[#FAF8F5] border-b border-[#E8E0D8] text-center py-2 text-xs text-[#6B5B4E]">
+      <span className="text-[#1A1412] font-medium">Envío gratis en PR</span>
+      <span className="mx-2">·</span>
+      Bordado a mano en 24–48 h
+      <span className="mx-2 hidden sm:inline">·</span>
+      <span className="hidden sm:inline">
+        Quedan <strong className="text-[#1A1412]">{inventory.remaining}</strong> unidades
+      </span>
     </div>
   );
 }

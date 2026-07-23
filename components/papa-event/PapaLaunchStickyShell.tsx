@@ -1,6 +1,7 @@
 'use client';
 
 import PapaStickyBar from '@/components/papa-event/PapaStickyBar';
+import PapaMobileBuyBar from '@/components/papa-event/PapaMobileBuyBar';
 
 type PapaLaunchStickyShellProps = {
   header: React.ReactNode;
@@ -21,6 +22,7 @@ export default function PapaLaunchStickyShell({
         <PapaStickyBar />
       </div>
       {children}
+      <PapaMobileBuyBar />
       {footer}
     </>
   );

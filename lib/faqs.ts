@@ -24,8 +24,12 @@ export const faqCategories: FaqCategory[] = [
         a: `Recogida en ${papaEvent.pickupLocation}: coordinamos contigo después de comprar. Envío por correo: ${papaEvent.mailDeliveryDays} en Puerto Rico.`,
       },
       {
+        q: '¿Hay opción sin personalizar?',
+        a: 'Sí. Elige Personalizado y en Stripe aplica el código 35SPECIAL — te queda en $35 (logo de la marca, sin nombre bordado). Es el mismo delantal de las fotos.',
+      },
+      {
         q: '¿Qué puedo escribir en el bordado?',
-        a: `Nombres, apodos o frases cortas. Máximo ${papaEvent.maxEmbroideryChars} caracteres por delantal.`,
+        a: `En Personalizado y VIP: nombres o apodos. Máximo ${papaEvent.maxEmbroideryChars} caracteres.`,
       },
     ],
   },
@@ -35,7 +39,7 @@ export const faqCategories: FaqCategory[] = [
     items: [
       {
         q: '¿Qué incluye cada oferta?',
-        a: 'Premium ($49.99): delantal + recetario digital. VIP ($59.99): delantal + recetario + video de saludo de El Gordito. Legado ($84.99): 2 delantales + recetario.',
+        a: 'Sin personalizar ($35 con código 35SPECIAL en Stripe): delantal con logo + recetario. Personalizado ($49.99): nombre bordado + recetario. Personalizado VIP ($59.99): añade video de Ariel y grupo WhatsApp.',
       },
       {
         q: '¿Es preventa o ya tienen stock?',
