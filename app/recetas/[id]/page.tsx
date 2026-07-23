@@ -201,12 +201,12 @@ export default async function RecipeDetailPage({ params }: PageProps) {
                 </div>
 
                 <div className="bg-[#1A1412] rounded-2xl p-6 md:p-8 text-center">
-                  <h3 className="text-xl font-bold text-[#FAF8F5] mb-3">Regalo para papá</h3>
+                  <h3 className="text-xl font-bold text-[#FAF8F5] mb-3">Delantal El Gordito</h3>
                   <p className="text-[#C4B8AE] text-lg mb-6 leading-relaxed">
-                    Delantal personalizado — edición limitada.
+                    Bordado personalizado — edición limitada.
                   </p>
-                  <Button href="/el-sabor-de-papa" size="lg" className="w-full">
-                    Ver delantal
+                  <Button href="/delantal-el-gordito" size="lg" className="w-full">
+                    Ver Delantal El Gordito
                   </Button>
                 </div>
               </div>

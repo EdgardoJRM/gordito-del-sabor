@@ -90,8 +90,8 @@ export function HelpCards() {
       <div className="rounded-2xl border-2 border-[#E8E0D8] bg-white p-8">
         <Package className="text-[#C4472B] mb-4" size={32} aria-hidden />
         <h3 className="text-xl font-bold text-[#1A1412] mb-2">Ordenar delantal</h3>
-        <p className="body-text text-lg mb-6">Elige tu oferta y asegura el delantal de papá.</p>
-        <Button href="/el-sabor-de-papa#ordenar" size="lg" className="w-full">
+        <p className="body-text text-lg mb-6">Elige tu oferta y asegura tu Delantal El Gordito.</p>
+        <Button href="/delantal-el-gordito#ordenar" size="lg" className="w-full">
           Ir a ordenar
         </Button>
       </div>

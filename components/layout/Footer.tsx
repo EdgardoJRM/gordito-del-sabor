@@ -71,8 +71,8 @@ export default function Footer() {
             &copy; {currentYear} {siteConfig.brandName}. Todos los derechos reservados.
           </p>
           <div className="flex flex-wrap gap-6 justify-center">
-            <Link href="/el-sabor-de-papa" className="hover:text-[#C4472B] font-bold">
-              Delantal de Papá
+            <Link href="/delantal-el-gordito" className="hover:text-[#C4472B] font-bold">
+              Delantal El Gordito
             </Link>
             <Link href="/recetas" className="hover:text-[#C4472B]">
               Recetas

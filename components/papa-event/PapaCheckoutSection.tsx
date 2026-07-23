@@ -8,6 +8,7 @@ import {
   papaBundles,
   papaEvent,
   papaHero,
+  papaProductName,
   type PapaBundleId,
 } from '@/lib/papa-event';
 import { siteConfig } from '@/lib/site-config';
@@ -76,7 +77,7 @@ export default function PapaCheckoutSection() {
             Los 100 delantales ya tienen dueño
           </h2>
           <p className="body-text text-lg max-w-2xl mx-auto mb-8">
-            Gracias por el amor. Esta edición de El Sabor de Papá cerró. Si quedaste fuera o
+            Gracias por el amor. Esta edición de {papaProductName} cerró. Si quedaste fuera o
             necesitas ayuda con un pedido, escríbenos.
           </p>
           <a
@@ -105,7 +106,7 @@ export default function PapaCheckoutSection() {
             ) : (
               <>
                 Quedan <strong className="text-[#1A1412]">{inventory.remaining}</strong> de{' '}
-                {inventory.total} delantales. Elige la oferta y asegura el
+                {inventory.total} delantales en esta edición limitada. Elige la oferta y asegura el
                 tuyo en el siguiente paso.
               </>
             )}

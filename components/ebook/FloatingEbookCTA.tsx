@@ -36,9 +36,9 @@ export default function FloatingEbookCTA() {
 
   return (
     <a
-      href="/el-sabor-de-papa"
+      href="/delantal-el-gordito"
       className="fixed bottom-6 right-6 z-40 flex items-center gap-2 bg-[#C4472B] hover:bg-[#A8381F] text-white font-bold py-4 px-6 rounded-full transition-all shadow-lg text-base min-h-[52px]"
-      title="Ordenar delantal El Sabor de Papá"
+      title="Ordenar Delantal El Gordito"
     >
       <ChefHat size={22} aria-hidden />
       <span>Asegura tu delantal</span>

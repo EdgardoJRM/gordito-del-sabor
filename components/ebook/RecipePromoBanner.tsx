@@ -35,12 +35,11 @@ export default function RecipePromoBanner() {
             ¿Te gustó esta receta?
           </h3>
           <p className="body-text text-lg text-[#6B5B4E]">
-            El recetario digital con 20 recetas favoritas viene incluido con el delantal de El Sabor de
-            Papá.
+            El recetario digital con 20 recetas favoritas viene incluido con Delantal El Gordito.
           </p>
         </div>
         <a
-          href="/el-sabor-de-papa"
+          href="/delantal-el-gordito"
           className="flex items-center gap-2 bg-[#C4472B] hover:bg-[#A8381F] text-white font-bold py-4 px-8 rounded-full transition-all transform hover:scale-105 whitespace-nowrap"
         >
           <ChefHat size={20} aria-hidden />

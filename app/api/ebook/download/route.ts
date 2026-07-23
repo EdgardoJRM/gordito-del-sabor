@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       return NextResponse.json(
         {
           error:
-            'El recetario digital ya no está disponible por descarga gratuita. Viene incluido con la compra del delantal en El Sabor de Papá.',
+            'El recetario digital ya no está disponible por descarga gratuita. Viene incluido con la compra del Delantal El Gordito.',
         },
         { status: 410 }
       );

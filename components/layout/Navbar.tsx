@@ -16,7 +16,7 @@ type NavbarProps = {
 
 const navItems: { label: string; href: string; icon?: LucideIcon }[] = [
   { label: 'Inicio', href: '/' },
-  { label: 'Delantal de Papá', href: '/el-sabor-de-papa' },
+  { label: 'Delantal El Gordito', href: '/delantal-el-gordito' },
   { label: 'Recetas', href: '/recetas' },
   { label: 'Preguntas', href: '/preguntas', icon: HelpCircle },
 ];
@@ -66,7 +66,7 @@ export default function Navbar({ overlayHero = false, pinOnScroll = true }: Navb
               </Link>
             );
             })}
-            <Button href="/el-sabor-de-papa" size="lg">
+            <Button href="/delantal-el-gordito" size="lg">
               Ordenar delantal
             </Button>
           </div>
@@ -148,7 +148,7 @@ export default function Navbar({ overlayHero = false, pinOnScroll = true }: Navb
               );
               })}
               <div className="pt-4">
-                <Button href="/el-sabor-de-papa" size="lg" className="w-full" onClick={() => setIsOpen(false)}>
+                <Button href="/delantal-el-gordito" size="lg" className="w-full" onClick={() => setIsOpen(false)}>
                   Ordenar delantal
                 </Button>
               </div>

@@ -12,7 +12,13 @@ const nextConfig = {
     ],
   },
   async redirects() {
-    return [];
+    return [
+      {
+        source: '/el-sabor-de-papa',
+        destination: '/delantal-el-gordito',
+        permanent: true,
+      },
+    ];
   },
 };
 

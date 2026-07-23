@@ -16,6 +16,12 @@ export type PapaBundle = {
 
 export const PAPA_EVENT_ID = 'el-sabor-de-papa-2026';
 
+/** Ruta canónica de la página de venta. */
+export const papaProductSlug = '/delantal-el-gordito' as const;
+
+/** Nombre del producto en copy y UI. */
+export const papaProductName = 'Delantal El Gordito' as const;
+
 /** Fotos reales del Gordito/equipo para la landing. */
 export const papaTeamPhotos = {
   hero: '/images/team/gordito-photos/IMG_3572.jpg',
@@ -30,49 +36,71 @@ export const papaTeamPhotos = {
 
 export const papaEvent = {
   id: PAPA_EVENT_ID,
-  slug: '/el-sabor-de-papa',
+  slug: papaProductSlug,
   totalAprons: 100,
   maxEmbroideryChars: 15,
-  orderDeadlineLabel: '14 de junio de 2026',
-  fathersDayLabel: 'Domingo 21 de junio de 2026',
-  pickupFriday: 'Viernes 20 de junio (4pm–8pm)',
-  pickupSaturday: 'Sábado 21 de junio (10am–2pm)',
   pickupLocation: 'Área Metro, San Juan',
-  socialProof: `${siteConfig.stats.instagram} seguidores confían en nuestro sabor`,
+  embroideryTurnaround: '24–48 horas',
+  mailDeliveryDays: '3–5 días hábiles',
+  socialProof: 'Recetas boricuas y sazón de verdad desde Puerto Rico',
 } as const;
 
 export const papaHero = {
-  eyebrow: `Solo ${papaEvent.totalAprons} unidades · Día de los Padres`,
-  headline: 'Regala un legado, no solo un delantal',
+  eyebrow: `Edición limitada · ${papaEvent.totalAprons} unidades`,
+  headline: 'Cocina con tu nombre en la pechera',
   subheadline:
-    'El único delantal personalizado con el nombre de papá bordado a mano. Solo 100 disponibles en toda PR.',
+    'Delantal personalizado con bordado a mano. Tela premium 100% algodón, hecho en Puerto Rico.',
   cta: 'Asegura tu delantal',
 } as const;
 
-export const papaProblem = {
-  title: '¿Qué regalarle a papá este domingo?',
-  lines: [
-    'Camisetas. Corbatas. Herramientas.',
-    'Siempre lo mismo.',
-    'Papá merece algo diferente.',
-    'Algo que diga: "Te veo. Te valoro. Eres especial."',
-  ],
-  closing:
-    'Un delantal con su nombre bordado. Cada vez que lo use, pensará en ti.',
+export const papaHomeHero = {
+  eyebrow: 'El Gordito del Sabor',
+  headline: 'Sazón de verdad.',
+  subheadline:
+    'Recetas boricuas para tu cocina, una comunidad que crece en redes, y un delantal hecho para usarse de verdad.',
+  ctaPrimary: 'Ver recetas',
+  ctaPrimaryHref: '/recetas',
+  ctaSecondary: 'Ordenar delantal',
+  ctaSecondaryHref: `${papaProductSlug}#ordenar`,
 } as const;
 
-export const papaSolution = {
-  title: 'Presentamos: El Sabor de Papá',
-  subtitle: 'El delantal que hace que papá se sienta como el chef que siempre fue.',
-  bullets: [
-    'Su nombre bordado a mano en la pechera',
-    'Tela premium 100% algodón — resiste lavadas sin perder forma',
-    'Bolsillos reforzados para sus herramientas favoritas',
-    'Hecho en Puerto Rico con amor',
-    'Garantizado antes del Día de los Padres (con recogida)',
+export const papaHighlights = [
+  {
+    title: 'Bordado a mano',
+    text: 'Tu nombre o frase en la pechera — máximo 15 caracteres.',
+  },
+  {
+    title: 'Tela premium',
+    text: 'Algodón resistente al calor y las lavadas. Bolsillos reforzados.',
+  },
+  {
+    title: 'Hecho en PR',
+    text: 'Bordado y empacado con cuidado desde la isla.',
+  },
+  {
+    title: 'Recogida o envío',
+    text: `Área Metro o correo gratis a toda Puerto Rico.`,
+  },
+] as const;
+
+export const papaStory = {
+  title: 'No es merch de pasillo',
+  paragraphs: [
+    'Cocinas en casa, para tu familia o para tus panas. Mereces un delantal que aguante la cocina de verdad y que se vea como tú cocinas: con sazón y con orgullo.',
+    'Cada pieza se borda a mano en esta edición limitada. Cuando se agoten las 100 unidades, cerramos esta ronda.',
   ],
-  closing:
-    'Esto no es un delantal. Es un reconocimiento. Es decirle a papá: "Tú eres el jefe de esta cocina."',
+} as const;
+
+export const papaGuaranteeSection = {
+  title: 'Calidad y confianza',
+  intro: 'Respaldamos cada delantal. Si hay defecto de fabricación o bordado, lo resolvemos contigo.',
+  body: 'Escríbenos a elgorditodelsaborshop@gmail.com con fotos del problema. Reemplazo o devolución, sin vueltas.',
+} as const;
+
+export const papaClose = {
+  title: `¿Listo para tu ${papaProductName}?`,
+  subtitle: 'Elige tu oferta abajo y completa el bordado en el checkout.',
+  cta: 'Ver ofertas',
 } as const;
 
 export const papaBundles: Record<PapaBundleId, PapaBundle> = {
@@ -109,9 +137,9 @@ export const papaBundles: Record<PapaBundleId, PapaBundle> = {
     price: 84.99,
     priceLabel: '$84.99',
     apronCount: 2,
-    badge: 'Para regalos dobles',
+    badge: 'Para dos nombres',
     bullets: [
-      '2 delantales personalizados (papá e hijo/a)',
+      '2 delantales personalizados (dos nombres distintos)',
       'Recetario digital + video exclusivo',
       'Acceso a grupo privado de WhatsApp',
       'Recogida o envío por correo (tú eliges)',
@@ -162,11 +190,11 @@ export const papaDeliveryOptions: Record<
   pickup: {
     id: 'pickup',
     title: 'Recogida en punto de encuentro',
-    subtitle: 'Recomendado · Garantizado antes del domingo',
+    subtitle: 'Recomendado · Coordinamos contigo',
     recommended: true,
     bullets: [
       `Ubicación: ${papaEvent.pickupLocation}`,
-      `${papaEvent.pickupFriday} o ${papaEvent.pickupSaturday}`,
+      'Te confirmamos fecha y hora después de comprar',
       'Sin riesgo de retrasos del correo',
       'Conoces a El Gordito en persona',
     ],
@@ -174,46 +202,27 @@ export const papaDeliveryOptions: Record<
   mail: {
     id: 'mail',
     title: 'Envío por correo',
-    subtitle: 'Comodidad en casa — con riesgo de retraso',
+    subtitle: 'Comodidad en casa',
     warnings: [
-      'Puede llegar después del Domingo',
-      '3–5 días hábiles — riesgo del correo postal',
-      'No recomendado si papá lo necesita el Domingo',
+      `${papaEvent.mailDeliveryDays} — sujeto a tiempos del correo postal`,
+      'No recomendado si lo necesitas con urgencia',
     ],
     bullets: ['Envío gratis a toda Puerto Rico', 'Recibes en la puerta de tu casa'],
   },
 };
 
-export const papaEmbroideryExamples = ['PAPÁ', 'CHEF PAPÁ', 'JEFE DE COCINA', 'PAPÁ 2026'] as const;
-
-export const papaBenefits = [
-  {
-    icon: 'pencil' as const,
-    title: 'Bordado a mano',
-    text: 'Su nombre o frase favorita en la pechera (máx. 15 caracteres).',
-  },
-  {
-    icon: 'shield' as const,
-    title: 'Calidad premium',
-    text: 'Tela resistente al calor y las manchas, hecha para durar en la cocina.',
-  },
-  {
-    icon: 'heart' as const,
-    title: 'Hecho en PR',
-    text: 'Bordado y empacado con amor desde Puerto Rico.',
-  },
-  {
-    icon: 'clock' as const,
-    title: 'A tiempo para papá',
-    text: `Recogida garantizada antes del ${papaEvent.fathersDayLabel}.`,
-  },
-];
+export const papaEmbroideryExamples = [
+  'CHEF CASERO',
+  'JEFE DE COCINA',
+  'BBQ MASTER',
+  'SAZÓN REAL',
+] as const;
 
 export const papaSteps = [
   {
     step: 1,
     title: 'Elige tu oferta',
-    text: 'Premium, VIP o Legado — según el regalo que quieras darle.',
+    text: 'Premium, VIP o Legado — según lo que quieras llevar a tu cocina.',
   },
   {
     step: 2,
@@ -223,12 +232,12 @@ export const papaSteps = [
   {
     step: 3,
     title: 'Nosotros bordamos',
-    text: 'Nuestro equipo borda a mano en 24–48 horas.',
+    text: `Nuestro equipo borda a mano en ${papaEvent.embroideryTurnaround}.`,
   },
   {
     step: 4,
     title: 'Tú recibes',
-    text: `Recogida: ${papaEvent.pickupFriday} o ${papaEvent.pickupSaturday}. Correo: 3–5 días hábiles.`,
+    text: `Recogida en ${papaEvent.pickupLocation} o envío por correo (${papaEvent.mailDeliveryDays}).`,
   },
 ];
 
@@ -236,51 +245,40 @@ export const papaSocialProof = [
   {
     id: 'instagram',
     platform: 'Instagram',
-    stat: siteConfig.stats.instagram,
-    description:
-      'Seguidores que cocinan con nosotros cada día. Recetas, tips y sazón de verdad en tu feed.',
+    label: 'Recetas y sazón en tu feed',
     href: siteConfig.instagram,
   },
   {
     id: 'facebook',
     platform: 'Facebook',
-    stat: siteConfig.stats.facebook,
-    description: `Comunidad activa en Meta con ${siteConfig.stats.engagementMeta} de engagement promedio.`,
+    label: 'Comunidad en Meta',
     href: siteConfig.facebook,
   },
   {
     id: 'tiktok',
     platform: 'TikTok',
-    stat: siteConfig.stats.tiktok,
-    description: `Videos que llegan. ${siteConfig.stats.engagementTikTok} de engagement en la plataforma.`,
+    label: 'Videos de cocina',
     href: siteConfig.tiktok,
-  },
-  {
-    id: 'reach',
-    platform: 'Alcance mensual',
-    stat: siteConfig.stats.monthlyImpressions,
-    description: 'Impresiones al mes en nuestras redes. Gente real, no números inflados.',
-    href: siteConfig.instagram,
   },
 ] as const;
 
 export const papaGuarantees = [
   'Garantía de calidad en el bordado',
-  'Garantía de entrega a tiempo (solo con recogida)',
+  'Reemplazo por defectos de fabricación',
   'Hecho en Puerto Rico con amor',
   'Pagos seguros con Stripe',
 ] as const;
 
 export const papaFaqs = [
   {
-    id: 'deadline',
+    id: 'delivery',
     question: '¿Cuándo llegará?',
-    answer: `Depende de tu opción de entrega. Recogida en punto de encuentro: GARANTIZADO antes del Domingo (${papaEvent.pickupFriday} o ${papaEvent.pickupSaturday}). Envío por correo: puede llegar después del Domingo (3–5 días). Recomendación: elige recogida si quieres garantía 100%.`,
+    answer: `Depende de tu opción de entrega. Recogida en ${papaEvent.pickupLocation}: coordinamos contigo después de comprar. Envío por correo: ${papaEvent.mailDeliveryDays} en Puerto Rico. Recomendación: elige recogida si lo necesitas pronto.`,
   },
   {
     id: 'pickup-location',
     question: '¿Dónde es el punto de encuentro?',
-    answer: `${papaEvent.pickupLocation}. Te enviaremos la ubicación exacta después de comprar. Puedes recoger en cualquier momento del Viernes 20 al Sábado 21.`,
+    answer: `${papaEvent.pickupLocation}. Te enviamos la ubicación exacta y horarios disponibles después de comprar.`,
   },
   {
     id: 'change-delivery',
@@ -289,14 +287,13 @@ export const papaFaqs = [
   },
   {
     id: 'cant-pickup',
-    question: '¿Qué pasa si no puedo recoger el Viernes o Sábado?',
-    answer: 'Puedes elegir envío por correo, pero no garantizamos que llegue el Domingo. O coordina otra hora de recogida escribiéndonos.',
+    question: '¿Qué pasa si no puedo recoger en la fecha acordada?',
+    answer: 'Coordina otra hora de recogida escribiéndonos, o cambia a envío por correo.',
   },
   {
     id: 'mail-late',
-    question: '¿Qué pasa si elijo correo y no llega el Domingo?',
-    answer:
-      'Al elegir envío por correo aceptas que puede llegar después del Domingo (3–5 días hábiles). Por eso recomendamos recogida si lo necesitas para ese día. No hay reembolsos por retrasos del correo postal.',
+    question: '¿Qué pasa si el correo se retrasa?',
+    answer: `Los envíos por correo toman ${papaEvent.mailDeliveryDays} y dependen del servicio postal. Por eso recomendamos recogida si lo necesitas con urgencia. No hay reembolsos por retrasos del correo postal.`,
   },
   {
     id: 'pickup-cost',
@@ -306,17 +303,27 @@ export const papaFaqs = [
   {
     id: 'text',
     question: '¿Qué puedo escribir en el bordado?',
-    answer: 'Nombres, apodos o frases cortas. Máximo 15 caracteres por delantal. En el bundle Legado puedes poner dos nombres distintos.',
+    answer: `Nombres, apodos o frases cortas. Máximo ${papaEvent.maxEmbroideryChars} caracteres por delantal. En el bundle Legado puedes poner dos nombres distintos.`,
   },
   {
     id: 'stock',
     question: '¿Por qué solo 100 unidades?',
-    answer: 'Es una edición ultra-limitada para el Día de los Padres. Cuando se agoten los 100 delantales, no habrá más en esta edición.',
+    answer: 'Es una edición ultra-limitada. Cada delantal se borda a mano. Cuando se agoten los 100, esta edición cierra.',
   },
   {
     id: 'payment',
     question: '¿El pago es seguro?',
     answer: 'Sí. Procesamos pagos con Stripe. Aceptamos tarjetas principales y verás el cargo como El Gordito del Sabor.',
+  },
+  {
+    id: 'who',
+    question: '¿A quién va dirigido?',
+    answer: 'A cocineros caseros, fanáticos del BBQ, quien cocina para la familia y cualquiera que quiera verse bien en su cocina con un delantal personalizado hecho en PR.',
+  },
+  {
+    id: 'difference',
+    question: '¿En qué se diferencia de un delantal de Amazon?',
+    answer: 'Tela premium 100% algodón, bordado a mano con tu nombre, bolsillos reforzados, hecho en Puerto Rico — y bonos digitales incluidos según tu oferta.',
   },
 ];
 
@@ -333,7 +340,7 @@ export function validateEmbroideryNames(bundleId: PapaBundleId, names: string[])
   if (names.length !== bundle.apronCount) {
     return bundle.apronCount === 1
       ? 'Escribe el nombre a bordar.'
-      : 'Escribe los dos nombres a bordar (papá e hijo/a).';
+      : 'Escribe los dos nombres a bordar.';
   }
 
   for (const name of names) {

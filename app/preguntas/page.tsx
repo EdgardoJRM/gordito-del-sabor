@@ -7,7 +7,7 @@ import Button from '@/components/ui/Button';
 export const metadata: Metadata = {
   title: 'Preguntas y ayuda | El Gordito del Sabor',
   description:
-    'Respuestas claras sobre el delantal de Papá, envíos, pagos con Stripe y cómo ordenar. Contacto y soporte.',
+    'Respuestas claras sobre Delantal El Gordito, envíos, pagos con Stripe y cómo ordenar. Contacto y soporte.',
 };
 
 export default function PreguntasPage() {
@@ -39,12 +39,12 @@ export default function PreguntasPage() {
 
           <div className="mt-14 rounded-3xl border-2 border-[#C4472B]/30 bg-[#1A1412] p-8 md:p-12 text-center">
             <h2 className="heading-section-comfort text-[#FAF8F5] mb-4">
-              ¿Listo para asegurar el delantal de papá?
+              ¿Listo para asegurar tu Delantal El Gordito?
             </h2>
             <p className="text-xl text-[#C4B8AE] max-w-2xl mx-auto mb-8 leading-relaxed">
               Solo 100 unidades. Elige tu oferta y asegura el tuyo en el siguiente paso.
             </p>
-            <Button href="/el-sabor-de-papa#ordenar" size="lg">
+            <Button href="/delantal-el-gordito#ordenar" size="lg">
               Asegura tu delantal
             </Button>
           </div>

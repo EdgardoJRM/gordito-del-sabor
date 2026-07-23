@@ -39,7 +39,7 @@ export default function EcosystemHero() {
             </h1>
             <p className="subheadline text-[#D4C9BC] max-w-xl mx-auto lg:mx-0 mb-6 font-normal">
               Más que un delantal: es pertenencia. Sazón, familia y cultura en cada receta. Edición
-              Día de los Padres — stock limitado a 100 unidades.
+              Edición limitada — stock de 100 unidades.
             </p>
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 mb-8">
               <span className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#FAF8F5]">
@@ -53,10 +53,10 @@ export default function EcosystemHero() {
               </span>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button href="/el-sabor-de-papa" variant="primary" className="shadow-xl">
+              <Button href="/delantal-el-gordito" variant="primary" className="shadow-xl">
                 Quiero mi delantal
               </Button>
-              <Button href="/el-sabor-de-papa" variant="ghost">
+              <Button href="/delantal-el-gordito" variant="ghost">
                 Ver Edición Fundadores
               </Button>
             </div>

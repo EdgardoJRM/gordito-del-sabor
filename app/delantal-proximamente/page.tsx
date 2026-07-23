@@ -5,7 +5,7 @@ import { getDelantalLaunchAtIso } from '@/lib/delantal-countdown';
 export const metadata: Metadata = {
   title: 'Delantal disponible pronto | El Gordito del Sabor',
   description:
-    'El delantal personalizado de El Sabor de Papá abre en pocas horas. Déjanos tu email y te avisamos.',
+    'Delantal El Gordito abre en pocas horas. Déjanos tu email y te avisamos.',
   robots: { index: false, follow: false },
 };
 

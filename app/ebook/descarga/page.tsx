@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function DescargaPage() {
   if (!isRecetarioGratisEnabled()) {
-    redirect('/el-sabor-de-papa');
+    redirect('/delantal-el-gordito');
   }
 
   return (

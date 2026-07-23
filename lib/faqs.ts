@@ -13,15 +13,15 @@ export type FaqCategory = {
 export const faqCategories: FaqCategory[] = [
   {
     id: 'preventa',
-    label: 'Delantal de Papá',
+    label: 'Delantal El Gordito',
     items: [
       {
         q: '¿Cuántos delantales hay disponibles?',
-        a: `Solo ${papaEvent.totalAprons} unidades en esta edición del Día de los Padres. Cuando se agoten, no habrá más en esta ronda.`,
+        a: `Solo ${papaEvent.totalAprons} unidades en esta edición limitada. Cuando se agoten, no habrá más en esta ronda.`,
       },
       {
-        q: '¿Llega antes del Día de los Padres?',
-        a: `Sí, si ordenas antes del ${papaEvent.orderDeadlineLabel}. Enviamos por USPS Priority Mail en todo Puerto Rico.`,
+        q: '¿Cuánto tarda en llegar?',
+        a: `Recogida en ${papaEvent.pickupLocation}: coordinamos contigo después de comprar. Envío por correo: ${papaEvent.mailDeliveryDays} en Puerto Rico.`,
       },
       {
         q: '¿Qué puedo escribir en el bordado?',
@@ -53,7 +53,7 @@ export const faqCategories: FaqCategory[] = [
     items: [
       {
         q: '¿El libro es lo mismo que el recetario gratis?',
-        a: 'Las 20 recetas favoritas son el mismo contenido del PDF. Ya no está disponible por descarga gratuita: viene incluido con la compra del delantal en El Sabor de Papá.',
+        a: 'Las 20 recetas favoritas son el mismo contenido del PDF. Ya no está disponible por descarga gratuita: viene incluido con la compra del Delantal El Gordito.',
       },
       {
         q: '¿En qué formato viene?',

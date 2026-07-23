@@ -10,7 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     '/sobre-nosotros',
     '/contacto',
     '/recetario',
-    '/el-sabor-de-papa',
+    '/delantal-el-gordito',
     '/delantal',
     '/la-boveda',
     '/las-20-recetas-favoritas',

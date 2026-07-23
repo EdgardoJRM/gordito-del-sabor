@@ -4,7 +4,7 @@ import Button, { type ButtonProps } from '@/components/ui/Button';
 import { papaHero } from '@/lib/papa-event';
 import { usePapaInventory } from '@/hooks/usePapaInventory';
 
-type PapaOrderCtaProps = Omit<ButtonProps, 'href' | 'disabled' | 'children'> & {
+type PapaOrderCtaProps = Omit<ButtonProps, 'disabled' | 'children'> & {
   children?: string;
   soldOutLabel?: string;
 };
@@ -12,6 +12,7 @@ type PapaOrderCtaProps = Omit<ButtonProps, 'href' | 'disabled' | 'children'> & {
 export default function PapaOrderCta({
   children,
   soldOutLabel = 'Edición agotada',
+  href = '#ordenar',
   ...buttonProps
 }: PapaOrderCtaProps) {
   const { inventory, loading } = usePapaInventory();
@@ -25,7 +26,7 @@ export default function PapaOrderCta({
   }
 
   return (
-    <Button href="#ordenar" {...buttonProps}>
+    <Button href={href} {...buttonProps}>
       {children ?? papaHero.cta}
     </Button>
   );

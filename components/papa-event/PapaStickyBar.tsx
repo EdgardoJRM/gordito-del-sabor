@@ -1,50 +1,39 @@
 'use client';
 
 import { usePapaInventory } from '@/hooks/usePapaInventory';
+import { papaProductName } from '@/lib/papa-event';
 
 export default function PapaStickyBar() {
   const { inventory, loading } = usePapaInventory();
 
-  const total = inventory.total;
-  const remaining = inventory.remaining;
-  const sold = inventory.sold;
-  const progress = Math.max(0, Math.min(100, (remaining / total) * 100));
+  if (loading) {
+    return (
+      <div className="bg-[#1A1412] text-white border-t border-white/10">
+        <div className="container-custom py-2.5 text-center text-sm text-[#C4B8AE]">
+          Cargando disponibilidad…
+        </div>
+      </div>
+    );
+  }
+
+  if (inventory.soldOut) {
+    return (
+      <div className="bg-[#1A1412] text-white border-t border-white/10">
+        <div className="container-custom py-2.5 text-center text-sm font-medium text-[#E8D4BC]">
+          {papaProductName} — edición agotada
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div
-      className={`text-white shadow-lg ${
-        inventory.soldOut ? 'bg-[#1A1412]' : 'bg-[#C4472B]'
-      }`}
-    >
-      <div className="container-custom py-3 md:py-4">
-        <p className="text-center text-base md:text-lg font-bold">
-          {loading ? (
-            'Cargando disponibilidad…'
-          ) : inventory.soldOut ? (
-            <>Edición agotada — los {total} delantales ya tienen dueño</>
-          ) : (
-            <>
-              Solo quedan{' '}
-              <span className="text-2xl md:text-3xl mx-1">{remaining}</span> de {total} delantales
-              <span className="block text-sm font-normal text-white/85 mt-1">
-                {sold} vendidos
-              </span>
-            </>
-          )}
-        </p>
-        {!inventory.soldOut && (
-          <div className="mt-2 h-2.5 rounded-full bg-[#A8381F] overflow-hidden max-w-xl mx-auto">
-            <div
-              className="h-full bg-[#FAF8F5] transition-all duration-700"
-              style={{ width: `${progress}%` }}
-              role="progressbar"
-              aria-valuenow={remaining}
-              aria-valuemin={0}
-              aria-valuemax={total}
-              aria-label="Delantales disponibles"
-            />
-          </div>
-        )}
+    <div className="bg-[#1A1412] text-white border-t border-white/10">
+      <div className="container-custom py-2.5 flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-3 text-sm text-[#E8D4BC]">
+        <span className="font-medium text-white">{papaProductName}</span>
+        <span className="hidden sm:inline text-[#6B5B4E]">·</span>
+        <span>
+          Quedan <strong className="text-white">{inventory.remaining}</strong> en esta edición
+        </span>
       </div>
     </div>
   );

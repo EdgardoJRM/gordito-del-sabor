@@ -98,13 +98,13 @@ export default function RecipesPage() {
       <section className="section-spacing-comfort bg-[#1A1412] text-center">
         <div className="container-custom max-w-2xl space-y-6">
           <h2 className="heading-section-comfort text-[#FAF8F5]">
-            ¿Buscas un regalo para papá?
+            ¿Quieres cocinar con estilo?
           </h2>
           <p className="text-xl text-[#C4B8AE] leading-relaxed">
-            El delantal personalizado de El Gordito del Sabor — solo 100 unidades para el Día de los Padres.
+            Delantal El Gordito — edición limitada de 100 unidades con bordado personalizado.
           </p>
-          <Button href="/el-sabor-de-papa" size="lg">
-            Ver delantal de papá
+          <Button href="/delantal-el-gordito" size="lg">
+            Ver Delantal El Gordito
           </Button>
         </div>
       </section>

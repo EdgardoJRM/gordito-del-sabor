@@ -5,6 +5,7 @@ import {
   getBundle,
   getDeliveryLabel,
   papaBundles,
+  papaProductSlug,
   validateDeliveryMethod,
   validateEmbroideryNames,
   type PapaBundleId,
@@ -51,7 +52,7 @@ function buildPapaLineItem(
     price_data: {
       currency: 'usd',
       product_data: {
-        name: `El Sabor de Papá — ${bundle.title}`,
+        name: `Delantal El Gordito — ${bundle.title}`,
         description: `Bordado: ${embroideryLabel} · Entrega: ${deliveryLabel}`,
         metadata: {
           eventId: 'el-sabor-de-papa-2026',
@@ -129,7 +130,7 @@ async function handlePapaCheckout(body: PapaCheckoutBody) {
       mode: 'payment',
       line_items: [buildPapaLineItem(bundleId, trimmedNames, deliveryMethod)],
       success_url: `${siteUrl}/pago-exitoso?session_id={CHECKOUT_SESSION_ID}&event=papa`,
-      cancel_url: `${siteUrl}/el-sabor-de-papa?cancelled=1`,
+      cancel_url: `${siteUrl}${papaProductSlug}?cancelled=1`,
       customer_email: email,
       phone_number_collection: { enabled: true },
       metadata: {

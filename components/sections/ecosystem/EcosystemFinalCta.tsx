@@ -24,7 +24,7 @@ export default function EcosystemFinalCta() {
           Entra por el delantal, por La Bóveda o por el recetario gratis. Lo importante es que cocines con sazón de verdad.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button href="/el-sabor-de-papa">Ordenar delantal</Button>
+          <Button href="/delantal-el-gordito">Ordenar delantal</Button>
           <Button href="/recetario" variant="ghost">
             Recetario gratis
           </Button>

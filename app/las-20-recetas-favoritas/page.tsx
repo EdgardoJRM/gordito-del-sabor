@@ -165,9 +165,9 @@ export default function Las20RecetasFavoritasPage() {
         <div className="container-custom max-w-2xl mx-auto text-center mt-12 space-y-4">
           <h3 className="text-2xl font-bold text-[#1A1412]">Bundle sugerido</h3>
           <p className="body-text">
-            Libro + delantal oficial: lleva la narrativa completa.{' '}
+            Libro + Delantal El Gordito: lleva la narrativa completa.{' '}
             <Link href="/delantal" className="text-[#C4472B] font-bold hover:underline">
-              Ver delantal
+              Ver Delantal El Gordito
             </Link>
             .
           </p>

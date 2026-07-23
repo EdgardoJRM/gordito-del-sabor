@@ -86,7 +86,7 @@ const FAQ = [
 
 export default function RecetarioPage() {
   if (!isRecetarioGratisEnabled()) {
-    redirect('/el-sabor-de-papa');
+    redirect('/delantal-el-gordito');
   }
 
   return (

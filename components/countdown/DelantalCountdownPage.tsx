@@ -96,7 +96,7 @@ export default function DelantalCountdownPage({ launchAtIso }: DelantalCountdown
             priority
           />
 
-          <p className="comfort-eyebrow text-[#E8D4BC] mb-4">Edición El Sabor de Papá</p>
+          <p className="comfort-eyebrow text-[#E8D4BC] mb-4">Edición Delantal El Gordito</p>
           <h1 className="heading-section-comfort text-[#FAF8F5] mb-4">
             El delantal abre en
           </h1>

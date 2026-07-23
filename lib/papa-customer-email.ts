@@ -1,5 +1,5 @@
 import type { IPapaOrder } from '@/lib/models/PapaOrder';
-import { papaEvent } from '@/lib/papa-event';
+import { papaEvent, papaProductSlug } from '@/lib/papa-event';
 import { CONTACT_EMAIL } from '@/lib/contact-email';
 import { siteConfig } from '@/lib/site-config';
 import { SOCIAL_URLS } from '@/lib/social-links';
@@ -73,7 +73,7 @@ export function buildPapaCustomerEmailHtml(order: IPapaOrder): string {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Confirmación — El Sabor de Papá</title>
+  <title>Confirmación — Delantal El Gordito</title>
 </head>
 <body style="margin:0;padding:0;background:#F2EDE6;font-family:Arial,Helvetica,sans-serif;">
   <table width="100%" cellpadding="0" cellspacing="0" border="0">
@@ -83,7 +83,7 @@ export function buildPapaCustomerEmailHtml(order: IPapaOrder): string {
           <tr>
             <td style="background:#1A1412;padding:32px 28px;text-align:center;">
               <p style="margin:0 0 8px 0;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#E8D4BC;">
-                El Sabor de Papá
+                Delantal El Gordito
               </p>
               <h1 style="margin:0;font-size:26px;line-height:1.25;color:#FAF8F5;font-weight:bold;">
                 Tu delantal está confirmado
@@ -111,8 +111,8 @@ export function buildPapaCustomerEmailHtml(order: IPapaOrder): string {
                   <td style="padding:22px 20px;font-size:16px;line-height:1.6;color:#1A1412;">
                     <p style="margin:0 0 12px 0;font-weight:bold;color:#C4472B;">Qué sigue</p>
                     <p style="margin:0 0 10px 0;">✔ Bordado a mano con el nombre que nos diste</p>
-                    <p style="margin:0 0 10px 0;">✔ Recogida en ${papaEvent.pickupLocation}: ${papaEvent.pickupFriday} o ${papaEvent.pickupSaturday}</p>
-                    <p style="margin:0;">✔ Meta: tenerlo listo antes del ${papaEvent.fathersDayLabel}</p>
+                    <p style="margin:0 0 10px 0;">✔ Recogida en ${papaEvent.pickupLocation} — te confirmamos fecha y hora</p>
+                    <p style="margin:0;">✔ Bordado a mano en ${papaEvent.embroideryTurnaround}</p>
                   </td>
                 </tr>
               </table>
@@ -145,7 +145,7 @@ export function buildPapaCustomerEmailHtml(order: IPapaOrder): string {
 
           <tr>
             <td align="center" style="padding:0 28px 32px 28px;">
-              <a href="https://gorditodelsabor.com/el-sabor-de-papa"
+              <a href="https://gorditodelsabor.com${papaProductSlug}"
                 style="background:#C4472B;color:#ffffff;padding:16px 32px;font-size:17px;font-weight:bold;text-decoration:none;border-radius:999px;display:inline-block;">
                 Ver detalles del evento
               </a>

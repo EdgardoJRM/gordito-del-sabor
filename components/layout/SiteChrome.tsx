@@ -7,6 +7,7 @@ import PapaEventHeader from '@/components/layout/PapaEventHeader';
 import PapaLaunchStickyShell from '@/components/papa-event/PapaLaunchStickyShell';
 import FloatingEbookCTA from '@/components/ebook/FloatingEbookCTA';
 import Footer from '@/components/layout/Footer';
+import { papaProductSlug } from '@/lib/papa-event';
 
 function isRecetarioFunnelPath(pathname: string | null) {
   if (!pathname) return false;
@@ -15,7 +16,7 @@ function isRecetarioFunnelPath(pathname: string | null) {
 
 function isPapaEventPath(pathname: string | null) {
   if (!pathname) return false;
-  return pathname === '/el-sabor-de-papa' || pathname.startsWith('/el-sabor-de-papa/');
+  return pathname === papaProductSlug || pathname.startsWith(`${papaProductSlug}/`);
 }
 
 function isCountdownPath(pathname: string | null) {

@@ -113,7 +113,7 @@ export function resolvePapaBundleFromSession(
 export function isPapaCheckoutSession(session: Stripe.Checkout.Session): boolean {
   if (session.metadata?.checkoutType === 'papa-event') return true;
   if (session.metadata?.eventId === 'el-sabor-de-papa-2026') return true;
-  // Solo usamos Payment Links para El Sabor de Papá.
+  // Solo usamos Payment Links para Delantal El Gordito.
   if (session.payment_link) return true;
   return resolvePapaBundleFromSession(session) != null;
 }

@@ -52,7 +52,7 @@ export async function sendPapaOrderEmails(
   const customerHtml = buildPapaCustomerEmailHtml(order);
 
   const teamHtml = `
-    <h2>Nuevo pedido — El Sabor de Papá</h2>
+    <h2>Nuevo pedido — Delantal El Gordito</h2>
     <p><strong>Bundle:</strong> ${order.bundleTitle} (${order.bundleId})</p>
     <p><strong>Total:</strong> ${totalLabel}</p>
     <p><strong>Delantales:</strong> ${order.apronCount}</p>
@@ -69,7 +69,7 @@ export async function sendPapaOrderEmails(
       from,
       replyTo: CONTACT_EMAIL,
       to: notifyEmail(),
-      subject: `Nuevo pedido Papá — ${order.bundleTitle} (${inventory.remaining} quedan)`,
+      subject: `Nuevo pedido Delantal El Gordito — ${order.bundleTitle} (${inventory.remaining} quedan)`,
       html: teamHtml,
     }),
     resend.emails.send({

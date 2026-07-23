@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, Package } from 'lucide-react';
 import { useCartStore } from '@/lib/cart-store';
+import { papaProductSlug } from '@/lib/papa-event';
 
 export default function SuccessPage() {
   const searchParams = useSearchParams();
@@ -69,7 +70,7 @@ export default function SuccessPage() {
             {/* Message */}
             <p className="body-text text-2xl mb-12">
               {isPapaEvent
-                ? 'Gracias. Tu delantal personalizado para papá entra en producción — te llega la confirmación por email.'
+                ? 'Gracias. Tu Delantal El Gordito entra en producción — te llega la confirmación por email.'
                 : 'Gracias por tu compra. Tu delantal personalizado está siendo preparado.'}
             </p>
 
@@ -131,10 +132,10 @@ export default function SuccessPage() {
             {/* Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
-                href={isPapaEvent ? '/el-sabor-de-papa' : '/recetas'}
+                href={isPapaEvent ? papaProductSlug : '/recetas'}
                 className="btn-text flex-1 bg-[#C4472B] hover:bg-[#A8381F] text-white py-5 rounded-full transition-all transform hover:scale-105"
               >
-                {isPapaEvent ? 'Volver a El Sabor de Papá' : 'Ver recetas'}
+                {isPapaEvent ? 'Volver a Delantal El Gordito' : 'Ver recetas'}
               </Link>
               <Link
                 href="/"
